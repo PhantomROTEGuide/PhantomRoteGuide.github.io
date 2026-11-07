@@ -22,12 +22,12 @@ const SUPABASE_ANON_KEY='YOUR_SUPABASE_ANON_PUBLIC_KEY';
 const configured=SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY!=='YOUR_SUPABASE_ANON_PUBLIC_KEY';
 const db=configured?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
 const phases=[
-[1,'Relic 5',[['Mustafar','Dark Side'],['Corellia','Mixed'],['Coruscant','Light Side']]],
-[2,'Relic 6',[['Geonosis','Dark Side'],['Felucia','Mixed'],['Bracca','Light Side']]],
-[3,'Relic 7',[['Dathomir','Dark Side'],['Tatooine','Mixed'],['Kashyyyk','Light Side']]],
-[4,'Relic 8',[['Haven Medical Station','Dark Side'],['Kessel','Mixed'],['Lothal','Light Side']]],
-[5,'Relic 9',[['Malachor','Dark Side'],['Vandor','Mixed'],['Ring of Kafrene','Light Side']]],
-[6,'Relic 9',[['Death Star','Dark Side'],['Hoth','Mixed'],['Scarif','Light Side']]]];
+[1,'Territory Zones',[['Mustafar','Dark Side'],['Corellia','Mixed'],['Coruscant','Light Side']]],
+[2,'Territory Zones',[['Geonosis','Dark Side'],['Felucia','Mixed'],['Bracca','Light Side']]],
+[3,'Territory Zones',[['Dathomir','Dark Side'],['Tatooine','Mixed'],['Kashyyyk','Light Side']]],
+[4,'Territory Zones',[['Haven Medical Station','Dark Side'],['Kessel','Mixed'],['Lothal','Light Side']]],
+[5,'Territory Zones',[['Malachor','Dark Side'],['Vandor','Mixed'],['Ring of Kafrene','Light Side']]],
+[6,'Territory Zones',[['Death Star','Dark Side'],['Hoth','Mixed'],['Scarif','Light Side']]]];
 const bonus=[['Zeffo','Phase 3 Bonus Zone'],['Mandalore','Phase 4 Bonus Zone']];
 const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false;
