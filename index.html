@@ -53,7 +53,35 @@ function goHome(){document.getElementById('detail').classList.remove('active');d
 function renderMissions(){const list=ensurePlanet(current),root=document.getElementById('missions');document.getElementById('addMissionBtn').style.display=isEditor?'inline-block':'none';document.getElementById('editNotice').style.display=isEditor?'none':'block';if(!list.length){root.innerHTML='<div class="empty">No missions have been added.</div>';return}root.innerHTML=list.map((m,i)=>'<details class="mission"><summary><span class="chev">›</span><span class="mission-name">'+esc(m.title||'Untitled mission')+'</span><span class="count">'+(m.recommendations||[]).length+' teams</span></summary><div class="mission-body">'+(isEditor?'<label class="field">Mission title</label><input class="edit-title" value="'+esc(m.title)+'" onchange="changeMissionTitle('+i+',this.value)">':'')+'<div class="team-list">'+(m.recommendations||[]).map((r,j)=>renderTeam(i,j,r)).join('')+'</div>'+(isEditor?'<button class="add-team" onclick="addTeam('+i+')">＋ Add team recommendation</button><div class="team-controls"><button class="btn danger" onclick="removeMission('+i+')">Delete mission</button></div>':'')+'</div></details>').join('')}
 function recommendationImages(r){const images=Array.isArray(r.images)?r.images.slice(0,5):[r.image||''];while(images.length<5)images.push('');return images}
 function renderTeam(i,j,r){const images=recommendationImages(r);const portraits='<div class="portrait-grid">'+images.map((url,k)=>'<div class="portrait-slot"><div class="portrait-circle">'+(url?'<img src="'+esc(url)+'" alt="Squad character '+(k+1)+'">':'＋')+'</div><span class="portrait-number">Slot '+(k+1)+'</span>'+(isEditor?'<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" aria-label="Upload picture to slot '+(k+1)+'" onchange="uploadTeamImage('+i+','+j+','+k+',this)"><div class="portrait-actions">'+(url?'<button class="btn danger" onclick="removeTeamImage('+i+','+j+','+k+')">Remove</button>':'')+'</div>':'')+'</div>').join('')+'</div>';return '<details class="team"><summary><span class="chev">›</span><span class="team-title">'+esc(r.title||'Untitled team')+'</span><span class="team-hint">View strategy</span></summary><div class="team-body">'+(isEditor?'<label class="field">Recommendation title</label><input value="'+esc(r.title)+'" onchange="changeRec('+i+','+j+',\'title\',this.value)">':'')+'<label class="field">Squad portraits · 5 picture slots</label>'+portraits+'<label class="field">Notes / strategy</label><textarea '+(!isEditor?'readonly':'')+' onchange="changeRec('+i+','+j+',\'notes\',this.value)" placeholder="Strategy, turn order, ability use, battle tips">'+esc(r.notes)+'</textarea>'+(isEditor?'<div class="team-controls"><button class="btn danger" onclick="removeTeam('+i+','+j+')">Delete recommendation</button></div>':'')+'</div></details>'}
-async function uploadTeamImage(i,j,k,input){const file=input.files&&input.files[0];if(!file)return;if(!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type)){setStatus('Please choose a JPEG, PNG, WebP, or GIF image.','bad');input.value='';return}if(file.size>8*1024*1024){setStatus('Image must be 8 MB or smaller.','bad');input.value='';return}if(!db||!isEditor){setStatus('Officer access and shared storage are required to upload images.','bad');input.value='';return}const rec=ensurePlanet(current)[i].recommendations[j];const images=recommendationImages(rec);setStatus('Uploading squad portrait '+(k+1)+'…','');const ext=({ 'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/gif':'gif'})[file.type];const path=slug(current)+'/'+crypto.randomUUID()+'.'+ext;const {error}=await db.storage.from('team-recommendations').upload(path,file,{upsert:false,contentType:file.type});if(error){setStatus('Image upload failed: '+error.message,'bad');input.value='';return}const {data:publicData}=db.storage.from('team-recommendations').getPublicUrl(path);images[k]=publicData.publicUrl;rec.images=images;delete rec.image;queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}setStatus('Portrait uploaded · saving shared guide…','')}
+async function uploadTeamImage(i,j,k,input){
+ const file=input.files&&input.files[0];
+ if(!file)return;
+ setStatus('Selected '+file.name+' · checking upload…','');
+ if(!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type)){
+  setStatus('Unsupported image type ('+(file.type||'unknown')+'). Please use JPEG, PNG, WebP, or GIF.','bad');input.value='';return;
+ }
+ if(file.size>8*1024*1024){setStatus('Image must be 8 MB or smaller.','bad');input.value='';return;}
+ if(!db||!isEditor){setStatus('Upload blocked: please sign in with an approved officer account.','bad');return;}
+ try{
+  const rec=ensurePlanet(current)[i].recommendations[j];
+  const images=recommendationImages(rec);
+  setStatus('Uploading squad portrait '+(k+1)+'…','');
+  const ext=({'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/gif':'gif'})[file.type];
+  const unique=window.crypto&&crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2);
+  const path=slug(current)+'/'+unique+'.'+ext;
+  const result=await db.storage.from('team-recommendations').upload(path,file,{upsert:false,contentType:file.type});
+  if(result.error)throw result.error;
+  const publicData=db.storage.from('team-recommendations').getPublicUrl(path);
+  images[k]=publicData.data.publicUrl;rec.images=images;delete rec.image;
+  queueSave();renderMissions();
+  const cards=document.querySelectorAll('.mission');
+  if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true;}
+  setStatus('Portrait uploaded · saving shared guide…','');
+ }catch(error){
+  setStatus('Upload failed: '+(error&&error.message?error.message:String(error)),'bad');
+  input.value='';
+ }
+}
 function removeTeamImage(i,j,k){if(!confirm('Remove picture from slot '+(k+1)+'?'))return;const rec=ensurePlanet(current)[i].recommendations[j];const images=recommendationImages(rec);images[k]='';rec.images=images;delete rec.image;queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}}
 function queueSave(){dirty=true;setStatus('Changes pending…','');clearTimeout(saveTimer);saveTimer=setTimeout(saveShared,450)}
 function setStatus(msg,kind){const el=document.getElementById('saveStatus');el.textContent=msg;el.className='status '+(kind||'')}
