@@ -4,10 +4,6 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_triplezero.png"
   },
   {
-    "name": "212th Veteran",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_clone212.png"
-  },
-  {
     "name": "4-LOM",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_4lom.png"
   },
@@ -628,10 +624,6 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig11_nurse.png"
   },
   {
-    "name": "IG-11 (Bounty Hunter)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig11.png"
-  },
-  {
     "name": "IG-12 & Grogu",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig12.png"
   },
@@ -800,7 +792,7 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_landobespin.png"
   },
   {
-    "name": "Leia Organa",
+    "name": "Princess Leia",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiaendor.png"
   },
   {
