@@ -8,24 +8,16 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_4lom.png"
   },
   {
-    "name": "CT-7567 \"Rex\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_rex.png"
-  },
-  {
-    "name": "CT-21-0408 \"Echo\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_echo.png"
-  },
-  {
-    "name": "CT-5555 \"Fives\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_fives.png"
-  },
-  {
     "name": "50R-T",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_50rt.png"
   },
   {
     "name": "Aayla Secura",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_aaylasecura.png"
+  },
+  {
+    "name": "Adelphi Ranger",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_adelphiranger.png"
   },
   {
     "name": "Admiral Ackbar",
@@ -308,6 +300,18 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_crosshair_scarred.png"
   },
   {
+    "name": "CT-21-0408 \"Echo\"",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_echo.png"
+  },
+  {
+    "name": "CT-5555 \"Fives\"",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_fives.png"
+  },
+  {
+    "name": "CT-7567 \"Rex\"",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_rex.png"
+  },
+  {
     "name": "CX-2",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_operative.png"
   },
@@ -322,6 +326,10 @@
   {
     "name": "Darth Bane",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthbane.png"
+  },
+  {
+    "name": "Darth Jar Jar",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthjarjar.png"
   },
   {
     "name": "Darth Malak",
@@ -426,6 +434,10 @@
   {
     "name": "Embo",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_embo.png"
+  },
+  {
+    "name": "Embo & Keibu",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_emboandkeibu.png"
   },
   {
     "name": "Emperor Palpatine",
@@ -680,6 +692,10 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_scavenger.png"
   },
   {
+    "name": "Jaxxon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jaxxon.png"
+  },
+  {
     "name": "Jedi Consular",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_consular_03.png"
   },
@@ -792,8 +808,8 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_landobespin.png"
   },
   {
-    "name": "Princess Leia",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiaendor.png"
+    "name": "Leia (Jedi Training)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiajeditraining.png"
   },
   {
     "name": "Lobot",
@@ -832,6 +848,10 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_majorpartagaz.png"
   },
   {
+    "name": "Mara Jade Skywalker",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marajadeskywalker.png"
+  },
+  {
     "name": "Mara Jade, The Emperor's Hand",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_marajade.png"
   },
@@ -854,6 +874,10 @@
   {
     "name": "Maz Kanata",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_mazkanata.png"
+  },
+  {
+    "name": "Mercenary Guard Droid (B1)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b1mercdroid.png"
   },
   {
     "name": "Merrin",
@@ -972,6 +996,10 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_princesskneesaa.png"
   },
   {
+    "name": "Princess Leia",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiaendor.png"
+  },
+  {
     "name": "Qi'ra",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_qira.png"
   },
@@ -1028,16 +1056,16 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tros.png"
   },
   {
-    "name": "Rey (Scavenger)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_reyjakku.png"
-  },
-  {
     "name": "Rey (Dark Side Vision)",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_darkrey.png"
   },
   {
     "name": "Rey (Jedi Training)",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tlj.png"
+  },
+  {
+    "name": "Rey (Scavenger)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_reyjakku.png"
   },
   {
     "name": "Rose Tico",
@@ -1144,8 +1172,16 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_starkiller.png"
   },
   {
+    "name": "Starkiller (Luke Concept)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lukestarkiller.png"
+  },
+  {
     "name": "Stormtrooper",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm.png"
+  },
+  {
+    "name": "Stormtrooper (Concept)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stormtrooperconcept.png"
   },
   {
     "name": "Stormtrooper Han",
@@ -1202,6 +1238,10 @@
   {
     "name": "The Mandalorian (Beskar Armor)",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandobeskar.png"
+  },
+  {
+    "name": "The Ronin",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_theronin.png"
   },
   {
     "name": "The Stranger",
@@ -1290,6 +1330,10 @@
   {
     "name": "Wrecker (Mercenary)",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_wreckers3.png"
+  },
+  {
+    "name": "Yoda (Dark Side Vision)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodadsv.png"
   },
   {
     "name": "Yoda & Chewie",
