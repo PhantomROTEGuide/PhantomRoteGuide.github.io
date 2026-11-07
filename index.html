@@ -17,9 +17,9 @@ main{max-width:1240px;margin:auto;padding:28px 22px 65px}.hero{margin:10px 0 26p
 <script>
 /* Add your Supabase Project URL and anon/public key after creating the project.
    Never put a service_role key in this file. */
-const SUPABASE_URL='YOUR_SUPABASE_PROJECT_URL';
-const SUPABASE_ANON_KEY='YOUR_SUPABASE_ANON_PUBLIC_KEY';
-const configured=SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY!=='YOUR_SUPABASE_ANON_PUBLIC_KEY';
+const SUPABASE_URL='https://qjkzppzdtnbotwgzmxqo.supabase.co';
+const SUPABASE_ANON_KEY='sb_publishable_v0G1QJfWxsjSXXG959UHsQ_UkBYaRWU';
+const configured=SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY.startsWith('sb_publishable_');
 const db=configured?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
 const phases=[
 [1,'Territory Zones',[['Mustafar','Dark Side'],['Corellia','Mixed'],['Coruscant','Light Side']]],
