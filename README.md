@@ -30,7 +30,7 @@ https://rotske1.github.io/Phantom-Rote-Guide/
 
 ## How recommendations are organized
 
-Planet → mission (editable title) → multiple team recommendations. Each recommendation expands independently and has its own editable title, squad image, and strategy notes. Officers can upload, replace, or remove a JPEG, PNG, WebP, or GIF image (up to 8 MB); images are stored in the public `team-recommendations` Supabase Storage bucket so all visitors can see them. Existing text squad fields are retained in saved data for compatibility but are no longer shown in the recommendation editor. Relic-level and datacron suggestions are not part of the guide. Editors can add/remove missions and recommendations. All saved changes go to the same shared database.
+Planet → mission (editable title) → multiple team recommendations. Each recommendation expands independently and has its own editable title, five circular squad-portrait slots, and strategy notes. Officers can upload, replace, or remove a JPEG, PNG, WebP, or GIF image (up to 8 MB) in each slot; portraits are displayed as circular crops and stored in the public `team-recommendations` Supabase Storage bucket so all visitors can see them. Existing text squad fields are retained in saved data for compatibility but are no longer shown in the recommendation editor. Relic-level and datacron suggestions are not part of the guide. Editors can add/remove missions and recommendations. All saved changes go to the same shared database.
 
 ## Current status
 
