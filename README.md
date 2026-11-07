@@ -30,8 +30,8 @@ https://rotske1.github.io/Phantom-Rote-Guide/
 
 ## How recommendations are organized
 
-Planet → mission (editable title) → multiple team recommendations. Each recommendation expands independently and has its own editable title, squad composition, and strategy notes. Relic-level and datacron suggestions are not part of the guide. Editors can add/remove missions and recommendations. All saved changes go to the same shared database.
+Planet → mission (editable title) → multiple team recommendations. Each recommendation expands independently and has its own editable title, squad image, and strategy notes. Officers can upload, replace, or remove a JPEG, PNG, WebP, or GIF image (up to 8 MB); images are stored in the public `team-recommendations` Supabase Storage bucket so all visitors can see them. Existing text squad fields are retained in saved data for compatibility but are no longer shown in the recommendation editor. Relic-level and datacron suggestions are not part of the guide. Editors can add/remove missions and recommendations. All saved changes go to the same shared database.
 
 ## Current status
 
-The frontend is connected to the Supabase project. Shared reading and saving will become available after you run `supabase-setup.sql` in the project's SQL Editor and add approved editor user IDs to `public.editors`. The website currently has no credentials for any service-role secret.
+The frontend is connected to the Supabase project. Shared reading and saving require `supabase-setup.sql` to be run in the project's SQL Editor and approved editor user IDs to be added to `public.editors`. If you already ran an older version of the setup SQL, run the updated `supabase-setup.sql` again to create the shared image bucket and its access policies. This is required before squad image uploads will work. The website currently has no credentials for any service-role secret.
