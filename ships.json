@@ -1,0 +1,282 @@
+[
+  {
+    "name": "Ahsoka Tano's Jedi Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_fighter_ahsoka.png"
+  },
+  {
+    "name": "Anakin's Eta-2 Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_fighter_anakin.png"
+  },
+  {
+    "name": "B-28 Extinction-class Bomber",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b28extinctionclassbomber.png"
+  },
+  {
+    "name": "Biggs Darklighter's X-wing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_xwing_red3.png"
+  },
+  {
+    "name": "Bistan's U-wing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_uwing.png"
+  },
+  {
+    "name": "BTL-B Y-wing Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ywing_btlb.png"
+  },
+  {
+    "name": "Cassian's U-wing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_uwing_hero.png"
+  },
+  {
+    "name": "Chimaera",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chimaera.png"
+  },
+  {
+    "name": "Clone Sergeant's ARC-170",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_arc170.png"
+  },
+  {
+    "name": "Comeuppance",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_comeuppance.png"
+  },
+  {
+    "name": "Ebon Hawk",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ebonhawk.png"
+  },
+  {
+    "name": "Emperor's Shuttle",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_imperialshuttle.png"
+  },
+  {
+    "name": "Endurance",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_venator.png"
+  },
+  {
+    "name": "Executor",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_executor.png"
+  },
+  {
+    "name": "Executrix",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stardestroyer.png"
+  },
+  {
+    "name": "Finalizer",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_finalizer.png"
+  },
+  {
+    "name": "First Order SF TIE Fighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_fosf_tie_fighter.png"
+  },
+  {
+    "name": "First Order TIE Fighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_tiefighter.png"
+  },
+  {
+    "name": "Fury-class Interceptor",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_furyclassinterceptor.png"
+  },
+  {
+    "name": "Gauntlet Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gauntlet.png"
+  },
+  {
+    "name": "Geonosian Soldier's Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosis_fighter_soldier.png"
+  },
+  {
+    "name": "Geonosian Spy's Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosis_fighter_spy.png"
+  },
+  {
+    "name": "Ghost",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ghost.png"
+  },
+  {
+    "name": "Han's Millennium Falcon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mfalcon.png"
+  },
+  {
+    "name": "Home One",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_moncalamarilibertycruiser.png"
+  },
+  {
+    "name": "Hound's Tooth",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_houndstooth.png"
+  },
+  {
+    "name": "Hyena Bomber",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hyenabomber.png"
+  },
+  {
+    "name": "IG-2000",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig2000.png"
+  },
+  {
+    "name": "Imperial TIE Bomber",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiebomber.png"
+  },
+  {
+    "name": "Imperial TIE Fighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiefighter.png"
+  },
+  {
+    "name": "Jedi Consular's Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_fighter.png"
+  },
+  {
+    "name": "Kylo Ren's Command Shuttle",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_upsilon_shuttle_kylo.png"
+  },
+  {
+    "name": "Lando's Millennium Falcon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mil_fal_pristine.png"
+  },
+  {
+    "name": "Leviathan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leviathan.png"
+  },
+  {
+    "name": "Malevolence",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_malevolence.png"
+  },
+  {
+    "name": "Marauder",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marauder.png"
+  },
+  {
+    "name": "Mark VI Interceptor",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithsupremacyclass.png"
+  },
+  {
+    "name": "MG-100 StarFortress SF-17",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mg100.png"
+  },
+  {
+    "name": "Negotiator",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_negotiator.png"
+  },
+  {
+    "name": "Outrider",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_outrider.png"
+  },
+  {
+    "name": "Phantom II",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_phantom2.png"
+  },
+  {
+    "name": "Plo Koon's Jedi Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_fighter_bladeofdorin.png"
+  },
+  {
+    "name": "Poe Dameron's X-wing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_xwing_blackone.png"
+  },
+  {
+    "name": "Profundity",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_profundity.png"
+  },
+  {
+    "name": "Punishing One",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_punishingone.png"
+  },
+  {
+    "name": "Raddus",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_raddus.png"
+  },
+  {
+    "name": "Raven's Claw",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ravensclaw.png"
+  },
+  {
+    "name": "Razor Crest",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_razorcrest.png"
+  },
+  {
+    "name": "Rebel B-wing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bwingrebel.png"
+  },
+  {
+    "name": "Rebel Y-wing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ywing.png"
+  },
+  {
+    "name": "Resistance X-wing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_xwing_resistance.png"
+  },
+  {
+    "name": "Rex's ARC-170",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_arc170_02.png"
+  },
+  {
+    "name": "Rey's Millennium Falcon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mfalcon_ep7.png"
+  },
+  {
+    "name": "Rogue One",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rogueoneship.png"
+  },
+  {
+    "name": "Scimitar",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithinfiltrator.png"
+  },
+  {
+    "name": "Scythe",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_scythe.png"
+  },
+  {
+    "name": "Sith Fighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithfighter.png"
+  },
+  {
+    "name": "Slave I",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_slave1.png"
+  },
+  {
+    "name": "Sun Fac's Geonosian Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosis_fighter_sunfac.png"
+  },
+  {
+    "name": "TIE Advanced x1",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tieadvanced.png"
+  },
+  {
+    "name": "TIE Dagger",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiedagger.png"
+  },
+  {
+    "name": "TIE Defender",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiedefender.png"
+  },
+  {
+    "name": "TIE Echelon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstordertieechelon.png"
+  },
+  {
+    "name": "TIE Reaper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiereaper.png"
+  },
+  {
+    "name": "TIE Silencer",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tie_silencer.png"
+  },
+  {
+    "name": "TIE/IN Interceptor Prototype",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tie_interceptor_prototype.png"
+  },
+  {
+    "name": "Umbaran Starfighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_umbaran_star_fighter.png"
+  },
+  {
+    "name": "Vulture Droid",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vulturedroid.png"
+  },
+  {
+    "name": "Wedge Antilles's X-wing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_xwing_red2.png"
+  },
+  {
+    "name": "Xanadu Blood",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_xanadublood.png"
+  }
+]
