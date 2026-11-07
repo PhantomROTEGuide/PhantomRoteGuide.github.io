@@ -31,7 +31,7 @@ https://rotske1.github.io/Phantom-Rote-Guide/
 
 ## How recommendations are organized
 
-Planet → mission (editable title) → multiple team recommendations. Each recommendation expands independently and has its own squad, relic/gear requirements, and strategy notes. Editors can add/remove missions and recommendations. All saved changes go to the same shared database.
+Planet → mission (editable title) → multiple team recommendations. Each recommendation expands independently and has its own editable title, squad composition, and strategy notes. Relic-level and datacron suggestions are not part of the guide. Editors can add/remove missions and recommendations. All saved changes go to the same shared database.
 
 ## Current status
 
