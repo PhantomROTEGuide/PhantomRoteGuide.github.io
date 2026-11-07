@@ -1,147 +1,64 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#07111f">
-<title>Phantom RoTE Guide</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07111f"><title>Phantom RoTE Guide</title>
 <style>
-:root{
-  --bg:#07111f;--panel:#0d1b2d;--panel2:#12243a;--line:#29415d;
-  --ink:#eef5ff;--muted:#9eb2ca;--gold:#e7c477;--blue:#83c6e8;
-  --green:#9bd2b1;--shadow:0 18px 45px #0007;
-}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1d3c59 0,#0a192b 42%,var(--bg) 78%);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-button,input,textarea{font:inherit}
-button{color:inherit}
-header{position:sticky;top:0;z-index:10;background:#07111feF;border-bottom:1px solid #29415d;backdrop-filter:blur(14px)}
-.header-inner{max-width:1240px;margin:auto;padding:15px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{display:flex;align-items:center;gap:13px}.crest{width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:22px;box-shadow:0 0 22px #e7c47725}
-.brand h1{font-size:17px;letter-spacing:.16em;margin:0}.brand p{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:2px 0 0}
-.header-actions{display:flex;gap:8px;flex-wrap:wrap}.utility{background:#10243a;border:1px solid var(--line);padding:8px 11px;border-radius:8px;cursor:pointer;font-size:12px}.utility:hover{border-color:var(--gold)}
-main{max-width:1240px;margin:auto;padding:30px 24px 70px}
-.hero{display:flex;justify-content:space-between;align-items:end;gap:25px;margin:8px 0 28px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);font-weight:800}
-.hero h2{font-size:clamp(28px,4vw,43px);letter-spacing:.02em;line-height:1.08;margin:8px 0}.hero p{color:var(--muted);max-width:720px;margin:0}
-.hero-mark{border:1px solid var(--line);padding:10px 14px;border-radius:10px;color:var(--muted);font-size:11px;white-space:nowrap;background:#0c1a2a}
-.legend{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 25px}.legend span{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:30px;padding:5px 10px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}.ds{background:#d87870}.mixed{background:#d7b56b}.ls{background:#78c4aa}.bonus{background:#a89be8}
-.phase{margin:28px 0 35px}.phase-heading{display:flex;align-items:center;gap:13px;margin-bottom:13px}.phase-number{color:var(--gold);font-size:11px;letter-spacing:.17em;text-transform:uppercase;font-weight:800}.phase-heading h3{font-size:17px;margin:0}.phase-heading:after{content:"";height:1px;background:linear-gradient(90deg,var(--line),transparent);flex:1}
-.planet-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.planet-card{min-height:146px;position:relative;overflow:hidden;text-align:left;border:1px solid var(--line);border-radius:12px;padding:17px;background:linear-gradient(135deg,#152a42,#0d1929 70%);cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
-.planet-card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:var(--shadow)}
-.planet-card:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.planet-info{position:relative;z-index:2;max-width:68%}.planet-info .type{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}.planet-info strong{display:block;font-size:20px;line-height:1.15;margin:7px 0 6px}.planet-info .sub{font-size:11px;color:#b6c7da}
-.planet-art{position:absolute;right:19px;top:24px;width:98px;height:98px;border-radius:50%;opacity:.9;box-shadow:inset -17px -15px 23px #020813a8, inset 8px 7px 15px #ffffff25,0 0 28px #70a9d022}
-.planet-art:after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(125deg,transparent 38%,#020916a8 100%)}
-.art-mustafar{background:radial-gradient(ellipse at 34% 35%,#eab06d 0 8%,#a84e31 24%,#4c282b 52%,#1b2635 78%)}
-.art-corellia{background:radial-gradient(ellipse at 35% 32%,#b6b8a0,#657c72 35%,#334c56 68%,#172b3b)}
-.art-coruscant{background:radial-gradient(ellipse at 32% 30%,#d5c8a0,#7c8d91 35%,#3d586e 70%,#18283b)}
-.art-geonosis{background:radial-gradient(ellipse at 30% 30%,#e2b36e,#a75e38 38%,#613b35 69%,#202a3b)}
-.art-felucia{background:radial-gradient(ellipse at 33% 32%,#d3d37e,#668e68 40%,#315b5c 70%,#172b3c)}
-.art-bracca{background:radial-gradient(ellipse at 34% 30%,#b8a58b,#79736b 37%,#46505b 70%,#1a293a)}
-.art-dathomir{background:radial-gradient(ellipse at 33% 30%,#c68d83,#813f50 37%,#4c334b 70%,#1b2639)}
-.art-tatooine{background:radial-gradient(ellipse at 32% 29%,#f0d09a,#c48a55 42%,#815d4b 70%,#273449)}
-.art-kashyyyk{background:radial-gradient(ellipse at 33% 30%,#b7c48b,#648c62 40%,#315b56 72%,#172b3b)}
-.art-haven{background:radial-gradient(ellipse at 33% 30%,#b9c5c6,#758b99 39%,#465a6d 72%,#192a3d)}
-.art-kessel{background:radial-gradient(ellipse at 32% 30%,#d4a77c,#8b695e 40%,#4c5360 72%,#19283a)}
-.art-lothal{background:radial-gradient(ellipse at 32% 30%,#b7d1bb,#6d9c91 39%,#3e6271 72%,#192b3c)}
-.art-malachor{background:radial-gradient(ellipse at 34% 31%,#d68c75,#914c49 40%,#4b3547 72%,#192638)}
-.art-vandor{background:radial-gradient(ellipse at 34% 29%,#d5c0a4,#8a786d 42%,#4c5b69 73%,#1b2a3b)}
-.art-kafrene{background:radial-gradient(ellipse at 32% 30%,#b5a38f,#77756e 38%,#46545e 70%,#1a2b3c)}
-.art-deathstar{background:radial-gradient(circle at 35% 32%,#aeb9c3,#657789 40%,#344454 72%,#111c2b)}
-.art-hoth{background:radial-gradient(ellipse at 32% 30%,#f1f4ed,#aabecb 42%,#627c91 72%,#1c2d40)}
-.art-scarif{background:radial-gradient(ellipse at 32% 30%,#d5d8a0,#7eaa87 39%,#3e7778 72%,#192e40)}
-.art-zeffo{background:radial-gradient(ellipse at 32% 30%,#d4c5a1,#9b9d8a 38%,#526f78 70%,#1a2d3e)}
-.art-mandalore{background:radial-gradient(ellipse at 32% 30%,#b7c6d1,#718d9e 38%,#405c72 70%,#172b3e)}
-.card-arrow{position:absolute;right:16px;bottom:13px;color:var(--gold);font-size:21px}
-.bonus-section{margin-top:38px;border-top:1px solid var(--line);padding-top:23px}.bonus-section h3{font-size:17px;margin:5px 0 13px}.bonus-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.bonus-card{position:relative;display:flex;align-items:center;gap:13px;text-align:left;background:#101f32;border:1px solid var(--line);border-radius:11px;padding:13px;cursor:pointer}.bonus-card:hover{border-color:var(--gold)}.bonus-card .planet-art{position:relative;inset:auto;flex:none;width:54px;height:54px}.bonus-card strong{display:block}.bonus-card small{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em}
-#detail{display:none}#detail.active{display:block}#home.hidden{display:none}
-.back{background:#10243a;border:1px solid var(--line);padding:8px 12px;border-radius:8px;cursor:pointer;color:var(--gold);margin-bottom:20px}
-.detail-top{display:flex;align-items:center;gap:17px;margin-bottom:20px}.detail-top .planet-art{position:relative;inset:auto;flex:none;width:84px;height:84px}.detail-top h2{margin:0;font-size:30px}.detail-top p{margin:3px 0 0;color:var(--muted);font-size:12px}
-.detail-intro{color:var(--muted);max-width:800px;margin:0 0 18px}
-.detail-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:18px 0 13px}.detail-toolbar p{color:var(--muted);font-size:12px;margin:0}.action{background:#18324d;border:1px solid var(--line);padding:9px 12px;border-radius:8px;cursor:pointer;font-size:12px}.action:hover{border-color:var(--gold)}
-.mission-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.mission{background:linear-gradient(145deg,#142840,#0d1929);border:1px solid var(--line);border-radius:11px;padding:15px}.mission-head{display:flex;gap:8px;align-items:center;margin-bottom:10px}.mission-title{min-width:0;flex:1;background:transparent;border:0;border-bottom:1px solid #304963;color:var(--ink);font-weight:700;padding:5px 2px}.remove{background:transparent;border:1px solid #65434b;color:#e3a4a4;border-radius:6px;padding:4px 7px;cursor:pointer;font-size:11px}
-.field-label{display:block;color:var(--gold);font-size:9px;text-transform:uppercase;letter-spacing:.16em;margin:11px 0 5px}.mission textarea{display:block;width:100%;resize:vertical;min-height:66px;background:#091525;color:var(--ink);border:1px solid #304963;border-radius:7px;padding:9px;font-size:13px;line-height:1.45}.mission textarea:focus,.mission-title:focus{outline:1px solid var(--gold);border-color:var(--gold)}
-.saved{color:var(--green);font-size:10px;min-height:14px;margin-top:7px}
-.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
-footer{border-top:1px solid var(--line);padding:22px;text-align:center;color:#8196ae;font-size:11px}
-@media(max-width:760px){.header-inner{align-items:flex-start;flex-direction:column}.hero{align-items:flex-start;flex-direction:column}.planet-grid,.bonus-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mission-list{grid-template-columns:1fr}.hero-mark{white-space:normal}.planet-card{min-height:130px}.planet-art{width:78px;height:78px;right:12px;top:28px}}
-@media(max-width:480px){main{padding:22px 14px 55px}.header-inner{padding:12px 14px}.planet-grid,.bonus-grid{grid-template-columns:1fr}.planet-card{min-height:112px}.planet-art{width:76px;height:76px;top:17px}.brand h1{font-size:14px}.detail-top h2{font-size:24px}}
-</style>
-</head>
+:root{--bg:#07111f;--panel:#102139;--panel2:#142a43;--line:#29415d;--ink:#eef5ff;--muted:#9eb2ca;--gold:#e7c477;--green:#9bd2b1;--red:#e3a4a4}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1d3c59,#0a192b 42%,var(--bg) 78%);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;min-height:100vh}button,input,textarea{font:inherit;color:inherit}button{cursor:pointer}header{position:sticky;top:0;z-index:5;background:#07111fee;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.bar{max-width:1240px;margin:auto;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{display:flex;gap:12px;align-items:center}.crest{width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:22px;font-weight:900}.brand h1{font-size:16px;letter-spacing:.15em;margin:0}.brand p{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:1px 0 0}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{background:#18324d;border:1px solid var(--line);padding:8px 12px;border-radius:8px;font-size:12px}.btn:hover{border-color:var(--gold)}.btn.primary{border-color:#a88d50;color:var(--gold)}.btn.danger{color:var(--red);border-color:#65434b}
+main{max-width:1240px;margin:auto;padding:28px 22px 65px}.hero{margin:10px 0 26px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);font-weight:800}.hero h2{font-size:clamp(29px,4vw,43px);line-height:1.08;margin:8px 0}.hero p,.muted{color:var(--muted)}.hero p{max-width:740px;margin:0}.phase{margin:28px 0 35px}.phase-head{display:flex;gap:13px;align-items:center;margin-bottom:13px}.phase-head:after{content:"";height:1px;background:linear-gradient(90deg,var(--line),transparent);flex:1}.phase-head b{font-size:11px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase}.phase-head strong{font-size:17px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.planet{min-height:130px;position:relative;overflow:hidden;text-align:left;border:1px solid var(--line);border-radius:12px;padding:16px;background:linear-gradient(135deg,#152a42,#0d1929);transition:.18s}.planet:hover{transform:translateY(-2px);border-color:var(--gold)}.planet strong{display:block;font-size:20px;max-width:70%;position:relative;z-index:1}.planet small{color:var(--muted);text-transform:uppercase;letter-spacing:.1em;position:relative;z-index:1}.orb{position:absolute;width:88px;height:88px;right:17px;top:23px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#e7c477,#9a5945 43%,#25374a 75%);box-shadow:inset -15px -13px 23px #020813a8,0 0 25px #70a9d022}.orb:after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(125deg,transparent 40%,#020916a8)}.bonus{margin-top:36px;border-top:1px solid var(--line);padding-top:22px}.bonus h3{margin:5px 0 13px}.detail{display:none}.detail.active{display:block}.home.hidden{display:none}.back{margin-bottom:20px}.detail-top{display:flex;align-items:center;gap:16px;margin-bottom:14px}.detail-top .orb{position:relative;inset:auto;flex:none;width:78px;height:78px}.detail-top h2{margin:0;font-size:29px}.detail-top p{margin:3px 0;color:var(--muted);font-size:12px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0 12px}.toolbar p{font-size:11px;color:var(--muted);margin:0;letter-spacing:.08em}.mission-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mission{border:1px solid var(--line);border-radius:11px;background:linear-gradient(145deg,#142840,#0d1929);padding:13px}.mission>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px}.mission>summary::-webkit-details-marker,.team>summary::-webkit-details-marker{display:none}.chev{color:var(--gold);font-size:18px;transition:transform .15s}.mission[open]>summary .chev,.team[open]>summary .chev{transform:rotate(90deg)}.mission-name{font-weight:750;flex:1}.count{font-size:10px;color:var(--muted);white-space:nowrap}.mission-body{padding-top:13px}.edit-title{width:100%;background:#091525;border:1px solid #304963;border-radius:7px;padding:8px;margin:0 0 10px}.team-list{display:grid;gap:7px}.team{border:1px solid #304963;border-radius:8px;background:#0b192a;overflow:hidden}.team>summary{list-style:none;display:flex;align-items:center;gap:9px;padding:10px;cursor:pointer}.team-title{font-size:13px;font-weight:650;flex:1}.team-hint{font-size:10px;color:var(--muted)}.team-body{padding:0 10px 11px;border-top:1px solid #243c55}.field{display:block;color:var(--gold);font-size:9px;text-transform:uppercase;letter-spacing:.15em;margin:10px 0 5px}.team textarea{display:block;width:100%;min-height:54px;resize:vertical;background:#071321;border:1px solid #304963;border-radius:7px;padding:8px;font-size:12px;line-height:1.45}.team input,.mission input{background:#071321;border:1px solid #304963;border-radius:7px;padding:7px;font-size:12px;width:100%}.team textarea:focus,.team input:focus,.edit-title:focus{outline:1px solid var(--gold);border-color:var(--gold)}.team-controls{display:flex;gap:7px;align-items:center;margin-top:9px}.team-controls .btn{padding:5px 8px;font-size:10px}.add-team{margin-top:9px;width:100%;border:1px dashed #46617c;background:transparent;color:var(--gold);border-radius:7px;padding:8px;font-size:11px}.status{font-size:11px;color:var(--muted);min-height:18px;margin:12px 0}.status.good{color:var(--green)}.status.bad{color:var(--red)}.locked{border:1px solid var(--line);padding:12px;border-radius:9px;color:var(--muted);font-size:12px;margin:12px 0}.empty{padding:24px;border:1px dashed var(--line);border-radius:9px;color:var(--muted);text-align:center}.login-panel{display:none;position:fixed;inset:0;z-index:20;background:#0009;place-items:center;padding:20px}.login-panel.show{display:grid}.login-box{width:min(400px,100%);background:#102139;border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:0 20px 60px #0009}.login-box h3{margin:0 0 12px}.login-box input{width:100%;padding:10px;background:#071321;border:1px solid var(--line);border-radius:7px;margin:6px 0 10px}.login-box label{font-size:11px;color:var(--muted)}footer{text-align:center;border-top:1px solid var(--line);padding:22px;color:#8196ae;font-size:11px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mission-list{grid-template-columns:1fr}}@media(max-width:480px){main{padding:22px 14px 50px}.grid{grid-template-columns:1fr}.planet{min-height:108px}.orb{width:72px;height:72px;top:18px}.detail-top h2{font-size:24px}}
+</style></head>
 <body>
-<header><div class="header-inner">
-  <div class="brand"><div class="crest">P</div><div><h1>PHANTOM RoTE GUIDE</h1><p>Rise of the Empire · Territory Battles</p></div></div>
-  <div class="header-actions">
-    <button class="utility" onclick="exportBackup()">↓ Export guide data</button>
-    <button class="utility" onclick="document.getElementById('importFile').click()">↑ Import guide data</button>
-    <input id="importFile" type="file" accept="application/json" hidden onchange="importBackup(event)">
-  </div>
-</div></header>
+<header><div class="bar"><div class="brand"><div class="crest">P</div><div><h1>PHANTOM RoTE GUIDE</h1><p>Rise of the Empire · Territory Battles</p></div></div><div class="actions"><span id="authLabel" class="btn">View only</span><button class="btn" id="loginBtn" onclick="showLogin()">Officer login</button><button class="btn" id="logoutBtn" style="display:none" onclick="logout()">Sign out</button></div></div></header>
 <main>
-<section id="home">
-  <div class="hero"><div><div class="eyebrow">Guild field manual</div><h2>Choose your battlefield</h2><p>Select a planet to open its mission guide. Add Phantom's recommended squads, relic requirements, and strategy notes whenever you're ready.</p></div><div class="hero-mark">6 PHASES&nbsp; · &nbsp;18 CORE ZONES&nbsp; · &nbsp;2 BONUS ZONES</div></div>
-  <div class="legend"><span><i class="dot ds"></i>Dark Side</span><span><i class="dot mixed"></i>Mixed</span><span><i class="dot ls"></i>Light Side</span><span><i class="dot bonus"></i>Bonus zone</span></div>
-  <div id="phases"></div>
-  <section class="bonus-section"><div class="eyebrow">Bonus operations</div><h3>Special Zones</h3><div class="bonus-grid" id="bonusZones"></div></section>
-  <section class="bonus-section"><div class="eyebrow">Across the operation</div><h3>Special Missions</h3>
-    <button class="bonus-card" style="width:100%" onclick="openPlanet('Special Missions','All Phases','Special objectives')"><span class="planet-art art-zeffo"></span><span><strong>Special Missions</strong><small>Open a shared space for special-mission squads and notes</small></span><span class="card-arrow">↗</span></button>
-  </section>
-</section>
-<section id="detail">
-  <button class="back" onclick="goHome()">← All phases and planets</button>
-  <div class="detail-top"><div id="detailArt" class="planet-art"></div><div><div class="eyebrow" id="detailPhase"></div><h2 id="detailName"></h2><p id="detailSub"></p></div></div>
-  <p class="detail-intro">Add your own team recommendations below. Each mission card can hold a squad, relic requirements, and strategy notes. Your edits are saved in this browser on this device.</p>
-  <div class="detail-toolbar"><p>PHANTOM TEAM RECOMMENDATIONS · EDITABLE PLACEHOLDERS</p><button class="action" onclick="addMission()">＋ Add mission slot</button></div>
-  <div class="mission-list" id="missions"></div>
-</section>
-</main>
-<footer>PHANTOM RoTE GUIDE · Unofficial community resource for Star Wars: Galaxy of Heroes</footer>
+<section id="home" class="home"><div class="hero"><div class="eyebrow">Guild field manual</div><h2>Choose your battlefield</h2><p>Select a planet to view its missions and the team's recommendations. Open a mission, then expand an individual team to see its squad, requirements, and strategy.</p></div><div id="phases"></div><section class="bonus"><div class="eyebrow">Bonus operations</div><h3>Special Zones</h3><div class="grid" id="bonusZones"></div></section><section class="bonus"><div class="eyebrow">Across the operation</div><h3>Special Missions</h3><button class="planet" style="width:100%" onclick="openPlanet('Special Missions','All Phases','Special objectives')"><strong>Special Missions</strong><small>Special-mission squads and strategy</small><span class="orb"></span></button></section></section>
+<section id="detail" class="detail"><button class="btn back" onclick="goHome()">← All phases and planets</button><div class="detail-top"><span class="orb" id="detailOrb"></span><div><div class="eyebrow" id="detailPhase"></div><h2 id="detailName"></h2><p id="detailSub"></p></div></div><p class="muted">Expand a mission to see its team recommendations. Expand any team for its own squad details and strategy notes.</p><div id="editNotice" class="locked">View-only mode. Officers can sign in to add or edit recommendations.</div><div class="toolbar"><p>MISSIONS &amp; TEAM RECOMMENDATIONS</p><button class="btn primary" id="addMissionBtn" onclick="addMission()" style="display:none">＋ Add mission</button></div><div class="mission-list" id="missions"></div><div id="saveStatus" class="status"></div></section>
+</main><footer>PHANTOM RoTE GUIDE · Unofficial community resource for Star Wars: Galaxy of Heroes</footer>
+<div class="login-panel" id="loginPanel"><div class="login-box"><h3>Officer sign in</h3><p class="muted" style="font-size:12px">Use the email and password created for you by the guide administrator.</p><form onsubmit="login(event)"><label>Email</label><input id="email" type="email" required autocomplete="username"><label>Password</label><input id="password" type="password" required autocomplete="current-password"><div class="actions"><button class="btn primary" type="submit">Sign in</button><button class="btn" type="button" onclick="hideLogin()">Cancel</button></div></form><div id="loginError" class="status bad"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+/* Add your Supabase Project URL and anon/public key after creating the project.
+   Never put a service_role key in this file. */
+const SUPABASE_URL='YOUR_SUPABASE_PROJECT_URL';
+const SUPABASE_ANON_KEY='YOUR_SUPABASE_ANON_PUBLIC_KEY';
+const configured=SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY!=='YOUR_SUPABASE_ANON_PUBLIC_KEY';
+const db=configured?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
 const phases=[
- {phase:1,req:'Relic 5',planets:[['Mustafar','Dark Side','ds','art-mustafar'],['Corellia','Mixed','mixed','art-corellia'],['Coruscant','Light Side','ls','art-coruscant']]},
- {phase:2,req:'Relic 6',planets:[['Geonosis','Dark Side','ds','art-geonosis'],['Felucia','Mixed','mixed','art-felucia'],['Bracca','Light Side','ls','art-bracca']]},
- {phase:3,req:'Relic 7',planets:[['Dathomir','Dark Side','ds','art-dathomir'],['Tatooine','Mixed','mixed','art-tatooine'],['Kashyyyk','Light Side','ls','art-kashyyyk']]},
- {phase:4,req:'Relic 8',planets:[['Haven Medical Station','Dark Side','ds','art-haven'],['Kessel','Mixed','mixed','art-kessel'],['Lothal','Light Side','ls','art-lothal']]},
- {phase:5,req:'Relic 9',planets:[['Malachor','Dark Side','ds','art-malachor'],['Vandor','Mixed','mixed','art-vandor'],['Ring of Kafrene','Light Side','ls','art-kafrene']]},
- {phase:6,req:'Relic 9',planets:[['Death Star','Dark Side','ds','art-deathstar'],['Hoth','Mixed','mixed','art-hoth'],['Scarif','Light Side','ls','art-scarif']]}
-];
-const bonus=[['Zeffo','Phase 3 Bonus Zone','art-zeffo'],['Mandalore','Phase 4 Bonus Zone','art-mandalore']];
-const starterMissions=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
-let current='';
-function renderHome(){
- const root=document.getElementById('phases');
- root.innerHTML=phases.map(p=>`<section class="phase"><div class="phase-heading"><span class="phase-number">Phase ${p.phase}</span><h3>${p.req} · Territory Zones</h3></div><div class="planet-grid">${p.planets.map(pl=>planetButton(pl,p.phase,p.req)).join('')}</div></section>`).join('');
- document.getElementById('bonusZones').innerHTML=bonus.map(b=>`<button class="bonus-card" onclick="openPlanet('${b[0]}','${b[1]}','Bonus zone')"><span class="planet-art ${b[2]}"></span><span><strong>${b[0]}</strong><small>${b[1]}</small></span><span class="card-arrow">↗</span></button>`).join('');
-}
-function planetButton(pl,phase,req){return `<button class="planet-card" onclick="openPlanet('${pl[0]}','Phase ${phase} · ${pl[1]}','${req}')"><span class="planet-art ${pl[3]}"></span><span class="planet-info"><span class="type">${pl[1]}</span><strong>${pl[0]}</strong><span class="sub">Phase ${phase} · ${req}</span></span><span class="card-arrow">↗</span></button>`}
-function keyFor(name){return 'phantom-rote-v2-'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-')}
-function starter(){return starterMissions.map(title=>({title,team:'',relics:'',notes:''}))}
-function getSlots(){try{return JSON.parse(localStorage.getItem(keyFor(current)))||starter()}catch(e){return starter()}}
-function openPlanet(name,phase,req){
- current=name;document.getElementById('home').classList.add('hidden');document.getElementById('detail').classList.add('active');
- document.getElementById('detailName').textContent=name;document.getElementById('detailPhase').textContent=phase;document.getElementById('detailSub').textContent=req;
- const artClass=([...phases.flatMap(p=>p.planets),...bonus.map(b=>[b[0],'','',b[2]])].find(p=>p[0]===name)||[])[3]||'art-zeffo';
- document.getElementById('detailArt').className='planet-art '+artClass;renderMissions();window.scrollTo({top:0,behavior:'smooth'});
-}
-function renderMissions(){
- const slots=getSlots(),root=document.getElementById('missions');
- if(!slots.length){root.innerHTML='<div class="empty">No mission slots yet. Use “Add mission slot” to create one.</div>';return}
- root.innerHTML=slots.map((s,i)=>`<article class="mission"><div class="mission-head"><input class="mission-title" aria-label="Mission title" value="${esc(s.title||'Mission')}" data-i="${i}" data-field="title"><button class="remove" onclick="removeMission(${i})">Remove</button></div>
- <label class="field-label">Recommended team</label><textarea data-i="${i}" data-field="team" placeholder="Add leader and squad members (for example, five character names)...">${esc(s.team||'')}</textarea>
- <label class="field-label">Relic / gear requirements</label><textarea data-i="${i}" data-field="relics" placeholder="Add relic levels, gear levels, required units, or datacron details...">${esc(s.relics||'')}</textarea>
- <label class="field-label">Strategy notes</label><textarea data-i="${i}" data-field="notes" placeholder="Add strategy, turn order, ability use, or auto-battle notes...">${esc(s.notes||'')}</textarea>
- <div class="saved" id="saved-${i}">Edits save automatically in this browser</div></article>`).join('');
- root.querySelectorAll('[data-i]').forEach(el=>el.addEventListener('input',saveField));
-}
-function saveField(){const slots=getSlots(),i=Number(this.dataset.i);slots[i][this.dataset.field]=this.value;localStorage.setItem(keyFor(current),JSON.stringify(slots));const note=document.getElementById('saved-'+i);if(note)note.textContent='Saved locally ✓'}
-function addMission(){const slots=getSlots();slots.push({title:'New mission '+(slots.length+1),team:'',relics:'',notes:''});localStorage.setItem(keyFor(current),JSON.stringify(slots));renderMissions()}
-function removeMission(i){if(!confirm('Remove this mission slot and its saved information?'))return;const slots=getSlots();slots.splice(i,1);localStorage.setItem(keyFor(current),JSON.stringify(slots));renderMissions()}
+[1,'Relic 5',[['Mustafar','Dark Side'],['Corellia','Mixed'],['Coruscant','Light Side']]],
+[2,'Relic 6',[['Geonosis','Dark Side'],['Felucia','Mixed'],['Bracca','Light Side']]],
+[3,'Relic 7',[['Dathomir','Dark Side'],['Tatooine','Mixed'],['Kashyyyk','Light Side']]],
+[4,'Relic 8',[['Haven Medical Station','Dark Side'],['Kessel','Mixed'],['Lothal','Light Side']]],
+[5,'Relic 9',[['Malachor','Dark Side'],['Vandor','Mixed'],['Ring of Kafrene','Light Side']]],
+[6,'Relic 9',[['Death Star','Dark Side'],['Hoth','Mixed'],['Scarif','Light Side']]]];
+const bonus=[['Zeffo','Phase 3 Bonus Zone'],['Mandalore','Phase 4 Bonus Zone']];
+const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
+let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false;
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function planetList(){return [...phases.flatMap(p=>p[2].map(x=>x[0])),...bonus.map(x=>x[0]),'Special Missions']}
+function blankRec(n){return {title:'Team Recommendation '+n,team:'',relics:'',notes:''}}
+function blankMission(title){return {title,recommendations:[1,2,3,4].map(blankRec)}}
+function ensurePlanet(name){const k=slug(name);if(!Array.isArray(data[k]))data[k]=missionNames.map(blankMission);return data[k]}
+function renderHome(){document.getElementById('phases').innerHTML=phases.map(p=>'<section class="phase"><div class="phase-head"><b>Phase '+p[0]+'</b><strong>'+p[1]+' · Territory Zones</strong></div><div class="grid">'+p[2].map(x=>planetCard(x[0],'Phase '+p[0]+' · '+x[1],p[1])).join('')+'</div></section>').join('');document.getElementById('bonusZones').innerHTML=bonus.map(x=>planetCard(x[0],x[1],'Bonus zone')).join('')}
+function planetCard(name,sub,req){return '<button class="planet" onclick="openPlanet(\''+esc(name)+'\',\''+esc(sub)+'\',\''+esc(req)+'\')"><strong>'+esc(name)+'</strong><small>'+esc(sub)+'</small><span class="orb"></span></button>'}
+function openPlanet(name,phase,req){current=name;document.getElementById('home').classList.add('hidden');document.getElementById('detail').classList.add('active');document.getElementById('detailName').textContent=name;document.getElementById('detailPhase').textContent=phase;document.getElementById('detailSub').textContent=req;renderMissions();window.scrollTo({top:0,behavior:'smooth'})}
 function goHome(){document.getElementById('detail').classList.remove('active');document.getElementById('home').classList.remove('hidden');current='';window.scrollTo({top:0,behavior:'smooth'})}
-function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function exportBackup(){const data={site:'Phantom RoTE Guide',version:2,exported:new Date().toISOString(),guides:{}};const keys=Object.keys(localStorage).filter(k=>k.startsWith('phantom-rote-v2-'));keys.forEach(k=>data.guides[k]=localStorage.getItem(k));const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='phantom-rote-guide-backup.json';a.click();URL.revokeObjectURL(a.href)}
-function importBackup(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(!data.guides||typeof data.guides!=='object')throw new Error('Invalid backup');Object.entries(data.guides).forEach(([k,v])=>{if(k.startsWith('phantom-rote-v2-'))localStorage.setItem(k,v)});alert('Guide data imported.');if(current)renderMissions()}catch(e){alert('Could not import that file. Please choose a Phantom RoTE Guide backup.')}event.target.value=''};reader.readAsText(file)}
+function renderMissions(){const list=ensurePlanet(current),root=document.getElementById('missions');document.getElementById('addMissionBtn').style.display=isEditor?'inline-block':'none';document.getElementById('editNotice').style.display=isEditor?'none':'block';if(!list.length){root.innerHTML='<div class="empty">No missions have been added.</div>';return}root.innerHTML=list.map((m,i)=>'<details class="mission"><summary><span class="chev">›</span><span class="mission-name">'+esc(m.title||'Untitled mission')+'</span><span class="count">'+(m.recommendations||[]).length+' teams</span></summary><div class="mission-body">'+(isEditor?'<label class="field">Mission title</label><input class="edit-title" value="'+esc(m.title)+'" onchange="changeMissionTitle('+i+',this.value)">':'')+'<div class="team-list">'+(m.recommendations||[]).map((r,j)=>renderTeam(i,j,r)).join('')+'</div>'+(isEditor?'<button class="add-team" onclick="addTeam('+i+')">＋ Add team recommendation</button><div class="team-controls"><button class="btn danger" onclick="removeMission('+i+')">Delete mission</button></div>':'')+'</div></details>').join('')}
+function renderTeam(i,j,r){return '<details class="team"><summary><span class="chev">›</span><span class="team-title">'+esc(r.title||'Untitled team')+'</span><span class="team-hint">View strategy</span></summary><div class="team-body">'+(isEditor?'<label class="field">Recommendation title</label><input value="'+esc(r.title)+'" onchange="changeRec('+i+','+j+',\'title\',this.value)">':'')+'<label class="field">Team / squad</label><textarea '+(!isEditor?'readonly':'')+' onchange="changeRec('+i+','+j+',\'team\',this.value)" placeholder="Leader and squad members">'+esc(r.team)+'</textarea><label class="field">Relic / gear requirements</label><textarea '+(!isEditor?'readonly':'')+' onchange="changeRec('+i+','+j+',\'relics\',this.value)" placeholder="Relic levels, gear, required units, datacron details">'+esc(r.relics)+'</textarea><label class="field">Notes / strategy</label><textarea '+(!isEditor?'readonly':'')+' onchange="changeRec('+i+','+j+',\'notes\',this.value)" placeholder="Strategy, turn order, ability use, battle tips">'+esc(r.notes)+'</textarea>'+(isEditor?'<div class="team-controls"><button class="btn danger" onclick="removeTeam('+i+','+j+')">Delete recommendation</button></div>':'')+'</div></details>'}
+function queueSave(){dirty=true;setStatus('Changes pending…','');clearTimeout(saveTimer);saveTimer=setTimeout(saveShared,450)}
+function setStatus(msg,kind){const el=document.getElementById('saveStatus');el.textContent=msg;el.className='status '+(kind||'')}
+function changeMissionTitle(i,v){ensurePlanet(current)[i].title=v;queueSave();renderMissions()}
+function changeRec(i,j,k,v){ensurePlanet(current)[i].recommendations[j][k]=v;queueSave();const d=[...document.querySelectorAll('.mission')];if(d[i]){const team=d[i].querySelectorAll('.team')[j];if(team&&k==='title')team.querySelector('.team-title').textContent=v}}
+function addMission(){const list=ensurePlanet(current);list.push(blankMission('New mission '+(list.length+1)));queueSave();renderMissions()}
+function removeMission(i){if(!confirm('Delete this mission and all its recommendations?'))return;ensurePlanet(current).splice(i,1);queueSave();renderMissions()}
+function addTeam(i){const list=ensurePlanet(current)[i].recommendations;list.push(blankRec(list.length+1));queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i])cards[i].open=true}
+function removeTeam(i,j){if(!confirm('Delete this team recommendation?'))return;ensurePlanet(current)[i].recommendations.splice(j,1);queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i])cards[i].open=true}
+async function loadShared(){if(!db){setStatus('Shared database not connected yet. Setup is required before shared editing is available.','bad');return}const {data:row,error}=await db.from('guide_data').select('data').eq('id',1).single();if(error){setStatus('Could not load shared guide: '+error.message,'bad');return}data=row.data||{};await checkEditor();if(current)renderMissions();setStatus('Connected · shared guide loaded','good')}
+async function checkEditor(){isEditor=false;if(db){const {data:sessionData}=await db.auth.getSession();user=sessionData.session?.user||null;if(user){const {data:rows}=await db.from('editors').select('user_id').eq('user_id',user.id).maybeSingle();isEditor=!!rows}}updateAuthUI()}
+function updateAuthUI(){document.getElementById('authLabel').textContent=isEditor?'Officer editor':'View only';document.getElementById('loginBtn').style.display=isEditor?'none':'inline-block';document.getElementById('logoutBtn').style.display=user?'inline-block':'none';if(current)renderMissions()}
+async function saveShared(){if(!dirty)return;if(!db||!isEditor){setStatus('Not saved: officer access and database connection are required.','bad');return}const snapshot=JSON.parse(JSON.stringify(data));const {error}=await db.from('guide_data').update({data:snapshot,updated_at:new Date().toISOString()}).eq('id',1);if(error){setStatus('Save failed: '+error.message,'bad');return}dirty=false;setStatus('Saved for everyone ✓','good')}
+function showLogin(){if(!db){alert('The shared database has not been connected yet. Follow the Supabase setup instructions in the repository.');return}document.getElementById('loginPanel').classList.add('show')}
+function hideLogin(){document.getElementById('loginPanel').classList.remove('show')}
+async function login(e){e.preventDefault();const email=document.getElementById('email').value,password=document.getElementById('password').value;const {data:result,error}=await db.auth.signInWithPassword({email,password});if(error){document.getElementById('loginError').textContent=error.message;return}user=result.user;hideLogin();await checkEditor();if(!isEditor){await db.auth.signOut();user=null;await checkEditor();alert('This account is not on the approved editor list.');return}setStatus('Officer access granted','good')}
+async function logout(){if(db)await db.auth.signOut();user=null;isEditor=false;updateAuthUI();setStatus('Signed out. Viewing shared guide.','')}
+if(db){db.auth.onAuthStateChange(()=>{setTimeout(checkEditor,0)});loadShared()}else{planetList().forEach(ensurePlanet);setStatus('Setup needed: connect Supabase to enable shared data and officer sign-in.','bad')}
 renderHome();
-</script>
-</body></html>
+</script></body></html>
