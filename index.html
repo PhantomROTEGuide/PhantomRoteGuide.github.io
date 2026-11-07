@@ -20,7 +20,7 @@ main{max-width:1240px;margin:auto;padding:28px 22px 65px}.hero{margin:10px 0 26p
 const SUPABASE_URL='https://qjkzppzdtnbotwgzmxqo.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_v0G1QJfWxsjSXXG959UHsQ_UkBYaRWU';
 const configured=SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY.startsWith('sb_publishable_');
-const db=configured?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+const db=configured&&window.supabase&&typeof window.supabase.createClient==='function'?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
 const phases=[
 [1,'Territory Zones',[['Mustafar','Dark Side'],['Corellia','Mixed'],['Coruscant','Light Side']]],
 [2,'Territory Zones',[['Geonosis','Dark Side'],['Felucia','Mixed'],['Bracca','Light Side']]],
