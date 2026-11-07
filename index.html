@@ -97,14 +97,25 @@ async function openCharacterPicker(i,j,k){
 }
 function renderCharacterPicker(){
  const query=(document.getElementById('characterSearch').value||'').trim().toLowerCase();
- const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>x.c.name.toLowerCase().includes(query)).slice(0,120);
- document.getElementById('characterPickerStatus').textContent=matches.length?(query?'Showing '+matches.length+' matching characters':'Showing '+matches.length+' characters · start typing to narrow the list'):'No characters match that search.';
+ const usedImages=new Set();
+ if(pickerTarget){
+  const rec=ensurePlanet(pickerTarget.planet)[pickerTarget.i]?.recommendations?.[pickerTarget.j];
+  recommendationImages(rec||{}).forEach((url,slot)=>{if(slot!==pickerTarget.k&&url)usedImages.add(url)});
+ }
+ const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
+ document.getElementById('characterPickerStatus').textContent=matches.length
+  ?'Showing '+matches.length+' available characters'+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
+  :'No available characters match. Characters already used in this team are hidden.';
  document.getElementById('characterPickerGrid').innerHTML=matches.map(x=>'<button class="character-choice" onclick="selectCharacterPortrait('+x.index+')"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+esc(x.c.name)+'</span></button>').join('');
 }
 function closeCharacterPicker(){document.getElementById('characterPicker').classList.remove('show');pickerTarget=null}
 function selectCharacterPortrait(index){
  const character=characterCatalog[index],target=pickerTarget;if(!character||!target)return;
  const rec=ensurePlanet(target.planet)[target.i].recommendations[target.j],images=recommendationImages(rec);
+ if(images.some((url,slot)=>slot!==target.k&&url===character.image)){
+  setStatus(character.name+' is already in this team. Choose a different character.','bad');
+  renderCharacterPicker();return;
+ }
  images[target.k]=character.image;rec.images=images;delete rec.image;
  const missionIndex=target.i,teamIndex=target.j;closeCharacterPicker();queueSave();renderMissions();
  const cards=document.querySelectorAll('.mission');if(cards[missionIndex]){cards[missionIndex].open=true;const teams=cards[missionIndex].querySelectorAll('.team');if(teams[teamIndex])teams[teamIndex].open=true}
