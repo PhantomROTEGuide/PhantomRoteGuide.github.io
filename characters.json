@@ -69,10 +69,6 @@
   },
   {
     "name": "Asajj Ventress",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ventress_bountyhunter.png"
-  },
-  {
-    "name": "Asajj Ventress",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_ventress.png"
   },
   {
@@ -302,10 +298,6 @@
   {
     "name": "Commander Luke Skywalker",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_lukebespin.png"
-  },
-  {
-    "name": "Commander Luke Skywalker (Hoth)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelhoth_luke.png"
   },
   {
     "name": "Coruscant Underworld Police",
@@ -588,10 +580,6 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_han.png"
   },
   {
-    "name": "Han Solo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_han_sickness.png"
-  },
-  {
     "name": "Hera Syndulla",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_hera_s3.png"
   },
@@ -622,10 +610,6 @@
   {
     "name": "Hunter (Mercenary)",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_hunters3.png"
-  },
-  {
-    "name": "Huttslayer Leia",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leia_princess.png"
   },
   {
     "name": "Huyang",
@@ -829,10 +813,6 @@
   },
   {
     "name": "Lord Vader",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_anakin_fallen.png"
-  },
-  {
-    "name": "Lord Vader",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_lordvader.png"
   },
   {
@@ -934,10 +914,6 @@
   {
     "name": "Nightsister Zombie",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_zombie.png"
-  },
-  {
-    "name": "Nikto Thug",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_niktothug_01.png"
   },
   {
     "name": "Ninth Sister",
@@ -1042,10 +1018,6 @@
   {
     "name": "Rebel Officer Leia Organa",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiahoth.png"
-  },
-  {
-    "name": "Rebel Officer Leia Organa (Bespin)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leia_bespin.png"
   },
   {
     "name": "Resistance Hero Finn",
@@ -1258,10 +1230,6 @@
   {
     "name": "TIE Fighter Pilot",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiepilot.png"
-  },
-  {
-    "name": "TK Stormtrooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tkstormtrooper.png"
   },
   {
     "name": "Tusken Chieftain",
