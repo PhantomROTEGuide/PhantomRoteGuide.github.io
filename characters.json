@@ -1,1 +1,1370 @@
-[{"name":"0-0-0","image":"https://game-assets.swgoh.gg/textures/tex.charui_triplezero.png"},{"name":"212th Veteran","image":"https://game-assets.swgoh.gg/textures/tex.charui_clone212.png"},{"name":"4-LOM","image":"https://game-assets.swgoh.gg/textures/tex.charui_4lom.png"},{"name":"501st Captain","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_rex.png"},{"name":"501st Clone Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_echo.png"},{"name":"501st Veteran","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_fives.png"},{"name":"50R-T","image":"https://game-assets.swgoh.gg/textures/tex.charui_50rt.png"},{"name":"Aayla Secura","image":"https://game-assets.swgoh.gg/textures/tex.charui_aaylasecura.png"},{"name":"Admiral Ackbar","image":"https://game-assets.swgoh.gg/textures/tex.charui_ackbaradmiral.png"},{"name":"Admiral Piett","image":"https://game-assets.swgoh.gg/textures/tex.charui_piett.png"},{"name":"Admiral Raddus","image":"https://game-assets.swgoh.gg/textures/tex.charui_admiralraddus.png"},{"name":"Admiral Trench","image":"https://game-assets.swgoh.gg/textures/tex.charui_admiraltrench.png"},{"name":"Ahsoka Tano","image":"https://game-assets.swgoh.gg/textures/tex.charui_ahsokatanogray.png"},{"name":"Ahsoka Tano (Fulcrum)","image":"https://game-assets.swgoh.gg/textures/tex.charui_ahsokaadult.png"},{"name":"Ahsoka Tano (Snips)","image":"https://game-assets.swgoh.gg/textures/tex.charui_ahsoka.png"},{"name":"Amilyn Holdo","image":"https://game-assets.swgoh.gg/textures/tex.charui_holdo.png"},{"name":"ARC Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_arc.png"},{"name":"Asajj Ventress","image":"https://game-assets.swgoh.gg/textures/tex.charui_ventress_bountyhunter.png"},{"name":"Asajj Ventress","image":"https://game-assets.swgoh.gg/textures/tex.charui_ventress.png"},{"name":"Asajj Ventress (Dark Disciple)","image":"https://game-assets.swgoh.gg/textures/tex.charui_asajjdarkdisciple.png"},{"name":"Aurra Sing","image":"https://game-assets.swgoh.gg/textures/tex.charui_aurrasing.png"},{"name":"B1 Battle Droid","image":"https://game-assets.swgoh.gg/textures/tex.charui_b1.png"},{"name":"B2 Super Battle Droid","image":"https://game-assets.swgoh.gg/textures/tex.charui_b2.png"},{"name":"Barriss Offee","image":"https://game-assets.swgoh.gg/textures/tex.charui_barriss_light.png"},{"name":"Bastila Shan","image":"https://game-assets.swgoh.gg/textures/tex.charui_bastilashan.png"},{"name":"Bastila Shan (Fallen)","image":"https://game-assets.swgoh.gg/textures/tex.charui_bastilashan_dark.png"},{"name":"Batcher","image":"https://game-assets.swgoh.gg/textures/tex.charui_batcher.png"},{"name":"Baylan Skoll","image":"https://game-assets.swgoh.gg/textures/tex.charui_baylanskoll.png"},{"name":"Baze Malbus","image":"https://game-assets.swgoh.gg/textures/tex.charui_bazemalbus.png"},{"name":"BB-8","image":"https://game-assets.swgoh.gg/textures/tex.charui_bb8.png"},{"name":"Ben Solo","image":"https://game-assets.swgoh.gg/textures/tex.charui_bensolo.png"},{"name":"Biggs Darklighter","image":"https://game-assets.swgoh.gg/textures/tex.charui_rebelpilot_biggs.png"},{"name":"Bistan","image":"https://game-assets.swgoh.gg/textures/tex.charui_bistan.png"},{"name":"Bo-Katan (Mand'alor)","image":"https://game-assets.swgoh.gg/textures/tex.charui_mandalorbokatan.png"},{"name":"Bo-Katan Kryze","image":"https://game-assets.swgoh.gg/textures/tex.charui_bokatan.png"},{"name":"Boba Fett","image":"https://game-assets.swgoh.gg/textures/tex.charui_bobafett.png"},{"name":"Boba Fett, Scion of Jango","image":"https://game-assets.swgoh.gg/textures/tex.charui_bobafettold.png"},{"name":"Bodhi Rook","image":"https://game-assets.swgoh.gg/textures/tex.charui_bodhi.png"},{"name":"Boss Nass","image":"https://game-assets.swgoh.gg/textures/tex.charui_bossnass.png"},{"name":"Bossk","image":"https://game-assets.swgoh.gg/textures/tex.charui_bossk.png"},{"name":"Boushh (Leia Organa)","image":"https://game-assets.swgoh.gg/textures/tex.charui_boushh.png"},{"name":"Brutus","image":"https://game-assets.swgoh.gg/textures/tex.charui_brutus.png"},{"name":"BT-1","image":"https://game-assets.swgoh.gg/textures/tex.charui_bt1.png"},{"name":"C-3PO","image":"https://game-assets.swgoh.gg/textures/tex.charui_c3p0.png"},{"name":"Cad Bane","image":"https://game-assets.swgoh.gg/textures/tex.charui_cadbane.png"},{"name":"Cal Kestis","image":"https://game-assets.swgoh.gg/textures/tex.charui_calkestis.png"},{"name":"Canderous Ordo","image":"https://game-assets.swgoh.gg/textures/tex.charui_canderous.png"},{"name":"Captain Carson Teva","image":"https://game-assets.swgoh.gg/textures/tex.charui_carsonteva.png"},{"name":"Captain Drogan","image":"https://game-assets.swgoh.gg/textures/tex.charui_captaindrogan.png"},{"name":"Captain Enoch","image":"https://game-assets.swgoh.gg/textures/tex.charui_captainenoch.png"},{"name":"Captain Han Solo","image":"https://game-assets.swgoh.gg/textures/tex.charui_hoth_han.png"},{"name":"Captain Ithano","image":"https://game-assets.swgoh.gg/textures/tex.charui_ithano.png"},{"name":"Captain Phasma","image":"https://game-assets.swgoh.gg/textures/tex.charui_phasma.png"},{"name":"Captain Rex","image":"https://game-assets.swgoh.gg/textures/tex.charui_captainrex.png"},{"name":"Captain Silvo","image":"https://game-assets.swgoh.gg/textures/tex.charui_captainsilvo.png"},{"name":"Captain Tarpals","image":"https://game-assets.swgoh.gg/textures/tex.charui_captaintarpals.png"},{"name":"Cara Dune","image":"https://game-assets.swgoh.gg/textures/tex.charui_caradune.png"},{"name":"Cartel Bruiser","image":"https://game-assets.swgoh.gg/textures/tex.charui_jabbasenforcer.png"},{"name":"Cartel Saboteur","image":"https://game-assets.swgoh.gg/textures/tex.charui_weequaysaboteur.png"},{"name":"Carth Onasi","image":"https://game-assets.swgoh.gg/textures/tex.charui_carth.png"},{"name":"Cassian Andor","image":"https://game-assets.swgoh.gg/textures/tex.charui_cassian.png"},{"name":"Cassian Andor (Undercover)","image":"https://game-assets.swgoh.gg/textures/tex.charui_cassianundercover.png"},{"name":"CC-1119 \"Appo\"","image":"https://game-assets.swgoh.gg/textures/tex.charui_appo.png"},{"name":"CC-2224 \"Cody\"","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_cody.png"},{"name":"Cere Junda","image":"https://game-assets.swgoh.gg/textures/tex.charui_cerejunda.png"},{"name":"Chewbacca","image":"https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_ot.png"},{"name":"Chief Chirpa","image":"https://game-assets.swgoh.gg/textures/tex.charui_ewok_chirpa.png"},{"name":"Chief Nebit","image":"https://game-assets.swgoh.gg/textures/tex.charui_jawa_nebit.png"},{"name":"Chirrut Îmwe","image":"https://game-assets.swgoh.gg/textures/tex.charui_chirrut.png"},{"name":"Chopper","image":"https://game-assets.swgoh.gg/textures/tex.charui_chopper.png"},{"name":"Cinta Kaz","image":"https://game-assets.swgoh.gg/textures/tex.charui_cinta.png"},{"name":"Clone Scout Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_clonetrooperp2forestscout.png"},{"name":"Clone Sergeant - Phase I","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperclonegreen.png"},{"name":"Clone Wars Chewbacca","image":"https://game-assets.swgoh.gg/textures/tex.charui_chewbacca.png"},{"name":"Cobb Vanth","image":"https://game-assets.swgoh.gg/textures/tex.charui_cobbvanth.png"},{"name":"Colonel Starck","image":"https://game-assets.swgoh.gg/textures/tex.charui_colonel_stark.png"},{"name":"Colonel Ward","image":"https://game-assets.swgoh.gg/textures/tex.charui_colonelward.png"},{"name":"Commander Ahsoka Tano","image":"https://game-assets.swgoh.gg/textures/tex.charui_commanderahsokatano.png"},{"name":"Commander Luke Skywalker","image":"https://game-assets.swgoh.gg/textures/tex.charui_lukebespin.png"},{"name":"Commander Luke Skywalker (Hoth)","image":"https://game-assets.swgoh.gg/textures/tex.charui_rebelhoth_luke.png"},{"name":"Coruscant Underworld Police","image":"https://game-assets.swgoh.gg/textures/tex.charui_coruscantpolice.png"},{"name":"Count Dooku","image":"https://game-assets.swgoh.gg/textures/tex.charui_dooku.png"},{"name":"Crosshair (Scarred)","image":"https://game-assets.swgoh.gg/textures/tex.charui_crosshair_scarred.png"},{"name":"CX-2","image":"https://game-assets.swgoh.gg/textures/tex.charui_operative.png"},{"name":"Dark Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_darktrooper.png"},{"name":"Dark Trooper Moff Gideon","image":"https://game-assets.swgoh.gg/textures/tex.charui_moffgideons3.png"},{"name":"Darth Bane","image":"https://game-assets.swgoh.gg/textures/tex.charui_darthbane.png"},{"name":"Darth Malak","image":"https://game-assets.swgoh.gg/textures/tex.charui_darthmalak.png"},{"name":"Darth Malgus","image":"https://game-assets.swgoh.gg/textures/tex.charui_darthmalgus.png"},{"name":"Darth Maul","image":"https://game-assets.swgoh.gg/textures/tex.charui_maul.png"},{"name":"Darth Nihilus","image":"https://game-assets.swgoh.gg/textures/tex.charui_nihilus.png"},{"name":"Darth Revan","image":"https://game-assets.swgoh.gg/textures/tex.charui_sithrevan.png"},{"name":"Darth Sidious","image":"https://game-assets.swgoh.gg/textures/tex.charui_sidious.png"},{"name":"Darth Sion","image":"https://game-assets.swgoh.gg/textures/tex.charui_sion.png"},{"name":"Darth Talon","image":"https://game-assets.swgoh.gg/textures/tex.charui_darthtalon.png"},{"name":"Darth Traya","image":"https://game-assets.swgoh.gg/textures/tex.charui_traya.png"},{"name":"Darth Vader","image":"https://game-assets.swgoh.gg/textures/tex.charui_vader.png"},{"name":"Darth Vader (Duel's End)","image":"https://game-assets.swgoh.gg/textures/tex.charui_vaderduelsend.png"},{"name":"Dash Rendar","image":"https://game-assets.swgoh.gg/textures/tex.charui_dashrendar.png"},{"name":"Dathcha","image":"https://game-assets.swgoh.gg/textures/tex.charui_jawa_dathcha.png"},{"name":"Death Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperdeath.png"},{"name":"Death Trooper (Peridea)","image":"https://game-assets.swgoh.gg/textures/tex.charui_deathtrooperperidea.png"},{"name":"Dedra Meero","image":"https://game-assets.swgoh.gg/textures/tex.charui_dedrameero.png"},{"name":"Dengar","image":"https://game-assets.swgoh.gg/textures/tex.charui_dengar.png"},{"name":"Depa Billaba","image":"https://game-assets.swgoh.gg/textures/tex.charui_depabillaba.png"},{"name":"Director Krennic","image":"https://game-assets.swgoh.gg/textures/tex.charui_krennic.png"},{"name":"Disguised Clone Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_disguisedclonetrooper.png"},{"name":"Doctor Aphra","image":"https://game-assets.swgoh.gg/textures/tex.charui_doctoraphra.png"},{"name":"Droideka","image":"https://game-assets.swgoh.gg/textures/tex.charui_droideka.png"},{"name":"Echo","image":"https://game-assets.swgoh.gg/textures/tex.charui_bb_echo.png"},{"name":"Eeth Koth","image":"https://game-assets.swgoh.gg/textures/tex.charui_eethkoth.png"},{"name":"Eighth Brother","image":"https://game-assets.swgoh.gg/textures/tex.charui_eighthbrother.png"},{"name":"Embo","image":"https://game-assets.swgoh.gg/textures/tex.charui_embo.png"},{"name":"Emperor Palpatine","image":"https://game-assets.swgoh.gg/textures/tex.charui_palpatineemperor.png"},{"name":"Enfys Nest","image":"https://game-assets.swgoh.gg/textures/tex.charui_enfys.png"},{"name":"Ewok Elder","image":"https://game-assets.swgoh.gg/textures/tex.charui_ewok_chief.png"},{"name":"Ewok Scout","image":"https://game-assets.swgoh.gg/textures/tex.charui_ewok_scout.png"},{"name":"Ezra Bridger","image":"https://game-assets.swgoh.gg/textures/tex.charui_ezra_s3.png"},{"name":"Ezra Bridger (Exile)","image":"https://game-assets.swgoh.gg/textures/tex.charui_ezraexile.png"},{"name":"Fennec Shand","image":"https://game-assets.swgoh.gg/textures/tex.charui_fennec.png"},{"name":"Fifth Brother","image":"https://game-assets.swgoh.gg/textures/tex.charui_fifthbrother.png"},{"name":"Finn","image":"https://game-assets.swgoh.gg/textures/tex.charui_finnjakku.png"},{"name":"First Order Executioner","image":"https://game-assets.swgoh.gg/textures/tex.charui_firstorder_executioner.png"},{"name":"First Order Officer","image":"https://game-assets.swgoh.gg/textures/tex.charui_firstorderofficer.png"},{"name":"First Order SF TIE Pilot","image":"https://game-assets.swgoh.gg/textures/tex.charui_firstorder_pilot.png"},{"name":"First Order Stormtrooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_firstordertrooper.png"},{"name":"First Order TIE Pilot","image":"https://game-assets.swgoh.gg/textures/tex.charui_firstordertiepilot.png"},{"name":"Gamorrean Guard","image":"https://game-assets.swgoh.gg/textures/tex.charui_gamorreanguard.png"},{"name":"Gar Saxon","image":"https://game-assets.swgoh.gg/textures/tex.charui_gar_saxon.png"},{"name":"Garazeb \"Zeb\" Orrelios","image":"https://game-assets.swgoh.gg/textures/tex.charui_zeb_s3.png"},{"name":"General Grievous","image":"https://game-assets.swgoh.gg/textures/tex.charui_grievous.png"},{"name":"General Hux","image":"https://game-assets.swgoh.gg/textures/tex.charui_generalhux.png"},{"name":"General Kenobi","image":"https://game-assets.swgoh.gg/textures/tex.charui_obiwangeneral.png"},{"name":"General Skywalker","image":"https://game-assets.swgoh.gg/textures/tex.charui_generalanakin.png"},{"name":"General Syndulla","image":"https://game-assets.swgoh.gg/textures/tex.charui_generalsyndulla.png"},{"name":"General Veers","image":"https://game-assets.swgoh.gg/textures/tex.charui_veers.png"},{"name":"Geonosian Brood Alpha","image":"https://game-assets.swgoh.gg/textures/tex.charui_geonosian_broodalpha.png"},{"name":"Geonosian Soldier","image":"https://game-assets.swgoh.gg/textures/tex.charui_geonosian_soldier.png"},{"name":"Geonosian Spy","image":"https://game-assets.swgoh.gg/textures/tex.charui_geonosian_spy.png"},{"name":"Grand Admiral Thrawn","image":"https://game-assets.swgoh.gg/textures/tex.charui_thrawn.png"},{"name":"Grand Inquisitor","image":"https://game-assets.swgoh.gg/textures/tex.charui_grandinquisitor.png"},{"name":"Grand Master Yoda","image":"https://game-assets.swgoh.gg/textures/tex.charui_yodagrandmaster.png"},{"name":"Grand Moff Tarkin","image":"https://game-assets.swgoh.gg/textures/tex.charui_tarkinadmiral.png"},{"name":"Great Mothers","image":"https://game-assets.swgoh.gg/textures/tex.charui_greatmothers.png"},{"name":"Greedo","image":"https://game-assets.swgoh.gg/textures/tex.charui_greedo.png"},{"name":"Greef Karga","image":"https://game-assets.swgoh.gg/textures/tex.charui_greefkarga.png"},{"name":"Grogu & Anzellans","image":"https://game-assets.swgoh.gg/textures/tex.charui_groguanz.png"},{"name":"Gungan Boomadier","image":"https://game-assets.swgoh.gg/textures/tex.charui_gunganboomadier.png"},{"name":"Gungan Phalanx","image":"https://game-assets.swgoh.gg/textures/tex.charui_gunganphalanx.png"},{"name":"Han Solo","image":"https://game-assets.swgoh.gg/textures/tex.charui_han.png"},{"name":"Han Solo","image":"https://game-assets.swgoh.gg/textures/tex.charui_han_sickness.png"},{"name":"Hera Syndulla","image":"https://game-assets.swgoh.gg/textures/tex.charui_hera_s3.png"},{"name":"Hermit Yoda","image":"https://game-assets.swgoh.gg/textures/tex.charui_yodahermit.png"},{"name":"HK-47","image":"https://game-assets.swgoh.gg/textures/tex.charui_hk47.png"},{"name":"Hondo Ohnaka","image":"https://game-assets.swgoh.gg/textures/tex.charui_hondoohnaka.png"},{"name":"Hoth Rebel Scout","image":"https://game-assets.swgoh.gg/textures/tex.charui_rebelhothscout.png"},{"name":"Hoth Rebel Soldier","image":"https://game-assets.swgoh.gg/textures/tex.charui_rebelhoth.png"},{"name":"Hunter","image":"https://game-assets.swgoh.gg/textures/tex.charui_bb_hunter.png"},{"name":"Hunter (Mercenary)","image":"https://game-assets.swgoh.gg/textures/tex.charui_hunters3.png"},{"name":"Huttslayer Leia","image":"https://game-assets.swgoh.gg/textures/tex.charui_leia_princess.png"},{"name":"Huyang","image":"https://game-assets.swgoh.gg/textures/tex.charui_huyang.png"},{"name":"Iden Versio","image":"https://game-assets.swgoh.gg/textures/tex.charui_idenversioempire.png"},{"name":"IG-100 MagnaGuard","image":"https://game-assets.swgoh.gg/textures/tex.charui_magnaguard.png"},{"name":"IG-11","image":"https://game-assets.swgoh.gg/textures/tex.charui_ig11_nurse.png"},{"name":"IG-11 (Bounty Hunter)","image":"https://game-assets.swgoh.gg/textures/tex.charui_ig11.png"},{"name":"IG-12 & Grogu","image":"https://game-assets.swgoh.gg/textures/tex.charui_ig12.png"},{"name":"IG-86 Sentinel Droid","image":"https://game-assets.swgoh.gg/textures/tex.charui_ig86.png"},{"name":"IG-88","image":"https://game-assets.swgoh.gg/textures/tex.charui_ig88.png"},{"name":"IG-90","image":"https://game-assets.swgoh.gg/textures/tex.charui_ig-90.png"},{"name":"Ima-Gun Di","image":"https://game-assets.swgoh.gg/textures/tex.charui_imagundi.png"},{"name":"Imperial Probe Droid","image":"https://game-assets.swgoh.gg/textures/tex.charui_probedroid.png"},{"name":"Imperial Super Commando","image":"https://game-assets.swgoh.gg/textures/tex.charui_imperial_super_commando.png"},{"name":"Inquisitor Barriss","image":"https://game-assets.swgoh.gg/textures/tex.charui_inquisitorbarriss.png"},{"name":"Jabba the Hutt","image":"https://game-assets.swgoh.gg/textures/tex.charui_jabbathehutt.png"},{"name":"Jango Fett","image":"https://game-assets.swgoh.gg/textures/tex.charui_jangofett.png"},{"name":"Jar Jar Binks","image":"https://game-assets.swgoh.gg/textures/tex.charui_jarjarbinks.png"},{"name":"Jawa","image":"https://game-assets.swgoh.gg/textures/tex.charui_jawa_jawa.png"},{"name":"Jawa Engineer","image":"https://game-assets.swgoh.gg/textures/tex.charui_jawa_engineer.png"},{"name":"Jawa Scavenger","image":"https://game-assets.swgoh.gg/textures/tex.charui_jawa_scavenger.png"},{"name":"Jedi Consular","image":"https://game-assets.swgoh.gg/textures/tex.charui_jedi_consular_03.png"},{"name":"Jedi Knight Anakin","image":"https://game-assets.swgoh.gg/textures/tex.charui_anakinknight.png"},{"name":"Jedi Knight Cal Kestis","image":"https://game-assets.swgoh.gg/textures/tex.charui_jediknightcal.png"},{"name":"Jedi Knight Guardian","image":"https://game-assets.swgoh.gg/textures/tex.charui_jedi_guardian_01.png"},{"name":"Jedi Knight Luke Skywalker","image":"https://game-assets.swgoh.gg/textures/tex.charui_luke_jediknight.png"},{"name":"Jedi Knight Revan","image":"https://game-assets.swgoh.gg/textures/tex.charui_jedirevan.png"},{"name":"Jedi Master Kenobi","image":"https://game-assets.swgoh.gg/textures/tex.charui_globiwan.png"},{"name":"Jedi Master Luke Skywalker","image":"https://game-assets.swgoh.gg/textures/tex.charui_luke_jml.png"},{"name":"Jedi Master Mace Windu","image":"https://game-assets.swgoh.gg/textures/tex.charui_jedimastermacewindu.png"},{"name":"Jocasta Nu","image":"https://game-assets.swgoh.gg/textures/tex.charui_jocastanu_blaster.png"},{"name":"Jolee Bindo","image":"https://game-assets.swgoh.gg/textures/tex.charui_joleebindo.png"},{"name":"Juhani","image":"https://game-assets.swgoh.gg/textures/tex.charui_juhani.png"},{"name":"Jyn Erso","image":"https://game-assets.swgoh.gg/textures/tex.charui_jyn.png"},{"name":"K-2SO","image":"https://game-assets.swgoh.gg/textures/tex.charui_k2so.png"},{"name":"Kanan Jarrus","image":"https://game-assets.swgoh.gg/textures/tex.charui_kanan_s3.png"},{"name":"Kelleran Beq","image":"https://game-assets.swgoh.gg/textures/tex.charui_kelleranbeq.png"},{"name":"Ki-Adi-Mundi","image":"https://game-assets.swgoh.gg/textures/tex.charui_kiadimundi.png"},{"name":"Kit Fisto","image":"https://game-assets.swgoh.gg/textures/tex.charui_kitfisto.png"},{"name":"Kix","image":"https://game-assets.swgoh.gg/textures/tex.charui_kix.png"},{"name":"Kleya Marki","image":"https://game-assets.swgoh.gg/textures/tex.charui_kleya.png"},{"name":"Krrsantan","image":"https://game-assets.swgoh.gg/textures/tex.charui_krrsantan.png"},{"name":"Kuiil","image":"https://game-assets.swgoh.gg/textures/tex.charui_kuiil.png"},{"name":"KX Security Droid","image":"https://game-assets.swgoh.gg/textures/tex.charui_kxsecuritydroid.png"},{"name":"Kyle Katarn","image":"https://game-assets.swgoh.gg/textures/tex.charui_kylekatarn.png"},{"name":"Kylo Ren","image":"https://game-assets.swgoh.gg/textures/tex.charui_kyloren.png"},{"name":"Kylo Ren (Unmasked)","image":"https://game-assets.swgoh.gg/textures/tex.charui_kylo_unmasked.png"},{"name":"L3-37","image":"https://game-assets.swgoh.gg/textures/tex.charui_l337.png"},{"name":"Lando Calrissian","image":"https://game-assets.swgoh.gg/textures/tex.charui_landobespin.png"},{"name":"Leia Organa","image":"https://game-assets.swgoh.gg/textures/tex.charui_leiaendor.png"},{"name":"Lobot","image":"https://game-assets.swgoh.gg/textures/tex.charui_lobot.png"},{"name":"Logray","image":"https://game-assets.swgoh.gg/textures/tex.charui_ewok_logray.png"},{"name":"Lord Vader","image":"https://game-assets.swgoh.gg/textures/tex.charui_anakin_fallen.png"},{"name":"Lord Vader","image":"https://game-assets.swgoh.gg/textures/tex.charui_lordvader.png"},{"name":"Luke Skywalker (Farmboy)","image":"https://game-assets.swgoh.gg/textures/tex.charui_luke_ep4.png"},{"name":"Luminara Unduli","image":"https://game-assets.swgoh.gg/textures/tex.charui_luminara.png"},{"name":"Luthen Rael","image":"https://game-assets.swgoh.gg/textures/tex.charui_luthenrael.png"},{"name":"Mace Windu","image":"https://game-assets.swgoh.gg/textures/tex.charui_macewindu.png"},{"name":"Magmatrooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm_magma.png"},{"name":"Major Partagaz","image":"https://game-assets.swgoh.gg/textures/tex.charui_majorpartagaz.png"},{"name":"Mara Jade, The Emperor's Hand","image":"https://game-assets.swgoh.gg/textures/tex.charui_marajade.png"},{"name":"Marrok","image":"https://game-assets.swgoh.gg/textures/tex.charui_marrok.png"},{"name":"Master Qui-Gon","image":"https://game-assets.swgoh.gg/textures/tex.charui_masterquigon.png"},{"name":"Maul","image":"https://game-assets.swgoh.gg/textures/tex.charui_maul_cyborg.png"},{"name":"Maul (Hate-Fueled)","image":"https://game-assets.swgoh.gg/textures/tex.charui_maulhatefueled.png"},{"name":"Maz Kanata","image":"https://game-assets.swgoh.gg/textures/tex.charui_mazkanata.png"},{"name":"Merrin","image":"https://game-assets.swgoh.gg/textures/tex.charui_merrin.png"},{"name":"Mission Vao","image":"https://game-assets.swgoh.gg/textures/tex.charui_mission.png"},{"name":"Mob Enforcer","image":"https://game-assets.swgoh.gg/textures/tex.charui_mob_enforcer.png"},{"name":"Mob Enforcer","image":"https://game-assets.swgoh.gg/textures/tex.charui_thug_female_01.png"},{"name":"Moff Gideon","image":"https://game-assets.swgoh.gg/textures/tex.charui_moffgideon.png"},{"name":"Mon Mothma","image":"https://game-assets.swgoh.gg/textures/tex.charui_monmothma.png"},{"name":"Morgan Elsbeth","image":"https://game-assets.swgoh.gg/textures/tex.charui_morganelsbeth.png"},{"name":"Mother Talzin","image":"https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_talzin.png"},{"name":"Night Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_nighttrooper_a.png"},{"name":"Nightsister Acolyte","image":"https://game-assets.swgoh.gg/textures/tex.charui_nightsister_acolyte.png"},{"name":"Nightsister Initiate","image":"https://game-assets.swgoh.gg/textures/tex.charui_nightsister_initiate.png"},{"name":"Nightsister Spirit","image":"https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_wraith.png"},{"name":"Nightsister Zombie","image":"https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_zombie.png"},{"name":"Nikto Thug","image":"https://game-assets.swgoh.gg/textures/tex.charui_niktothug_01.png"},{"name":"Ninth Sister","image":"https://game-assets.swgoh.gg/textures/tex.charui_ninthsister.png"},{"name":"Nute Gunray","image":"https://game-assets.swgoh.gg/textures/tex.charui_nutegunray.png"},{"name":"Obi-Wan Kenobi (Old Ben)","image":"https://game-assets.swgoh.gg/textures/tex.charui_obiwanep4.png"},{"name":"Old Daka","image":"https://game-assets.swgoh.gg/textures/tex.charui_daka.png"},{"name":"Omega","image":"https://game-assets.swgoh.gg/textures/tex.charui_badbatchomega.png"},{"name":"Omega (Fugitive)","image":"https://game-assets.swgoh.gg/textures/tex.charui_omegas3.png"},{"name":"Padawan Obi-Wan","image":"https://game-assets.swgoh.gg/textures/tex.charui_padawanobiwan.png"},{"name":"Padawan Sabine Wren","image":"https://game-assets.swgoh.gg/textures/tex.charui_padawansabine.png"},{"name":"Padmé Amidala","image":"https://game-assets.swgoh.gg/textures/tex.charui_padme_geonosis.png"},{"name":"Pao","image":"https://game-assets.swgoh.gg/textures/tex.charui_pao.png"},{"name":"Paploo","image":"https://game-assets.swgoh.gg/textures/tex.charui_ewok_paploo.png"},{"name":"Paz Vizsla","image":"https://game-assets.swgoh.gg/textures/tex.charui_pazvizsla.png"},{"name":"Pirate King Hondo Ohnaka","image":"https://game-assets.swgoh.gg/textures/tex.charui_glhondo.png"},{"name":"Plo Koon","image":"https://game-assets.swgoh.gg/textures/tex.charui_plokoon.png"},{"name":"Poe Dameron","image":"https://game-assets.swgoh.gg/textures/tex.charui_poe.png"},{"name":"Poggle the Lesser","image":"https://game-assets.swgoh.gg/textures/tex.charui_geonosian_poggle.png"},{"name":"Princess Kneesaa","image":"https://game-assets.swgoh.gg/textures/tex.charui_princesskneesaa.png"},{"name":"Qi'ra","image":"https://game-assets.swgoh.gg/textures/tex.charui_qira.png"},{"name":"Queen Amidala","image":"https://game-assets.swgoh.gg/textures/tex.charui_queenamidala.png"},{"name":"Qui-Gon Jinn","image":"https://game-assets.swgoh.gg/textures/tex.charui_quigon.png"},{"name":"Quiggold","image":"https://game-assets.swgoh.gg/textures/tex.charui_quiggold.png"},{"name":"R2-D2","image":"https://game-assets.swgoh.gg/textures/tex.charui_astromech_r2d2.png"},{"name":"R5-D4","image":"https://game-assets.swgoh.gg/textures/tex.charui_r5d4.png"},{"name":"Range Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperranger.png"},{"name":"RC-1262 \"Scorch\"","image":"https://game-assets.swgoh.gg/textures/tex.charui_scorch.png"},{"name":"Rebel Officer Leia Organa","image":"https://game-assets.swgoh.gg/textures/tex.charui_leiahoth.png"},{"name":"Rebel Officer Leia Organa (Bespin)","image":"https://game-assets.swgoh.gg/textures/tex.charui_leia_bespin.png"},{"name":"Resistance Hero Finn","image":"https://game-assets.swgoh.gg/textures/tex.charui_finn.png"},{"name":"Resistance Hero Poe","image":"https://game-assets.swgoh.gg/textures/tex.charui_poe_tros.png"},{"name":"Resistance Pilot","image":"https://game-assets.swgoh.gg/textures/tex.charui_resistancepilot.png"},{"name":"Resistance Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_resistancetrooper.png"},{"name":"Rey","image":"https://game-assets.swgoh.gg/textures/tex.charui_rey_tros.png"},{"name":"Rey","image":"https://game-assets.swgoh.gg/textures/tex.charui_reyjakku.png"},{"name":"Rey (Dark Side Vision)","image":"https://game-assets.swgoh.gg/textures/tex.charui_darkrey.png"},{"name":"Rey (Jedi Training)","image":"https://game-assets.swgoh.gg/textures/tex.charui_rey_tlj.png"},{"name":"Rose Tico","image":"https://game-assets.swgoh.gg/textures/tex.charui_rose.png"},{"name":"Rotta the Hutt","image":"https://game-assets.swgoh.gg/textures/tex.charui_rotta.png"},{"name":"Royal Guard","image":"https://game-assets.swgoh.gg/textures/tex.charui_royalguard.png"},{"name":"Sabine Wren","image":"https://game-assets.swgoh.gg/textures/tex.charui_sabine_s3.png"},{"name":"Sana Starros","image":"https://game-assets.swgoh.gg/textures/tex.charui_sanastarros.png"},{"name":"Satele Shan","image":"https://game-assets.swgoh.gg/textures/tex.charui_sateleshan.png"},{"name":"Savage Opress","image":"https://game-assets.swgoh.gg/textures/tex.charui_savageopress.png"},{"name":"Saw Gerrera","image":"https://game-assets.swgoh.gg/textures/tex.charui_sawgerrera.png"},{"name":"Scarif Rebel Pathfinder","image":"https://game-assets.swgoh.gg/textures/tex.charui_rebel_scarif.png"},{"name":"Scout Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperscout.png"},{"name":"Second Sister","image":"https://game-assets.swgoh.gg/textures/tex.charui_secondsister.png"},{"name":"Seventh Sister","image":"https://game-assets.swgoh.gg/textures/tex.charui_seventhsister.png"},{"name":"Shaak Ti","image":"https://game-assets.swgoh.gg/textures/tex.charui_shaakti.png"},{"name":"Shin Hati","image":"https://game-assets.swgoh.gg/textures/tex.charui_shinhati.png"},{"name":"Shoretrooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_troopershore.png"},{"name":"Sith Assassin","image":"https://game-assets.swgoh.gg/textures/tex.charui_sithassassin.png"},{"name":"Sith Empire Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_sithtrooper.png"},{"name":"Sith Eternal Emperor","image":"https://game-assets.swgoh.gg/textures/tex.charui_espalpatine_pre.png"},{"name":"Sith Marauder","image":"https://game-assets.swgoh.gg/textures/tex.charui_sithmarauder.png"},{"name":"Sith Trooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_firstorder_sithtrooper.png"},{"name":"Skiff Guard (Lando Calrissian)","image":"https://game-assets.swgoh.gg/textures/tex.charui_undercoverlando.png"},{"name":"SM-33","image":"https://game-assets.swgoh.gg/textures/tex.charui_sm33.png"},{"name":"Snowtrooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_troopersnow.png"},{"name":"Snowtrooper Commander","image":"https://game-assets.swgoh.gg/textures/tex.charui_remnantsnowcommander.png"},{"name":"STAP","image":"https://game-assets.swgoh.gg/textures/tex.charui_stap.png"},{"name":"Starkiller","image":"https://game-assets.swgoh.gg/textures/tex.charui_starkiller.png"},{"name":"Stormtrooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm.png"},{"name":"Stormtrooper Han","image":"https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm_han.png"},{"name":"Stormtrooper Luke","image":"https://game-assets.swgoh.gg/textures/tex.charui_stormtrooperluke.png"},{"name":"Sun Fac","image":"https://game-assets.swgoh.gg/textures/tex.charui_geonosian_sunfac.png"},{"name":"Supreme Leader Kylo Ren","image":"https://game-assets.swgoh.gg/textures/tex.charui_kyloren_tros.png"},{"name":"T3-M4","image":"https://game-assets.swgoh.gg/textures/tex.charui_t3m4.png"},{"name":"Talia","image":"https://game-assets.swgoh.gg/textures/tex.charui_nightsister_talia.png"},{"name":"Tarfful","image":"https://game-assets.swgoh.gg/textures/tex.charui_tarfful.png"},{"name":"Taron Malicos","image":"https://game-assets.swgoh.gg/textures/tex.charui_taronmalicos.png"},{"name":"Tech","image":"https://game-assets.swgoh.gg/textures/tex.charui_bb_tech.png"},{"name":"Teebo","image":"https://game-assets.swgoh.gg/textures/tex.charui_ewok_teebo.png"},{"name":"Temple Guard","image":"https://game-assets.swgoh.gg/textures/tex.charui_vanguardtempleguard.png"},{"name":"The Armorer","image":"https://game-assets.swgoh.gg/textures/tex.charui_armorer.png"},{"name":"The Mandalorian","image":"https://game-assets.swgoh.gg/textures/tex.charui_mandalorian.png"},{"name":"The Mandalorian (Beskar Armor)","image":"https://game-assets.swgoh.gg/textures/tex.charui_mandobeskar.png"},{"name":"The Stranger","image":"https://game-assets.swgoh.gg/textures/tex.charui_stranger.png"},{"name":"Third Sister","image":"https://game-assets.swgoh.gg/textures/tex.charui_thirdsister.png"},{"name":"Threepio & Chewie","image":"https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_c3po.png"},{"name":"TIE Fighter Pilot","image":"https://game-assets.swgoh.gg/textures/tex.charui_tiepilot.png"},{"name":"TK Stormtrooper","image":"https://game-assets.swgoh.gg/textures/tex.charui_tkstormtrooper.png"},{"name":"Tusken Chieftain","image":"https://game-assets.swgoh.gg/textures/tex.charui_tuskenchieftain.png"},{"name":"Tusken Raider","image":"https://game-assets.swgoh.gg/textures/tex.charui_tuskenraider.png"},{"name":"Tusken Shaman","image":"https://game-assets.swgoh.gg/textures/tex.charui_tuskenshaman.png"},{"name":"Tusken Warrior","image":"https://game-assets.swgoh.gg/textures/tex.charui_tuskenhuntress.png"},{"name":"Ugnaught","image":"https://game-assets.swgoh.gg/textures/tex.charui_ugnaught.png"},{"name":"URoRRuR'R'R","image":"https://game-assets.swgoh.gg/textures/tex.charui_urorrurrr.png"},{"name":"Vandor Chewbacca","image":"https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_vandor.png"},{"name":"Vane","image":"https://game-assets.swgoh.gg/textures/tex.charui_vane.png"},{"name":"Vel Sartha","image":"https://game-assets.swgoh.gg/textures/tex.charui_vel.png"},{"name":"Veteran Smuggler Chewbacca","image":"https://game-assets.swgoh.gg/textures/tex.charui_tfa_chewbacca.png"},{"name":"Veteran Smuggler Han Solo","image":"https://game-assets.swgoh.gg/textures/tex.charui_tfa_han.png"},{"name":"Visas Marr","image":"https://game-assets.swgoh.gg/textures/tex.charui_visas.png"},{"name":"Wampa","image":"https://game-assets.swgoh.gg/textures/tex.charui_wampa.png"},{"name":"Wat Tambor","image":"https://game-assets.swgoh.gg/textures/tex.charui_wattambor.png"},{"name":"Wedge Antilles","image":"https://game-assets.swgoh.gg/textures/tex.charui_rebelpilot_wedge.png"},{"name":"Wicket","image":"https://game-assets.swgoh.gg/textures/tex.charui_ewok_wicket.png"},{"name":"Wrecker","image":"https://game-assets.swgoh.gg/textures/tex.charui_bb_wrecker.png"},{"name":"Wrecker (Mercenary)","image":"https://game-assets.swgoh.gg/textures/tex.charui_wreckers3.png"},{"name":"Yoda & Chewie","image":"https://game-assets.swgoh.gg/textures/tex.charui_yodachewbacca.png"},{"name":"Young Han Solo","image":"https://game-assets.swgoh.gg/textures/tex.charui_han_young.png"},{"name":"Young Lando Calrissian","image":"https://game-assets.swgoh.gg/textures/tex.charui_younglando.png"},{"name":"Zaalbar","image":"https://game-assets.swgoh.gg/textures/tex.charui_zaalbar.png"},{"name":"Zam Wesell","image":"https://game-assets.swgoh.gg/textures/tex.charui_zamwesell.png"},{"name":"Zeb Orrelios (New Republic Pilot)","image":"https://game-assets.swgoh.gg/textures/tex.charui_rangerzeb.png"},{"name":"Zorii Bliss","image":"https://game-assets.swgoh.gg/textures/tex.charui_zoriibliss.png"},{"name":"Zuckuss","image":"https://game-assets.swgoh.gg/textures/tex.charui_zuckuss.png"}]
+[
+  {
+    "name": "0-0-0",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_triplezero.png"
+  },
+  {
+    "name": "212th Veteran",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_clone212.png"
+  },
+  {
+    "name": "4-LOM",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_4lom.png"
+  },
+  {
+    "name": "501st Captain",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_rex.png"
+  },
+  {
+    "name": "501st Clone Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_echo.png"
+  },
+  {
+    "name": "501st Veteran",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_fives.png"
+  },
+  {
+    "name": "50R-T",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_50rt.png"
+  },
+  {
+    "name": "Aayla Secura",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_aaylasecura.png"
+  },
+  {
+    "name": "Admiral Ackbar",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ackbaradmiral.png"
+  },
+  {
+    "name": "Admiral Piett",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_piett.png"
+  },
+  {
+    "name": "Admiral Raddus",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_admiralraddus.png"
+  },
+  {
+    "name": "Admiral Trench",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_admiraltrench.png"
+  },
+  {
+    "name": "Ahsoka Tano",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsokatanogray.png"
+  },
+  {
+    "name": "Ahsoka Tano (Fulcrum)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsokaadult.png"
+  },
+  {
+    "name": "Ahsoka Tano (Snips)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsoka.png"
+  },
+  {
+    "name": "Amilyn Holdo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_holdo.png"
+  },
+  {
+    "name": "ARC Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_arc.png"
+  },
+  {
+    "name": "Asajj Ventress",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ventress_bountyhunter.png"
+  },
+  {
+    "name": "Asajj Ventress",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ventress.png"
+  },
+  {
+    "name": "Asajj Ventress (Dark Disciple)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_asajjdarkdisciple.png"
+  },
+  {
+    "name": "Aurra Sing",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_aurrasing.png"
+  },
+  {
+    "name": "B1 Battle Droid",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b1.png"
+  },
+  {
+    "name": "B2 Super Battle Droid",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b2.png"
+  },
+  {
+    "name": "Barriss Offee",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_barriss_light.png"
+  },
+  {
+    "name": "Bastila Shan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bastilashan.png"
+  },
+  {
+    "name": "Bastila Shan (Fallen)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bastilashan_dark.png"
+  },
+  {
+    "name": "Batcher",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_batcher.png"
+  },
+  {
+    "name": "Baylan Skoll",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_baylanskoll.png"
+  },
+  {
+    "name": "Baze Malbus",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bazemalbus.png"
+  },
+  {
+    "name": "BB-8",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb8.png"
+  },
+  {
+    "name": "Ben Solo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bensolo.png"
+  },
+  {
+    "name": "Biggs Darklighter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelpilot_biggs.png"
+  },
+  {
+    "name": "Bistan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bistan.png"
+  },
+  {
+    "name": "Bo-Katan (Mand'alor)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandalorbokatan.png"
+  },
+  {
+    "name": "Bo-Katan Kryze",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bokatan.png"
+  },
+  {
+    "name": "Boba Fett",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bobafett.png"
+  },
+  {
+    "name": "Boba Fett, Scion of Jango",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bobafettold.png"
+  },
+  {
+    "name": "Bodhi Rook",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bodhi.png"
+  },
+  {
+    "name": "Boss Nass",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bossnass.png"
+  },
+  {
+    "name": "Bossk",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bossk.png"
+  },
+  {
+    "name": "Boushh (Leia Organa)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_boushh.png"
+  },
+  {
+    "name": "Brutus",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_brutus.png"
+  },
+  {
+    "name": "BT-1",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bt1.png"
+  },
+  {
+    "name": "C-3PO",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_c3p0.png"
+  },
+  {
+    "name": "Cad Bane",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cadbane.png"
+  },
+  {
+    "name": "Cal Kestis",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_calkestis.png"
+  },
+  {
+    "name": "Canderous Ordo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_canderous.png"
+  },
+  {
+    "name": "Captain Carson Teva",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_carsonteva.png"
+  },
+  {
+    "name": "Captain Drogan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captaindrogan.png"
+  },
+  {
+    "name": "Captain Enoch",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainenoch.png"
+  },
+  {
+    "name": "Captain Han Solo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hoth_han.png"
+  },
+  {
+    "name": "Captain Ithano",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ithano.png"
+  },
+  {
+    "name": "Captain Phasma",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_phasma.png"
+  },
+  {
+    "name": "Captain Rex",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainrex.png"
+  },
+  {
+    "name": "Captain Silvo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainsilvo.png"
+  },
+  {
+    "name": "Captain Tarpals",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captaintarpals.png"
+  },
+  {
+    "name": "Cara Dune",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_caradune.png"
+  },
+  {
+    "name": "Carth Onasi",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_carth.png"
+  },
+  {
+    "name": "Cassian Andor",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cassian.png"
+  },
+  {
+    "name": "Cassian Andor (Undercover)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cassianundercover.png"
+  },
+  {
+    "name": "CC-1119 \"Appo\"",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_appo.png"
+  },
+  {
+    "name": "CC-2224 \"Cody\"",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_cody.png"
+  },
+  {
+    "name": "Cere Junda",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cerejunda.png"
+  },
+  {
+    "name": "Chewbacca",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_ot.png"
+  },
+  {
+    "name": "Chief Chirpa",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_chirpa.png"
+  },
+  {
+    "name": "Chief Nebit",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_nebit.png"
+  },
+  {
+    "name": "Chirrut Îmwe",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chirrut.png"
+  },
+  {
+    "name": "Chopper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chopper.png"
+  },
+  {
+    "name": "Cinta Kaz",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cinta.png"
+  },
+  {
+    "name": "Clone Sergeant - Phase I",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclonegreen.png"
+  },
+  {
+    "name": "Clone Wars Chewbacca",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca.png"
+  },
+  {
+    "name": "Cobb Vanth",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cobbvanth.png"
+  },
+  {
+    "name": "Colonel Starck",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_colonel_stark.png"
+  },
+  {
+    "name": "Colonel Ward",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_colonelward.png"
+  },
+  {
+    "name": "Commander Ahsoka Tano",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_commanderahsokatano.png"
+  },
+  {
+    "name": "Commander Luke Skywalker",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lukebespin.png"
+  },
+  {
+    "name": "Commander Luke Skywalker (Hoth)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelhoth_luke.png"
+  },
+  {
+    "name": "Coruscant Underworld Police",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_coruscantpolice.png"
+  },
+  {
+    "name": "Count Dooku",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dooku.png"
+  },
+  {
+    "name": "Crosshair (Scarred)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_crosshair_scarred.png"
+  },
+  {
+    "name": "CX-2",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_operative.png"
+  },
+  {
+    "name": "Dark Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darktrooper.png"
+  },
+  {
+    "name": "Dark Trooper Moff Gideon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_moffgideons3.png"
+  },
+  {
+    "name": "Darth Bane",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthbane.png"
+  },
+  {
+    "name": "Darth Malak",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthmalak.png"
+  },
+  {
+    "name": "Darth Malgus",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthmalgus.png"
+  },
+  {
+    "name": "Darth Maul",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maul.png"
+  },
+  {
+    "name": "Darth Nihilus",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nihilus.png"
+  },
+  {
+    "name": "Darth Revan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithrevan.png"
+  },
+  {
+    "name": "Darth Sidious",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sidious.png"
+  },
+  {
+    "name": "Darth Sion",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sion.png"
+  },
+  {
+    "name": "Darth Talon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthtalon.png"
+  },
+  {
+    "name": "Darth Traya",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_traya.png"
+  },
+  {
+    "name": "Darth Vader",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vader.png"
+  },
+  {
+    "name": "Darth Vader (Duel's End)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vaderduelsend.png"
+  },
+  {
+    "name": "Dash Rendar",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dashrendar.png"
+  },
+  {
+    "name": "Dathcha",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_dathcha.png"
+  },
+  {
+    "name": "Death Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperdeath.png"
+  },
+  {
+    "name": "Death Trooper (Peridea)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_deathtrooperperidea.png"
+  },
+  {
+    "name": "Dedra Meero",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dedrameero.png"
+  },
+  {
+    "name": "Dengar",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dengar.png"
+  },
+  {
+    "name": "Depa Billaba",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_depabillaba.png"
+  },
+  {
+    "name": "Director Krennic",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_krennic.png"
+  },
+  {
+    "name": "Disguised Clone Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_disguisedclonetrooper.png"
+  },
+  {
+    "name": "Doctor Aphra",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_doctoraphra.png"
+  },
+  {
+    "name": "Droideka",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_droideka.png"
+  },
+  {
+    "name": "Echo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_echo.png"
+  },
+  {
+    "name": "Eeth Koth",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_eethkoth.png"
+  },
+  {
+    "name": "Eighth Brother",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_eighthbrother.png"
+  },
+  {
+    "name": "Embo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_embo.png"
+  },
+  {
+    "name": "Emperor Palpatine",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_palpatineemperor.png"
+  },
+  {
+    "name": "Enfys Nest",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_enfys.png"
+  },
+  {
+    "name": "Ewok Elder",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_chief.png"
+  },
+  {
+    "name": "Ewok Scout",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_scout.png"
+  },
+  {
+    "name": "Ezra Bridger",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ezra_s3.png"
+  },
+  {
+    "name": "Ezra Bridger (Exile)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ezraexile.png"
+  },
+  {
+    "name": "Fennec Shand",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_fennec.png"
+  },
+  {
+    "name": "Fifth Brother",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_fifthbrother.png"
+  },
+  {
+    "name": "Finn",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_finnjakku.png"
+  },
+  {
+    "name": "First Order Executioner",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_executioner.png"
+  },
+  {
+    "name": "First Order Officer",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorderofficer.png"
+  },
+  {
+    "name": "First Order SF TIE Pilot",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_pilot.png"
+  },
+  {
+    "name": "First Order Stormtrooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstordertrooper.png"
+  },
+  {
+    "name": "First Order TIE Pilot",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstordertiepilot.png"
+  },
+  {
+    "name": "Gamorrean Guard",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gamorreanguard.png"
+  },
+  {
+    "name": "Gar Saxon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gar_saxon.png"
+  },
+  {
+    "name": "Garazeb \"Zeb\" Orrelios",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zeb_s3.png"
+  },
+  {
+    "name": "General Grievous",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_grievous.png"
+  },
+  {
+    "name": "General Hux",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalhux.png"
+  },
+  {
+    "name": "General Kenobi",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_obiwangeneral.png"
+  },
+  {
+    "name": "General Skywalker",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalanakin.png"
+  },
+  {
+    "name": "General Syndulla",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalsyndulla.png"
+  },
+  {
+    "name": "General Veers",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_veers.png"
+  },
+  {
+    "name": "Geonosian Brood Alpha",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_broodalpha.png"
+  },
+  {
+    "name": "Geonosian Soldier",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_soldier.png"
+  },
+  {
+    "name": "Geonosian Spy",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_spy.png"
+  },
+  {
+    "name": "Grand Admiral Thrawn",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_thrawn.png"
+  },
+  {
+    "name": "Grand Inquisitor",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_grandinquisitor.png"
+  },
+  {
+    "name": "Grand Master Yoda",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodagrandmaster.png"
+  },
+  {
+    "name": "Grand Moff Tarkin",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tarkinadmiral.png"
+  },
+  {
+    "name": "Great Mothers",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greatmothers.png"
+  },
+  {
+    "name": "Greedo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greedo.png"
+  },
+  {
+    "name": "Greef Karga",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greefkarga.png"
+  },
+  {
+    "name": "Grogu & Anzellans",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_groguanz.png"
+  },
+  {
+    "name": "Gungan Boomadier",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gunganboomadier.png"
+  },
+  {
+    "name": "Gungan Phalanx",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gunganphalanx.png"
+  },
+  {
+    "name": "Han Solo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_han.png"
+  },
+  {
+    "name": "Han Solo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_han_sickness.png"
+  },
+  {
+    "name": "Hera Syndulla",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hera_s3.png"
+  },
+  {
+    "name": "Hermit Yoda",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodahermit.png"
+  },
+  {
+    "name": "HK-47",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hk47.png"
+  },
+  {
+    "name": "Hondo Ohnaka",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hondoohnaka.png"
+  },
+  {
+    "name": "Hoth Rebel Scout",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelhothscout.png"
+  },
+  {
+    "name": "Hoth Rebel Soldier",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelhoth.png"
+  },
+  {
+    "name": "Hunter",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_hunter.png"
+  },
+  {
+    "name": "Hunter (Mercenary)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hunters3.png"
+  },
+  {
+    "name": "Huttslayer Leia",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leia_princess.png"
+  },
+  {
+    "name": "Huyang",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_huyang.png"
+  },
+  {
+    "name": "Iden Versio",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_idenversioempire.png"
+  },
+  {
+    "name": "IG-100 MagnaGuard",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_magnaguard.png"
+  },
+  {
+    "name": "IG-11",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig11_nurse.png"
+  },
+  {
+    "name": "IG-11 (Bounty Hunter)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig11.png"
+  },
+  {
+    "name": "IG-12 & Grogu",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig12.png"
+  },
+  {
+    "name": "IG-86 Sentinel Droid",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig86.png"
+  },
+  {
+    "name": "IG-88",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig88.png"
+  },
+  {
+    "name": "IG-90",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig-90.png"
+  },
+  {
+    "name": "Ima-Gun Di",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_imagundi.png"
+  },
+  {
+    "name": "Imperial Probe Droid",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_probedroid.png"
+  },
+  {
+    "name": "Imperial Super Commando",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_imperial_super_commando.png"
+  },
+  {
+    "name": "Inquisitor Barriss",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_inquisitorbarriss.png"
+  },
+  {
+    "name": "Jabba the Hutt",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jabbathehutt.png"
+  },
+  {
+    "name": "Jango Fett",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jangofett.png"
+  },
+  {
+    "name": "Jar Jar Binks",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jarjarbinks.png"
+  },
+  {
+    "name": "Jawa",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_jawa.png"
+  },
+  {
+    "name": "Jawa Engineer",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_engineer.png"
+  },
+  {
+    "name": "Jawa Scavenger",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_scavenger.png"
+  },
+  {
+    "name": "Jedi Consular",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_consular_03.png"
+  },
+  {
+    "name": "Jedi Knight Anakin",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_anakinknight.png"
+  },
+  {
+    "name": "Jedi Knight Cal Kestis",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jediknightcal.png"
+  },
+  {
+    "name": "Jedi Knight Guardian",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_guardian_01.png"
+  },
+  {
+    "name": "Jedi Knight Luke Skywalker",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_jediknight.png"
+  },
+  {
+    "name": "Jedi Knight Revan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedirevan.png"
+  },
+  {
+    "name": "Jedi Master Kenobi",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_globiwan.png"
+  },
+  {
+    "name": "Jedi Master Luke Skywalker",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_jml.png"
+  },
+  {
+    "name": "Jedi Master Mace Windu",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedimastermacewindu.png"
+  },
+  {
+    "name": "Jocasta Nu",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jocastanu_blaster.png"
+  },
+  {
+    "name": "Jolee Bindo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_joleebindo.png"
+  },
+  {
+    "name": "Juhani",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_juhani.png"
+  },
+  {
+    "name": "Jyn Erso",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jyn.png"
+  },
+  {
+    "name": "K-2SO",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_k2so.png"
+  },
+  {
+    "name": "Kanan Jarrus",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kanan_s3.png"
+  },
+  {
+    "name": "Kelleran Beq",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kelleranbeq.png"
+  },
+  {
+    "name": "Ki-Adi-Mundi",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kiadimundi.png"
+  },
+  {
+    "name": "Kit Fisto",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kitfisto.png"
+  },
+  {
+    "name": "Kix",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kix.png"
+  },
+  {
+    "name": "Kleya Marki",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kleya.png"
+  },
+  {
+    "name": "Krrsantan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_krrsantan.png"
+  },
+  {
+    "name": "Kuiil",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kuiil.png"
+  },
+  {
+    "name": "KX Security Droid",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kxsecuritydroid.png"
+  },
+  {
+    "name": "Kyle Katarn",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kylekatarn.png"
+  },
+  {
+    "name": "Kylo Ren",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kyloren.png"
+  },
+  {
+    "name": "Kylo Ren (Unmasked)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kylo_unmasked.png"
+  },
+  {
+    "name": "L3-37",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_l337.png"
+  },
+  {
+    "name": "Lando Calrissian",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_landobespin.png"
+  },
+  {
+    "name": "Leia Organa",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiaendor.png"
+  },
+  {
+    "name": "Lobot",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lobot.png"
+  },
+  {
+    "name": "Logray",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_logray.png"
+  },
+  {
+    "name": "Lord Vader",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_anakin_fallen.png"
+  },
+  {
+    "name": "Lord Vader",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lordvader.png"
+  },
+  {
+    "name": "Luke Skywalker (Farmboy)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_ep4.png"
+  },
+  {
+    "name": "Luminara Unduli",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luminara.png"
+  },
+  {
+    "name": "Luthen Rael",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luthenrael.png"
+  },
+  {
+    "name": "Mace Windu",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_macewindu.png"
+  },
+  {
+    "name": "Magmatrooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm_magma.png"
+  },
+  {
+    "name": "Major Partagaz",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_majorpartagaz.png"
+  },
+  {
+    "name": "Mara Jade, The Emperor's Hand",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marajade.png"
+  },
+  {
+    "name": "Marrok",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marrok.png"
+  },
+  {
+    "name": "Master Qui-Gon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_masterquigon.png"
+  },
+  {
+    "name": "Maul",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maul_cyborg.png"
+  },
+  {
+    "name": "Maul (Hate-Fueled)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maulhatefueled.png"
+  },
+  {
+    "name": "Maz Kanata",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mazkanata.png"
+  },
+  {
+    "name": "Merrin",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_merrin.png"
+  },
+  {
+    "name": "Mission Vao",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mission.png"
+  },
+  {
+    "name": "Mob Enforcer",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mob_enforcer.png"
+  },
+  {
+    "name": "Mob Enforcer",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_thug_female_01.png"
+  },
+  {
+    "name": "Moff Gideon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_moffgideon.png"
+  },
+  {
+    "name": "Mon Mothma",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_monmothma.png"
+  },
+  {
+    "name": "Morgan Elsbeth",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_morganelsbeth.png"
+  },
+  {
+    "name": "Mother Talzin",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_talzin.png"
+  },
+  {
+    "name": "Night Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nighttrooper_a.png"
+  },
+  {
+    "name": "Nightsister Acolyte",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_acolyte.png"
+  },
+  {
+    "name": "Nightsister Initiate",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_initiate.png"
+  },
+  {
+    "name": "Nightsister Spirit",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_wraith.png"
+  },
+  {
+    "name": "Nightsister Zombie",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_zombie.png"
+  },
+  {
+    "name": "Nikto Thug",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_niktothug_01.png"
+  },
+  {
+    "name": "Ninth Sister",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ninthsister.png"
+  },
+  {
+    "name": "Nute Gunray",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nutegunray.png"
+  },
+  {
+    "name": "Obi-Wan Kenobi (Old Ben)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_obiwanep4.png"
+  },
+  {
+    "name": "Old Daka",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_daka.png"
+  },
+  {
+    "name": "Omega",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_badbatchomega.png"
+  },
+  {
+    "name": "Omega (Fugitive)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_omegas3.png"
+  },
+  {
+    "name": "Padawan Obi-Wan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padawanobiwan.png"
+  },
+  {
+    "name": "Padawan Sabine Wren",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padawansabine.png"
+  },
+  {
+    "name": "Padmé Amidala",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padme_geonosis.png"
+  },
+  {
+    "name": "Pao",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_pao.png"
+  },
+  {
+    "name": "Paploo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_paploo.png"
+  },
+  {
+    "name": "Paz Vizsla",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_pazvizsla.png"
+  },
+  {
+    "name": "Pirate King Hondo Ohnaka",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_glhondo.png"
+  },
+  {
+    "name": "Plo Koon",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_plokoon.png"
+  },
+  {
+    "name": "Poe Dameron",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_poe.png"
+  },
+  {
+    "name": "Poggle the Lesser",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_poggle.png"
+  },
+  {
+    "name": "Princess Kneesaa",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_princesskneesaa.png"
+  },
+  {
+    "name": "Qi'ra",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_qira.png"
+  },
+  {
+    "name": "Queen Amidala",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_queenamidala.png"
+  },
+  {
+    "name": "Qui-Gon Jinn",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_quigon.png"
+  },
+  {
+    "name": "Quiggold",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_quiggold.png"
+  },
+  {
+    "name": "R2-D2",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_astromech_r2d2.png"
+  },
+  {
+    "name": "R5-D4",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_r5d4.png"
+  },
+  {
+    "name": "Range Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperranger.png"
+  },
+  {
+    "name": "RC-1262 \"Scorch\"",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_scorch.png"
+  },
+  {
+    "name": "Rebel Officer Leia Organa",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiahoth.png"
+  },
+  {
+    "name": "Rebel Officer Leia Organa (Bespin)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leia_bespin.png"
+  },
+  {
+    "name": "Resistance Hero Finn",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_finn.png"
+  },
+  {
+    "name": "Resistance Hero Poe",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_poe_tros.png"
+  },
+  {
+    "name": "Resistance Pilot",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_resistancepilot.png"
+  },
+  {
+    "name": "Resistance Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_resistancetrooper.png"
+  },
+  {
+    "name": "Rey",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tros.png"
+  },
+  {
+    "name": "Rey",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_reyjakku.png"
+  },
+  {
+    "name": "Rey (Dark Side Vision)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darkrey.png"
+  },
+  {
+    "name": "Rey (Jedi Training)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tlj.png"
+  },
+  {
+    "name": "Rose Tico",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rose.png"
+  },
+  {
+    "name": "Rotta the Hutt",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rotta.png"
+  },
+  {
+    "name": "Royal Guard",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_royalguard.png"
+  },
+  {
+    "name": "Sabine Wren",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sabine_s3.png"
+  },
+  {
+    "name": "Sana Starros",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sanastarros.png"
+  },
+  {
+    "name": "Satele Shan",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sateleshan.png"
+  },
+  {
+    "name": "Savage Opress",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_savageopress.png"
+  },
+  {
+    "name": "Saw Gerrera",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sawgerrera.png"
+  },
+  {
+    "name": "Scarif Rebel Pathfinder",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebel_scarif.png"
+  },
+  {
+    "name": "Scout Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperscout.png"
+  },
+  {
+    "name": "Second Sister",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_secondsister.png"
+  },
+  {
+    "name": "Seventh Sister",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_seventhsister.png"
+  },
+  {
+    "name": "Shaak Ti",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_shaakti.png"
+  },
+  {
+    "name": "Shin Hati",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_shinhati.png"
+  },
+  {
+    "name": "Shoretrooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_troopershore.png"
+  },
+  {
+    "name": "Sith Assassin",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithassassin.png"
+  },
+  {
+    "name": "Sith Empire Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithtrooper.png"
+  },
+  {
+    "name": "Sith Eternal Emperor",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_espalpatine_pre.png"
+  },
+  {
+    "name": "Sith Marauder",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithmarauder.png"
+  },
+  {
+    "name": "Sith Trooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_sithtrooper.png"
+  },
+  {
+    "name": "Skiff Guard (Lando Calrissian)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_undercoverlando.png"
+  },
+  {
+    "name": "SM-33",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sm33.png"
+  },
+  {
+    "name": "Snowtrooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_troopersnow.png"
+  },
+  {
+    "name": "Snowtrooper Commander",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_remnantsnowcommander.png"
+  },
+  {
+    "name": "STAP",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stap.png"
+  },
+  {
+    "name": "Starkiller",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_starkiller.png"
+  },
+  {
+    "name": "Stormtrooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm.png"
+  },
+  {
+    "name": "Stormtrooper Han",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm_han.png"
+  },
+  {
+    "name": "Stormtrooper Luke",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stormtrooperluke.png"
+  },
+  {
+    "name": "Sun Fac",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_sunfac.png"
+  },
+  {
+    "name": "Supreme Leader Kylo Ren",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kyloren_tros.png"
+  },
+  {
+    "name": "T3-M4",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_t3m4.png"
+  },
+  {
+    "name": "Talia",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_talia.png"
+  },
+  {
+    "name": "Tarfful",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tarfful.png"
+  },
+  {
+    "name": "Taron Malicos",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_taronmalicos.png"
+  },
+  {
+    "name": "Tech",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_tech.png"
+  },
+  {
+    "name": "Teebo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_teebo.png"
+  },
+  {
+    "name": "Temple Guard",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vanguardtempleguard.png"
+  },
+  {
+    "name": "The Armorer",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_armorer.png"
+  },
+  {
+    "name": "The Mandalorian",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandalorian.png"
+  },
+  {
+    "name": "The Mandalorian (Beskar Armor)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandobeskar.png"
+  },
+  {
+    "name": "The Stranger",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stranger.png"
+  },
+  {
+    "name": "Third Sister",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_thirdsister.png"
+  },
+  {
+    "name": "Threepio & Chewie",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_c3po.png"
+  },
+  {
+    "name": "TIE Fighter Pilot",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiepilot.png"
+  },
+  {
+    "name": "TK Stormtrooper",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tkstormtrooper.png"
+  },
+  {
+    "name": "Tusken Chieftain",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenchieftain.png"
+  },
+  {
+    "name": "Tusken Raider",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenraider.png"
+  },
+  {
+    "name": "Tusken Shaman",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenshaman.png"
+  },
+  {
+    "name": "Tusken Warrior",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenhuntress.png"
+  },
+  {
+    "name": "Ugnaught",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ugnaught.png"
+  },
+  {
+    "name": "URoRRuR'R'R",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_urorrurrr.png"
+  },
+  {
+    "name": "Vandor Chewbacca",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_vandor.png"
+  },
+  {
+    "name": "Vane",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vane.png"
+  },
+  {
+    "name": "Vel Sartha",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vel.png"
+  },
+  {
+    "name": "Veteran Smuggler Chewbacca",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tfa_chewbacca.png"
+  },
+  {
+    "name": "Veteran Smuggler Han Solo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tfa_han.png"
+  },
+  {
+    "name": "Visas Marr",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_visas.png"
+  },
+  {
+    "name": "Wampa",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wampa.png"
+  },
+  {
+    "name": "Wat Tambor",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wattambor.png"
+  },
+  {
+    "name": "Wedge Antilles",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelpilot_wedge.png"
+  },
+  {
+    "name": "Wicket",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_wicket.png"
+  },
+  {
+    "name": "Wrecker",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_wrecker.png"
+  },
+  {
+    "name": "Wrecker (Mercenary)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wreckers3.png"
+  },
+  {
+    "name": "Yoda & Chewie",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodachewbacca.png"
+  },
+  {
+    "name": "Young Han Solo",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_han_young.png"
+  },
+  {
+    "name": "Young Lando Calrissian",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_younglando.png"
+  },
+  {
+    "name": "Zaalbar",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zaalbar.png"
+  },
+  {
+    "name": "Zam Wesell",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zamwesell.png"
+  },
+  {
+    "name": "Zeb Orrelios (New Republic Pilot)",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rangerzeb.png"
+  },
+  {
+    "name": "Zorii Bliss",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zoriibliss.png"
+  },
+  {
+    "name": "Zuckuss",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zuckuss.png"
+  }
+]
