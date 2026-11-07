@@ -5,9 +5,8 @@ The site is a static GitHub Pages app. Team recommendations are stored in Supaba
 ## 1. Create the shared database
 
 1. Create a project at https://supabase.com/.
-2. In the project, open **SQL Editor**, create a query, paste the contents of `supabase-setup.sql`, and run it.
-3. Open **Project Settings → API** (or **Data API / API Keys**, depending on the dashboard layout). Copy the **Project URL** and the **anon / publishable public key**.
-4. In this repository, open `index.html` and replace `YOUR_SUPABASE_PROJECT_URL` and `YOUR_SUPABASE_ANON_PUBLIC_KEY` with those two values. Commit the change.
+2. The website is already configured with this project's URL and publishable public key.
+3. In the project, open **SQL Editor**, create a query, paste the contents of `supabase-setup.sql` from this repository, and run it.
 
 **Important:** Use only the anon/publishable public key in the website. Never put the `service_role` or secret key in browser code.
 
@@ -35,4 +34,4 @@ Planet → mission (editable title) → multiple team recommendations. Each reco
 
 ## Current status
 
-The frontend and database schema are prepared in this repository. Shared editing will not work until you create the Supabase project, run the SQL, and add its Project URL and public anon key to `index.html`.
+The frontend is connected to the Supabase project. Shared reading and saving will become available after you run `supabase-setup.sql` in the project's SQL Editor and add approved editor user IDs to `public.editors`. The website currently has no credentials for any service-role secret.
