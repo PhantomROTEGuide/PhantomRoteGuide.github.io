@@ -12,15 +12,15 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_4lom.png"
   },
   {
-    "name": "501st Captain",
+    "name": "CT-7567 \"Rex\"",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_rex.png"
   },
   {
-    "name": "501st Clone Trooper",
+    "name": "CT-21-0408 \"Echo\"",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_echo.png"
   },
   {
-    "name": "501st Veteran",
+    "name": "CT-5555 \"Fives\"",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_fives.png"
   },
   {
@@ -876,10 +876,6 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_mob_enforcer.png"
   },
   {
-    "name": "Mob Enforcer",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_thug_female_01.png"
-  },
-  {
     "name": "Moff Gideon",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_moffgideon.png"
   },
@@ -1040,7 +1036,7 @@
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tros.png"
   },
   {
-    "name": "Rey",
+    "name": "Rey (Scavenger)",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_reyjakku.png"
   },
   {
