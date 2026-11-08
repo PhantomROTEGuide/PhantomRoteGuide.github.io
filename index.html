@@ -22,6 +22,15 @@ const SUPABASE_URL='https://qjkzppzdtnbotwgzmxqo.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_v0G1QJfWxsjSXXG959UHsQ_UkBYaRWU';
 const configured=SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY.startsWith('sb_publishable_');
 const db=configured&&window.supabase&&typeof window.supabase.createClient==='function'?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+// Characters with at least one Territory Battle Omicron, synced against the live Omicron catalog.
+const territoryBattleOmicronCharacters=new Set([
+ '4-LOM','Captain Carson Teva','Captain Enoch','Captain Tarpals','Carth Onasi',
+ 'Cassian Andor','CC-1119 "Appo"','Cobb Vanth','Depa Billaba','Embo & Keibu',
+ 'Finn','Gamorrean Guard','Hoth Leia','Huyang','Imperial Probe Droid','Jaxxon',
+ 'Jedi Knight Cal Kestis','Kyle Katarn','Marrok','Omega','Paz Vizsla','Quiggold',
+ 'Vane','Vel Sartha','Wrecker (Mercenary)','Yoda (Dark Side Vision)'
+]);
+function characterHasTBOmicron(name){return typeof name==='string'&&territoryBattleOmicronCharacters.has(name)}
 const phases=[
 [1,'Territory Zones',[['Mustafar','Dark Side'],['Corellia','Mixed'],['Coruscant','Light Side']]],
 [2,'Territory Zones',[['Geonosis','Dark Side'],['Felucia','Mixed'],['Bracca','Light Side']]],
@@ -239,7 +248,7 @@ function renderTeam(i,j,r){
  const specialRule=type==='special'?specialRuleForMission(mission):null;
  const omicrons=Array.isArray(r.omicrons)?r.omicrons:[];
  const renderSlots=(start,end,title)=>'<div class="fleet-slot-group"><div class="fleet-slot-heading">'+title+'</div><div class="portrait-grid">'+images.slice(start,end).map((url,offset)=>{
-  const k=start+offset,label=slotNames[k],requiredName=!isFleet?requiredCharacterAt(mission,k,current):null,choice= !isFleet?requiredChoiceAt(mission,k,current):null,leaderLocked=!isFleet&&!!requiredName,choiceLocked=!!(choice&&choice.options.includes((r.names||[])[k])),slotLocked=!isFleet&&k>=missionCharacterLimit(mission,current),hasOmicron=!isFleet&&!!omicrons[k],canMarkOmicron=!isFleet&&!!url&&(r.names?.[k]!=='__ANY__');
+  const k=start+offset,label=slotNames[k],requiredName=!isFleet?requiredCharacterAt(mission,k,current):null,choice= !isFleet?requiredChoiceAt(mission,k,current):null,leaderLocked=!isFleet&&!!requiredName,choiceLocked=!!(choice&&choice.options.includes((r.names||[])[k])),slotLocked=!isFleet&&k>=missionCharacterLimit(mission,current),canMarkOmicron=!isFleet&&!!url&&characterHasTBOmicron(r.names?.[k]),hasOmicron=canMarkOmicron&&!!omicrons[k];
   const marker=hasOmicron?'<span class="omicron-mark" title="Omicron applied" aria-label="Omicron applied">Ω</span>':'';
   const omicronControl=isEditor&&canMarkOmicron?'<button class="btn" onclick="toggleOmicron('+i+','+j+','+k+')" title="'+(hasOmicron?'Remove Omicron marker':'Mark Omicron')+'">'+(hasOmicron?'Remove Ω':'Add Ω')+'</button>':'';
   return '<div class="portrait-slot"><div class="portrait-circle">'+(url?'<img src="'+esc(url)+'" alt="'+esc(label)+'">':'＋')+marker+'</div><span class="portrait-number">'+esc(label)+'</span>'+(isEditor?(leaderLocked?'<span class="portrait-number">Locked · '+esc(requiredName)+'</span>'+omicronControl:choiceLocked?'<span class="portrait-number">Locked · Required</span>'+omicronControl:choice?'<span class="portrait-number">Choose one required character</span><button class="btn pick-character" onclick="openCharacterPicker('+i+','+j+','+k+')">Choose required</button>'+omicronControl:slotLocked?(url?'<div class="portrait-actions"><button class="btn danger" onclick="removeTeamImage('+i+','+j+','+k+')">Remove</button>'+omicronControl+'</div>':'<span class="portrait-number">Not used · 3 max</span>'):'<button class="btn pick-character" onclick="openCharacterPicker('+i+','+j+','+k+')">Choose '+(isFleet?'ship':'character')+'</button><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" aria-label="Upload '+esc(label)+' portrait" data-team-upload="'+i+','+j+','+k+'"><div class="portrait-actions">'+(url?'<button class="btn danger" onclick="removeTeamImage('+i+','+j+','+k+')">Remove</button>'+omicronControl:'')+'</div>'):'')+'</div>';
@@ -373,7 +382,7 @@ function toggleOmicron(i,j,k){
  const mission=ensurePlanet(current)[i];
  if(missionType(mission)==='fleet')return;
  const rec=mission.recommendations[j],images=recommendationImages(rec,missionType(mission));
- if(!images[k]||rec.names?.[k]==='__ANY__'){setStatus('Choose a character portrait before adding an Omicron marker.','bad');return}
+ if(!images[k]||!characterHasTBOmicron(rec.names?.[k])){setStatus('Only characters with a Territory Battle Omicron can be marked. Choose an eligible character first.','bad');return}
  const marks=Array.isArray(rec.omicrons)?rec.omicrons.slice():Array(5).fill(false);
  while(marks.length<5)marks.push(false);
  marks[k]=!marks[k];rec.omicrons=marks;queueSave();renderMissions();
