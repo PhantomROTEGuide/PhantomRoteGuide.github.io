@@ -33,6 +33,7 @@ const bonus=[['Zeffo','Phase 3 Bonus Zone'],['Mandalore','Phase 4 Bonus Zone']];
 const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false;
 let characterCatalog=[],characterCatalogPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null;
+const capitalShipNames=new Set(['Finalizer','Home One','Raddus','Chimaera','Executrix','Negotiator','Executor','Profundity','Leviathan']);
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function planetList(){return [...phases.flatMap(p=>p[2].map(x=>x[0])),...bonus.map(x=>x[0])]}
@@ -107,7 +108,8 @@ function renderCharacterPicker(){
   recommendationImages(rec||{}).forEach((url,slot)=>{if(slot!==pickerTarget.k&&url)usedImages.add(url)});
  }
  const itemLabel=pickerTarget&&pickerTarget.type==='fleet'?'ships':'characters';
- const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
+ const isCapitalSlot=pickerTarget&&pickerTarget.type==='fleet'&&pickerTarget.k===0;
+ const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!isCapitalSlot||capitalShipNames.has(x.c.name))&&x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
  document.getElementById('characterPickerStatus').textContent=matches.length
   ?'Showing '+matches.length+' available '+itemLabel+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
   :'No available '+itemLabel+' match. Items already used in this team are hidden.';
@@ -116,6 +118,10 @@ function renderCharacterPicker(){
 function closeCharacterPicker(){document.getElementById('characterPicker').classList.remove('show');pickerTarget=null}
 function selectCharacterPortrait(index){
  const character=characterCatalog[index],target=pickerTarget;if(!character||!target)return;
+ if(target.type==='fleet'&&target.k===0&&!capitalShipNames.has(character.name)){
+  setStatus(character.name+' is not a capital ship. Choose one of the nine capital ships.','bad');
+  return;
+ }
  const rec=ensurePlanet(target.planet)[target.i].recommendations[target.j],images=recommendationImages(rec,target.type);
  if(images.some((url,slot)=>slot!==target.k&&url===character.image)){
   setStatus(character.name+' is already in this team. Choose a different '+(target.type==='fleet'?'ship':'character')+'.','bad');
