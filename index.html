@@ -592,7 +592,6 @@ function selectCharacterPortrait(index){
    const isCapital=nextSlot===0;
    document.getElementById('pickerTitle').textContent=isCapital?'Choose a capital ship':'Choose a regular ship';
    document.getElementById('pickerDescription').textContent=isCapital?'Choose the fleet commander for this lineup. After that, you can add all 7 regular ships without reopening the picker.':'Choose the next regular ship. The picker will advance automatically through the remaining slots.';
-   document.getElementById('characterSearch').value='';
    renderCharacterPicker();
    setStatus('Added '+character.name+'. Now choose '+(nextSlot===1?'the first starting ship':'the next ship')+'.','good');
    return;
