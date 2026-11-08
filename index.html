@@ -44,18 +44,18 @@ const specialFactionMembers={
  'Mandalorian':new Set(["Bo-Katan (Mand'alor)",'The Mandalorian (Beskar Armor)','The Armorer','Canderous Ordo','Gar Saxon','Imperial Super Commando','Jango Fett','Maul','Padawan Sabine Wren','Paz Vizsla','Sabine Wren','The Mandalorian','The Mandalorian and Grogu','Grogu & Anzellans','IG-12 & Grogu','Bo-Katan Kryze'])
 };
 const specialMissionRules={
- 'Corellia':[{id:'qira-younghan',name:"Qi'ra + Young Han Solo",description:"5 characters · Qi'ra and Young Han Solo required",requiredAll:["Qi'ra",'Young Han Solo']}],
+ 'Corellia':[{id:'qira-younghan',name:"Qi'ra + Young Han Solo",description:"5 characters · Qi'ra and Young Han Solo required",requiredAll:["Qi'ra",'Young Han Solo'],teamSize:5}],
  'Bracca':[{id:'zeffo-unlock',name:'Zeffo Unlock',description:'Cere Junda and either Cal Kestis or Jedi Knight Cal Kestis required',requiredAll:['Cere Junda'],requiredAny:[['Cal Kestis','Jedi Knight Cal Kestis']]}],
  'Zeffo':[{id:'clone-trooper',name:'Clone Trooper Special Mission',description:'5 Clone Troopers required',faction:'Clone Trooper',requiredCount:5}],
- 'Kashyyyk':[{id:'saw-gerrera',name:'Saw Gerrera Special Mission',description:'Rebel Fighters · Saw Gerrera required',faction:'Rebel Fighter',requiredAll:['Saw Gerrera']}],
- 'Dathomir':[{id:'merrin',name:'Merrin Nightsister Special Mission',description:'Nightsisters · Merrin required',faction:'Nightsister',requiredAll:['Merrin']}],
+ 'Kashyyyk':[{id:'saw-gerrera',name:'Saw Gerrera Special Mission',description:'Rebel Fighters · Saw Gerrera required',faction:'Rebel Fighter',requiredAll:['Saw Gerrera'],requiredCount:5}],
+ 'Dathomir':[{id:'merrin',name:'Merrin Nightsister Special Mission',description:'Nightsisters · Merrin required',faction:'Nightsister',requiredAll:['Merrin'],requiredCount:5}],
  'Tatooine':[
   {id:'reva',name:'Reva Shard Special Mission',description:'5 Inquisitorius · Grand Inquisitor required',faction:'Inquisitorius',requiredAll:['Grand Inquisitor'],requiredCount:5},
-  {id:'mandalore-unlock',name:'Mandalore Unlock Mission',description:"Maximum 3 characters · Bo-Katan (Mand'alor), The Mandalorian (Beskar Armor), and one other Mandalorian",faction:'Mandalorian',requiredAll:["Bo-Katan (Mand'alor)",'The Mandalorian (Beskar Armor)'],maxUnits:3}
+  {id:'mandalore-unlock',name:'Mandalore Unlock Mission',description:"Maximum 3 characters · Bo-Katan (Mand'alor), The Mandalorian (Beskar Armor), and one other Mandalorian",faction:'Mandalorian',requiredAll:["Bo-Katan (Mand'alor)",'The Mandalorian (Beskar Armor)'],requiredCount:3,maxUnits:3}
  ],
- 'Haven Medical Station':[{id:'third-sister',name:'Third Sister Special Mission',description:'Inquisitorius · Third Sister required',faction:'Inquisitorius',requiredAll:['Third Sister']}],
- 'Kessel':[{id:'qira-l3',name:"Qi'ra + L3-37 Special Mission",description:"5 characters · Qi'ra and L3-37 required",requiredAll:["Qi'ra",'L3-37']}],
- 'Vandor':[{id:'younghan-vandor',name:'Young Han + Vandor Chewbacca Special Mission',description:'5 characters · Young Han Solo and Vandor Chewbacca required',requiredAll:['Young Han Solo','Vandor Chewbacca']}]
+ 'Haven Medical Station':[{id:'third-sister',name:'Third Sister Special Mission',description:'Inquisitorius · Third Sister required',faction:'Inquisitorius',requiredAll:['Third Sister'],requiredCount:5}],
+ 'Kessel':[{id:'qira-l3',name:"Qi'ra + L3-37 Special Mission",description:"5 characters · Qi'ra and L3-37 required",requiredAll:["Qi'ra",'L3-37'],teamSize:5}],
+ 'Vandor':[{id:'younghan-vandor',name:'Young Han + Vandor Chewbacca Special Mission',description:'5 characters · Young Han Solo and Vandor Chewbacca required',requiredAll:['Young Han Solo','Vandor Chewbacca'],teamSize:5}]
 };
 function specialRuleForMission(m,planet=current){return (specialMissionRules[planet]||[]).find(r=>r.id===m?.specialRuleId)||null}
 function specialRuleOptions(planet=current){return specialMissionRules[planet]||[]}
@@ -71,6 +71,7 @@ function specialTeamStatus(rec,rule){
  if(missing.length)notes.push('Required: '+missing.join(', '));
  anyMissing.forEach(group=>notes.push('Also required: one of '+group.join(' or ')));
  if(rule.requiredCount&&factionCount<rule.requiredCount)notes.push('Add '+(rule.requiredCount-factionCount)+' more '+rule.faction+' character(s)');
+ if(rule.teamSize&&names.filter(Boolean).length<rule.teamSize)notes.push('Fill all '+rule.teamSize+' character slots');
  if(rule.maxUnits&&names.filter(Boolean).length>rule.maxUnits)notes.push('This mission allows no more than '+rule.maxUnits+' characters');
  return notes.length?'Still needed: '+notes.join(' · '):'Required characters included.';
 }
