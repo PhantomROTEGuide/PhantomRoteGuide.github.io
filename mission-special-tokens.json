@@ -7,11 +7,11 @@
   {
     "name": "Mk II Guild Event Token",
     "image": "https://game-assets.swgoh.gg/textures/tex.challenge_skill.png",
-    "crop": "50% 22%"
+    "crop": "82% 72%"
   },
   {
     "name": "Mk III Guild Event Token",
     "image": "https://game-assets.swgoh.gg/textures/tex.challenge_skill.png",
-    "crop": "50% 22%"
+    "crop": "24% 72%"
   }
 ]
