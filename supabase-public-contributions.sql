@@ -139,7 +139,7 @@ begin
                select 1 from jsonb_array_elements(v_new_rec -> 'omicronAbilities') as slots(value)
                where jsonb_typeof(slots.value) <> 'array'
                   or exists (
-                    select 1 from jsonb_array_elements(slots.value) as abilities(value)
+                    select 1 from jsonb_array_elements(case when jsonb_typeof(slots.value) = 'array' then slots.value else '[]'::jsonb end) as abilities(value)
                     where jsonb_typeof(abilities.value) <> 'string' or length(abilities.value #>> '{}') > 120
                   )
              ) then
