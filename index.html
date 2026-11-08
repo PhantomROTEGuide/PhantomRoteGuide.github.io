@@ -359,7 +359,7 @@ async function openCharacterPicker(i,j,k){
  const type=missionType(mission);
  const rule=type==='special'?specialRuleForMission(ensurePlanet(current)[i]):null;
  if(type!=='fleet'&&k>=missionCharacterLimit(mission,current)){setStatus('This mission allows a maximum of '+missionCharacterLimit(mission,current)+' character(s).','bad');return;}
- pickerTarget={planet:current,i,j,k,type};pickerSelections=[];document.getElementById('pickerBatchActions').style.display=type==='fleet'?'none':'flex';document.getElementById('characterFactionFilter').style.display=type==='fleet'?'none':'block';document.getElementById('characterFactionFilter').value='';document.getElementById('characterFactionFilter').disabled=type==='character'&&!!mission.forcedFaction;
+ pickerTarget={planet:current,i,j,k,type};pickerSelections=[];document.getElementById('pickerBatchActions').style.display=type==='fleet'?'none':'flex';document.getElementById('characterFactionFilter').style.display='block';document.getElementById('characterFactionFilter').value='';document.getElementById('characterFactionFilter').disabled=type==='character'&&!!mission.forcedFaction;
  const panel=document.getElementById('characterPicker'),search=document.getElementById('characterSearch'),status=document.getElementById('characterPickerStatus');
  document.getElementById('pickerTitle').textContent=type==='fleet'?(k===0?'Choose a capital ship':'Choose a regular ship'):'Choose a character';
  document.getElementById('pickerDescription').textContent=type==='fleet'?(k===0?'Choose the capital ship first. The picker will then switch to regular ships and advance through all 7 remaining slots.':'Choose the next regular ship. The picker will advance through the remaining slots.'):'Select up to 5 characters. They will be placed left to right, starting with the slot you opened.';
@@ -373,9 +373,8 @@ async function openCharacterPicker(i,j,k){
 }
 function populateFactionFilter(type){
  const select=document.getElementById('characterFactionFilter');
- if(type==='fleet'){select.innerHTML='<option value="">All factions</option>';return;}
  const factions=[...new Set(characterCatalog.flatMap(c=>Array.isArray(c.factions)?c.factions:[]).map(f=>String(f).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-  select.innerHTML='<option value="">All Factions</option>'+factions.map(f=>'<option value="'+esc(f)+'">'+esc(f.replace(/\b[a-z]/g,c=>c.toUpperCase()))+'</option>').join('');
+ select.innerHTML='<option value="">All Factions</option>'+factions.map(f=>'<option value="'+esc(f)+'">'+esc(f.replace(/\b[a-z]/g,c=>c.toUpperCase()))+'</option>').join('');
 }
 function renderCharacterPicker(){
  const query=(document.getElementById('characterSearch').value||'').trim().toLowerCase();
@@ -393,11 +392,11 @@ function renderCharacterPicker(){
  const specialRule=pickerTarget&&pickerTarget.type==='special'?specialRuleForMission(activeMission,pickerTarget.planet):null;
  const requiredChoice=pickerTarget?requiredChoiceAt(activeMission,pickerTarget.k,pickerTarget.planet):null;
  const forcedFaction=pickerTarget?.type==='character'?activeMission?.forcedFaction||'':'';
- const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!forcedFaction||(x.c.factions||[]).some(f=>String(f).toLowerCase()===forcedFaction.toLowerCase()))&&(pickerTarget?.type!=='fleet'||(isCapitalSlot?capitalShipNames.has(x.c.name):!capitalShipNames.has(x.c.name)))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(requiredCharacterSide==='Bonus'||requiredCharacterSide==='Mixed'||characterAlignmentMap[x.c.name]===requiredCharacterSide.toLowerCase().replace(' ','') )&&(pickerTarget?.type!=='special'||specialCharacterAllowed(x.c.name,specialRule))&&(!requiredChoice||requiredChoice.options.includes(x.c.name))&&(!selectedFaction||(pickerTarget?.type!=='fleet'&&(x.c.factions||[]).some(faction=>String(faction).toLowerCase()===selectedFaction)))&&(x.c.name.toLowerCase().includes(query)||(pickerTarget?.type!=='fleet'&&(x.c.factions||[]).some(faction=>String(faction).toLowerCase().includes(query))))&&!usedImages.has(x.c.image));
+ const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!forcedFaction||(x.c.factions||[]).some(f=>String(f).toLowerCase()===forcedFaction.toLowerCase()))&&(pickerTarget?.type!=='fleet'||(isCapitalSlot?capitalShipNames.has(x.c.name):!capitalShipNames.has(x.c.name)))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(requiredCharacterSide==='Bonus'||requiredCharacterSide==='Mixed'||characterAlignmentMap[x.c.name]===requiredCharacterSide.toLowerCase().replace(' ','') )&&(pickerTarget?.type!=='special'||specialCharacterAllowed(x.c.name,specialRule))&&(!requiredChoice||requiredChoice.options.includes(x.c.name))&&(!selectedFaction||(x.c.factions||[]).some(faction=>String(faction).toLowerCase()===selectedFaction))&&(x.c.name.toLowerCase().includes(query)||(x.c.factions||[]).some(faction=>String(faction).toLowerCase().includes(query)))&&!usedImages.has(x.c.image));
  document.getElementById('characterPickerStatus').textContent=matches.length
   ?'Showing '+matches.length+' available '+itemLabel+((requiredShipSide==='Dark Side'||requiredCharacterSide==='Dark Side')?' · Dark Side only':(requiredShipSide==='Light Side'||requiredCharacterSide==='Light Side')?' · Light Side only':'')+(pickerTarget?.type==='special'&&specialRule?.faction?' · '+specialRule.faction+' only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
   :'No available '+itemLabel+' match the planet alignment or search. Items already used in this team are hidden.';
- document.getElementById('characterPickerGrid').innerHTML=(pickerTarget?.type!=='fleet'?'<button class="character-choice" onclick="selectAnyoneSlot()"><div style="width:65px;height:65px;border-radius:50%;display:grid;place-items:center;background:#203b56;border:2px solid #e7c477;color:#e7c477;font-size:14px;font-weight:800">ANY</div><span>'+'Any'+'</span></button>':'')+matches.map(x=>'<button class="character-choice '+(pickerSelections.includes(x.index)?'selected':'')+'" style="'+(pickerSelections.includes(x.index)?'border-color:var(--gold);background:#203b56;box-shadow:inset 0 0 0 1px var(--gold)':'')+'" onclick="'+(pickerTarget?.type==='fleet'?'selectCharacterPortrait('+x.index+')':'toggleCharacterSelection('+x.index+')')+'"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+(pickerSelections.includes(x.index)?'✓ ':'')+esc(x.c.name)+'</span></button>').join(''); if(pickerTarget?.type!=='fleet'){const action=document.getElementById('applyCharacterSelections');action.textContent='Add selected ('+pickerSelections.length+')';action.disabled=pickerSelections.length===0;}
+ document.getElementById('characterPickerGrid').innerHTML='<button class="character-choice" onclick="selectAnyoneSlot()"><div style="width:65px;height:65px;border-radius:50%;display:grid;place-items:center;background:#000;border:2px solid #e7c477;color:#e7c477;font-size:14px;font-weight:800">Any</div><span>Any</span></button>'+matches.map(x=>'<button class="character-choice '+(pickerSelections.includes(x.index)?'selected':'')+'" style="'+(pickerSelections.includes(x.index)?'border-color:var(--gold);background:#203b56;box-shadow:inset 0 0 0 1px var(--gold)':'')+'" onclick="'+(pickerTarget?.type==='fleet'?'selectCharacterPortrait('+x.index+')':'toggleCharacterSelection('+x.index+')')+'"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+(pickerSelections.includes(x.index)?'✓ ':'')+esc(x.c.name)+'</span></button>').join(''); if(pickerTarget?.type!=='fleet'){const action=document.getElementById('applyCharacterSelections');action.textContent='Add selected ('+pickerSelections.length+')';action.disabled=pickerSelections.length===0;}
 }
 function closeCharacterPicker(){document.getElementById('characterPicker').classList.remove('show');pickerTarget=null;pickerSelections=[];}
 function toggleCharacterSelection(index){if(!pickerTarget||pickerTarget.type==='fleet')return;const at=pickerSelections.indexOf(index);if(at>=0)pickerSelections.splice(at,1);else if(pickerSelections.length<5)pickerSelections.push(index);else{setStatus('You can select up to 5 characters at a time.','bad');return}renderCharacterPicker();}
@@ -441,18 +440,19 @@ function applyCharacterSelections(){
  setStatus('Added '+accepted.length+' character(s) in order'+(rejected.length?'; skipped '+rejected.length+' that did not fit':'')+' · saving shared guide…','good');
 }
 function selectAnyoneSlot(){
- const target=pickerTarget;if(!target||target.type==='fleet')return;
+ const target=pickerTarget;if(!target)return;
  const mission=ensurePlanet(target.planet)[target.i],rec=mission.recommendations[target.j];
- if(target.k>=missionCharacterLimit(mission,target.planet)||lockedRequiredSlot(mission,rec,target.k,target.planet)||requiredChoiceAt(mission,target.k,target.planet)){
+ if(target.type!=='fleet'&&(target.k>=missionCharacterLimit(mission,target.planet)||lockedRequiredSlot(mission,rec,target.k,target.planet)||requiredChoiceAt(mission,target.k,target.planet))){
   setStatus('This slot is reserved for a required character.','bad');return;
  }
- const names=Array.isArray(rec.names)?rec.names.slice():Array(5).fill('');
- while(names.length<5)names.push('');
+ if(target.type==='fleet'&&forcedFleetSlotLocked(mission,rec,target.k)){setStatus('This fleet slot is reserved for a forced ship.','bad');return}
+ const count=target.type==='fleet'?8:5,names=Array.isArray(rec.names)?rec.names.slice():Array(count).fill('');
+ while(names.length<count)names.push('');
  const images=recommendationImages(rec,target.type);
  names[target.k]='__ANY__';images[target.k]='';rec.names=names;rec.images=images;delete rec.image;
  const missionIndex=target.i,teamIndex=target.j;closeCharacterPicker();queueSave();renderMissions();
  const cards=document.querySelectorAll('.mission');if(cards[missionIndex]){cards[missionIndex].open=true;const teams=cards[missionIndex].querySelectorAll('.team');if(teams[teamIndex])teams[teamIndex].open=true}
- setStatus('Slot set to Anyone · saving shared guide…','');
+ setStatus('Slot set to Any · saving shared guide…','');
 }
 function selectCharacterPortrait(index){
  const character=characterCatalog[index],target=pickerTarget;if(!character||!target)return;
