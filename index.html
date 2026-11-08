@@ -13,7 +13,7 @@ main{max-width:1240px;margin:auto;padding:28px 22px 65px}.hero{margin:10px 0 26p
 <section id="detail" class="detail"><button class="btn back" onclick="goHome()">← All phases and planets</button><div class="detail-top"><span class="orb" id="detailOrb"></span><div><div class="eyebrow" id="detailPhase"></div><h2 id="detailName"></h2><p id="detailSub"></p></div></div><p class="muted">Expand a mission to see its team recommendations. Expand any team for its squad details and strategy notes.</p><div id="editNotice" class="locked">View-only mode. Officers can sign in to add or edit recommendations.</div><div class="toolbar"><p>MISSIONS &amp; TEAM RECOMMENDATIONS</p><div id="addMissionBtn" style="display:none;gap:7px;flex-wrap:wrap"><button class="btn primary" onclick="addMission('character')">＋ Character mission</button><button class="btn primary" onclick="addMission('fleet')">＋ Fleet mission 🚀</button><select class="btn" id="specialMissionToAdd" aria-label="Choose special mission" style="max-width:230px"><option value="">Choose special mission…</option></select><button class="btn primary" onclick="addSpecialMissionFromPicker()">＋ Add special mission ★</button></div></div><div class="mission-list" id="missions"></div><div id="saveStatus" class="status"></div></section>
 </main><footer>PHANTOM RoTE GUIDE · Unofficial community resource for Star Wars: Galaxy of Heroes · Planet artwork: genskaar/tb_empire (adapted from jetkokos/tb_geo) · Character portraits: <a href="https://game-assets.swgoh.gg/" target="_blank" rel="noopener" style="color:inherit">SWGOH game assets</a></footer>
 <div class="login-panel" id="loginPanel"><div class="login-box"><h3>Officer sign in</h3><p class="muted" style="font-size:12px">Use the email and password created for you by the guide administrator.</p><form onsubmit="login(event)"><label>Email</label><input id="email" type="email" required autocomplete="username"><label>Password</label><input id="password" type="password" required autocomplete="current-password"><div class="actions"><button class="btn primary" type="submit">Sign in</button><button class="btn" type="button" onclick="hideLogin()">Cancel</button></div></form><div id="loginError" class="status bad"></div></div></div>
-<div class="picker-panel" id="characterPicker" onclick="if(event.target===this)closeCharacterPicker()"><div class="picker-box"><div class="picker-head"><div><h3 id="pickerTitle">Choose a character</h3><p id="pickerDescription">Search the SWGOH character roster and click a portrait to fill this slot.</p></div><button class="btn" onclick="closeCharacterPicker()">Close</button></div><input id="characterSearch" type="search" placeholder="Search characters — e.g. Maul, Ahsoka, Vader" oninput="renderCharacterPicker()"><div id="characterPickerStatus" class="picker-status">Loading character portraits…</div><div id="characterPickerGrid" class="character-picker-grid"></div></div></div>
+<div class="picker-panel" id="characterPicker" onclick="if(event.target===this)closeCharacterPicker()"><div class="picker-box"><div class="picker-head"><div><h3 id="pickerTitle">Choose a character</h3><p id="pickerDescription">Search the SWGOH character roster and click a portrait to fill this slot.</p></div><button class="btn" onclick="closeCharacterPicker()">Close</button></div><input id="characterSearch" type="search" placeholder="Search characters — e.g. Maul, Ahsoka, Vader" oninput="renderCharacterPicker()"><div id="characterPickerStatus" class="picker-status">Loading character portraits…</div><div id="characterPickerGrid" class="character-picker-grid"></div><div id="pickerBatchActions" style="display:none;justify-content:flex-end;gap:8px;padding-top:12px;border-top:1px solid var(--line);margin-top:8px"><button class="btn" onclick="clearCharacterSelections()">Clear selection</button><button class="btn primary" id="applyCharacterSelections" onclick="applyCharacterSelections()" disabled>Add selected (0)</button></div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* Add your Supabase Project URL and anon/public key after creating the project.
@@ -42,7 +42,7 @@ const phases=[
 const bonus=[['Zeffo','Phase 3 Bonus Zone'],['Mandalore','Phase 4 Bonus Zone']];
 const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false;
-let characterCatalog=[],characterCatalogPromise=null,characterAlignmentMap={},characterAlignmentPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null;
+let characterCatalog=[],characterCatalogPromise=null,characterAlignmentMap={},characterAlignmentPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null,pickerSelections=[];
 
 // Verified Rise of the Empire special-mission restrictions. Faction members are
 // matched against the character roster by exact in-game unit name.
@@ -293,10 +293,10 @@ async function openCharacterPicker(i,j,k){
  const type=missionType(mission);
  const rule=type==='special'?specialRuleForMission(ensurePlanet(current)[i]):null;
  if(type!=='fleet'&&k>=missionCharacterLimit(mission,current)){setStatus('This mission allows a maximum of '+missionCharacterLimit(mission,current)+' character(s).','bad');return;}
- pickerTarget={planet:current,i,j,k,type};
+ pickerTarget={planet:current,i,j,k,type};pickerSelections=[];document.getElementById('pickerBatchActions').style.display=type==='fleet'?'none':'flex';
  const panel=document.getElementById('characterPicker'),search=document.getElementById('characterSearch'),status=document.getElementById('characterPickerStatus');
  document.getElementById('pickerTitle').textContent=type==='fleet'?'Choose a ship':'Choose a character';
- document.getElementById('pickerDescription').textContent=type==='fleet'?'Search the SWGOH ship roster and click a ship to fill this slot.':'Search the SWGOH character roster and click a portrait to fill this slot.';
+ document.getElementById('pickerDescription').textContent=type==='fleet'?'Search the SWGOH ship roster and click a ship to fill this slot.':'Select up to 5 characters. They will be placed left to right, starting with the slot you opened.';
  search.placeholder=type==='fleet'?'Search ships — e.g. Executor, X-wing, Falcon':'Search characters — e.g. Maul, Ahsoka, Vader';
  panel.classList.add('show');search.value='';status.textContent='Loading '+(type==='fleet'?'ship':'character')+' portraits…';document.getElementById('characterPickerGrid').innerHTML='';
  try{
@@ -323,9 +323,31 @@ function renderCharacterPicker(){
  document.getElementById('characterPickerStatus').textContent=matches.length
   ?'Showing '+matches.length+' available '+itemLabel+((requiredShipSide==='Dark Side'||requiredCharacterSide==='Dark Side')?' · Dark Side only':(requiredShipSide==='Light Side'||requiredCharacterSide==='Light Side')?' · Light Side only':'')+(pickerTarget?.type==='special'&&specialRule?.faction?' · '+specialRule.faction+' only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
   :'No available '+itemLabel+' match the planet alignment or search. Items already used in this team are hidden.';
- document.getElementById('characterPickerGrid').innerHTML=(pickerTarget?.type!=='fleet'?'<button class="character-choice" onclick="selectAnyoneSlot()"><div style="width:65px;height:65px;border-radius:50%;display:grid;place-items:center;background:#203b56;border:2px solid #e7c477;color:#e7c477;font-size:14px;font-weight:800">ANY</div><span>'+(pickerTarget?.type==='special'?'Any eligible character':'Anyone')+'</span></button>':'')+matches.map(x=>'<button class="character-choice" onclick="selectCharacterPortrait('+x.index+')"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+esc(x.c.name)+'</span></button>').join('');
+ document.getElementById('characterPickerGrid').innerHTML=(pickerTarget?.type!=='fleet'?'<button class="character-choice" onclick="selectAnyoneSlot()"><div style="width:65px;height:65px;border-radius:50%;display:grid;place-items:center;background:#203b56;border:2px solid #e7c477;color:#e7c477;font-size:14px;font-weight:800">ANY</div><span>'+(pickerTarget?.type==='special'?'Any eligible character':'Anyone')+'</span></button>':'')+matches.map(x=>'<button class="character-choice '+(pickerSelections.includes(x.index)?'selected':'')+'" style="'+(pickerSelections.includes(x.index)?'border-color:var(--gold);background:#203b56;box-shadow:inset 0 0 0 1px var(--gold)':'')+'" onclick="'+(pickerTarget?.type==='fleet'?'selectCharacterPortrait('+x.index+')':'toggleCharacterSelection('+x.index+')')+'"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+(pickerSelections.includes(x.index)?'✓ ':'')+esc(x.c.name)+'</span></button>').join(''); if(pickerTarget?.type!=='fleet'){const action=document.getElementById('applyCharacterSelections');action.textContent='Add selected ('+pickerSelections.length+')';action.disabled=pickerSelections.length===0;}
 }
-function closeCharacterPicker(){document.getElementById('characterPicker').classList.remove('show');pickerTarget=null}
+function closeCharacterPicker(){document.getElementById('characterPicker').classList.remove('show');pickerTarget=null;pickerSelections=[];}
+function toggleCharacterSelection(index){if(!pickerTarget||pickerTarget.type==='fleet')return;const at=pickerSelections.indexOf(index);if(at>=0)pickerSelections.splice(at,1);else if(pickerSelections.length<5)pickerSelections.push(index);else{setStatus('You can select up to 5 characters at a time.','bad');return}renderCharacterPicker();}
+function clearCharacterSelections(){pickerSelections=[];renderCharacterPicker();}
+function applyCharacterSelections(){
+ const target=pickerTarget;if(!target||target.type==='fleet'||!pickerSelections.length)return;
+ const mission=ensurePlanet(target.planet)[target.i],rec=mission.recommendations[target.j],type=target.type,images=recommendationImages(rec,type),names=Array.isArray(rec.names)?rec.names.slice():Array(5).fill('');
+ while(names.length<5)names.push('');
+ const slots=[target.k];for(let k=target.k+1;k<missionCharacterLimit(mission,target.planet);k++){if(!images[k]&&!lockedRequiredSlot(mission,rec,k,target.planet))slots.push(k);}
+ const accepted=[],rejected=[];let next=0;
+ for(const index of pickerSelections){const character=characterCatalog[index];if(!character)continue;let placed=false;
+  while(next<slots.length){const slot=slots[next++],choice=requiredChoiceAt(mission,slot,target.planet),side=planetAlignment(target.planet),actual=characterAlignmentMap[character.name];
+   if(choice&&!choice.options.includes(character.name))continue;
+   if(type==='special'&&!specialCharacterAllowed(character.name,specialRuleForMission(mission,target.planet)))continue;
+   if(type==='character'&&(side==='Dark Side'||side==='Light Side')&&actual!==side.toLowerCase().replace(' ',''))continue;
+   if(images.some((url,k)=>k!==slot&&url===character.image))continue;
+   images[slot]=character.image;names[slot]=character.name;if(Array.isArray(rec.omicrons))rec.omicrons[slot]=false;accepted.push(character.name);placed=true;break;
+  }
+  if(!placed)rejected.push(character.name);
+ }
+ if(!accepted.length){setStatus('None of the selected characters fit the available slots or mission restrictions.','bad');return;}
+ rec.images=images;rec.names=names;delete rec.image;const mi=target.i,ti=target.j;closeCharacterPicker();queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[mi]){cards[mi].open=true;const teams=cards[mi].querySelectorAll('.team');if(teams[ti])teams[ti].open=true}
+ setStatus('Added '+accepted.length+' character(s) in order'+(rejected.length?'; skipped '+rejected.length+' that did not fit':'')+' · saving shared guide…','good');
+}
 function selectAnyoneSlot(){
  const target=pickerTarget;if(!target||target.type==='fleet')return;
  const mission=ensurePlanet(target.planet)[target.i],rec=mission.recommendations[target.j];
