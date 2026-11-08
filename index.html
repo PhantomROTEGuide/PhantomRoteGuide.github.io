@@ -151,6 +151,12 @@ function requiredAnyChoice(m,planet=current){
 function requiredCharacterAt(m,slot,planet=current){
  return requiredMissionCharacters(m,planet)[slot]||null;
 }
+function missionCharacterLimit(m,planet=current){
+ const title=String(m?.title||'').toLowerCase();
+ if((planet==='Mustafar'&&title.includes('lord vader'))||(planet==='Death Star'&&title.includes('darth vader')))return 1;
+ const rule=missionType(m)==='special'?specialRuleForMission(m,planet):null;
+ return rule?.maxUnits||5;
+}
 function requiredChoiceAt(m,slot,planet=current){
  const choice=requiredAnyChoice(m,planet);
  return choice&&choice.index===slot?choice:null;
@@ -232,14 +238,14 @@ function renderTeam(i,j,r){
  const slotNames=isFleet?['Capital Ship','Starting Ship','Starting Ship','Starting Ship','Reinforcement','Reinforcement','Reinforcement','Reinforcement']:images.map((_,k)=>requiredCharacterAt(mission,k,current)?'Required · '+requiredCharacterAt(mission,k,current):requiredChoiceAt(mission,k,current)?'Required choice':'Slot '+(k+1));
  const specialRule=type==='special'?specialRuleForMission(mission):null;
  const renderSlots=(start,end,title)=>'<div class="fleet-slot-group"><div class="fleet-slot-heading">'+title+'</div><div class="portrait-grid">'+images.slice(start,end).map((url,offset)=>{
-  const k=start+offset,label=slotNames[k],requiredName=!isFleet?requiredCharacterAt(mission,k,current):null,choice= !isFleet?requiredChoiceAt(mission,k,current):null,leaderLocked=!isFleet&&!!requiredName,choiceLocked=!!(choice&&choice.options.includes((r.names||[])[k])),slotLocked=type==='special'&&specialRule?.maxUnits&&k>=specialRule.maxUnits;
+  const k=start+offset,label=slotNames[k],requiredName=!isFleet?requiredCharacterAt(mission,k,current):null,choice= !isFleet?requiredChoiceAt(mission,k,current):null,leaderLocked=!isFleet&&!!requiredName,choiceLocked=!!(choice&&choice.options.includes((r.names||[])[k])),slotLocked=!isFleet&&k>=missionCharacterLimit(mission,current);
   return '<div class="portrait-slot"><div class="portrait-circle">'+(url?'<img src="'+esc(url)+'" alt="'+esc(label)+'">':'＋')+'</div><span class="portrait-number">'+esc(label)+'</span>'+(isEditor?(leaderLocked?'<span class="portrait-number">Locked · '+esc(requiredName)+'</span>':choiceLocked?'<span class="portrait-number">Locked · Required</span>':choice?'<span class="portrait-number">Choose one required character</span><button class="btn pick-character" onclick="openCharacterPicker('+i+','+j+','+k+')">Choose required</button>':slotLocked?(url?'<div class="portrait-actions"><button class="btn danger" onclick="removeTeamImage('+i+','+j+','+k+')">Remove</button></div>':'<span class="portrait-number">Not used · 3 max</span>'):'<button class="btn pick-character" onclick="openCharacterPicker('+i+','+j+','+k+')">Choose '+(isFleet?'ship':'character')+'</button><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" aria-label="Upload '+esc(label)+' portrait" data-team-upload="'+i+','+j+','+k+'"><div class="portrait-actions">'+(url?'<button class="btn danger" onclick="removeTeamImage('+i+','+j+','+k+')">Remove</button>':'')+'</div>'):'')+'</div>';
  }).join('')+'</div></div>';
  const portraits=isFleet?'<div class="fleet-top-row">'+renderSlots(0,1,'Capital Ship')+renderSlots(1,4,'Starting Ships')+'</div>'+renderSlots(4,8,'Reinforcements'):renderSlots(0,5,type==='special'?'Special Mission Squad':'Character Squad');
  return '<details class="team"><summary><span class="chev">›</span><span class="team-title">'+esc(r.title||'Untitled team')+'</span><span class="team-hint">View strategy</span></summary><div class="team-body">'+(isEditor?'<label class="field">Recommendation title</label><input value="'+esc(r.title)+'" onchange="changeRec('+i+','+j+',\'title\',this.value)">':'')+'<label class="field">'+(isFleet?'Fleet composition · 1 capital ship, 3 starting ships, 4 reinforcements':type==='special'?'Special mission squad · 5 picture slots':'Character portraits · 5 picture slots')+'</label>'+(type==='special'?'<div class="locked">'+esc(specialRuleText(specialRule))+' · '+esc(specialTeamStatus(r,specialRule))+'</div>':'')+portraits+'<label class="field">Notes / strategy</label><textarea '+(!isEditor?'readonly':'')+' onchange="changeRec('+i+','+j+',\'notes\',this.value)" placeholder="Strategy, turn order, ability use, battle tips">'+esc(r.notes)+'</textarea>'+(isEditor?'<div class="team-controls"><button class="btn danger" onclick="removeTeam('+i+','+j+')">Delete recommendation</button></div>':'')+'</div></details>';
 }
 async function uploadTeamImage(i,j,k,input){
- const mission=ensurePlanet(current)[i];if(lockedRequiredSlot(mission,mission.recommendations[j],k,current)||requiredChoiceAt(mission,k,current)){setStatus('This required character slot must be filled using the character picker.','bad');input.value='';return}
+ const mission=ensurePlanet(current)[i];if(k>=missionCharacterLimit(mission,current)||lockedRequiredSlot(mission,mission.recommendations[j],k,current)||requiredChoiceAt(mission,k,current)){setStatus('This required character slot must be filled using the character picker.','bad');input.value='';return}
  const file=input.files&&input.files[0];
  if(!file)return;
  setStatus('Selected '+file.name+' · checking upload…','');
@@ -273,7 +279,7 @@ async function openCharacterPicker(i,j,k){
  const mission=ensurePlanet(current)[i];if(lockedRequiredSlot(mission,mission.recommendations[j],k,current)){setStatus('This required character slot is locked.','bad');return}
  const type=missionType(mission);
  const rule=type==='special'?specialRuleForMission(ensurePlanet(current)[i]):null;
- if(type==='special'&&rule?.maxUnits&&k>=rule.maxUnits){setStatus('This special mission allows a maximum of '+rule.maxUnits+' characters.','bad');return;}
+ if(type!=='fleet'&&k>=missionCharacterLimit(mission,current)){setStatus('This mission allows a maximum of '+missionCharacterLimit(mission,current)+' character(s).','bad');return;}
  pickerTarget={planet:current,i,j,k,type};
  const panel=document.getElementById('characterPicker'),search=document.getElementById('characterSearch'),status=document.getElementById('characterPickerStatus');
  document.getElementById('pickerTitle').textContent=type==='fleet'?'Choose a ship':'Choose a character';
@@ -309,6 +315,7 @@ function renderCharacterPicker(){
 function closeCharacterPicker(){document.getElementById('characterPicker').classList.remove('show');pickerTarget=null}
 function selectCharacterPortrait(index){
  const character=characterCatalog[index],target=pickerTarget;if(!character||!target)return;
+ if(target.type!=='fleet'&&target.k>=missionCharacterLimit(ensurePlanet(target.planet)[target.i],target.planet)){setStatus('This mission does not use that character slot.','bad');return}
  if(lockedRequiredSlot(ensurePlanet(target.planet)[target.i],ensurePlanet(target.planet)[target.i].recommendations[target.j],target.k,target.planet)){setStatus('This required character slot is locked.','bad');return}
  if(target.type==='fleet'){
   if(target.k===0&&!capitalShipNames.has(character.name)){
