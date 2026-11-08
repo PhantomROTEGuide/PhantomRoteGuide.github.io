@@ -235,7 +235,7 @@ function renderMissions(){const list=ensurePlanet(current),root=document.getElem
 function recommendationImages(r,type='character'){const count=type==='fleet'?8:5;const images=Array.isArray(r.images)?r.images.slice(0,count):[r.image||''];while(images.length<count)images.push('');return images}
 function renderTeam(i,j,r){
  const mission=ensurePlanet(current)[i],type=missionType(mission),isFleet=type==='fleet',images=recommendationImages(r,type),forcedLeader=forcedLeaderForMission(mission,current),requiredChoice=requiredAnyChoice(mission,current);
- const slotNames=isFleet?['Capital Ship','Starting Ship','Starting Ship','Starting Ship','Reinforcement','Reinforcement','Reinforcement','Reinforcement']:images.map((_,k)=>requiredCharacterAt(mission,k,current)?'Required · '+requiredCharacterAt(mission,k,current):requiredChoiceAt(mission,k,current)?'Required choice':'Slot '+(k+1));
+ const slotNames=isFleet?['Capital Ship','Starting Ship','Starting Ship','Starting Ship','Reinforcement','Reinforcement','Reinforcement','Reinforcement']:images.map((_,k)=>requiredCharacterAt(mission,k,current)?'Required · '+requiredCharacterAt(mission,k,current):requiredChoiceAt(mission,k,current)?'Required choice':r.names?.[k]==='__ANY__'?'Anyone':'Slot '+(k+1));
  const specialRule=type==='special'?specialRuleForMission(mission):null;
  const renderSlots=(start,end,title)=>'<div class="fleet-slot-group"><div class="fleet-slot-heading">'+title+'</div><div class="portrait-grid">'+images.slice(start,end).map((url,offset)=>{
   const k=start+offset,label=slotNames[k],requiredName=!isFleet?requiredCharacterAt(mission,k,current):null,choice= !isFleet?requiredChoiceAt(mission,k,current):null,leaderLocked=!isFleet&&!!requiredName,choiceLocked=!!(choice&&choice.options.includes((r.names||[])[k])),slotLocked=!isFleet&&k>=missionCharacterLimit(mission,current);
@@ -264,7 +264,7 @@ async function uploadTeamImage(i,j,k,input){
   const result=await db.storage.from('team-recommendations').upload(path,file,{upsert:false,contentType:file.type});
   if(result.error)throw result.error;
   const publicData=db.storage.from('team-recommendations').getPublicUrl(path);
-  images[k]=publicData.data.publicUrl;rec.images=images;delete rec.image;
+  images[k]=publicData.data.publicUrl;rec.images=images;if(Array.isArray(rec.names))rec.names[k]='';delete rec.image;
   queueSave();renderMissions();
   const cards=document.querySelectorAll('.mission');
   if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true;}
@@ -310,9 +310,23 @@ function renderCharacterPicker(){
  document.getElementById('characterPickerStatus').textContent=matches.length
   ?'Showing '+matches.length+' available '+itemLabel+((requiredShipSide==='Dark Side'||requiredCharacterSide==='Dark Side')?' · Dark Side only':(requiredShipSide==='Light Side'||requiredCharacterSide==='Light Side')?' · Light Side only':'')+(pickerTarget?.type==='special'&&specialRule?.faction?' · '+specialRule.faction+' only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
   :'No available '+itemLabel+' match the planet alignment or search. Items already used in this team are hidden.';
- document.getElementById('characterPickerGrid').innerHTML=matches.map(x=>'<button class="character-choice" onclick="selectCharacterPortrait('+x.index+')"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+esc(x.c.name)+'</span></button>').join('');
+ document.getElementById('characterPickerGrid').innerHTML=(pickerTarget?.type!=='fleet'?'<button class="character-choice" onclick="selectAnyoneSlot()"><div style="width:65px;height:65px;border-radius:50%;display:grid;place-items:center;background:#203b56;border:2px solid #e7c477;color:#e7c477;font-size:14px;font-weight:800">ANY</div><span>'+(pickerTarget?.type==='special'?'Any eligible character':'Anyone')+'</span></button>':'')+matches.map(x=>'<button class="character-choice" onclick="selectCharacterPortrait('+x.index+')"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+esc(x.c.name)+'</span></button>').join('');
 }
 function closeCharacterPicker(){document.getElementById('characterPicker').classList.remove('show');pickerTarget=null}
+function selectAnyoneSlot(){
+ const target=pickerTarget;if(!target||target.type==='fleet')return;
+ const mission=ensurePlanet(target.planet)[target.i],rec=mission.recommendations[target.j];
+ if(target.k>=missionCharacterLimit(mission,target.planet)||lockedRequiredSlot(mission,rec,target.k,target.planet)||requiredChoiceAt(mission,target.k,target.planet)){
+  setStatus('This slot is reserved for a required character.','bad');return;
+ }
+ const names=Array.isArray(rec.names)?rec.names.slice():Array(5).fill('');
+ while(names.length<5)names.push('');
+ const images=recommendationImages(rec,target.type);
+ names[target.k]='__ANY__';images[target.k]='';rec.names=names;rec.images=images;delete rec.image;
+ const missionIndex=target.i,teamIndex=target.j;closeCharacterPicker();queueSave();renderMissions();
+ const cards=document.querySelectorAll('.mission');if(cards[missionIndex]){cards[missionIndex].open=true;const teams=cards[missionIndex].querySelectorAll('.team');if(teams[teamIndex])teams[teamIndex].open=true}
+ setStatus('Slot set to Anyone · saving shared guide…','');
+}
 function selectCharacterPortrait(index){
  const character=characterCatalog[index],target=pickerTarget;if(!character||!target)return;
  if(target.type!=='fleet'&&target.k>=missionCharacterLimit(ensurePlanet(target.planet)[target.i],target.planet)){setStatus('This mission does not use that character slot.','bad');return}
