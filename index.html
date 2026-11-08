@@ -397,23 +397,41 @@ function closeCharacterPicker(){document.getElementById('characterPicker').class
 function toggleCharacterSelection(index){if(!pickerTarget||pickerTarget.type==='fleet')return;const at=pickerSelections.indexOf(index);if(at>=0)pickerSelections.splice(at,1);else if(pickerSelections.length<5)pickerSelections.push(index);else{setStatus('You can select up to 5 characters at a time.','bad');return}renderCharacterPicker();}
 function clearCharacterSelections(){pickerSelections=[];renderCharacterPicker();}
 function applyCharacterSelections(){
- const target=pickerTarget;if(!target||target.type==='fleet'||!pickerSelections.length)return;
- const mission=ensurePlanet(target.planet)[target.i],rec=mission.recommendations[target.j],type=target.type,images=recommendationImages(rec,type),names=Array.isArray(rec.names)?rec.names.slice():Array(5).fill('');
+ const target=pickerTarget;
+ if(!target||target.type==='fleet'||!pickerSelections.length)return;
+ const selected=[...pickerSelections],mission=ensurePlanet(target.planet)[target.i],rec=mission.recommendations[target.j],type=target.type;
+ const images=recommendationImages(rec,type),names=Array.isArray(rec.names)?rec.names.slice():Array(5).fill('');
  while(names.length<5)names.push('');
- const slots=[target.k];for(let k=target.k+1;k<missionCharacterLimit(mission,target.planet);k++){if(!images[k]&&!lockedRequiredSlot(mission,rec,k,target.planet))slots.push(k);}
+ const limit=missionCharacterLimit(mission,target.planet),slots=[];
+ for(let k=target.k;k<limit;k++){
+  if(k===target.k||(!images[k]&&!lockedRequiredSlot(mission,rec,k,target.planet)))slots.push(k);
+ }
  const accepted=[],rejected=[];let next=0;
- for(const index of pickerSelections){const character=characterCatalog[index];if(!character)continue;let placed=false;
-  while(next<slots.length){const slot=slots[next++],choice=requiredChoiceAt(mission,slot,target.planet),side=planetAlignment(target.planet),actual=characterAlignmentMap[character.name];
+ for(const index of selected){
+  const character=characterCatalog[index];
+  if(!character){rejected.push('Unknown selection');continue}
+  let placed=false;
+  while(next<slots.length){
+   const slot=slots[next++],choice=requiredChoiceAt(mission,slot,target.planet),side=planetAlignment(target.planet),actual=characterAlignmentMap[character.name];
    if(choice&&!choice.options.includes(character.name))continue;
    if(type==='special'&&!specialCharacterAllowed(character.name,specialRuleForMission(mission,target.planet)))continue;
+   if(type==='character'&&mission.forcedFaction&&!(character.factions||[]).some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase()))continue;
    if(type==='character'&&(side==='Dark Side'||side==='Light Side')&&actual!==side.toLowerCase().replace(' ',''))continue;
    if(images.some((url,k)=>k!==slot&&url===character.image))continue;
-   images[slot]=character.image;names[slot]=character.name;if(Array.isArray(rec.omicrons))rec.omicrons[slot]=false;accepted.push(character.name);placed=true;break;
+   images[slot]=character.image;names[slot]=character.name;
+   if(Array.isArray(rec.omicrons))rec.omicrons[slot]=false;
+   accepted.push(character.name);placed=true;break;
   }
   if(!placed)rejected.push(character.name);
  }
  if(!accepted.length){setStatus('None of the selected characters fit the available slots or mission restrictions.','bad');return;}
- rec.images=images;rec.names=names;delete rec.image;const mi=target.i,ti=target.j;closeCharacterPicker();queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[mi]){cards[mi].open=true;const teams=cards[mi].querySelectorAll('.team');if(teams[ti])teams[ti].open=true}
+ rec.images=images.slice(0,5);rec.names=names.slice(0,5);delete rec.image;
+ const mi=target.i,ti=target.j,planet=target.planet;
+ queueSave();
+ closeCharacterPicker();
+ renderMissions();
+ const cards=document.querySelectorAll('.mission');
+ if(cards[mi]){cards[mi].open=true;const teams=cards[mi].querySelectorAll('.team');if(teams[ti])teams[ti].open=true}
  setStatus('Added '+accepted.length+' character(s) in order'+(rejected.length?'; skipped '+rejected.length+' that did not fit':'')+' · saving shared guide…','good');
 }
 function selectAnyoneSlot(){
