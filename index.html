@@ -38,7 +38,6 @@ function selectedTBOmicrons(rec,slot,name){
  if(saved.length)return saved.filter(x=>available.includes(x));
  return rec.omicrons?.[slot]&&available.length?[available[0]]:[];
 }
-function characterHasTBOmicron(name){return typeof name==='string'&&territoryBattleOmicronCharacters.has(name)}
 const phases=[
 [1,'Territory Zones',[['Mustafar','Dark Side'],['Corellia','Mixed'],['Coruscant','Light Side']]],
 [2,'Territory Zones',[['Geonosis','Dark Side'],['Felucia','Mixed'],['Bracca','Light Side']]],
@@ -544,7 +543,7 @@ function toggleOmicronAbility(i,j,k,ability,checked){
   const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
   setStatus((checked?'Omicron ability selected':'Omicron ability cleared')+' · saving shared guide…','');
 }
-function removeTeamImage(i,j,k){if(forcedFleetSlotLocked(ensurePlanet(current)[i],ensurePlanet(current)[i].recommendations[j],k)){setStatus('This forced fleet slot is locked.','bad');return}if(lockedRequiredSlot(ensurePlanet(current)[i],ensurePlanet(current)[i].recommendations[j],k,current)){setStatus('This required character slot is locked.','bad');return}const rec=ensurePlanet(current)[i].recommendations[j];const images=recommendationImages(rec,missionType(ensurePlanet(current)[i]));images[k]='';rec.images=images;if(Array.isArray(rec.omicrons))rec.omicrons[k]=false;if(Array.isArray(rec.names)){rec.names[k]='';rec.names=rec.names}delete rec.image;queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}}
+function removeTeamImage(i,j,k){if(forcedFleetSlotLocked(ensurePlanet(current)[i],ensurePlanet(current)[i].recommendations[j],k)){setStatus('This forced fleet slot is locked.','bad');return}if(lockedRequiredSlot(ensurePlanet(current)[i],ensurePlanet(current)[i].recommendations[j],k,current)){setStatus('This required character slot is locked.','bad');return}const rec=ensurePlanet(current)[i].recommendations[j];const images=recommendationImages(rec,missionType(ensurePlanet(current)[i]));images[k]='';rec.images=images;if(Array.isArray(rec.omicrons))rec.omicrons[k]=false;if(Array.isArray(rec.omicronAbilities))rec.omicronAbilities[k]=[];if(Array.isArray(rec.names)){rec.names[k]='';rec.names=rec.names}delete rec.image;queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}}
 function queueSave(){dirty=true;setStatus('Changes pending…','');clearTimeout(saveTimer);saveTimer=setTimeout(saveShared,450)}
 function setStatus(msg,kind){const el=document.getElementById('saveStatus');el.textContent=msg;el.className='status '+(kind||'')}
 function changeMissionTitle(i,v){ensurePlanet(current)[i].title=v;queueSave();renderMissions()}
