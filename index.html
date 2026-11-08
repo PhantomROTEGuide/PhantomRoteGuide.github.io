@@ -55,7 +55,8 @@ const specialMissionRules={
  ],
  'Haven Medical Station':[{id:'third-sister',name:'Third Sister Special Mission',description:'Inquisitorius · Third Sister required',faction:'Inquisitorius',requiredAll:['Third Sister'],requiredCount:5,forcedLeader:'Third Sister'}],
  'Kessel':[{id:'qira-l3',name:"Qi'ra + L3-37 Special Mission",description:"5 characters · Qi'ra and L3-37 required",requiredAll:["Qi'ra",'L3-37'],teamSize:5}],
- 'Vandor':[{id:'younghan-vandor',name:'Young Han + Vandor Chewbacca Special Mission',description:'5 characters · Young Han Solo and Vandor Chewbacca required',requiredAll:['Young Han Solo','Vandor Chewbacca'],teamSize:5}]
+ 'Vandor':[{id:'younghan-vandor',name:'Young Han + Vandor Chewbacca Special Mission',description:'5 characters · Young Han Solo and Vandor Chewbacca required',requiredAll:['Young Han Solo','Vandor Chewbacca'],teamSize:5}],
+ 'Hoth':[{id:'aphra-droids',name:'Doctor Aphra / BT-1 / 0-0-0 Special Mission',description:'Doctor Aphra, BT-1, and 0-0-0 required',requiredAll:['Doctor Aphra','BT-1','0-0-0'],forcedLeader:'Doctor Aphra'}]
 };
 const forcedLeaderPortraits={
  'Lord Vader':'https://game-assets.swgoh.gg/textures/tex.charui_lordvader.png',
@@ -70,8 +71,28 @@ const forcedLeaderPortraits={
  'Third Sister':'https://game-assets.swgoh.gg/textures/tex.charui_thirdsister.png',
  'Jedi Knight Cal Kestis':'https://game-assets.swgoh.gg/textures/tex.charui_jediknightcal.png',
  'Dark Trooper Moff Gideon':'https://game-assets.swgoh.gg/textures/tex.charui_moffgideons3.png',
- 'Darth Vader':'https://game-assets.swgoh.gg/textures/tex.charui_vader.png'
-};
+ 'Darth Vader':'https://game-assets.swgoh.gg/textures/tex.charui_vader.png',
+ 'Young Han Solo':'https://game-assets.swgoh.gg/textures/tex.charui_han_young.png',
+ 'L3-37':'https://game-assets.swgoh.gg/textures/tex.charui_l337.png',
+ 'Vandor Chewbacca':'https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_vandor.png',
+ 'Cal Kestis':'https://game-assets.swgoh.gg/textures/tex.charui_calkestis.png',
+ 'Kit Fisto':'https://game-assets.swgoh.gg/textures/tex.charui_kitfisto.png',
+ 'Young Lando Calrissian':'https://game-assets.swgoh.gg/textures/tex.charui_younglando.png',
+ 'Hondo Ohnaka':'https://game-assets.swgoh.gg/textures/tex.charui_hondoohnaka.png',
+ 'Fennec Shand':'https://game-assets.swgoh.gg/textures/tex.charui_fennec.png',
+ 'Eighth Brother':'https://game-assets.swgoh.gg/textures/tex.charui_eighthbrother.png',
+ 'Fifth Brother':'https://game-assets.swgoh.gg/textures/tex.charui_fifthbrother.png',
+ 'Seventh Sister':'https://game-assets.swgoh.gg/textures/tex.charui_seventhsister.png',
+ 'Cassian Andor':'https://game-assets.swgoh.gg/textures/tex.charui_cassian.png',
+ 'K-2SO':'https://game-assets.swgoh.gg/textures/tex.charui_k2so.png',
+ 'Iden Versio':'https://game-assets.swgoh.gg/textures/tex.charui_idenversioempire.png',
+ 'BT-1':'https://game-assets.swgoh.gg/textures/tex.charui_bt1.png',
+ '0-0-0':'https://game-assets.swgoh.gg/textures/tex.charui_triplezero.png',
+ 'Baze Malbus':'https://game-assets.swgoh.gg/textures/tex.charui_bazemalbus.png',
+ 'Chirrut Îmwe':'https://game-assets.swgoh.gg/textures/tex.charui_chirrut.png',
+ 'Scarif Rebel Pathfinder':'https://game-assets.swgoh.gg/textures/tex.charui_rebel_scarif.png',
+ 'Pao':'https://game-assets.swgoh.gg/textures/tex.charui_pao.png',
+ 'Merrin':'https://game-assets.swgoh.gg/textures/tex.charui_merrin.png'
 const forcedLeaderChoices=Object.keys(forcedLeaderPortraits);
 function forcedLeaderForMission(m,planet=current){
  if(!m||missionType(m)==='fleet')return null;
@@ -230,7 +251,7 @@ function renderTeam(i,j,r){
  return '<details class="team"><summary><span class="chev">›</span><span class="team-title">'+esc(r.title||'Untitled team')+'</span><span class="team-hint">View strategy</span></summary><div class="team-body">'+(isEditor?'<label class="field">Recommendation title</label><input value="'+esc(r.title)+'" onchange="changeRec('+i+','+j+',\'title\',this.value)">':'')+'<label class="field">'+(isFleet?'Fleet composition · 1 capital ship, 3 starting ships, 4 reinforcements':type==='special'?'Special mission squad · 5 picture slots':'Character portraits · 5 picture slots')+'</label>'+(type==='special'?'<div class="locked">'+esc(specialRuleText(specialRule))+' · '+esc(specialTeamStatus(r,specialRule))+'</div>':'')+portraits+'<label class="field">Notes / strategy</label><textarea '+(!isEditor?'readonly':'')+' onchange="changeRec('+i+','+j+',\'notes\',this.value)" placeholder="Strategy, turn order, ability use, battle tips">'+esc(r.notes)+'</textarea>'+(isEditor?'<div class="team-controls"><button class="btn danger" onclick="removeTeam('+i+','+j+')">Delete recommendation</button></div>':'')+'</div></details>';
 }
 async function uploadTeamImage(i,j,k,input){
- const mission=ensurePlanet(current)[i];if(lockedRequiredSlot(mission,mission.recommendations[j],k,current)){setStatus('This required character slot is locked.','bad');input.value='';return}
+ const mission=ensurePlanet(current)[i];if(lockedRequiredSlot(mission,mission.recommendations[j],k,current)||requiredChoiceAt(mission,k,current)){setStatus('This required character slot must be filled using the character picker.','bad');input.value='';return}
  const file=input.files&&input.files[0];
  if(!file)return;
  setStatus('Selected '+file.name+' · checking upload…','');
