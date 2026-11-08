@@ -598,6 +598,7 @@ function editTeamOmicronSelections(i,j,event){
  const missionStates=[...document.querySelectorAll('.mission')].map(el=>el.open);renderMissions();
  const cards=document.querySelectorAll('.mission');cards.forEach((el,index)=>{if(missionStates[index])el.open=true});
  if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
+ positionOmicronPopups();
 }
 function toggleOmicronAbility(i,j,k,ability,checked){
   const mission=ensurePlanet(current)[i];if(missionType(mission)==='fleet')return;
