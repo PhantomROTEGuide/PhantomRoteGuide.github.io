@@ -286,5 +286,9 @@
   {
     "name": "Weequay Saboteur",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_weequaysaboteur.png"
+  },
+  {
+    "name": "Tomb Guardian",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zeffotombguardian.png"
   }
 ]
