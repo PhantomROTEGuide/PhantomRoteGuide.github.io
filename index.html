@@ -16,9 +16,9 @@ main{max-width:1240px;margin:auto;padding:28px 22px 65px}.hero{margin:10px 0 26p
 .portrait-grid{position:relative;overflow:visible;align-items:flex-start}
 .portrait-slot{position:relative;z-index:1;flex:0 0 76px;width:76px}
 .portrait-slot:has(.omicron-picker){z-index:8;width:76px}
-.portrait-slot:has(.omicron-picker) .omicron-picker{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);width:168px;max-width:min(168px,calc(100vw - 40px));max-height: min(55vh,420px);overflow-y:auto;z-index:20}
+.portrait-slot:has(.omicron-picker) .omicron-picker{position:absolute;top:auto;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:168px;max-width:min(168px,calc(100vw - 40px));max-height:min(55vh,420px);overflow-y:auto;z-index:20}
 @media(max-width:480px){.portrait-slot{flex-basis:62px;width:62px}.portrait-slot:has(.omicron-picker){width:62px}.portrait-slot:has(.omicron-picker) .omicron-picker{max-width:min(148px,calc(100vw - 28px))}}
-.team-info-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start;margin-top:12px}
+.team-info-layout{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:14px;align-items:start;margin-top:12px}
 .team-rating-panel .team-rating-group:first-child{margin-top:0}
 .team-notes-panel .field{margin-top:0}
 .team-notes-panel textarea{min-height:112px}
