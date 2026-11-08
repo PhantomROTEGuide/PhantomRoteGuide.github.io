@@ -417,8 +417,9 @@ async function openCharacterPicker(i,j,k){
  const type=missionType(mission);
  const rule=type==='special'?specialRuleForMission(ensurePlanet(current)[i]):null;
  if(type!=='fleet'&&k>=missionCharacterLimit(mission,current)){setStatus('This mission allows a maximum of '+missionCharacterLimit(mission,current)+' character(s).','bad');return;}
- pickerTarget={planet:current,i,j,k,type};pickerSelections=[];document.getElementById('pickerBatchActions').style.display=type==='fleet'?'none':'flex';document.getElementById('characterFactionFilter').style.display='block';document.getElementById('characterFactionFilter').value='';document.getElementById('characterFactionFilter').disabled=type==='character'&&!!mission.forcedFaction;
+ pickerTarget={planet:current,i,j,k,type};pickerSelections=[];missionPortraitTab='playable';document.getElementById('missionPortraitTabs').style.display='none';document.getElementById('pickerBatchActions').style.display=type==='fleet'?'none':'flex';document.getElementById('characterFactionFilter').style.display='block';document.getElementById('characterFactionFilter').value='';document.getElementById('characterFactionFilter').disabled=type==='character'&&!!mission.forcedFaction;
  const panel=document.getElementById('characterPicker'),search=document.getElementById('characterSearch'),status=document.getElementById('characterPickerStatus');
+ document.getElementById('missionPortraitTabs').style.display='none';
  document.getElementById('pickerTitle').textContent=type==='fleet'?(k===0?'Choose a capital ship':'Choose a regular ship'):'Choose a character';
  document.getElementById('pickerDescription').textContent=type==='fleet'?(k===0?'Choose the capital ship first. The picker will then switch to regular ships and advance through all 7 remaining slots.':'Choose the next regular ship. The picker will advance through the remaining slots.'):'Select up to 5 characters. They will be placed left to right, starting with the slot you opened.';
  search.placeholder=type==='fleet'?'Search ships — e.g. Executor, X-wing, Falcon':'Search characters — e.g. Maul, Ahsoka, Vader';
