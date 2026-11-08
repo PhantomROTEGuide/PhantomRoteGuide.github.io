@@ -179,20 +179,7 @@ function syncForcedCharacters(m,planet=current){
  return changed;
 }
 
- const leader=forcedLeaderForMission(m,planet);
- if(!leader)return false;
- let changed=false;
- (m.recommendations||[]).forEach(rec=>{
-  const images=recommendationImages(rec,missionType(m));
-  const names=Array.isArray(rec.names)?rec.names.slice():Array(5).fill('');
-  while(names.length<5)names.push('');
-  const portrait=forcedLeaderPortraits[leader];
-  if(images[0]!==portrait){images[0]=portrait;changed=true}
-  if(names[0]!==leader){names[0]=leader;changed=true}
-  rec.images=images;rec.names=names;delete rec.image;
- });
- return changed;
-}
+
 function specialRuleForMission(m,planet=current){return (specialMissionRules[planet]||[]).find(r=>r.id===m?.specialRuleId)||null}
 function specialRuleOptions(planet=current){return specialMissionRules[planet]||[]}
 function specialCharacterAllowed(name,rule){return !rule?.faction||!!specialFactionMembers[rule.faction]?.has(name)}
@@ -311,7 +298,8 @@ function renderCharacterPicker(){
  const requiredCharacterSide=pickerTarget&&pickerTarget.type==='character'?planetAlignment(pickerTarget.planet):'Bonus';
  const activeMission=pickerTarget?ensurePlanet(pickerTarget.planet)[pickerTarget.i]:null;
  const specialRule=pickerTarget&&pickerTarget.type==='special'?specialRuleForMission(activeMission,pickerTarget.planet):null;
- const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!isCapitalSlot||capitalShipNames.has(x.c.name))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(requiredCharacterSide==='Bonus'||requiredCharacterSide==='Mixed'||characterAlignmentMap[x.c.name]===requiredCharacterSide.toLowerCase().replace(' ','') )&&(pickerTarget?.type!=='special'||specialCharacterAllowed(x.c.name,specialRule))&&x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
+ const requiredChoice=pickerTarget?requiredChoiceAt(activeMission,pickerTarget.k,pickerTarget.planet):null;
+ const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!isCapitalSlot||capitalShipNames.has(x.c.name))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(requiredCharacterSide==='Bonus'||requiredCharacterSide==='Mixed'||characterAlignmentMap[x.c.name]===requiredCharacterSide.toLowerCase().replace(' ','') )&&(pickerTarget?.type!=='special'||specialCharacterAllowed(x.c.name,specialRule))&&(!requiredChoice||requiredChoice.options.includes(x.c.name))&&x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
  document.getElementById('characterPickerStatus').textContent=matches.length
   ?'Showing '+matches.length+' available '+itemLabel+((requiredShipSide==='Dark Side'||requiredCharacterSide==='Dark Side')?' · Dark Side only':(requiredShipSide==='Light Side'||requiredCharacterSide==='Light Side')?' · Light Side only':'')+(pickerTarget?.type==='special'&&specialRule?.faction?' · '+specialRule.faction+' only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
   :'No available '+itemLabel+' match the planet alignment or search. Items already used in this team are hidden.';
