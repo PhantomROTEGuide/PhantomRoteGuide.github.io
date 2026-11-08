@@ -633,8 +633,10 @@ function toggleOmicronAbility(i,j,k,ability,checked){
   while(marks.length<5)marks.push([]);if(!Array.isArray(marks[k]))marks[k]=[];
   if(checked&&!marks[k].includes(ability))marks[k].push(ability);if(!checked)marks[k]=marks[k].filter(x=>x!==ability);
   rec.omicronAbilities=marks;if(Array.isArray(rec.omicrons))rec.omicrons[k]=false;
+  const savedScrollX=window.scrollX,savedScrollY=window.scrollY;
   queueSave();renderMissions();positionOmicronPopups();
   const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
+  window.scrollTo(savedScrollX,savedScrollY);
   setStatus((checked?'Omicron ability selected':'Omicron ability cleared')+' · saving shared guide…','');
 }
 function removeTeamImage(i,j,k){if(forcedFleetSlotLocked(ensurePlanet(current)[i],ensurePlanet(current)[i].recommendations[j],k)){setStatus('This forced fleet slot is locked.','bad');return}if(lockedRequiredSlot(ensurePlanet(current)[i],ensurePlanet(current)[i].recommendations[j],k,current)){setStatus('This required character slot is locked.','bad');return}const rec=ensurePlanet(current)[i].recommendations[j];const images=recommendationImages(rec,missionType(ensurePlanet(current)[i]));images[k]='';rec.images=images;if(Array.isArray(rec.omicrons))rec.omicrons[k]=false;if(Array.isArray(rec.omicronAbilities))rec.omicronAbilities[k]=[];if(Array.isArray(rec.names)){rec.names[k]='';rec.names=rec.names}delete rec.image;queueSave();renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}}
