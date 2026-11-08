@@ -29,7 +29,7 @@ declare
   v_j integer;
   v_old_count integer;
   v_new_count integer;
-  v_allowed text[] := array['title','team','images','names','notes','omicrons','fullAuto','successRate'];
+  v_allowed text[] := array['title','team','images','names','notes','omicrons','omicronAbilities','fullAuto','successRate'];
 begin
   if jsonb_typeof(p_data) <> 'object' then
     raise exception 'Invalid guide data.';
@@ -131,6 +131,19 @@ begin
           if jsonb_typeof(v_new_rec -> 'omicrons') <> 'array' or jsonb_array_length(v_new_rec -> 'omicrons') > 8
              or exists (select 1 from jsonb_array_elements(v_new_rec -> 'omicrons') as e(value) where jsonb_typeof(value) <> 'boolean') then
             raise exception 'Invalid Omicron markers.';
+          end if;
+        end if;
+        if v_new_rec ? 'omicronAbilities' then
+          if jsonb_typeof(v_new_rec -> 'omicronAbilities') <> 'array' or jsonb_array_length(v_new_rec -> 'omicronAbilities') > 8
+             or exists (
+               select 1 from jsonb_array_elements(v_new_rec -> 'omicronAbilities') as slots(value)
+               where jsonb_typeof(slots.value) <> 'array'
+                  or exists (
+                    select 1 from jsonb_array_elements(slots.value) as abilities(value)
+                    where jsonb_typeof(abilities.value) <> 'string' or length(abilities.value #>> '{}') > 120
+                  )
+             ) then
+            raise exception 'Invalid selected Omicron abilities.';
           end if;
         end if;
         if v_new_rec ? 'fullAuto' and (jsonb_typeof(v_new_rec -> 'fullAuto') <> 'string' or v_new_rec ->> 'fullAuto' not in ('yes','no','sometimes')) then
