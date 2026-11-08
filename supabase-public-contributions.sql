@@ -49,7 +49,7 @@ begin
     raise exception 'stale guide data: refresh before saving.';
   end if;
 
-  if jsonb_object_length(v_current) <> jsonb_object_length(p_data) then
+  if (select count(*) from jsonb_object_keys(v_current)) <> (select count(*) from jsonb_object_keys(p_data)) then
     raise exception 'Public contributions cannot add or remove planets.';
   end if;
 
