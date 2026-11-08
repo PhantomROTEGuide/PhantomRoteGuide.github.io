@@ -117,26 +117,26 @@ begin
 
         if v_new_rec ? 'images' then
           if jsonb_typeof(v_new_rec -> 'images') <> 'array' or jsonb_array_length(v_new_rec -> 'images') > 8
-             or exists (select 1 from jsonb_array_elements(v_new_rec -> 'images') x where jsonb_typeof(x) <> 'string' or length(x #>> '{}') > 2048) then
+             or exists (select 1 from jsonb_array_elements(v_new_rec -> 'images') as e(value) where jsonb_typeof(value) <> 'string' or length(value #>> '{}') > 2048) then
             raise exception 'Invalid team image list.';
           end if;
         end if;
         if v_new_rec ? 'names' then
           if jsonb_typeof(v_new_rec -> 'names') <> 'array' or jsonb_array_length(v_new_rec -> 'names') > 8
-             or exists (select 1 from jsonb_array_elements(v_new_rec -> 'names') x where jsonb_typeof(x) <> 'string' or length(x #>> '{}') > 160) then
+             or exists (select 1 from jsonb_array_elements(v_new_rec -> 'names') as e(value) where jsonb_typeof(value) <> 'string' or length(value #>> '{}') > 160) then
             raise exception 'Invalid team character or ship list.';
           end if;
         end if;
         if v_new_rec ? 'omicrons' then
           if jsonb_typeof(v_new_rec -> 'omicrons') <> 'array' or jsonb_array_length(v_new_rec -> 'omicrons') > 8
-             or exists (select 1 from jsonb_array_elements(v_new_rec -> 'omicrons') x where jsonb_typeof(x) <> 'boolean') then
+             or exists (select 1 from jsonb_array_elements(v_new_rec -> 'omicrons') as e(value) where jsonb_typeof(value) <> 'boolean') then
             raise exception 'Invalid Omicron markers.';
           end if;
         end if;
-        if v_new_rec ? 'fullAuto' and v_new_rec ->> 'fullAuto' not in ('yes','no','sometimes') then
+        if v_new_rec ? 'fullAuto' and (jsonb_typeof(v_new_rec -> 'fullAuto') <> 'string' or v_new_rec ->> 'fullAuto' not in ('yes','no','sometimes')) then
           raise exception 'Invalid full-auto selection.';
         end if;
-        if v_new_rec ? 'successRate' and v_new_rec ->> 'successRate' not in ('high','medium','low','hailmary') then
+        if v_new_rec ? 'successRate' and (jsonb_typeof(v_new_rec -> 'successRate') <> 'string' or v_new_rec ->> 'successRate' not in ('high','medium','low','hailmary')) then
           raise exception 'Invalid success-rate selection.';
         end if;
       end loop;
