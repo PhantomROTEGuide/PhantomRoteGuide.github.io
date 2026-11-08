@@ -2041,7 +2041,7 @@
   },
   {
     "name": "Princess Leia",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiaendor.png",
+    "image": "https://raw.githubusercontent.com/tools4swgoh/swgoh-icons/main/65px-Unit-Character-Princess_Leia-portrait.png",
     "factions": [
       "rebel"
     ]
@@ -2797,6 +2797,14 @@
       "new republic",
       "scoundrel",
       "unaligned force user"
+    ]
+  },
+  {
+    "name": "Leia Organa",
+    "image": "https://raw.githubusercontent.com/tools4swgoh/swgoh-icons/main/65px-Unit-Character-Leia_Organa-portrait.png",
+    "factions": [
+      "galactic legend",
+      "rebel"
     ]
   }
 ]
