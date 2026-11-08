@@ -336,11 +336,14 @@ async function uploadTeamImage(i,j,k,input){
 function openTeamCharacterPicker(i,j){
  const mission=ensurePlanet(current)[i],type=missionType(mission),rec=mission.recommendations[j],limit=type==='fleet'?8:missionCharacterLimit(mission,current),images=recommendationImages(rec,type);
  let slot=-1;
- if(type!=='fleet'){
+ if(type==='fleet'){
+  slot=images.findIndex((url,k)=>k===0&&!url);
+  if(slot<0)slot=images.findIndex((url,k)=>k>0&&!url);
+ }else{
   for(let k=0;k<limit;k++){if(requiredChoiceAt(mission,k,current)&&!images[k]){slot=k;break}}
+  if(slot<0)slot=images.findIndex((url,k)=>k<limit&&!url&&!lockedRequiredSlot(mission,rec,k,current));
+  if(slot<0)slot=images.findIndex((url,k)=>k<limit&&!lockedRequiredSlot(mission,rec,k,current));
  }
- if(slot<0)slot=images.findIndex((url,k)=>k<limit&&!url&&!lockedRequiredSlot(mission,rec,k,current));
- if(slot<0)slot=images.findIndex((url,k)=>k<limit&&!lockedRequiredSlot(mission,rec,k,current));
  if(slot<0){setStatus('There are no available portrait slots in this team. Remove a portrait first.','bad');return}
  openCharacterPicker(i,j,slot);
 }
@@ -374,7 +377,7 @@ function renderCharacterPicker(){
  const usedImages=new Set();
  if(pickerTarget){
   const rec=ensurePlanet(pickerTarget.planet)[pickerTarget.i]?.recommendations?.[pickerTarget.j];
-  recommendationImages(rec||{}).forEach((url,slot)=>{if(slot!==pickerTarget.k&&url)usedImages.add(url)});
+  recommendationImages(rec||{},pickerTarget.type).forEach((url,slot)=>{if(slot!==pickerTarget.k&&url)usedImages.add(url)});
  }
  const itemLabel=pickerTarget&&pickerTarget.type==='fleet'?'ships':'characters';
  const isCapitalSlot=pickerTarget&&pickerTarget.type==='fleet'&&pickerTarget.k===0;
@@ -459,7 +462,22 @@ function selectCharacterPortrait(index){
   renderCharacterPicker();return;
  }
  images[target.k]=character.image;rec.images=images;if(Array.isArray(rec.omicrons)){rec.omicrons[target.k]=false;}const names=Array.isArray(rec.names)?rec.names.slice():Array(5).fill('');while(names.length<5)names.push('');names[target.k]=character.name;rec.names=names;delete rec.image;
- const missionIndex=target.i,teamIndex=target.j;closeCharacterPicker();queueSave();renderMissions();
+ const missionIndex=target.i,teamIndex=target.j;
+ if(target.type==='fleet'){
+  queueSave();
+  const nextSlot=images.findIndex((url,k)=>k>target.k&&!url);
+  if(nextSlot>=0){
+   pickerTarget={...target,k:nextSlot};
+   const isCapital=nextSlot===0;
+   document.getElementById('pickerTitle').textContent=isCapital?'Choose a capital ship':'Choose a regular ship';
+   document.getElementById('pickerDescription').textContent=isCapital?'Choose the fleet commander for this lineup. After that, you can add all 7 regular ships without reopening the picker.':'Choose the next regular ship. The picker will advance automatically through the remaining slots.';
+   document.getElementById('characterSearch').value='';
+   renderCharacterPicker();
+   setStatus('Added '+character.name+'. Now choose '+(nextSlot===1?'the first starting ship':'the next ship')+'.','good');
+   return;
+  }
+ }
+ closeCharacterPicker();queueSave();renderMissions();
  const cards=document.querySelectorAll('.mission');if(cards[missionIndex]){cards[missionIndex].open=true;const teams=cards[missionIndex].querySelectorAll('.team');if(teams[teamIndex])teams[teamIndex].open=true}
  setStatus('Added '+character.name+(target.type==='fleet'?' ship':' portrait')+' · saving shared guide…','');
 }
