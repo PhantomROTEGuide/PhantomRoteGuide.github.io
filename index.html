@@ -506,14 +506,12 @@ function applyCharacterSelections(){
 function selectAnyoneSlot(){
  const target=pickerTarget;if(!target)return;
  const mission=ensurePlanet(target.planet)[target.i],rec=mission.recommendations[target.j],isFleet=target.type==='fleet';
- if(!isFleet&&(target.k>=missionCharacterLimit(mission,target.planet)||lockedRequiredSlot(mission,rec,target.k,target.planet)||requiredChoiceAt(mission,target.k,target.planet))){setStatus('This slot is reserved for a required character.','bad');return}
- if(isFleet&&forcedFleetSlotLocked(mission,rec,target.k)){setStatus('This fleet slot is reserved for a forced ship.','bad');return}
- const count=isFleet?8:5,names=Array.isArray(rec.names)?rec.names.slice():Array(count).fill('');
+ const count=isFleet?8:5,limit=isFleet?8:missionCharacterLimit(mission,target.planet),names=Array.isArray(rec.names)?rec.names.slice():Array(count).fill('');
  while(names.length<count)names.push('');
- const images=recommendationImages(rec,target.type);let anySlot=target.k,added=[],lastPlaced=target.k-1;
+ const images=recommendationImages(rec,target.type);let added=[],lastPlaced=target.k-1,anySlot=-1;
  if(!isFleet&&pickerSelections.length){
-  const selected=[...pickerSelections],limit=missionCharacterLimit(mission,target.planet),slots=[];
-  for(let k=target.k;k<limit;k++)if(k===target.k||(!images[k]&&!names[k]&&!lockedRequiredSlot(mission,rec,k,target.planet)))slots.push(k);
+  const selected=[...pickerSelections],slots=[];
+  for(let k=target.k;k<limit;k++)if((k===target.k||(!images[k]&&!names[k]))&&!lockedRequiredSlot(mission,rec,k,target.planet)&&!requiredChoiceAt(mission,k,target.planet))slots.push(k);
   let next=0;
   for(const index of selected){
    const character=characterCatalog[index];if(!character)continue;let placed=false;
@@ -531,17 +529,19 @@ function selectAnyoneSlot(){
    if(!placed)continue;
   }
   if(!added.length){setStatus('None of the selected characters fit the available slots.','bad');return}
-  anySlot=-1;
+  pickerSelections=[];
   for(let k=lastPlaced+1;k<limit;k++)if(!images[k]&&!names[k]&&!lockedRequiredSlot(mission,rec,k,target.planet)&&!requiredChoiceAt(mission,k,target.planet)){anySlot=k;break}
+ }else{
+  for(let k=target.k;k<limit;k++)if(!images[k]&&!names[k]&&!lockedRequiredSlot(mission,rec,k,target.planet)&&!requiredChoiceAt(mission,k,target.planet)){anySlot=k;break}
  }
- if(anySlot>=0){
-  if(anySlot>=count||(!isFleet&&anySlot>=missionCharacterLimit(mission,target.planet))||(!isFleet&&(lockedRequiredSlot(mission,rec,anySlot,target.planet)||requiredChoiceAt(mission,anySlot,target.planet)))){setStatus('There is no available slot for Any.','bad');return}
-  names[anySlot]='__ANY__';images[anySlot]='';
- }
+ if(anySlot<0){if(!added.length){setStatus('There are no available slots for Any.','bad');return}}
+ else{names[anySlot]='__ANY__';images[anySlot]='';}
  rec.names=names;rec.images=images;delete rec.image;
- const missionIndex=target.i,teamIndex=target.j;closeCharacterPicker();queueSave();renderMissions();
- const cards=document.querySelectorAll('.mission');if(cards[missionIndex]){cards[missionIndex].open=true;const teams=cards[missionIndex].querySelectorAll('.team');if(teams[teamIndex])teams[teamIndex].open=true}
- setStatus((added.length?'Added '+added.length+' character(s) and set the next slot to Any':'Slot set to Any')+' · saving shared guide…','good');
+ if(anySlot>=0){let nextSlot=-1;for(let k=anySlot+1;k<limit;k++)if(!images[k]&&!names[k]&&!lockedRequiredSlot(mission,rec,k,target.planet)&&!requiredChoiceAt(mission,k,target.planet)){nextSlot=k;break}target.k=nextSlot>=0?nextSlot:anySlot;}
+ queueSave();renderMissions();
+ const cards=document.querySelectorAll('.mission');if(cards[target.i]){cards[target.i].open=true;const teams=cards[target.i].querySelectorAll('.team');if(teams[target.j])teams[target.j].open=true}
+ renderCharacterPicker();
+ setStatus((added.length?'Added '+added.length+' character(s) and set the next slot to Any':'Added Any')+' · picker remains open · saving shared guide…','good');
 }
 function selectCharacterPortrait(index){
  const character=characterCatalog[index],target=pickerTarget;if(!character||!target)return;
