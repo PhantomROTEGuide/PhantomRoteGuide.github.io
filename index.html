@@ -47,7 +47,7 @@ const bonus=[['Zeffo','Phase 3 Bonus Zone'],['Mandalore','Phase 4 Bonus Zone']];
 const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false;
 let characterCatalog=[],characterCatalogPromise=null,characterAlignmentMap={},characterAlignmentPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null,pickerSelections=[];
-let fullAutoEditing=new Set();
+let fullAutoEditing=new Set(),successRateEditing=new Set();
 
 // Verified Rise of the Empire special-mission restrictions. Faction members are
 // matched against the character roster by exact in-game unit name.
@@ -249,21 +249,30 @@ function goHome(){document.getElementById('detail').classList.remove('active');d
 function renderMissions(){const list=ensurePlanet(current),root=document.getElementById('missions');document.getElementById('addMissionBtn').style.display=isEditor?'flex':'none';document.getElementById('editNotice').style.display=isEditor?'none':'block';const specialSelect=document.getElementById('specialMissionToAdd');if(specialSelect){const existing=new Set(list.filter(m=>missionType(m)==='special').map(m=>m.specialRuleId));const options=specialRuleOptions(current).filter(r=>!existing.has(r.id));specialSelect.innerHTML='<option value="">'+(options.length?'Choose special mission…':'All listed special missions added')+'</option>'+options.map(r=>'<option value="'+esc(r.id)+'">'+esc(r.name)+'</option>').join('')+(specialRuleOptions(current).length?'':'<option value="custom">Custom special mission</option>');specialSelect.disabled=!isEditor||(!options.length&&specialRuleOptions(current).length>0)}if(!list.length){root.innerHTML='<div class="empty">No missions have been added.</div>';return}let forcedLeaderChanged=false;list.forEach(m=>{if(syncForcedCharacters(m,current))forcedLeaderChanged=true});if(forcedLeaderChanged&&isEditor)queueSave();root.innerHTML=list.map((m,i)=>'<details class="mission"><summary><span class="chev">›</span><span class="mission-name">'+(missionType(m)==='fleet'?'🚀 ':missionType(m)==='special'?'★ ':'👤 ')+esc(m.title||'Untitled mission')+'</span><span class="count">'+(m.recommendations||[]).length+' teams</span></summary><div class="mission-body">'+(isEditor?'<label class="field">Mission title</label><input class="edit-title" value="'+esc(m.title)+'" onchange="changeMissionTitle('+i+',this.value)"><label class="field">Mission type</label><select class="edit-title" onchange="changeMissionType('+i+',this.value)"><option value="character" '+(missionType(m)==='character'?'selected':'')+'>👤 Character mission</option><option value="fleet" '+(missionType(m)==='fleet'?'selected':'')+'>🚀 Fleet mission</option><option value="special" '+(missionType(m)==='special'?'selected':'')+'>★ Special mission</option></select>'+(missionType(m)==='special'?'<label class="field">Special mission restriction</label><select class="edit-title" onchange="changeSpecialRule('+i+',this.value)"><option value="custom" '+(!specialRuleForMission(m)?'selected':'')+'>Custom / unrestricted</option>'+specialRuleOptions(current).map(r=>'<option value="'+esc(r.id)+'" '+(m.specialRuleId===r.id?'selected':'')+'>'+esc(r.name)+'</option>').join('')+'</select>':'')+(missionType(m)!=='fleet'?'<label class="field">Required leader</label><select class="edit-title" onchange="changeForcedLeader('+i+',this.value)"><option value="" '+(!m.forcedLeaderName?'selected':'')+'>Auto-detect from mission title</option><option value="none" '+(m.forcedLeaderName==='none'?'selected':'')+'>No forced leader</option>'+forcedLeaderChoices.map(name=>'<option value="'+esc(name)+'" '+(m.forcedLeaderName===name?'selected':'')+'>'+esc(name)+'</option>').join('')+'</select>':''):'')+'<div class="team-list">'+(m.recommendations||[]).map((r,j)=>renderTeam(i,j,r)).join('')+'</div>'+(isEditor?'<button class="add-team" onclick="addTeam('+i+')">＋ Add team recommendation</button><div class="team-controls"><button class="btn danger" onclick="removeMission('+i+')">'+(missionType(m)==='special'?'Remove special mission':'Delete mission')+'</button></div>':'')+'</div></details>').join('');if(!window.teamUploadHandlerInstalled){window.teamUploadHandlerInstalled=true;document.addEventListener('change',function(event){const input=event.target;if(!input||!input.matches||!input.matches('input[data-team-upload]'))return;const file=input.files&&input.files[0];if(!file){setStatus('No file was selected.','bad');return;}const parts=input.getAttribute('data-team-upload').split(',').map(Number);setStatus('File selected: '+file.name,'');uploadTeamImage(parts[0],parts[1],parts[2],input)},true)}}
 function renderTeamRatings(i,j,r,editable){
  const fullOptions=[['yes','✓','Full auto'],['no','✕','Not full auto'],['sometimes','≈','Sometimes']];
- const successOptions=[['high','High','Greater than 90%'],['medium','Medium','60–85%'],['low','Low','Less than 50%'],['hailmary','Hail Mary','Less than 20%']];
- const editKey=current+'|'+i+'|'+j,editing=fullAutoEditing.has(editKey);
+ const successOptions=[['high','High (>90%)','Greater than 90%'],['medium','Medium (60–85%)','60–85%'],['low','Low (<50%)','Less than 50%'],['hailmary','Hail Mary (<20%)','Less than 20%']];
+ const editKey=current+'|'+i+'|'+j,fullEditing=fullAutoEditing.has(editKey),successEditing=successRateEditing.has(editKey);
  const renderOptions=(key,options)=>options.map(([value,label,description])=>{
   const action=editable?`onclick="setTeamRating(${i},${j},'${key}','${value}')"`:'disabled';
   return '<button type="button" class="team-rating-option '+(key==='fullAuto'?'full-'+value+' ':'')+(r[key]===value?'active':'')+'" '+action+' title="'+esc(description)+'" aria-pressed="'+(r[key]===value)+'">'+label+'</button>';
  }).join('');
  const chosen=fullOptions.find(option=>option[0]===r.fullAuto);
- const fullAutoDisplay=chosen&&!editing
+ const fullAutoDisplay=chosen&&!fullEditing
   ?'<div class="team-rating-selected"><span class="team-rating-current full-'+chosen[0]+'">'+chosen[1]+' '+esc(chosen[2])+'</span>'+(editable?'<button type="button" class="team-rating-edit" onclick="editTeamFullAuto('+i+','+j+')">Edit</button>':'')+'</div>'
   :'<div class="team-rating-options">'+renderOptions('fullAuto',fullOptions)+'</div>';
- return '<div class="team-rating-group"><span class="team-rating-label">Full auto</span>'+fullAutoDisplay+'</div><div class="team-rating-group"><span class="team-rating-label">Success rate</span><div class="team-rating-options">'+renderOptions('successRate',successOptions)+'</div></div>';
+ const successChosen=successOptions.find(option=>option[0]===r.successRate);
+ const successDisplay=successChosen&&!successEditing
+  ?'<div class="team-rating-selected"><span class="team-rating-current">'+esc(successChosen[1])+'</span>'+(editable?'<button type="button" class="team-rating-edit" onclick="editTeamSuccessRate('+i+','+j+')">Edit</button>':'')+'</div>'
+  :'<div class="team-rating-options">'+renderOptions('successRate',successOptions)+'</div>';
+ return '<div class="team-rating-group"><span class="team-rating-label">Full auto</span>'+fullAutoDisplay+'</div><div class="team-rating-group"><span class="team-rating-label">Success rate</span>'+successDisplay+'</div>';
 }
 function editTeamFullAuto(i,j){
  if(!isEditor)return;
  fullAutoEditing.add(current+'|'+i+'|'+j);renderMissions();
+ const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
+}
+function editTeamSuccessRate(i,j){
+ if(!isEditor)return;
+ successRateEditing.add(current+'|'+i+'|'+j);renderMissions();
  const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
 }
 function setTeamRating(i,j,key,value){
@@ -273,7 +282,9 @@ function setTeamRating(i,j,key,value){
  const rec=ensurePlanet(current)[i].recommendations[j];
  rec[key]=rec[key]===value?'':value;
  if(!rec[key])delete rec[key];
- if(key==='fullAuto')fullAutoEditing.delete(current+'|'+i+'|'+j);
+ const editKey=current+'|'+i+'|'+j;
+ if(key==='fullAuto')fullAutoEditing.delete(editKey);
+ if(key==='successRate')successRateEditing.delete(editKey);
  queueSave();renderMissions();
  const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
 }
