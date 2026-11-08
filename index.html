@@ -368,12 +368,18 @@ async function openCharacterPicker(i,j,k){
  try{
   if(type==='fleet'){if(!shipCatalogPromise)shipCatalogPromise=fetch('./ships.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load ship list ('+r.status+').');return r.json()});shipCatalog=await shipCatalogPromise;characterCatalog=shipCatalog;}
   else{if(!characterCatalogPromise)characterCatalogPromise=fetch('./characters.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character list ('+r.status+').');return r.json()});if(!characterAlignmentPromise)characterAlignmentPromise=fetch('./character-alignments.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character alignment list ('+r.status+').');return r.json()});[characterCatalog,characterAlignmentMap]=await Promise.all([characterCatalogPromise,characterAlignmentPromise]);}
-  populateFactionFilter(type);if(type==='character'&&mission.forcedFaction)document.getElementById('characterFactionFilter').value=mission.forcedFaction;renderCharacterPicker();search.focus();
+  populateFactionFilter(type,current,k);if(type==='character'&&mission.forcedFaction)document.getElementById('characterFactionFilter').value=mission.forcedFaction;renderCharacterPicker();search.focus();
  }catch(error){status.textContent='Could not load portrait list: '+error.message}
 }
-function populateFactionFilter(type){
+function populateFactionFilter(type,planetName,slot){
  const select=document.getElementById('characterFactionFilter');
- const factions=[...new Set(characterCatalog.flatMap(c=>Array.isArray(c.factions)?c.factions:[]).map(f=>String(f).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+ const isFleet=type==='fleet';
+ const side=isFleet?planetAlignment(planetName):'Bonus';
+ const isCapital=isFleet&&slot===0;
+ const eligible=characterCatalog.filter(c=>!isFleet||
+  ((isCapital?capitalShipNames.has(c.name):!capitalShipNames.has(c.name))&&
+   (side==='Bonus'||side==='Mixed'||shipAlignment(c.name)===side)));
+ const factions=[...new Set(eligible.flatMap(c=>Array.isArray(c.factions)?c.factions:[]).map(f=>String(f).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
  select.innerHTML='<option value="">All Factions</option>'+factions.map(f=>'<option value="'+esc(f)+'">'+esc(f.replace(/\b[a-z]/g,c=>c.toUpperCase()))+'</option>').join('');
 }
 function renderCharacterPicker(){
