@@ -34,6 +34,10 @@ const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Co
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false;
 let characterCatalog=[],characterCatalogPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null;
 const capitalShipNames=new Set(['Finalizer','Home One','Raddus','Chimaera','Executrix','Negotiator','Executor','Profundity','Leviathan','Endurance','Malevolence']);
+const darkSideShipNames=new Set(['B-28 Extinction-class Bomber','Chimaera',"Emperor's Shuttle",'Executor','Executrix','Finalizer','First Order SF TIE Fighter','First Order TIE Fighter','Fury-class Interceptor','Gauntlet Starfighter',"Geonosian Soldier's Starfighter","Geonosian Spy's Starfighter","Hound's Tooth",'Hyena Bomber','IG-2000','Imperial TIE Bomber','Imperial TIE Fighter',"Kylo Ren's Command Shuttle",'Leviathan','Malevolence','Mark VI Interceptor','Scimitar','Scythe','Sith Fighter','Slave I',"Sun Fac's Geonosian Starfighter",'TIE Advanced x1','TIE Dagger','TIE Defender','TIE Echelon','TIE Reaper','TIE Silencer','TIE/IN Interceptor Prototype','Vulture Droid','Xanadu Blood']);
+const lightSideShipNames=new Set(["Ahsoka Tano's Jedi Starfighter","Anakin's Eta-2 Starfighter","Biggs Darklighter's X-wing","Bistan's U-wing",'BTL-B Y-wing Starfighter',"Cassian's U-wing","Clone Sergeant's ARC-170",'Comeuppance','Ebon Hawk','Endurance','Ghost',"Han's Millennium Falcon",'Home One',"Jedi Consular's Starfighter","Lando's Millennium Falcon",'Marauder','MG-100 StarFortress SF-17','Negotiator','Outrider','Phantom II',"Plo Koon's Jedi Starfighter","Poe Dameron's X-wing",'Profundity','Raddus',"Raven's Claw",'Razor Crest','Rebel B-wing','Rebel Y-wing','Resistance X-wing',"Rex's ARC-170","Rey's Millennium Falcon",'Umbaran Starfighter',"Wedge Antilles's X-wing"]);
+function planetAlignment(name){for(const phase of phases){const planet=phase[2].find(x=>x[0]===name);if(planet)return planet[1]}return 'Bonus'}
+function shipAlignment(name){return darkSideShipNames.has(name)?'Dark Side':lightSideShipNames.has(name)?'Light Side':'Unknown'}
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function planetList(){return [...phases.flatMap(p=>p[2].map(x=>x[0])),...bonus.map(x=>x[0])]}
@@ -109,18 +113,26 @@ function renderCharacterPicker(){
  }
  const itemLabel=pickerTarget&&pickerTarget.type==='fleet'?'ships':'characters';
  const isCapitalSlot=pickerTarget&&pickerTarget.type==='fleet'&&pickerTarget.k===0;
- const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!isCapitalSlot||capitalShipNames.has(x.c.name))&&x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
+ const requiredShipSide=pickerTarget&&pickerTarget.type==='fleet'?planetAlignment(pickerTarget.planet):'Bonus';
+ const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!isCapitalSlot||capitalShipNames.has(x.c.name))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
  document.getElementById('characterPickerStatus').textContent=matches.length
-  ?'Showing '+matches.length+' available '+itemLabel+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
-  :'No available '+itemLabel+' match. Items already used in this team are hidden.';
+  ?'Showing '+matches.length+' available '+itemLabel+(requiredShipSide==='Dark Side'?' · Dark Side only':requiredShipSide==='Light Side'?' · Light Side only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
+  :'No available '+itemLabel+' match the planet alignment or search. Items already used in this team are hidden.';
  document.getElementById('characterPickerGrid').innerHTML=matches.map(x=>'<button class="character-choice" onclick="selectCharacterPortrait('+x.index+')"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+esc(x.c.name)+'</span></button>').join('');
 }
 function closeCharacterPicker(){document.getElementById('characterPicker').classList.remove('show');pickerTarget=null}
 function selectCharacterPortrait(index){
  const character=characterCatalog[index],target=pickerTarget;if(!character||!target)return;
- if(target.type==='fleet'&&target.k===0&&!capitalShipNames.has(character.name)){
-  setStatus(character.name+' is not a capital ship. Choose one of the nine capital ships.','bad');
-  return;
+ if(target.type==='fleet'){
+  if(target.k===0&&!capitalShipNames.has(character.name)){
+   setStatus(character.name+' is not a capital ship. Choose a capital ship.','bad');
+   return;
+  }
+  const requiredSide=planetAlignment(target.planet),actualSide=shipAlignment(character.name);
+  if((requiredSide==='Dark Side'||requiredSide==='Light Side')&&actualSide!==requiredSide){
+   setStatus(character.name+' is a '+actualSide+' ship and cannot be used on a '+requiredSide+' planet.','bad');
+   return;
+  }
  }
  const rec=ensurePlanet(target.planet)[target.i].recommendations[target.j],images=recommendationImages(rec,target.type);
  if(images.some((url,slot)=>slot!==target.k&&url===character.image)){
