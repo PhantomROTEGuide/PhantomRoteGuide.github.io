@@ -312,7 +312,8 @@ function populateFactionFilter(type){
  select.innerHTML='<option value="">All factions</option>'+factions.map(f=>'<option value="'+esc(f)+'">'+esc(f)+'</option>').join('');
 }
 function renderCharacterPicker(){
- const query=(document.getElementById('characterSearch').value||'').trim().toLowerCase();\n const selectedFaction=(document.getElementById('characterFactionFilter')?.value||'').toLowerCase();
+ const query=(document.getElementById('characterSearch').value||'').trim().toLowerCase();
+ const selectedFaction=(document.getElementById('characterFactionFilter')?.value||'').toLowerCase();
  const usedImages=new Set();
  if(pickerTarget){
   const rec=ensurePlanet(pickerTarget.planet)[pickerTarget.i]?.recommendations?.[pickerTarget.j];
