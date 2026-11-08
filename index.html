@@ -32,7 +32,7 @@ const phases=[
 const bonus=[['Zeffo','Phase 3 Bonus Zone'],['Mandalore','Phase 4 Bonus Zone']];
 const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false;
-let characterCatalog=[],characterCatalogPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null;
+let characterCatalog=[],characterCatalogPromise=null,characterAlignmentMap={},characterAlignmentPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null;
 const capitalShipNames=new Set(['Finalizer','Home One','Raddus','Chimaera','Executrix','Negotiator','Executor','Profundity','Leviathan','Endurance','Malevolence']);
 const darkSideShipNames=new Set(['B-28 Extinction-class Bomber','Punishing One','Chimaera',"Emperor's Shuttle",'Executor','Executrix','Finalizer','First Order SF TIE Fighter','First Order TIE Fighter','Fury-class Interceptor','Gauntlet Starfighter',"Geonosian Soldier's Starfighter","Geonosian Spy's Starfighter","Hound's Tooth",'Hyena Bomber','IG-2000','Imperial TIE Bomber','Imperial TIE Fighter',"Kylo Ren's Command Shuttle",'Leviathan','Malevolence','Mark VI Interceptor','Scimitar','Scythe','Sith Fighter','Slave I',"Sun Fac's Geonosian Starfighter",'TIE Advanced x1','TIE Dagger','TIE Defender','TIE Echelon','TIE Reaper','TIE Silencer','TIE/IN Interceptor Prototype','Vulture Droid','Xanadu Blood']);
 const lightSideShipNames=new Set(['Rogue One',"Ahsoka Tano's Jedi Starfighter","Anakin's Eta-2 Starfighter","Biggs Darklighter's X-wing","Bistan's U-wing",'BTL-B Y-wing Starfighter',"Cassian's U-wing","Clone Sergeant's ARC-170",'Comeuppance','Ebon Hawk','Endurance','Ghost',"Han's Millennium Falcon",'Home One',"Jedi Consular's Starfighter","Lando's Millennium Falcon",'Marauder','MG-100 StarFortress SF-17','Negotiator','Outrider','Phantom II',"Plo Koon's Jedi Starfighter","Poe Dameron's X-wing",'Profundity','Raddus',"Raven's Claw",'Razor Crest','Rebel B-wing','Rebel Y-wing','Resistance X-wing',"Rex's ARC-170","Rey's Millennium Falcon",'Umbaran Starfighter',"Wedge Antilles's X-wing"]);
@@ -100,7 +100,7 @@ async function openCharacterPicker(i,j,k){
  panel.classList.add('show');search.value='';status.textContent='Loading '+(type==='fleet'?'ship':'character')+' portraits…';document.getElementById('characterPickerGrid').innerHTML='';
  try{
   if(type==='fleet'){if(!shipCatalogPromise)shipCatalogPromise=fetch('./ships.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load ship list ('+r.status+').');return r.json()});shipCatalog=await shipCatalogPromise;characterCatalog=shipCatalog;}
-  else{if(!characterCatalogPromise)characterCatalogPromise=fetch('./characters.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character list ('+r.status+').');return r.json()});characterCatalog=await characterCatalogPromise;}
+  else{if(!characterCatalogPromise)characterCatalogPromise=fetch('./characters.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character list ('+r.status+').');return r.json()});if(!characterAlignmentPromise)characterAlignmentPromise=fetch('./character-alignments.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character alignment list ('+r.status+').');return r.json()});[characterCatalog,characterAlignmentMap]=await Promise.all([characterCatalogPromise,characterAlignmentPromise]);}
   renderCharacterPicker();search.focus();
  }catch(error){status.textContent='Could not load portrait list: '+error.message}
 }
@@ -114,9 +114,10 @@ function renderCharacterPicker(){
  const itemLabel=pickerTarget&&pickerTarget.type==='fleet'?'ships':'characters';
  const isCapitalSlot=pickerTarget&&pickerTarget.type==='fleet'&&pickerTarget.k===0;
  const requiredShipSide=pickerTarget&&pickerTarget.type==='fleet'?planetAlignment(pickerTarget.planet):'Bonus';
- const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!isCapitalSlot||capitalShipNames.has(x.c.name))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
+ const requiredCharacterSide=pickerTarget&&pickerTarget.type==='character'?planetAlignment(pickerTarget.planet):'Bonus';
+ const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>(!isCapitalSlot||capitalShipNames.has(x.c.name))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(requiredCharacterSide==='Bonus'||requiredCharacterSide==='Mixed'||characterAlignmentMap[x.c.name]===requiredCharacterSide.toLowerCase().replace(' ','') )&&x.c.name.toLowerCase().includes(query)&&!usedImages.has(x.c.image));
  document.getElementById('characterPickerStatus').textContent=matches.length
-  ?'Showing '+matches.length+' available '+itemLabel+(requiredShipSide==='Dark Side'?' · Dark Side only':requiredShipSide==='Light Side'?' · Light Side only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
+  ?'Showing '+matches.length+' available '+itemLabel+((requiredShipSide==='Dark Side'||requiredCharacterSide==='Dark Side')?' · Dark Side only':(requiredShipSide==='Light Side'||requiredCharacterSide==='Light Side')?' · Light Side only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
   :'No available '+itemLabel+' match the planet alignment or search. Items already used in this team are hidden.';
  document.getElementById('characterPickerGrid').innerHTML=matches.map(x=>'<button class="character-choice" onclick="selectCharacterPortrait('+x.index+')"><img src="'+esc(x.c.image)+'" alt="" loading="lazy"><span>'+esc(x.c.name)+'</span></button>').join('');
 }
@@ -131,6 +132,13 @@ function selectCharacterPortrait(index){
   const requiredSide=planetAlignment(target.planet),actualSide=shipAlignment(character.name);
   if((requiredSide==='Dark Side'||requiredSide==='Light Side')&&actualSide!==requiredSide){
    setStatus(character.name+' is a '+actualSide+' ship and cannot be used on a '+requiredSide+' planet.','bad');
+   return;
+  }
+ }
+ if(target.type==='character'){
+  const requiredSide=planetAlignment(target.planet),actualSide=characterAlignmentMap[character.name];
+  if((requiredSide==='Dark Side'||requiredSide==='Light Side')&&actualSide!==requiredSide.toLowerCase().replace(' ','')){
+   setStatus(character.name+' is not a '+requiredSide+' character and cannot be used on a '+requiredSide+' planet.','bad');
    return;
   }
  }
