@@ -290,5 +290,9 @@
   {
     "name": "Tomb Guardian",
     "image": "https://vignette.wikia.nocookie.net/starwarsjedifallenorder/images/c/c8/Tomb_Guardian.png/revision/latest?cb=20191117043321"
+  },
+  {
+    "name": "AT-ST",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_atst.png"
   }
 ]
