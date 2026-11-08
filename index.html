@@ -33,7 +33,7 @@ const bonus=[['Zeffo','Phase 3 Bonus Zone'],['Mandalore','Phase 4 Bonus Zone']];
 const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false;
 let characterCatalog=[],characterCatalogPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null;
-const capitalShipNames=new Set(['Finalizer','Home One','Raddus','Chimaera','Executrix','Negotiator','Executor','Profundity','Leviathan']);
+const capitalShipNames=new Set(['Finalizer','Home One','Raddus','Chimaera','Executrix','Negotiator','Executor','Profundity','Leviathan','Endurance','Malevolence']);
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function planetList(){return [...phases.flatMap(p=>p[2].map(x=>x[0])),...bonus.map(x=>x[0])]}
