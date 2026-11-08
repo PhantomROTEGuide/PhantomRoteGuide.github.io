@@ -331,7 +331,7 @@ function renderTeamRatings(i,j,r,editable){
 }
 function editTeamFullAuto(i,j){
  fullAutoEditing.add(current+'|'+i+'|'+j);renderMissions();
- const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
+ const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}positionOmicronPopups();
 }
 function editTeamSuccessRate(i,j){
  successRateEditing.add(current+'|'+i+'|'+j);renderMissions();
@@ -572,9 +572,10 @@ function selectCharacterPortrait(index){
  setStatus('Added '+character.name+(target.type==='fleet'?' ship':' portrait')+' · saving shared guide…','');
 }
 
-function setOmicronSelectionMode(i,j,k,editing,event){if(event)event.stopPropagation();const key=current+'|'+i+'|'+j+'|'+k;if(editing)omicronEditing.add(key);else omicronEditing.delete(key);const missionStates=[...document.querySelectorAll('.mission')].map(el=>el.open);const teamStates=[...document.querySelectorAll('.team')].map(el=>({mission:el.closest('.mission'),open:el.open,missionIndex:el.getAttribute('data-mission-index'),teamIndex:el.getAttribute('data-team-index')}));renderMissions();const cards=document.querySelectorAll('.mission');cards.forEach((el,index)=>{if(missionStates[index])el.open=true});if(cards[i])cards[i].open=true;const target=document.querySelector('.team[data-mission-index="'+i+'"][data-team-index="'+j+'"]');if(target)target.open=true}
+function setOmicronSelectionMode(i,j,k,editing,event){if(event)event.stopPropagation();const key=current+'|'+i+'|'+j+'|'+k;if(editing)omicronEditing.add(key);else omicronEditing.delete(key);const missionStates=[...document.querySelectorAll('.mission')].map(el=>el.open);const teamStates=[...document.querySelectorAll('.team')].map(el=>({mission:el.closest('.mission'),open:el.open,missionIndex:el.getAttribute('data-mission-index'),teamIndex:el.getAttribute('data-team-index')}));renderMissions();const cards=document.querySelectorAll('.mission');cards.forEach((el,index)=>{if(missionStates[index])el.open=true});if(cards[i])cards[i].open=true;const target=document.querySelector('.team[data-mission-index="'+i+'"][data-team-index="'+j+'"]');if(target)target.open=true;positionOmicronPopups()}
 function finishOmicronSelection(i,j,k,event){setOmicronSelectionMode(i,j,k,false,event)}
 function editOmicronSelection(i,j,k,event){setOmicronSelectionMode(i,j,k,true,event)}
+function positionOmicronPopups(){document.querySelectorAll('.portrait-slot:has(.omicron-picker)').forEach(slot=>{const popup=slot.querySelector('.omicron-picker');if(!popup||!popup.children.length)return;popup.style.left='50%';popup.style.transform='translateX(-50%)';popup.style.top='auto';popup.style.bottom='calc(100% + 8px)';const slotRect=slot.getBoundingClientRect(),popupRect=popup.getBoundingClientRect(),gap=8,viewportHeight=window.innerHeight;let placeBelow=popupRect.top<gap;if(placeBelow&&slotRect.bottom+gap+popupRect.height>viewportHeight-gap)placeBelow=false;if(placeBelow){popup.style.bottom='auto';popup.style.top='calc(100% + 8px)'}const finalRect=popup.getBoundingClientRect(),viewportWidth=window.innerWidth;let left=finalRect.left;if(finalRect.right>viewportWidth-gap)left-=finalRect.right-(viewportWidth-gap);if(left<gap)left+=gap-left;popup.style.left=(left-slotRect.left)+'px';popup.style.transform='none'})}
 function editTeamOmicronSelections(i,j,event){
  if(event)event.stopPropagation();
  const mission=ensurePlanet(current)[i],rec=mission?.recommendations?.[j];if(!mission||!rec)return;
@@ -594,7 +595,7 @@ function toggleOmicronAbility(i,j,k,ability,checked){
   while(marks.length<5)marks.push([]);if(!Array.isArray(marks[k]))marks[k]=[];
   if(checked&&!marks[k].includes(ability))marks[k].push(ability);if(!checked)marks[k]=marks[k].filter(x=>x!==ability);
   rec.omicronAbilities=marks;if(Array.isArray(rec.omicrons))rec.omicrons[k]=false;
-  queueSave();renderMissions();
+  queueSave();renderMissions();positionOmicronPopups();
   const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
   setStatus((checked?'Omicron ability selected':'Omicron ability cleared')+' · saving shared guide…','');
 }
