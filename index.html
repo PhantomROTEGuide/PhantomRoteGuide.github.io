@@ -575,7 +575,19 @@ function selectCharacterPortrait(index){
 function setOmicronSelectionMode(i,j,k,editing,event){if(event)event.stopPropagation();const key=current+'|'+i+'|'+j+'|'+k;if(editing)omicronEditing.add(key);else omicronEditing.delete(key);const missionStates=[...document.querySelectorAll('.mission')].map(el=>el.open);const teamStates=[...document.querySelectorAll('.team')].map(el=>({mission:el.closest('.mission'),open:el.open,missionIndex:el.getAttribute('data-mission-index'),teamIndex:el.getAttribute('data-team-index')}));renderMissions();const cards=document.querySelectorAll('.mission');cards.forEach((el,index)=>{if(missionStates[index])el.open=true});if(cards[i])cards[i].open=true;const target=document.querySelector('.team[data-mission-index="'+i+'"][data-team-index="'+j+'"]');if(target)target.open=true;positionOmicronPopups()}
 function finishOmicronSelection(i,j,k,event){setOmicronSelectionMode(i,j,k,false,event)}
 function editOmicronSelection(i,j,k,event){setOmicronSelectionMode(i,j,k,true,event)}
-function positionOmicronPopups(){document.querySelectorAll('.portrait-slot:has(.omicron-picker)').forEach(slot=>{const popup=slot.querySelector('.omicron-picker');if(!popup||!popup.children.length)return;popup.style.left='50%';popup.style.transform='translateX(-50%)';popup.style.top='auto';popup.style.bottom='calc(100% + 8px)';const slotRect=slot.getBoundingClientRect(),popupRect=popup.getBoundingClientRect(),gap=8,viewportHeight=window.innerHeight;let placeBelow=popupRect.top<gap;if(placeBelow&&slotRect.bottom+gap+popupRect.height>viewportHeight-gap)placeBelow=false;if(placeBelow){popup.style.bottom='auto';popup.style.top='calc(100% + 8px)'}const finalRect=popup.getBoundingClientRect(),viewportWidth=window.innerWidth;let left=finalRect.left;if(finalRect.right>viewportWidth-gap)left-=finalRect.right-(viewportWidth-gap);if(left<gap)left+=gap-left;popup.style.left=(left-slotRect.left)+'px';popup.style.transform='none'})}
+function positionOmicronPopups(){
+ document.querySelectorAll('.omicron-picker[data-omicron-portal="true"]').forEach(popup=>{if(!popup._omicronAnchor||!popup._omicronAnchor.isConnected)popup.remove()});
+ document.querySelectorAll('.portrait-slot:has(.omicron-picker)').forEach(slot=>{
+  const popup=slot.querySelector('.omicron-picker');if(!popup||!popup.children.length)return;
+  if(popup.parentElement!==document.body){popup._omicronAnchor=slot;popup.dataset.omicronPortal='true';document.body.appendChild(popup)}
+  const rect=slot.getBoundingClientRect(),gap=8,vw=document.documentElement.clientWidth,vh=window.innerHeight;
+  popup.style.position='fixed';popup.style.left='0px';popup.style.top='0px';popup.style.right='auto';popup.style.bottom='auto';popup.style.transform='none';popup.style.margin='0';popup.style.width=window.innerWidth<=480?'148px':'168px';popup.style.maxWidth='calc(100vw - 16px)';popup.style.maxHeight='min(55vh, 420px, calc(100vh - 16px))';popup.style.overflowY='auto';popup.style.zIndex='1000';
+  const size=popup.getBoundingClientRect();let left=rect.left+(rect.width-size.width)/2;left=Math.max(gap,Math.min(left,vw-size.width-gap));
+  let top=rect.top-size.height-gap;if(top<gap){top=rect.bottom+gap;if(top+size.height>vh-gap)top=Math.max(gap,Math.min(rect.top+(rect.height-size.height)/2,vh-size.height-gap))}
+  popup.style.left=left+'px';popup.style.top=top+'px';
+ });
+}
+if(!window._omicronPopupPositionListeners){window._omicronPopupPositionListeners=true;window.addEventListener('scroll',positionOmicronPopups,true);window.addEventListener('resize',positionOmicronPopups)}
 function editTeamOmicronSelections(i,j,event){
  if(event)event.stopPropagation();
  const mission=ensurePlanet(current)[i],rec=mission?.recommendations?.[j];if(!mission||!rec)return;
