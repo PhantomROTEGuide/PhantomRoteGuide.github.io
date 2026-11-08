@@ -536,7 +536,9 @@ function selectCharacterPortrait(index){
  setStatus('Added '+character.name+(target.type==='fleet'?' ship':' portrait')+' · saving shared guide…','');
 }
 
-function finishOmicronSelection(i,j,k){omicronEditing.add(current+'|'+i+'|'+j+'|'+k);renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}}\nfunction editOmicronSelection(i,j,k){omicronEditing.delete(current+'|'+i+'|'+j+'|'+k);renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}}\nfunction toggleOmicronAbility(i,j,k,ability,checked){
+function finishOmicronSelection(i,j,k){omicronEditing.add(current+'|'+i+'|'+j+'|'+k);renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}}
+function editOmicronSelection(i,j,k){omicronEditing.delete(current+'|'+i+'|'+j+'|'+k);renderMissions();const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}}
+function toggleOmicronAbility(i,j,k,ability,checked){
   const mission=ensurePlanet(current)[i];if(missionType(mission)==='fleet')return;
   const rec=mission.recommendations[j],images=recommendationImages(rec,missionType(mission)),available=territoryBattleOmicronAbilities[rec.names?.[k]]||[];
   if(!images[k]||!available.includes(ability)){setStatus('Choose a character with that Territory Battle Omicron first.','bad');return}
