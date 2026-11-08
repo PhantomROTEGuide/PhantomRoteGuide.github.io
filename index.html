@@ -340,15 +340,16 @@ async function uploadTeamImage(i,j,k,input){
  }
 }
 function openTeamCharacterPicker(i,j){
- const mission=ensurePlanet(current)[i],type=missionType(mission),rec=mission.recommendations[j],limit=type==='fleet'?8:missionCharacterLimit(mission,current),images=recommendationImages(rec,type);
+ const mission=ensurePlanet(current)[i],type=missionType(mission),rec=mission.recommendations[j],limit=type==='fleet'?8:missionCharacterLimit(mission,current),images=recommendationImages(rec,type),names=Array.isArray(rec.names)?rec.names:[];
+ const occupied=k=>!!images[k]||names[k]==='__ANY__';
  let slot=-1;
  if(type==='fleet'){
-  slot=images.findIndex((url,k)=>k===0&&!url);
-  if(slot<0)slot=images.findIndex((url,k)=>k>0&&!url);
+  slot=images.findIndex((url,k)=>k===0&&!occupied(k));
+  if(slot<0)slot=images.findIndex((url,k)=>k>0&&!occupied(k));
  }else{
-  for(let k=0;k<limit;k++){if(requiredChoiceAt(mission,k,current)&&!images[k]){slot=k;break}}
-  if(slot<0)slot=images.findIndex((url,k)=>k<limit&&!url&&!lockedRequiredSlot(mission,rec,k,current));
-  if(slot<0)slot=images.findIndex((url,k)=>k<limit&&!lockedRequiredSlot(mission,rec,k,current));
+  for(let k=0;k<limit;k++){if(requiredChoiceAt(mission,k,current)&&!occupied(k)){slot=k;break}}
+  if(slot<0)slot=images.findIndex((url,k)=>k<limit&&!occupied(k)&&!lockedRequiredSlot(mission,rec,k,current));
+  if(slot<0)slot=images.findIndex((url,k)=>k<limit&&!occupied(k)&&!lockedRequiredSlot(mission,rec,k,current));
  }
  if(slot<0){setStatus('There are no available portrait slots in this team. Remove a portrait first.','bad');return}
  openCharacterPicker(i,j,slot);
@@ -415,7 +416,7 @@ function applyCharacterSelections(){
  while(names.length<5)names.push('');
  const limit=missionCharacterLimit(mission,target.planet),slots=[];
  for(let k=target.k;k<limit;k++){
-  if(k===target.k||(!images[k]&&!lockedRequiredSlot(mission,rec,k,target.planet)))slots.push(k);
+  if(k===target.k||(!images[k]&&names[k]!=='__ANY__'&&!lockedRequiredSlot(mission,rec,k,target.planet)))slots.push(k);
  }
  const accepted=[],rejected=[];let next=0;
  for(const index of selected){
@@ -497,7 +498,7 @@ function selectCharacterPortrait(index){
  const missionIndex=target.i,teamIndex=target.j;
  if(target.type==='fleet'){
   queueSave();
-  const nextSlot=images.findIndex((url,k)=>k>target.k&&!url);
+  const nextSlot=images.findIndex((url,k)=>k>target.k&&!url&&rec.names?.[k]!=='__ANY__');
   if(nextSlot>=0){
    pickerTarget={...target,k:nextSlot};
    const isCapital=nextSlot===0;
