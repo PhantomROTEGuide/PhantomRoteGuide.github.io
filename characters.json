@@ -1,1374 +1,2802 @@
 [
   {
     "name": "0-0-0",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_triplezero.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_triplezero.png",
+    "factions": [
+      "droid",
+      "scoundrel"
+    ]
   },
   {
     "name": "4-LOM",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_4lom.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_4lom.png",
+    "factions": [
+      "bounty hunter",
+      "droid",
+      "scoundrel"
+    ]
   },
   {
     "name": "50R-T",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_50rt.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_50rt.png",
+    "factions": [
+      "droid",
+      "old republic"
+    ]
   },
   {
     "name": "Aayla Secura",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_aaylasecura.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_aaylasecura.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Adelphi Ranger",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_adelphiranger.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_adelphiranger.png",
+    "factions": [
+      "new republic",
+      "rebel"
+    ]
   },
   {
     "name": "Admiral Ackbar",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ackbaradmiral.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ackbaradmiral.png",
+    "factions": [
+      "rebel"
+    ]
   },
   {
     "name": "Admiral Piett",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_piett.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_piett.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Admiral Raddus",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_admiralraddus.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_admiralraddus.png",
+    "factions": [
+      "rebel",
+      "rogue one"
+    ]
   },
   {
     "name": "Admiral Trench",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_admiraltrench.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_admiraltrench.png",
+    "factions": [
+      "separatist"
+    ]
   },
   {
     "name": "Ahsoka Tano",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsokatanogray.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsokatanogray.png",
+    "factions": [
+      "galactic legend",
+      "spectre",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Ahsoka Tano (Fulcrum)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsokaadult.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsokaadult.png",
+    "factions": [
+      "rebel",
+      "spectre",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Ahsoka Tano (Snips)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsoka.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ahsoka.png",
+    "factions": [
+      "501st",
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "Amilyn Holdo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_holdo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_holdo.png",
+    "factions": [
+      "resistance"
+    ]
   },
   {
     "name": "ARC Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_arc.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_arc.png",
+    "factions": [
+      "501st",
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "Asajj Ventress",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ventress.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ventress.png",
+    "factions": [
+      "nightsister",
+      "separatist",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Asajj Ventress (Dark Disciple)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_asajjdarkdisciple.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_asajjdarkdisciple.png",
+    "factions": [
+      "bounty hunter",
+      "nightsister",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Aurra Sing",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_aurrasing.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_aurrasing.png",
+    "factions": [
+      "bounty hunter",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "B1 Battle Droid",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b1.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b1.png",
+    "factions": [
+      "droid",
+      "separatist"
+    ]
   },
   {
     "name": "B2 Super Battle Droid",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b2.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b2.png",
+    "factions": [
+      "droid",
+      "separatist"
+    ]
   },
   {
     "name": "Barriss Offee",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_barriss_light.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_barriss_light.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Bastila Shan",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bastilashan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bastilashan.png",
+    "factions": [
+      "jedi",
+      "old republic"
+    ]
   },
   {
     "name": "Bastila Shan (Fallen)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bastilashan_dark.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bastilashan_dark.png",
+    "factions": [
+      "sith",
+      "sith empire"
+    ]
   },
   {
     "name": "Batcher",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_batcher.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_batcher.png",
+    "factions": [
+      "bad batch"
+    ]
   },
   {
     "name": "Baylan Skoll",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_baylanskoll.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_baylanskoll.png",
+    "factions": [
+      "mercenary",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Baze Malbus",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bazemalbus.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bazemalbus.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "BB-8",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb8.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb8.png",
+    "factions": [
+      "droid",
+      "resistance"
+    ]
   },
   {
     "name": "Ben Solo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bensolo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bensolo.png",
+    "factions": [
+      "unaligned force user"
+    ]
   },
   {
     "name": "Biggs Darklighter",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelpilot_biggs.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelpilot_biggs.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Bistan",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bistan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bistan.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "Bo-Katan (Mand'alor)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandalorbokatan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandalorbokatan.png",
+    "factions": [
+      "mandalorian"
+    ]
   },
   {
     "name": "Bo-Katan Kryze",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bokatan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bokatan.png",
+    "factions": [
+      "mandalorian",
+      "scoundrel"
+    ]
   },
   {
     "name": "Boba Fett",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bobafett.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bobafett.png",
+    "factions": [
+      "bounty hunter",
+      "hutt cartel",
+      "scoundrel"
+    ]
   },
   {
     "name": "Boba Fett, Scion of Jango",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bobafettold.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bobafettold.png",
+    "factions": [
+      "bounty hunter",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "Bodhi Rook",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bodhi.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bodhi.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "Boss Nass",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bossnass.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bossnass.png",
+    "factions": [
+      "gungan"
+    ]
   },
   {
     "name": "Bossk",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bossk.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bossk.png",
+    "factions": [
+      "bounty hunter",
+      "scoundrel"
+    ]
   },
   {
     "name": "Boushh (Leia Organa)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_boushh.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_boushh.png",
+    "factions": [
+      "bounty hunter",
+      "hutt cartel",
+      "scoundrel"
+    ]
   },
   {
     "name": "Brutus",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_brutus.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_brutus.png",
+    "factions": [
+      "pirate",
+      "scoundrel"
+    ]
   },
   {
     "name": "BT-1",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bt1.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bt1.png",
+    "factions": [
+      "droid",
+      "scoundrel"
+    ]
   },
   {
     "name": "C-3PO",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_c3p0.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_c3p0.png",
+    "factions": [
+      "droid",
+      "galactic republic",
+      "new republic",
+      "rebel",
+      "resistance"
+    ]
   },
   {
     "name": "Cad Bane",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cadbane.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cadbane.png",
+    "factions": [
+      "bounty hunter",
+      "hutt cartel",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "Cal Kestis",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_calkestis.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_calkestis.png",
+    "factions": [
+      "unaligned force user"
+    ]
   },
   {
     "name": "Canderous Ordo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_canderous.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_canderous.png",
+    "factions": [
+      "mandalorian",
+      "mercenary",
+      "old republic",
+      "scoundrel"
+    ]
   },
   {
     "name": "Captain Carson Teva",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_carsonteva.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_carsonteva.png",
+    "factions": [
+      "constable",
+      "new republic",
+      "rebel"
+    ]
   },
   {
     "name": "Captain Drogan",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captaindrogan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captaindrogan.png",
+    "factions": [
+      "new republic",
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Captain Enoch",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainenoch.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainenoch.png",
+    "factions": [
+      "imperial remnant"
+    ]
   },
   {
     "name": "Captain Han Solo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hoth_han.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hoth_han.png",
+    "factions": [
+      "rebel",
+      "scoundrel"
+    ]
   },
   {
     "name": "Captain Ithano",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ithano.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ithano.png",
+    "factions": [
+      "pirate",
+      "scoundrel"
+    ]
   },
   {
     "name": "Captain Phasma",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_phasma.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_phasma.png",
+    "factions": [
+      "first order"
+    ]
   },
   {
     "name": "Captain Rex",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainrex.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainrex.png",
+    "factions": [
+      "clone trooper",
+      "phoenix",
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Captain Silvo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainsilvo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captainsilvo.png",
+    "factions": [
+      "pirate",
+      "scoundrel",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Captain Tarpals",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captaintarpals.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_captaintarpals.png",
+    "factions": [
+      "gungan"
+    ]
   },
   {
     "name": "Cara Dune",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_caradune.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_caradune.png",
+    "factions": [
+      "constable",
+      "mercenary",
+      "new republic",
+      "rebel",
+      "rebel fighter",
+      "scoundrel"
+    ]
   },
   {
     "name": "Carth Onasi",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_carth.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_carth.png",
+    "factions": [
+      "old republic"
+    ]
   },
   {
     "name": "Cassian Andor",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cassian.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cassian.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "Cassian Andor (Undercover)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cassianundercover.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cassianundercover.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "CC-1119 \"Appo\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_appo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_appo.png",
+    "factions": [
+      "clone trooper",
+      "empire"
+    ]
   },
   {
     "name": "CC-2224 \"Cody\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_cody.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_cody.png",
+    "factions": [
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "Cere Junda",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cerejunda.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cerejunda.png",
+    "factions": [
+      "scoundrel",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Chewbacca",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_ot.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_ot.png",
+    "factions": [
+      "rebel",
+      "scoundrel",
+      "smuggler",
+      "wookie"
+    ]
   },
   {
     "name": "Chief Chirpa",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_chirpa.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_chirpa.png",
+    "factions": [
+      "ewok"
+    ]
   },
   {
     "name": "Chief Nebit",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_nebit.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_nebit.png",
+    "factions": [
+      "jawa"
+    ]
   },
   {
     "name": "Chirrut Îmwe",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chirrut.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chirrut.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "Chopper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chopper.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chopper.png",
+    "factions": [
+      "droid",
+      "new republic",
+      "phoenix",
+      "rebel",
+      "spectre"
+    ]
   },
   {
     "name": "Cinta Kaz",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cinta.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cinta.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Clone Sergeant - Phase I",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclonegreen.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclonegreen.png",
+    "factions": [
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "Clone Wars Chewbacca",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca.png",
+    "factions": [
+      "galactic republic",
+      "scoundrel",
+      "wookie"
+    ]
   },
   {
     "name": "Cobb Vanth",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cobbvanth.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_cobbvanth.png",
+    "factions": [
+      "constable"
+    ]
   },
   {
     "name": "Colonel Starck",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_colonel_stark.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_colonel_stark.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Colonel Ward",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_colonelward.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_colonelward.png",
+    "factions": [
+      "new republic"
+    ]
   },
   {
     "name": "Commander Ahsoka Tano",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_commanderahsokatano.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_commanderahsokatano.png",
+    "factions": [
+      "galactic republic",
+      "scoundrel",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Commander Luke Skywalker",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lukebespin.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lukebespin.png",
+    "factions": [
+      "rebel",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Coruscant Underworld Police",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_coruscantpolice.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_coruscantpolice.png",
+    "factions": [
+      "constable",
+      "galactic republic"
+    ]
   },
   {
     "name": "Count Dooku",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dooku.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dooku.png",
+    "factions": [
+      "separatist",
+      "sith"
+    ]
   },
   {
     "name": "Crosshair (Scarred)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_crosshair_scarred.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_crosshair_scarred.png",
+    "factions": [
+      "bad batch"
+    ]
   },
   {
     "name": "CT-21-0408 \"Echo\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_echo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_echo.png",
+    "factions": [
+      "501st",
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "CT-5555 \"Fives\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_fives.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_fives.png",
+    "factions": [
+      "501st",
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "CT-7567 \"Rex\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_rex.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperclone_rex.png",
+    "factions": [
+      "501st",
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "CX-2",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_operative.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_operative.png",
+    "factions": [
+      "clone trooper",
+      "empire"
+    ]
   },
   {
     "name": "Dark Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darktrooper.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darktrooper.png",
+    "factions": [
+      "droid",
+      "empire",
+      "imperial remnant",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Dark Trooper Moff Gideon",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_moffgideons3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_moffgideons3.png",
+    "factions": [
+      "empire",
+      "imperial remnant"
+    ]
   },
   {
     "name": "Darth Bane",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthbane.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthbane.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Darth Jar Jar",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthjarjar.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthjarjar.png",
+    "factions": [
+      "gungan",
+      "sith"
+    ]
   },
   {
     "name": "Darth Malak",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthmalak.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthmalak.png",
+    "factions": [
+      "sith",
+      "sith empire"
+    ]
   },
   {
     "name": "Darth Malgus",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthmalgus.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthmalgus.png",
+    "factions": [
+      "sith",
+      "sith empire"
+    ]
   },
   {
     "name": "Darth Maul",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maul.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maul.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Darth Nihilus",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nihilus.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nihilus.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Darth Revan",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithrevan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithrevan.png",
+    "factions": [
+      "sith",
+      "sith empire"
+    ]
   },
   {
     "name": "Darth Sidious",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sidious.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sidious.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Darth Sion",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sion.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sion.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Darth Talon",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthtalon.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darthtalon.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Darth Traya",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_traya.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_traya.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Darth Vader",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vader.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vader.png",
+    "factions": [
+      "empire",
+      "sith"
+    ]
   },
   {
     "name": "Darth Vader (Duel's End)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vaderduelsend.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vaderduelsend.png",
+    "factions": [
+      "empire",
+      "sith"
+    ]
   },
   {
     "name": "Dash Rendar",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dashrendar.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dashrendar.png",
+    "factions": [
+      "mercenary",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Dathcha",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_dathcha.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_dathcha.png",
+    "factions": [
+      "jawa"
+    ]
   },
   {
     "name": "Death Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperdeath.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperdeath.png",
+    "factions": [
+      "empire",
+      "imperial remnant",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Death Trooper (Peridea)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_deathtrooperperidea.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_deathtrooperperidea.png",
+    "factions": [
+      "imperial remnant",
+      "nightsister"
+    ]
   },
   {
     "name": "Dedra Meero",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dedrameero.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dedrameero.png",
+    "factions": [
+      "empire",
+      "isb"
+    ]
   },
   {
     "name": "Dengar",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dengar.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_dengar.png",
+    "factions": [
+      "bounty hunter",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "Depa Billaba",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_depabillaba.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_depabillaba.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Director Krennic",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_krennic.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_krennic.png",
+    "factions": [
+      "empire",
+      "isb"
+    ]
   },
   {
     "name": "Disguised Clone Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_disguisedclonetrooper.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_disguisedclonetrooper.png",
+    "factions": [
+      "clone trooper",
+      "empire"
+    ]
   },
   {
     "name": "Doctor Aphra",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_doctoraphra.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_doctoraphra.png",
+    "factions": [
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "Droideka",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_droideka.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_droideka.png",
+    "factions": [
+      "droid",
+      "separatist"
+    ]
   },
   {
     "name": "Echo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_echo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_echo.png",
+    "factions": [
+      "bad batch",
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "Eeth Koth",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_eethkoth.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_eethkoth.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Eighth Brother",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_eighthbrother.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_eighthbrother.png",
+    "factions": [
+      "empire",
+      "inquisitorious",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Embo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_embo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_embo.png",
+    "factions": [
+      "bounty hunter",
+      "hutt cartel",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "Embo & Keibu",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_emboandkeibu.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_emboandkeibu.png",
+    "factions": [
+      "bounty hunter",
+      "hutt cartel",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "Emperor Palpatine",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_palpatineemperor.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_palpatineemperor.png",
+    "factions": [
+      "empire",
+      "sith"
+    ]
   },
   {
     "name": "Enfys Nest",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_enfys.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_enfys.png",
+    "factions": [
+      "pirate",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Ewok Elder",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_chief.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_chief.png",
+    "factions": [
+      "ewok"
+    ]
   },
   {
     "name": "Ewok Scout",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_scout.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_scout.png",
+    "factions": [
+      "ewok"
+    ]
   },
   {
     "name": "Ezra Bridger",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ezra_s3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ezra_s3.png",
+    "factions": [
+      "jedi",
+      "phoenix",
+      "rebel"
+    ]
   },
   {
     "name": "Ezra Bridger (Exile)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ezraexile.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ezraexile.png",
+    "factions": [
+      "jedi",
+      "spectre"
+    ]
   },
   {
     "name": "Fennec Shand",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_fennec.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_fennec.png",
+    "factions": [
+      "bounty hunter",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "Fifth Brother",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_fifthbrother.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_fifthbrother.png",
+    "factions": [
+      "empire",
+      "inquisitorious",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Finn",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_finnjakku.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_finnjakku.png",
+    "factions": [
+      "resistance"
+    ]
   },
   {
     "name": "First Order Executioner",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_executioner.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_executioner.png",
+    "factions": [
+      "first order"
+    ]
   },
   {
     "name": "First Order Officer",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorderofficer.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorderofficer.png",
+    "factions": [
+      "first order"
+    ]
   },
   {
     "name": "First Order SF TIE Pilot",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_pilot.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_pilot.png",
+    "factions": [
+      "first order"
+    ]
   },
   {
     "name": "First Order Stormtrooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstordertrooper.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstordertrooper.png",
+    "factions": [
+      "first order"
+    ]
   },
   {
     "name": "First Order TIE Pilot",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstordertiepilot.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstordertiepilot.png",
+    "factions": [
+      "first order"
+    ]
   },
   {
     "name": "Gamorrean Guard",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gamorreanguard.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gamorreanguard.png",
+    "factions": [
+      "hutt cartel"
+    ]
   },
   {
     "name": "Gar Saxon",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gar_saxon.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gar_saxon.png",
+    "factions": [
+      "empire",
+      "mandalorian"
+    ]
   },
   {
     "name": "Garazeb \"Zeb\" Orrelios",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zeb_s3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zeb_s3.png",
+    "factions": [
+      "phoenix",
+      "rebel"
+    ]
   },
   {
     "name": "General Grievous",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_grievous.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_grievous.png",
+    "factions": [
+      "droid",
+      "separatist"
+    ]
   },
   {
     "name": "General Hux",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalhux.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalhux.png",
+    "factions": [
+      "first order"
+    ]
   },
   {
     "name": "General Kenobi",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_obiwangeneral.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_obiwangeneral.png",
+    "factions": [
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "General Skywalker",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalanakin.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalanakin.png",
+    "factions": [
+      "501st",
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "General Syndulla",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalsyndulla.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_generalsyndulla.png",
+    "factions": [
+      "new republic",
+      "spectre"
+    ]
   },
   {
     "name": "General Veers",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_veers.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_veers.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Geonosian Brood Alpha",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_broodalpha.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_broodalpha.png",
+    "factions": [
+      "geonosian",
+      "separatist"
+    ]
   },
   {
     "name": "Geonosian Soldier",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_soldier.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_soldier.png",
+    "factions": [
+      "geonosian",
+      "separatist"
+    ]
   },
   {
     "name": "Geonosian Spy",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_spy.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_spy.png",
+    "factions": [
+      "geonosian",
+      "separatist"
+    ]
   },
   {
     "name": "Grand Admiral Thrawn",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_thrawn.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_thrawn.png",
+    "factions": [
+      "empire"
+    ]
   },
   {
     "name": "Grand Inquisitor",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_grandinquisitor.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_grandinquisitor.png",
+    "factions": [
+      "empire",
+      "inquisitorious",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Grand Master Yoda",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodagrandmaster.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodagrandmaster.png",
+    "factions": [
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "Grand Moff Tarkin",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tarkinadmiral.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tarkinadmiral.png",
+    "factions": [
+      "empire"
+    ]
   },
   {
     "name": "Great Mothers",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greatmothers.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greatmothers.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Greedo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greedo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greedo.png",
+    "factions": [
+      "bounty hunter",
+      "hutt cartel",
+      "scoundrel"
+    ]
   },
   {
     "name": "Greef Karga",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greefkarga.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_greefkarga.png",
+    "factions": [
+      "bounty hunter",
+      "scoundrel"
+    ]
   },
   {
     "name": "Grogu & Anzellans",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_groguanz.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_groguanz.png",
+    "factions": [
+      "mandalorian",
+      "new republic",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Gungan Boomadier",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gunganboomadier.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gunganboomadier.png",
+    "factions": [
+      "gungan"
+    ]
   },
   {
     "name": "Gungan Phalanx",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gunganphalanx.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_gunganphalanx.png",
+    "factions": [
+      "gungan"
+    ]
   },
   {
     "name": "Han Solo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_han.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_han.png",
+    "factions": [
+      "mercenary",
+      "rebel",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Hera Syndulla",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hera_s3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hera_s3.png",
+    "factions": [
+      "phoenix",
+      "rebel"
+    ]
   },
   {
     "name": "Hermit Yoda",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodahermit.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodahermit.png",
+    "factions": [
+      "jedi"
+    ]
   },
   {
     "name": "HK-47",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hk47.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hk47.png",
+    "factions": [
+      "droid",
+      "sith empire"
+    ]
   },
   {
     "name": "Hondo Ohnaka",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hondoohnaka.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hondoohnaka.png",
+    "factions": [
+      "mercenary",
+      "pirate",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Hoth Rebel Scout",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelhothscout.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelhothscout.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Hoth Rebel Soldier",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelhoth.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelhoth.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Hunter",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_hunter.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_hunter.png",
+    "factions": [
+      "bad batch",
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "Hunter (Mercenary)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hunters3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_hunters3.png",
+    "factions": [
+      "bad batch",
+      "mercenary"
+    ]
   },
   {
     "name": "Huyang",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_huyang.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_huyang.png",
+    "factions": [
+      "droid",
+      "spectre"
+    ]
   },
   {
     "name": "Iden Versio",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_idenversioempire.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_idenversioempire.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "IG-100 MagnaGuard",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_magnaguard.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_magnaguard.png",
+    "factions": [
+      "droid",
+      "separatist"
+    ]
   },
   {
     "name": "IG-11",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig11_nurse.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig11_nurse.png",
+    "factions": [
+      "droid",
+      "scoundrel"
+    ]
   },
   {
     "name": "IG-12 & Grogu",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig12.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig12.png",
+    "factions": [
+      "mandalorian"
+    ]
   },
   {
     "name": "IG-86 Sentinel Droid",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig86.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig86.png",
+    "factions": [
+      "droid"
+    ]
   },
   {
     "name": "IG-88",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig88.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig88.png",
+    "factions": [
+      "bounty hunter",
+      "droid",
+      "scoundrel"
+    ]
   },
   {
     "name": "IG-90",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig-90.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ig-90.png",
+    "factions": [
+      "bounty hunter",
+      "droid",
+      "scoundrel"
+    ]
   },
   {
     "name": "Ima-Gun Di",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_imagundi.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_imagundi.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Imperial Probe Droid",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_probedroid.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_probedroid.png",
+    "factions": [
+      "droid",
+      "empire",
+      "isb"
+    ]
   },
   {
     "name": "Imperial Super Commando",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_imperial_super_commando.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_imperial_super_commando.png",
+    "factions": [
+      "empire",
+      "mandalorian"
+    ]
   },
   {
     "name": "Inquisitor Barriss",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_inquisitorbarriss.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_inquisitorbarriss.png",
+    "factions": [
+      "empire",
+      "inquisitorious",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Jabba the Hutt",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jabbathehutt.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jabbathehutt.png",
+    "factions": [
+      "galactic legend",
+      "bounty hunter",
+      "hutt cartel",
+      "smuggler"
+    ]
   },
   {
     "name": "Jango Fett",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jangofett.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jangofett.png",
+    "factions": [
+      "bounty hunter",
+      "mandalorian",
+      "mercenary",
+      "scoundrel",
+      "separatist"
+    ]
   },
   {
     "name": "Jar Jar Binks",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jarjarbinks.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jarjarbinks.png",
+    "factions": [
+      "gungan"
+    ]
   },
   {
     "name": "Jawa",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_jawa.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_jawa.png",
+    "factions": [
+      "jawa"
+    ]
   },
   {
     "name": "Jawa Engineer",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_engineer.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_engineer.png",
+    "factions": [
+      "jawa"
+    ]
   },
   {
     "name": "Jawa Scavenger",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_scavenger.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jawa_scavenger.png",
+    "factions": [
+      "jawa"
+    ]
   },
   {
     "name": "Jaxxon",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jaxxon.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jaxxon.png",
+    "factions": [
+      "mercenary",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Jedi Consular",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_consular_03.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_consular_03.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Jedi Knight Anakin",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_anakinknight.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_anakinknight.png",
+    "factions": [
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "Jedi Knight Cal Kestis",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jediknightcal.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jediknightcal.png",
+    "factions": [
+      "jedi",
+      "mercenary"
+    ]
   },
   {
     "name": "Jedi Knight Guardian",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_guardian_01.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedi_guardian_01.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Jedi Knight Luke Skywalker",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_jediknight.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_jediknight.png",
+    "factions": [
+      "jedi"
+    ]
   },
   {
     "name": "Jedi Knight Revan",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedirevan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedirevan.png",
+    "factions": [
+      "jedi",
+      "old republic"
+    ]
   },
   {
     "name": "Jedi Master Kenobi",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_globiwan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_globiwan.png",
+    "factions": [
+      "galactic legend",
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "Jedi Master Luke Skywalker",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_jml.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_jml.png",
+    "factions": [
+      "galactic legend",
+      "jedi"
+    ]
   },
   {
     "name": "Jedi Master Mace Windu",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedimastermacewindu.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jedimastermacewindu.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Jocasta Nu",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jocastanu_blaster.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jocastanu_blaster.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Jolee Bindo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_joleebindo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_joleebindo.png",
+    "factions": [
+      "jedi",
+      "old republic"
+    ]
   },
   {
     "name": "Juhani",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_juhani.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_juhani.png",
+    "factions": [
+      "jedi",
+      "old republic"
+    ]
   },
   {
     "name": "Jyn Erso",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jyn.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_jyn.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "K-2SO",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_k2so.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_k2so.png",
+    "factions": [
+      "droid",
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "Kanan Jarrus",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kanan_s3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kanan_s3.png",
+    "factions": [
+      "jedi",
+      "phoenix",
+      "rebel"
+    ]
   },
   {
     "name": "Kelleran Beq",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kelleranbeq.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kelleranbeq.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Ki-Adi-Mundi",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kiadimundi.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kiadimundi.png",
+    "factions": [
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "Kit Fisto",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kitfisto.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kitfisto.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Kix",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kix.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kix.png",
+    "factions": [
+      "clone trooper",
+      "pirate",
+      "scoundrel"
+    ]
   },
   {
     "name": "Kleya Marki",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kleya.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kleya.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Krrsantan",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_krrsantan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_krrsantan.png",
+    "factions": [
+      "bounty hunter",
+      "hutt cartel",
+      "mercenary",
+      "scoundrel",
+      "wookie"
+    ]
   },
   {
     "name": "Kuiil",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kuiil.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kuiil.png",
+    "factions": [
+      "scoundrel"
+    ]
   },
   {
     "name": "KX Security Droid",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kxsecuritydroid.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kxsecuritydroid.png",
+    "factions": [
+      "droid",
+      "empire",
+      "isb"
+    ]
   },
   {
     "name": "Kyle Katarn",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kylekatarn.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kylekatarn.png",
+    "factions": [
+      "jedi",
+      "mercenary",
+      "new republic",
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Kylo Ren",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kyloren.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kyloren.png",
+    "factions": [
+      "first order",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Kylo Ren (Unmasked)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kylo_unmasked.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kylo_unmasked.png",
+    "factions": [
+      "first order",
+      "unaligned force user"
+    ]
   },
   {
     "name": "L3-37",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_l337.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_l337.png",
+    "factions": [
+      "droid",
+      "mercenary",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Lando Calrissian",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_landobespin.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_landobespin.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "scoundrel"
+    ]
   },
   {
     "name": "Leia (Jedi Training)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiajeditraining.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiajeditraining.png",
+    "factions": [
+      "jedi"
+    ]
   },
   {
     "name": "Lobot",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lobot.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lobot.png",
+    "factions": [
+      "constable",
+      "rebel"
+    ]
   },
   {
     "name": "Logray",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_logray.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_logray.png",
+    "factions": [
+      "ewok"
+    ]
   },
   {
     "name": "Lord Vader",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lordvader.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lordvader.png",
+    "factions": [
+      "galactic legend",
+      "empire",
+      "sith"
+    ]
   },
   {
     "name": "Luke Skywalker (Farmboy)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_ep4.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luke_ep4.png",
+    "factions": [
+      "rebel"
+    ]
   },
   {
     "name": "Luminara Unduli",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luminara.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luminara.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Luthen Rael",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luthenrael.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_luthenrael.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Mace Windu",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_macewindu.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_macewindu.png",
+    "factions": [
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "Magmatrooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm_magma.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm_magma.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Major Partagaz",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_majorpartagaz.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_majorpartagaz.png",
+    "factions": [
+      "empire",
+      "isb"
+    ]
   },
   {
     "name": "Mara Jade Skywalker",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marajadeskywalker.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marajadeskywalker.png",
+    "factions": [
+      "jedi",
+      "new republic"
+    ]
   },
   {
     "name": "Mara Jade, The Emperor's Hand",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marajade.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marajade.png",
+    "factions": [
+      "empire",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Marrok",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marrok.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_marrok.png",
+    "factions": [
+      "inquisitorious",
+      "mercenary",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Master Qui-Gon",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_masterquigon.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_masterquigon.png",
+    "factions": [
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "Maul",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maul_cyborg.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maul_cyborg.png",
+    "factions": [
+      "mandalorian",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Maul (Hate-Fueled)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maulhatefueled.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_maulhatefueled.png",
+    "factions": [
+      "unaligned force user"
+    ]
   },
   {
     "name": "Maz Kanata",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mazkanata.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mazkanata.png",
+    "factions": [
+      "pirate",
+      "smuggler",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Mercenary Guard Droid (B1)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b1mercdroid.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_b1mercdroid.png",
+    "factions": [
+      "droid",
+      "mercenary"
+    ]
   },
   {
     "name": "Merrin",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_merrin.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_merrin.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Mission Vao",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mission.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mission.png",
+    "factions": [
+      "mercenary",
+      "old republic",
+      "scoundrel"
+    ]
   },
   {
     "name": "Mob Enforcer",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mob_enforcer.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mob_enforcer.png",
+    "factions": [
+      "hutt cartel",
+      "scoundrel"
+    ]
   },
   {
     "name": "Moff Gideon",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_moffgideon.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_moffgideon.png",
+    "factions": [
+      "empire",
+      "imperial remnant",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Mon Mothma",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_monmothma.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_monmothma.png",
+    "factions": [
+      "new republic",
+      "rebel"
+    ]
   },
   {
     "name": "Morgan Elsbeth",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_morganelsbeth.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_morganelsbeth.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Mother Talzin",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_talzin.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_talzin.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Night Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nighttrooper_a.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nighttrooper_a.png",
+    "factions": [
+      "imperial remnant",
+      "nightsister"
+    ]
   },
   {
     "name": "Nightsister Acolyte",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_acolyte.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_acolyte.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Nightsister Initiate",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_initiate.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_initiate.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Nightsister Spirit",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_wraith.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_wraith.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Nightsister Zombie",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_zombie.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsisters_zombie.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Ninth Sister",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ninthsister.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ninthsister.png",
+    "factions": [
+      "empire",
+      "inquisitorious",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Nute Gunray",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nutegunray.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nutegunray.png",
+    "factions": [
+      "scoundrel",
+      "separatist"
+    ]
   },
   {
     "name": "Obi-Wan Kenobi (Old Ben)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_obiwanep4.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_obiwanep4.png",
+    "factions": [
+      "jedi",
+      "rebel"
+    ]
   },
   {
     "name": "Old Daka",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_daka.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_daka.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Omega",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_badbatchomega.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_badbatchomega.png",
+    "factions": [
+      "bad batch",
+      "clone trooper"
+    ]
   },
   {
     "name": "Omega (Fugitive)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_omegas3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_omegas3.png",
+    "factions": [
+      "bad batch"
+    ]
   },
   {
     "name": "Padawan Obi-Wan",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padawanobiwan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padawanobiwan.png",
+    "factions": [
+      "galactic republic",
+      "jedi"
+    ]
   },
   {
     "name": "Padawan Sabine Wren",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padawansabine.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padawansabine.png",
+    "factions": [
+      "mandalorian",
+      "spectre",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Padmé Amidala",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padme_geonosis.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_padme_geonosis.png",
+    "factions": [
+      "galactic republic"
+    ]
   },
   {
     "name": "Pao",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_pao.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_pao.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "Paploo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_paploo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_paploo.png",
+    "factions": [
+      "ewok"
+    ]
   },
   {
     "name": "Paz Vizsla",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_pazvizsla.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_pazvizsla.png",
+    "factions": [
+      "mandalorian"
+    ]
   },
   {
     "name": "Pirate King Hondo Ohnaka",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_glhondo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_glhondo.png",
+    "factions": [
+      "galactic legend",
+      "pirate",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Plo Koon",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_plokoon.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_plokoon.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Poe Dameron",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_poe.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_poe.png",
+    "factions": [
+      "resistance"
+    ]
   },
   {
     "name": "Poggle the Lesser",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_poggle.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_poggle.png",
+    "factions": [
+      "geonosian",
+      "separatist"
+    ]
   },
   {
     "name": "Princess Kneesaa",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_princesskneesaa.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_princesskneesaa.png",
+    "factions": [
+      "ewok"
+    ]
   },
   {
     "name": "Princess Leia",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiaendor.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiaendor.png",
+    "factions": [
+      "rebel"
+    ]
   },
   {
     "name": "Qi'ra",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_qira.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_qira.png",
+    "factions": [
+      "mercenary",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Queen Amidala",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_queenamidala.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_queenamidala.png",
+    "factions": [
+      "galactic republic"
+    ]
   },
   {
     "name": "Qui-Gon Jinn",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_quigon.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_quigon.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Quiggold",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_quiggold.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_quiggold.png",
+    "factions": [
+      "pirate",
+      "scoundrel"
+    ]
   },
   {
     "name": "R2-D2",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_astromech_r2d2.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_astromech_r2d2.png",
+    "factions": [
+      "droid",
+      "galactic republic",
+      "rebel",
+      "resistance"
+    ]
   },
   {
     "name": "R5-D4",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_r5d4.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_r5d4.png",
+    "factions": [
+      "droid",
+      "new republic",
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Range Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperranger.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperranger.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "RC-1262 \"Scorch\"",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_scorch.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_scorch.png",
+    "factions": [
+      "clone trooper",
+      "empire"
+    ]
   },
   {
     "name": "Rebel Officer Leia Organa",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiahoth.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_leiahoth.png",
+    "factions": [
+      "rebel"
+    ]
   },
   {
     "name": "Resistance Hero Finn",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_finn.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_finn.png",
+    "factions": [
+      "resistance"
+    ]
   },
   {
     "name": "Resistance Hero Poe",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_poe_tros.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_poe_tros.png",
+    "factions": [
+      "resistance"
+    ]
   },
   {
     "name": "Resistance Pilot",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_resistancepilot.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_resistancepilot.png",
+    "factions": [
+      "resistance"
+    ]
   },
   {
     "name": "Resistance Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_resistancetrooper.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_resistancetrooper.png",
+    "factions": [
+      "resistance"
+    ]
   },
   {
     "name": "Rey",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tros.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tros.png",
+    "factions": [
+      "galactic legend",
+      "resistance",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Rey (Dark Side Vision)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darkrey.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_darkrey.png",
+    "factions": [
+      "first order",
+      "sith"
+    ]
   },
   {
     "name": "Rey (Jedi Training)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tlj.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rey_tlj.png",
+    "factions": [
+      "resistance",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Rey (Scavenger)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_reyjakku.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_reyjakku.png",
+    "factions": [
+      "resistance",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Rose Tico",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rose.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rose.png",
+    "factions": [
+      "resistance"
+    ]
   },
   {
     "name": "Rotta the Hutt",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rotta.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rotta.png",
+    "factions": [
+      "hutt cartel"
+    ]
   },
   {
     "name": "Royal Guard",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_royalguard.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_royalguard.png",
+    "factions": [
+      "empire"
+    ]
   },
   {
     "name": "Sabine Wren",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sabine_s3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sabine_s3.png",
+    "factions": [
+      "mandalorian",
+      "phoenix",
+      "rebel"
+    ]
   },
   {
     "name": "Sana Starros",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sanastarros.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sanastarros.png",
+    "factions": [
+      "mercenary",
+      "pirate",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Satele Shan",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sateleshan.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sateleshan.png",
+    "factions": [
+      "jedi",
+      "old republic"
+    ]
   },
   {
     "name": "Savage Opress",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_savageopress.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_savageopress.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Saw Gerrera",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sawgerrera.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sawgerrera.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Scarif Rebel Pathfinder",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebel_scarif.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebel_scarif.png",
+    "factions": [
+      "rebel",
+      "rebel fighter",
+      "rogue one"
+    ]
   },
   {
     "name": "Scout Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperscout.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperscout.png",
+    "factions": [
+      "empire",
+      "imperial remnant",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Second Sister",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_secondsister.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_secondsister.png",
+    "factions": [
+      "empire",
+      "inquisitorious",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Seventh Sister",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_seventhsister.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_seventhsister.png",
+    "factions": [
+      "empire",
+      "inquisitorious",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Shaak Ti",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_shaakti.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_shaakti.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "Shin Hati",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_shinhati.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_shinhati.png",
+    "factions": [
+      "mercenary",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Shoretrooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_troopershore.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_troopershore.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Sith Assassin",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithassassin.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithassassin.png",
+    "factions": [
+      "sith",
+      "sith empire"
+    ]
   },
   {
     "name": "Sith Empire Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithtrooper.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithtrooper.png",
+    "factions": [
+      "sith",
+      "sith empire"
+    ]
   },
   {
     "name": "Sith Eternal Emperor",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_espalpatine_pre.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_espalpatine_pre.png",
+    "factions": [
+      "galactic legend",
+      "sith"
+    ]
   },
   {
     "name": "Sith Marauder",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithmarauder.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sithmarauder.png",
+    "factions": [
+      "sith",
+      "sith empire"
+    ]
   },
   {
     "name": "Sith Trooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_sithtrooper.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_firstorder_sithtrooper.png",
+    "factions": [
+      "first order",
+      "sith"
+    ]
   },
   {
     "name": "Skiff Guard (Lando Calrissian)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_undercoverlando.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_undercoverlando.png",
+    "factions": [
+      "hutt cartel",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "SM-33",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sm33.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_sm33.png",
+    "factions": [
+      "droid",
+      "pirate",
+      "scoundrel"
+    ]
   },
   {
     "name": "Snowtrooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_troopersnow.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_troopersnow.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Snowtrooper Commander",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_remnantsnowcommander.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_remnantsnowcommander.png",
+    "factions": [
+      "empire",
+      "imperial remnant",
+      "imperial trooper"
+    ]
   },
   {
     "name": "STAP",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stap.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stap.png",
+    "factions": [
+      "droid",
+      "separatist"
+    ]
   },
   {
     "name": "Starkiller",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_starkiller.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_starkiller.png",
+    "factions": [
+      "unaligned force user"
+    ]
   },
   {
     "name": "Starkiller (Luke Concept)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lukestarkiller.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_lukestarkiller.png",
+    "factions": [
+      "rebel",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Stormtrooper",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm.png",
+    "factions": [
+      "empire",
+      "imperial remnant",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Stormtrooper (Concept)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stormtrooperconcept.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stormtrooperconcept.png",
+    "factions": [
+      "empire",
+      "imperial trooper"
+    ]
   },
   {
     "name": "Stormtrooper Han",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm_han.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_trooperstorm_han.png",
+    "factions": [
+      "rebel",
+      "scoundrel"
+    ]
   },
   {
     "name": "Stormtrooper Luke",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stormtrooperluke.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stormtrooperluke.png",
+    "factions": [
+      "rebel"
+    ]
   },
   {
     "name": "Sun Fac",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_sunfac.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_geonosian_sunfac.png",
+    "factions": [
+      "geonosian",
+      "separatist"
+    ]
   },
   {
     "name": "Supreme Leader Kylo Ren",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kyloren_tros.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_kyloren_tros.png",
+    "factions": [
+      "galactic legend",
+      "first order",
+      "unaligned force user"
+    ]
   },
   {
     "name": "T3-M4",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_t3m4.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_t3m4.png",
+    "factions": [
+      "droid",
+      "old republic"
+    ]
   },
   {
     "name": "Talia",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_talia.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_nightsister_talia.png",
+    "factions": [
+      "nightsister"
+    ]
   },
   {
     "name": "Tarfful",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tarfful.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tarfful.png",
+    "factions": [
+      "wookie"
+    ]
   },
   {
     "name": "Taron Malicos",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_taronmalicos.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_taronmalicos.png",
+    "factions": [
+      "unaligned force user"
+    ]
   },
   {
     "name": "Tech",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_tech.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_tech.png",
+    "factions": [
+      "bad batch",
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "Teebo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_teebo.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_teebo.png",
+    "factions": [
+      "ewok"
+    ]
   },
   {
     "name": "Temple Guard",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vanguardtempleguard.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vanguardtempleguard.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "jedi vanguard"
+    ]
   },
   {
     "name": "The Armorer",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_armorer.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_armorer.png",
+    "factions": [
+      "mandalorian"
+    ]
   },
   {
     "name": "The Mandalorian",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandalorian.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandalorian.png",
+    "factions": [
+      "bounty hunter",
+      "mandalorian",
+      "scoundrel"
+    ]
   },
   {
     "name": "The Mandalorian (Beskar Armor)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandobeskar.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_mandobeskar.png",
+    "factions": [
+      "mandalorian",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "The Ronin",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_theronin.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_theronin.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "The Stranger",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stranger.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_stranger.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Third Sister",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_thirdsister.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_thirdsister.png",
+    "factions": [
+      "empire",
+      "inquisitorious",
+      "unaligned force user"
+    ]
   },
   {
     "name": "Threepio & Chewie",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_c3po.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_c3po.png",
+    "factions": [
+      "droid",
+      "rebel",
+      "wookie"
+    ]
   },
   {
     "name": "TIE Fighter Pilot",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiepilot.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tiepilot.png",
+    "factions": [
+      "empire"
+    ]
   },
   {
     "name": "Tusken Chieftain",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenchieftain.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenchieftain.png",
+    "factions": [
+      "tusken"
+    ]
   },
   {
     "name": "Tusken Raider",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenraider.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenraider.png",
+    "factions": [
+      "tusken"
+    ]
   },
   {
     "name": "Tusken Shaman",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenshaman.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenshaman.png",
+    "factions": [
+      "tusken"
+    ]
   },
   {
     "name": "Tusken Warrior",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenhuntress.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tuskenhuntress.png",
+    "factions": [
+      "tusken"
+    ]
   },
   {
     "name": "Ugnaught",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ugnaught.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ugnaught.png",
+    "factions": []
   },
   {
     "name": "URoRRuR'R'R",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_urorrurrr.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_urorrurrr.png",
+    "factions": [
+      "tusken"
+    ]
   },
   {
     "name": "Vandor Chewbacca",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_vandor.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_chewbacca_vandor.png",
+    "factions": [
+      "mercenary",
+      "scoundrel",
+      "smuggler",
+      "wookie"
+    ]
   },
   {
     "name": "Vane",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vane.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vane.png",
+    "factions": [
+      "pirate",
+      "scoundrel"
+    ]
   },
   {
     "name": "Vel Sartha",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vel.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_vel.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Veteran Smuggler Chewbacca",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tfa_chewbacca.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tfa_chewbacca.png",
+    "factions": [
+      "resistance",
+      "scoundrel",
+      "smuggler",
+      "wookie"
+    ]
   },
   {
     "name": "Veteran Smuggler Han Solo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tfa_han.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_tfa_han.png",
+    "factions": [
+      "mercenary",
+      "resistance",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Visas Marr",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_visas.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_visas.png",
+    "factions": [
+      "unaligned force user"
+    ]
   },
   {
     "name": "Wampa",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wampa.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wampa.png",
+    "factions": []
   },
   {
     "name": "Wat Tambor",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wattambor.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wattambor.png",
+    "factions": [
+      "separatist"
+    ]
   },
   {
     "name": "Wedge Antilles",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelpilot_wedge.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rebelpilot_wedge.png",
+    "factions": [
+      "rebel",
+      "rebel fighter"
+    ]
   },
   {
     "name": "Wicket",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_wicket.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_ewok_wicket.png",
+    "factions": [
+      "ewok"
+    ]
   },
   {
     "name": "Wrecker",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_wrecker.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_bb_wrecker.png",
+    "factions": [
+      "bad batch",
+      "clone trooper",
+      "galactic republic"
+    ]
   },
   {
     "name": "Wrecker (Mercenary)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wreckers3.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_wreckers3.png",
+    "factions": [
+      "bad batch",
+      "mercenary"
+    ]
   },
   {
     "name": "Yoda (Dark Side Vision)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodadsv.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodadsv.png",
+    "factions": [
+      "sith"
+    ]
   },
   {
     "name": "Yoda & Chewie",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodachewbacca.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_yodachewbacca.png",
+    "factions": [
+      "galactic republic",
+      "jedi",
+      "wookie"
+    ]
   },
   {
     "name": "Young Han Solo",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_han_young.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_han_young.png",
+    "factions": [
+      "mercenary",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Young Lando Calrissian",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_younglando.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_younglando.png",
+    "factions": [
+      "mercenary",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Zaalbar",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zaalbar.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zaalbar.png",
+    "factions": [
+      "mercenary",
+      "old republic",
+      "scoundrel",
+      "wookie"
+    ]
   },
   {
     "name": "Zam Wesell",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zamwesell.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zamwesell.png",
+    "factions": [
+      "bounty hunter",
+      "mercenary",
+      "scoundrel"
+    ]
   },
   {
     "name": "Zeb Orrelios (New Republic Pilot)",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rangerzeb.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_rangerzeb.png",
+    "factions": [
+      "new republic"
+    ]
   },
   {
     "name": "Zorii Bliss",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zoriibliss.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zoriibliss.png",
+    "factions": [
+      "resistance",
+      "scoundrel",
+      "smuggler"
+    ]
   },
   {
     "name": "Zuckuss",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zuckuss.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_zuckuss.png",
+    "factions": [
+      "bounty hunter",
+      "scoundrel",
+      "unaligned force user"
+    ]
   },
   {
     "name": "The Mandalorian and Grogu",
-    "image": "https://game-assets.swgoh.gg/textures/tex.charui_glmandogrogu.png"
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_glmandogrogu.png",
+    "factions": [
+      "galactic legend",
+      "bounty hunter",
+      "mandalorian",
+      "new republic",
+      "scoundrel",
+      "unaligned force user"
+    ]
   }
 ]
