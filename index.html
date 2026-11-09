@@ -63,8 +63,8 @@ const territoryBattleOmicronAbilityTypes={
 function formatTBOmicronAbility(ability){return ability+' ('+(territoryBattleOmicronAbilityTypes[ability]||'Ability')+')'}
 function selectedTBOmicrons(rec,slot,name){
  const saved=Array.isArray(rec.omicronAbilities?.[slot])?rec.omicronAbilities[slot]:[];
- // Saved selections are the source of truth. Do not hide them just because a
- // character's catalog label or available-ability list has since changed.
+ // Prefer the exact saved abilities. Fall back to the legacy per-slot flag
+ // so existing/shared recommendations still show their Omicron marker.
  if(saved.length)return saved.filter(x=>typeof x==='string'&&x.trim());
  const available=territoryBattleOmicronAbilities[name]||[];
  return rec.omicrons?.[slot]&&available.length?[available[0]]:[];
@@ -646,7 +646,9 @@ function toggleOmicronAbility(i,j,k,ability,checked){
   const marks=Array.isArray(rec.omicronAbilities)?rec.omicronAbilities.slice():Array(5).fill(null).map(()=>[]);
   while(marks.length<5)marks.push([]);if(!Array.isArray(marks[k]))marks[k]=[];
   if(checked&&!marks[k].includes(ability))marks[k].push(ability);if(!checked)marks[k]=marks[k].filter(x=>x!==ability);
-  rec.omicronAbilities=marks;if(Array.isArray(rec.omicrons))rec.omicrons[k]=false;
+  rec.omicronAbilities=marks;
+  if(!Array.isArray(rec.omicrons))rec.omicrons=Array(5).fill(false);
+  rec.omicrons[k]=marks[k].length>0;
   // Keep the picker DOM in place while changing checkboxes. Rebuilding the
   // mission list here destroys the portaled picker before the user can finish.
   // The checkbox already reflects the new state; render the recommendation
