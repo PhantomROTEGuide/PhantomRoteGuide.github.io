@@ -950,5 +950,6 @@ function hideLogin(){document.getElementById('loginPanel').classList.remove('sho
 async function login(e){e.preventDefault();const email=document.getElementById('email').value,password=document.getElementById('password').value;const {data:result,error}=await db.auth.signInWithPassword({email,password});if(error){document.getElementById('loginError').textContent=error.message;return}user=result.user;hideLogin();await checkEditor();if(!isEditor){await db.auth.signOut();user=null;await checkEditor();alert('This account is not on the approved editor list.');return}setStatus('Officer access granted','good')}
 async function logout(){if(db)await db.auth.signOut();user=null;isEditor=false;updateAuthUI();setStatus('Signed out. Viewing shared guide.','')}
 if(db){db.auth.onAuthStateChange(()=>{setTimeout(checkEditor,0)});loadShared()}else{planetList().forEach(ensurePlanet);setStatus('Setup needed: connect Supabase to enable shared data and officer sign-in.','bad')}
+try{sessionStorage.removeItem('phantomGuidePageState')}catch(e){}
 renderHome();
 </script></body></html>
