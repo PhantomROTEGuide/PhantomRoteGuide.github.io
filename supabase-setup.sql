@@ -55,7 +55,7 @@ returns timestamptz
 language plpgsql
 security definer
 set search_path = public
-as $
+as $$
 declare
   v_existing jsonb;
   v_merged jsonb;
@@ -130,7 +130,7 @@ begin
 
   return v_updated_at;
 end;
-$;
+$$;
 
 revoke all on function public.save_public_recommendations(jsonb, timestamptz) from public;
 grant execute on function public.save_public_recommendations(jsonb, timestamptz) to anon, authenticated;
