@@ -273,6 +273,7 @@ const capitalShipNames=new Set(['Finalizer','Home One','Raddus','Chimaera','Exec
 const darkSideShipNames=new Set(['B-28 Extinction-class Bomber','Punishing One','Chimaera',"Emperor's Shuttle",'Executor','Executrix','Finalizer','First Order SF TIE Fighter','First Order TIE Fighter','Fury-class Interceptor','Gauntlet Starfighter',"Geonosian Soldier's Starfighter","Geonosian Spy's Starfighter","Hound's Tooth",'Hyena Bomber','IG-2000','Imperial TIE Bomber','Imperial TIE Fighter',"Kylo Ren's Command Shuttle",'Leviathan','Malevolence','Mark VI Interceptor','Scimitar','Scythe','Sith Fighter','Slave I',"Sun Fac's Geonosian Starfighter",'TIE Advanced x1','TIE Dagger','TIE Defender','TIE Echelon','TIE Reaper','TIE Silencer','TIE/IN Interceptor Prototype','Vulture Droid','Xanadu Blood']);
 const lightSideShipNames=new Set(['Rogue One',"Ahsoka Tano's Jedi Starfighter","Anakin's Eta-2 Starfighter","Biggs Darklighter's X-wing","Bistan's U-wing",'BTL-B Y-wing Starfighter',"Cassian's U-wing","Clone Sergeant's ARC-170",'Comeuppance','Ebon Hawk','Endurance','Ghost',"Han's Millennium Falcon",'Home One',"Jedi Consular's Starfighter","Lando's Millennium Falcon",'Marauder','MG-100 StarFortress SF-17','Negotiator','Outrider','Phantom II',"Plo Koon's Jedi Starfighter","Poe Dameron's X-wing",'Profundity','Raddus',"Raven's Claw",'Razor Crest','Rebel B-wing','Rebel Y-wing','Resistance X-wing',"Rex's ARC-170","Rey's Millennium Falcon",'Umbaran Starfighter',"Wedge Antilles's X-wing"]);
 function planetAlignment(name){if(name==='Zeffo')return 'Light Side';for(const phase of phases){const planet=phase[2].find(x=>x[0]===name);if(planet)return planet[1]==='Bonus Zone'?'Bonus':planet[1]}return 'Bonus'}
+function characterAllowedOnPlanet(name,planet){const side=planetAlignment(planet),alignment=characterAlignmentMap[name];if(planet==='Zeffo')return alignment==='lightside'||name==='Hondo Ohnaka';if(side==='Light Side'||side==='Dark Side')return alignment==='neutral'||alignment===side.toLowerCase().replace(' ','');return true}
 function shipAlignment(name){return darkSideShipNames.has(name)?'Dark Side':lightSideShipNames.has(name)?'Light Side':'Unknown'}
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -769,7 +770,7 @@ function renderCharacterPicker(){
  const isNpcMissionTab=pickerTarget?.mode==='mission'&&pickerTarget?.type!=='fleet'&&missionPortraitTab==='npcs';
  const isSpecialMissionTab=pickerTarget?.mode==='mission'&&pickerTarget?.type!=='fleet'&&missionPortraitTab==='special';
  const forcedFaction=(!isNpcMissionTab&&!isSpecialMissionTab)&&(pickerTarget?.type==='character'||(pickerTarget?.mode==='mission'&&pickerTarget?.type!=='fleet'))?activeMission?.forcedFaction||'':'';
- const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>isSpecialMissionTab||((!forcedFaction||(x.c.factions||[]).some(f=>String(f).toLowerCase()===forcedFaction.toLowerCase()))&&(pickerTarget?.type!=='fleet'||pickerTarget?.mode==='mission'||(isCapitalSlot?capitalShipNames.has(x.c.name):!capitalShipNames.has(x.c.name)))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(requiredCharacterSide==='Bonus'||requiredCharacterSide==='Mixed'||(characterAlignmentMap[x.c.name]==='neutral'||characterAlignmentMap[x.c.name]===requiredCharacterSide.toLowerCase().replace(' ','') ) )&&(pickerTarget?.type!=='special'||specialCharacterAllowed(x.c.name,specialRule))&&(!requiredChoice||requiredChoice.options.includes(x.c.name))&&(isNpcMissionTab||isSpecialMissionTab||!selectedFaction||(x.c.factions||[]).some(faction=>String(faction).toLowerCase()===selectedFaction))&&(x.c.name.toLowerCase().includes(query)||(x.c.factions||[]).some(faction=>String(faction).toLowerCase().includes(query)))&&!usedImages.has(x.c.image)));
+ const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>isSpecialMissionTab||((!forcedFaction||(x.c.factions||[]).some(f=>String(f).toLowerCase()===forcedFaction.toLowerCase()))&&(pickerTarget?.type!=='fleet'||pickerTarget?.mode==='mission'||(isCapitalSlot?capitalShipNames.has(x.c.name):!capitalShipNames.has(x.c.name)))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(pickerTarget?.type!=='character'||characterAllowedOnPlanet(x.c.name,pickerTarget.planet))&&(pickerTarget?.type!=='special'||specialCharacterAllowed(x.c.name,specialRule))&&(!requiredChoice||requiredChoice.options.includes(x.c.name))&&(isNpcMissionTab||isSpecialMissionTab||!selectedFaction||(x.c.factions||[]).some(faction=>String(faction).toLowerCase()===selectedFaction))&&(x.c.name.toLowerCase().includes(query)||(x.c.factions||[]).some(faction=>String(faction).toLowerCase().includes(query)))&&!usedImages.has(x.c.image)));
  document.getElementById('characterPickerStatus').textContent=matches.length
   ?'Showing '+matches.length+' available '+itemLabel+((requiredShipSide==='Dark Side'||requiredCharacterSide==='Dark Side')?' · Dark Side only':(requiredShipSide==='Light Side'||requiredCharacterSide==='Light Side')?' · Light Side only':'')+(forcedFaction?' · '+forcedFaction+' only':'')+(pickerTarget?.type==='special'&&specialRule?.faction?' · '+specialRule.faction+' only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
   :'No available '+itemLabel+' match the planet alignment or search. Items already used in this team are hidden.';
@@ -800,7 +801,7 @@ function applyCharacterSelections(){
    if(choice&&!choice.options.includes(character.name))continue;
    if(type==='special'&&!specialCharacterAllowed(character.name,specialRuleForMission(mission,target.planet)))continue;
    if(type==='character'&&mission.forcedFaction&&!(character.factions||[]).some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase()))continue;
-   if(type==='character'&&(side==='Dark Side'||side==='Light Side')&&actual!=='neutral'&&actual!==side.toLowerCase().replace(' ',''))continue;
+   if(type==='character'&&!characterAllowedOnPlanet(character.name,target.planet))continue;
    if(images.some((url,k)=>k!==slot&&url===character.image))continue;
    images[slot]=character.image;names[slot]=character.name;
    if(Array.isArray(rec.omicrons))rec.omicrons[slot]=false;if(Array.isArray(rec.omicronAbilities))rec.omicronAbilities[slot]=[];
@@ -835,7 +836,7 @@ function selectAnyoneSlot(){
     if(choice&&!choice.options.includes(character.name))continue;
     if(target.type==='special'&&!specialCharacterAllowed(character.name,specialRuleForMission(mission,target.planet)))continue;
     if(target.type==='character'&&mission.forcedFaction&&!(character.factions||[]).some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase()))continue;
-    if(target.type==='character'&&(side==='Dark Side'||side==='Light Side')&&actual!=='neutral'&&actual!==side.toLowerCase().replace(' ',''))continue;
+    if(target.type==='character'&&!characterAllowedOnPlanet(character.name,target.planet))continue;
     if(images.some((url,k)=>k!==slot&&url===character.image))continue;
     images[slot]=character.image;names[slot]=character.name;lastPlaced=slot;
     if(Array.isArray(rec.omicrons))rec.omicrons[slot]=false;if(Array.isArray(rec.omicronAbilities))rec.omicronAbilities[slot]=[];
@@ -882,7 +883,7 @@ function selectCharacterPortrait(index){
  }
  if(target.type==='character'){
   const requiredSide=planetAlignment(target.planet),actualSide=characterAlignmentMap[character.name];
-  if((requiredSide==='Dark Side'||requiredSide==='Light Side')&&actualSide!==requiredSide.toLowerCase().replace(' ','')){
+  if(!characterAllowedOnPlanet(character.name,target.planet)){
    setStatus(character.name+' is not a '+requiredSide+' character and cannot be used on a '+requiredSide+' planet.','bad');
    return;
   }
