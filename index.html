@@ -62,8 +62,11 @@ const territoryBattleOmicronAbilityTypes={
 };
 function formatTBOmicronAbility(ability){return ability+' ('+(territoryBattleOmicronAbilityTypes[ability]||'Ability')+')'}
 function selectedTBOmicrons(rec,slot,name){
- const available=territoryBattleOmicronAbilities[name]||[],saved=Array.isArray(rec.omicronAbilities?.[slot])?rec.omicronAbilities[slot]:[];
- if(saved.length)return saved.filter(x=>available.includes(x));
+ const saved=Array.isArray(rec.omicronAbilities?.[slot])?rec.omicronAbilities[slot]:[];
+ // Saved selections are the source of truth. Do not hide them just because a
+ // character's catalog label or available-ability list has since changed.
+ if(saved.length)return saved.filter(x=>typeof x==='string'&&x.trim());
+ const available=territoryBattleOmicronAbilities[name]||[];
  return rec.omicrons?.[slot]&&available.length?[available[0]]:[];
 }
 const phases=[
