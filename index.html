@@ -482,37 +482,40 @@ function plannerOptimizeByPhase(groups){
  return {selected,eligible,nodes,limited};
 }
 function plannerOptimize(groups){
- // Maximize the total number of assigned missions first. When multiple plans
- // assign the same number, prefer the plan with more special missions.
- // Special missions are explored first so ties naturally favor them.
+ // Optimize lexicographically: special missions first, total missions second,
+ // then the combined squad success score.
  const work=groups.filter(group=>group.candidates.length).slice().sort((a,b)=>{
   const priority=group=>group.type==='special'?0:1;
   return priority(a)-priority(b)||a.candidates.length-b.candidates.length;
  });
  work.forEach(group=>group.candidates.sort((a,b)=>b.score-a.score));
- let best=[],bestSpecial=-1,bestTotal=-1,nodes=0;const nodeLimit=60000,chosen=[];
- function search(index,used,chosenSpecial){
+ let best=[],bestSpecial=-1,bestTotal=-1,bestScore=-Infinity,nodes=0;
+ const nodeLimit=60000,chosen=[];
+ function search(index,used,chosenSpecial,chosenScore){
   if(++nodes>nodeLimit)return;
-  if(chosen.length>bestTotal||(chosen.length===bestTotal&&chosenSpecial>bestSpecial)){
-   best=chosen.slice();bestTotal=chosen.length;bestSpecial=chosenSpecial;
+  const chosenTotal=chosen.length;
+  if(chosenSpecial>bestSpecial||
+     (chosenSpecial===bestSpecial&&(chosenTotal>bestTotal||
+      (chosenTotal===bestTotal&&chosenScore>bestScore)))){
+   best=chosen.slice();bestSpecial=chosenSpecial;bestTotal=chosenTotal;bestScore=chosenScore;
   }
   if(index>=work.length)return;
-  const maximumTotal=chosen.length+(work.length-index);
-  if(maximumTotal<bestTotal)return;
-  if(maximumTotal===bestTotal){
-   const remainingSpecial=work.slice(index).filter(group=>group.type==='special').length;
-   if(chosenSpecial+remainingSpecial<=bestSpecial)return;
-  }
+  const remaining=work.slice(index);
+  const maximumSpecial=chosenSpecial+remaining.filter(group=>group.type==='special').length;
+  if(maximumSpecial<bestSpecial)return;
+  if(maximumSpecial===bestSpecial&&chosenTotal+remaining.length<bestTotal)return;
   const group=work[index],isSpecial=group.type==='special';
   for(const candidate of group.candidates){
    if(candidate.units.some(unit=>used.has(unit)))continue;
    const next=new Set(used);candidate.units.forEach(unit=>next.add(unit));
-   chosen.push({group,candidate});search(index+1,next,chosenSpecial+(isSpecial?1:0));chosen.pop();
+   chosen.push({group,candidate});
+   search(index+1,next,chosenSpecial+(isSpecial?1:0),chosenScore+(candidate.score||0));
+   chosen.pop();
    if(nodes>nodeLimit)return;
   }
-  search(index+1,used,chosenSpecial);
+  search(index+1,used,chosenSpecial,chosenScore);
  }
- search(0,new Set(),0);
+ search(0,new Set(),0,0);
  const selected=new Map(best.map(item=>[item.group.key,item.candidate]));
  return {selected,eligible:work.length,nodes,limited:nodes>nodeLimit};
 }
