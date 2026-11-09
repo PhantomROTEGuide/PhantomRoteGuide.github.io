@@ -646,13 +646,13 @@ function updateOmicronSlotDisplay(i,j,k,rec){
  const teamCards=Array.from(document.querySelectorAll('.mission')).map(el=>Array.from(el.querySelectorAll('.team')).map(team=>team.open));
  renderMissions();
  const cards=document.querySelectorAll('.mission');
- cards.forEach((card,index)=>{if(missionCards[index])card.open=true});
+ cards.forEach((card,index)=>{
+  if(missionCards[index])card.open=true;
+  const teams=card.querySelectorAll('.team');
+  (teamCards[index]||[]).forEach((wasOpen,teamIndex)=>{if(wasOpen&&teams[teamIndex])teams[teamIndex].open=true});
+ });
  const missionCard=cards[i];
- if(missionCard){
-  missionCard.open=true;
-  const teams=missionCard.querySelectorAll('.team');
-  if(teams[j])teams[j].open=true;
- }
+ if(missionCard){missionCard.open=true;const teams=missionCard.querySelectorAll('.team');if(teams[j])teams[j].open=true}
 }
 function toggleOmicronAbility(i,j,k,ability,checked){
   const mission=ensurePlanet(current)[i];if(missionType(mission)==='fleet')return;
