@@ -609,7 +609,7 @@ function selectCharacterPortrait(index){
 }
 
 function setOmicronSelectionMode(i,j,k,editing,event){if(event)event.stopPropagation();const key=current+'|'+i+'|'+j+'|'+k;if(editing)omicronEditing.add(key);else omicronEditing.delete(key);const missionStates=[...document.querySelectorAll('.mission')].map(el=>el.open);const teamStates=[...document.querySelectorAll('.team')].map(el=>({mission:el.closest('.mission'),open:el.open,missionIndex:el.getAttribute('data-mission-index'),teamIndex:el.getAttribute('data-team-index')}));renderMissions();const cards=document.querySelectorAll('.mission');cards.forEach((el,index)=>{if(missionStates[index])el.open=true});if(cards[i])cards[i].open=true;const target=document.querySelector('.team[data-mission-index="'+i+'"][data-team-index="'+j+'"]');if(target)target.open=true;positionOmicronPopups()}
-function finishOmicronSelection(i,j,k,event){setOmicronSelectionMode(i,j,k,false,event)}
+function finishOmicronSelection(i,j,k,event){if(event)event.stopPropagation();setOmicronSelectionMode(i,j,k,false,event);queueSave();saveShared();setStatus('Omicron selections saved · syncing shared guide…','')}
 function editOmicronSelection(i,j,k,event){setOmicronSelectionMode(i,j,k,true,event)}
 function positionOmicronPopups(){
  document.querySelectorAll('.omicron-picker[data-omicron-portal="true"]').forEach(popup=>{if(!popup._omicronAnchor||!popup._omicronAnchor.isConnected)popup.remove()});
