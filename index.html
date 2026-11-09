@@ -377,6 +377,27 @@ function plannerBuildRoster(payload){
  });
  return {map,units};
 }
+function plannerUnitHasTBOmicron(unit,abilityName){
+ const data=unit?.data||unit||{};
+ const target=normalizeRosterName(abilityName);
+ if(!target)return false;
+ const abilities=Array.isArray(data.ability_data)?data.ability_data:Array.isArray(data.abilityData)?data.abilityData:[];
+ const learned=abilities.some(ability=>{
+  const name=ability?.name||ability?.ability_name||ability?.abilityName||'';
+  const hasOmicron=ability?.has_omicron_learned===true||ability?.hasOmicronLearned===true;
+  const isOmicron=ability?.is_omicron===true||ability?.isOmicron===true;
+  return normalizeRosterName(name)===target&&hasOmicron&&isOmicron;
+ });
+ if(learned)return true;
+ const applied=data.omicron_abilities||data.omicronAbilities;
+ return Array.isArray(applied)&&applied.some(ability=>{
+  const name=typeof ability==='string'?ability:(ability?.name||ability?.ability_name||ability?.abilityName||'');
+  return normalizeRosterName(name)===target;
+ });
+}
+function plannerUnitMeetsTBOmicrons(unit,requiredAbilities){
+ return requiredAbilities.every(ability=>plannerUnitHasTBOmicron(unit,ability));
+}
 async function fetchPlannerRoster(allyCode){
  let response;
  try{
@@ -430,6 +451,14 @@ function plannerCandidate(planet,mission,rec,index,roster){
  if(new Set(normalized).size!==normalized.length)return null;
  const owned=names.map(name=>roster.map.get(normalizeRosterName(name)));
  if(owned.some(unit=>!unit))return null;
+ // A recommendation's selected TB Omicron abilities are hard requirements.
+ // Use the exact learned ability reported by SWGOH.GG; missing or unverified
+ // Omicron data must never make an Omicron-required team appear eligible.
+ const omicronSlots=namedSlots.map(slot=>({slot,unit:roster.map.get(normalizeRosterName(slot.name))}));
+ if(omicronSlots.some(({slot,unit})=>{
+  const required=selectedTBOmicrons(rec,slot.index,slot.name);
+  return required.length&&!plannerUnitMeetsTBOmicrons(unit?.raw,required);
+ }))return null;
  const relic=plannerRelicRequirement(planet,mission);
  if(fleet&&owned.some(unit=>unit.stars===null||unit.stars<7))return null;
  if(!fleet&&owned.some(unit=>unit.relic<relic))return null;
