@@ -586,6 +586,11 @@ function selectCharacterPortrait(index){
  const missionIndex=target.i,teamIndex=target.j;
  if(target.type==='fleet'){
   queueSave();
+  const cardsBefore=document.querySelectorAll('.mission');
+  if(cardsBefore[missionIndex]){cardsBefore[missionIndex].open=true;const teams=cardsBefore[missionIndex].querySelectorAll('.team');if(teams[teamIndex])teams[teamIndex].open=true}
+  renderMissions();
+  const updatedCards=document.querySelectorAll('.mission');
+  if(updatedCards[missionIndex]){updatedCards[missionIndex].open=true;const teams=updatedCards[missionIndex].querySelectorAll('.team');if(teams[teamIndex])teams[teamIndex].open=true}
   const nextSlot=images.findIndex((url,k)=>k>target.k&&!url&&rec.names?.[k]!=='__ANY__');
   if(nextSlot>=0){
    pickerTarget={...target,k:nextSlot};
