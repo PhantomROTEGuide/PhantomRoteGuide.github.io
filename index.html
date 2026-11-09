@@ -640,19 +640,49 @@ function editTeamOmicronSelections(i,j,event){
  positionOmicronPopups();
 }
 function updateOmicronSlotDisplay(i,j,k,rec){
- // Rebuild the recommendation from the updated data so the portrait badge,
- // ability labels, and picker checkboxes all use the same saved selection.
- const missionCards=Array.from(document.querySelectorAll('.mission')).map(el=>el.open);
- const teamCards=Array.from(document.querySelectorAll('.mission')).map(el=>Array.from(el.querySelectorAll('.team')).map(team=>team.open));
- renderMissions();
- const cards=document.querySelectorAll('.mission');
- cards.forEach((card,index)=>{
-  if(missionCards[index])card.open=true;
-  const teams=card.querySelectorAll('.team');
-  (teamCards[index]||[]).forEach((wasOpen,teamIndex)=>{if(wasOpen&&teams[teamIndex])teams[teamIndex].open=true});
- });
- const missionCard=cards[i];
- if(missionCard){missionCard.open=true;const teams=missionCard.querySelectorAll('.team');if(teams[j])teams[j].open=true}
+ const team=document.querySelector('.team[data-mission-index="'+i+'"][data-team-index="'+j+'"]');
+ if(!team)return;
+ const slot=team.querySelector('.portrait-slot[data-portrait-slot="'+k+'"]');
+ if(!slot)return;
+ const chosen=selectedTBOmicrons(rec,k,rec.names?.[k]);
+ const circle=slot.querySelector('.portrait-circle');
+ if(circle){
+  circle.querySelectorAll('.omicron-mark').forEach(el=>el.remove());
+  if(chosen.length){
+   const mark=document.createElement('span');
+   mark.className='omicron-mark';
+   mark.title=chosen.join(', ');
+   mark.setAttribute('aria-label','Selected Territory Battle Omicrons: '+chosen.join(', '));
+   mark.textContent='Ω';
+   circle.appendChild(mark);
+  }
+ }
+ const oldList=slot.querySelector('.omicron-selected-list');
+ if(oldList)oldList.remove();
+ if(chosen.length){
+  const list=document.createElement('div');
+  list.className='omicron-selected-list';
+  chosen.forEach(x=>{const item=document.createElement('span');item.textContent=formatTBOmicronAbility(x);list.appendChild(item)});
+  const name=slot.querySelector('.portrait-number');
+  if(name)name.insertAdjacentElement('afterend',list);
+ }
+ // Keep the dropdown thumbnail in sync without re-rendering or replacing
+ // the open Omicron picker.
+ const summary=team.querySelector('.team-unit-thumbs');
+ if(summary){
+  const thumb=summary.querySelectorAll('.team-unit-thumb')[k];
+  if(thumb){
+   thumb.querySelectorAll('.team-omicron-mark').forEach(el=>el.remove());
+   if(chosen.length){
+    const badge=document.createElement('span');
+    badge.className='team-omicron-mark';
+    badge.title='Territory Battle Omicron';
+    badge.setAttribute('aria-label','Territory Battle Omicron');
+    badge.textContent='Ω';
+    thumb.appendChild(badge);
+   }
+  }
+ }
 }
 function toggleOmicronAbility(i,j,k,ability,checked){
   const mission=ensurePlanet(current)[i];if(missionType(mission)==='fleet')return;
