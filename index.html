@@ -61,7 +61,7 @@ main{max-width:1240px;margin:auto;padding:28px 22px 65px}.hero{margin:10px 0 26p
 const SUPABASE_URL='https://qjkzppzdtnbotwgzmxqo.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_v0G1QJfWxsjSXXG959UHsQ_UkBYaRWU';
 const configured=SUPABASE_URL.startsWith('https://') && SUPABASE_ANON_KEY.startsWith('sb_publishable_');
-const db=configured&&window.supabase&&typeof window.supabase.createClient==='function'?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+let db=null;try{db=configured&&window.supabase&&typeof window.supabase.createClient==='function'?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null}catch(error){console.error('Supabase initialization failed; loading the guide in read-only mode.',error)}
 // Characters with at least one Territory Battle Omicron, synced against the live Omicron catalog.
 // Source: https://grandmasterbot.com/omicrons (Territory Battles filter).
 const territoryBattleOmicronAbilities={
@@ -967,7 +967,7 @@ function showLogin(){if(!db){alert('The shared database has not been connected y
 function hideLogin(){document.getElementById('loginPanel').classList.remove('show')}
 async function login(e){e.preventDefault();const email=document.getElementById('email').value,password=document.getElementById('password').value;const {data:result,error}=await db.auth.signInWithPassword({email,password});if(error){document.getElementById('loginError').textContent=error.message;return}user=result.user;hideLogin();await checkEditor();if(!isEditor){await db.auth.signOut();user=null;await checkEditor();alert('This account is not on the approved editor list.');return}setStatus('Officer access granted','good')}
 async function logout(){if(db)await db.auth.signOut();user=null;isEditor=false;updateAuthUI();setStatus('Signed out. Viewing shared guide.','')}
-if(db){db.auth.onAuthStateChange(()=>{setTimeout(checkEditor,0)});loadShared()}else{planetList().forEach(ensurePlanet);setStatus('Setup needed: connect Supabase to enable shared data and officer sign-in.','bad')}
-try{sessionStorage.removeItem('phantomGuidePageState')}catch(e){}
 renderHome();
+if(db){try{db.auth.onAuthStateChange(()=>{setTimeout(checkEditor,0)});loadShared()}catch(error){console.error('Shared services failed to start; keeping the guide visible.',error);setStatus('Shared services are unavailable. The guide is still available in read-only mode.','bad')}}else{planetList().forEach(ensurePlanet);setStatus('Shared database unavailable. The guide is available in read-only mode.','bad')}
+try{sessionStorage.removeItem('phantomGuidePageState')}catch(e){}
 </script></body></html>
