@@ -201,14 +201,17 @@ function requiredMissionCharacters(m,planet=current){
  if(leader) return [leader,...names.filter(n=>n!==leader)];
  return names;
 }
+function requiredSlotOffset(m,planet=current){
+ return forcedLeaderForMission(m,planet)?0:1;
+}
 function requiredAnyChoice(m,planet=current){
  const rule=missionType(m)==='special'?specialRuleForMission(m,planet):null;
  if(!rule?.requiredAny?.length)return null;
  const forced=requiredMissionCharacters(m,planet);
- return {index:forced.length,options:rule.requiredAny[0]};
+ return {index:forced.length+requiredSlotOffset(m,planet),options:rule.requiredAny[0]};
 }
 function requiredCharacterAt(m,slot,planet=current){
- return requiredMissionCharacters(m,planet)[slot]||null;
+ return requiredMissionCharacters(m,planet)[slot-requiredSlotOffset(m,planet)]||null;
 }
 function missionCharacterLimit(m,planet=current){
  const title=String(m?.title||'').toLowerCase();
@@ -226,7 +229,7 @@ function lockedRequiredSlot(m,rec,slot,planet=current){
  return !!(choice&&choice.options.includes((rec?.names||[])[slot]));
 }
 function syncForcedCharacters(m,planet=current){
- const required=requiredMissionCharacters(m,planet);
+ const required=requiredMissionCharacters(m,planet),offset=requiredSlotOffset(m,planet);
  if(!required.length)return false;
  let changed=false;
  (m.recommendations||[]).forEach(rec=>{
@@ -234,11 +237,12 @@ function syncForcedCharacters(m,planet=current){
   const names=Array.isArray(rec.names)?rec.names.slice():Array(5).fill('');
   while(names.length<5)names.push('');
   required.forEach((name,index)=>{
+   const slot=index+offset;
    const portrait=forcedLeaderPortraits[name]||null;
    const catalogPortrait=characterCatalog.find(c=>c.name===name)?.image;
    const url=portrait||catalogPortrait;
-   if(url&&images[index]!==url){images[index]=url;changed=true}
-   if(names[index]!==name){names[index]=name;changed=true}
+   if(url&&images[slot]!==url){images[slot]=url;changed=true}
+   if(names[slot]!==name){names[slot]=name;changed=true}
   });
   rec.images=images;rec.names=names;delete rec.image;
  });
