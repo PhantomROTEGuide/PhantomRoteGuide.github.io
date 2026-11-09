@@ -298,5 +298,13 @@
   {
     "name": "Crosshair",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_crosshair.png"
+  },
+  {
+    "name": "Pyke Leader",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_pyke_leader.png"
+  },
+  {
+    "name": "Pyke Sentinel",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_pyke_sentinel.png"
   }
 ]
