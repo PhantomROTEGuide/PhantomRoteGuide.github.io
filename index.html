@@ -522,7 +522,8 @@ async function generateMyTBPlan(){
   plannerStatus('Retrieving your public roster…');
   const fetched=await fetchPlannerRoster(allyCode),roster=fetched.roster;myTBRoster=roster;
   const playerName=plannerProfileName(fetched.profile),memberKey=normalizeRosterName(playerName),reservations=plannerPlatoonReservations[selectedPhase];
-  if(reservations&&!reservations.has(memberKey))throw new Error('Your SWGOH.GG profile name ('+(playerName||'not available')+') could not be matched to a guild member in the Phase '+selectedPhase+' platoon assignments. Check that the Ally Code belongs to your guild account.');
+  const knownGuildMember=plannerPlatoonReservations[3].has(memberKey)||plannerPlatoonReservations[4].has(memberKey);
+  if(!knownGuildMember)throw new Error('Your SWGOH.GG profile name ('+(playerName||'not available')+') could not be matched to the collected guild platoon assignments. Check the Ally Code and in-game name before generating a restricted plan.');
   const platoonBlocked=reservations?.get(memberKey)||new Set();
   const groups=[];
   for(const [planet] of phaseConfig[2]){
