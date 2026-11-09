@@ -294,5 +294,9 @@
   {
     "name": "AT-ST",
     "image": "https://game-assets.swgoh.gg/textures/tex.charui_atst.png"
+  },
+  {
+    "name": "Crosshair",
+    "image": "https://game-assets.swgoh.gg/textures/tex.charui_crosshair.png"
   }
 ]
