@@ -436,13 +436,15 @@ function plannerHasRequiredOmicrons(unit,abilities){
 function plannerCandidateHasOmicrons(candidate,roster){
  return (candidate.omicronRequirements||[]).every(requirement=>plannerHasRequiredOmicrons(roster.map.get(normalizeRosterName(requirement.name)),requirement.abilities));
 }
-function plannerCandidate(planet,mission,rec,index,roster){
+function plannerCandidate(planet,mission,rec,index,roster,wildcardNames=[]){
  const fleet=missionType(mission)==='fleet';
  const rawNames=Array.isArray(rec.names)?rec.names:[];
  const count=fleet?8:missionCharacterLimit(mission,planet);
  const slotNames=rawNames.slice(0,count);
- if(!fleet&&(slotNames.length<count||slotNames.some(name=>!name||name==='__ANY__')))return null;
- if(fleet&&slotNames.slice(0,4).some(name=>!name||name==='__ANY__'))return null;
+ let wildcardIndex=0;
+ for(let slot=0;slot<slotNames.length;slot++)if(slotNames[slot]==='__ANY__')slotNames[slot]=wildcardNames[wildcardIndex++]||'';
+ if(!fleet&&(slotNames.length<count||slotNames.some(name=>!name)))return null;
+ if(fleet&&slotNames.slice(0,4).some(name=>!name))return null;
  const namedSlots=slotNames.map((name,index)=>({name,index})).filter(slot=>slot.name&&slot.name!=='__ANY__');
  const names=namedSlots.map(slot=>slot.name);
  const normalized=names.map(normalizeRosterName);
@@ -459,6 +461,28 @@ function plannerCandidate(planet,mission,rec,index,roster){
  const images=namedSlots.map(slot=>allImages[slot.index]||'');
  const rating={high:4,medium:3,low:2,hailmary:1};
  return {planet,missionTitle:mission.title||'Mission',missionIndex:-1,teamTitle:rec.title||rec.team||('Recommendation '+(index+1)),teamIndex:index,names,images,units,omicronRequirements,relic,fleet,fullAuto:rec.fullAuto||'',successRate:rec.successRate||'',score:(rating[rec.successRate]||0)+(rec.fullAuto==='yes'?0.5:0)};
+}
+function plannerCandidateOptions(planet,mission,rec,index,roster,platoonBlocked){
+ const fleet=missionType(mission)==='fleet',count=fleet?8:missionCharacterLimit(mission,planet);
+ const rawNames=Array.isArray(rec.names)?rec.names.slice(0,count):[];
+ const anyCount=rawNames.filter(name=>name==='__ANY__').length;
+ if(!anyCount){const candidate=plannerCandidate(planet,mission,rec,index,roster);return candidate?[candidate]:[]}
+ if(fleet)return [];
+ const named=rawNames.filter(name=>name&&name!=='__ANY__');
+ const used=new Set(named.map(name=>normalizeRosterName(name)));
+ const catalogNames=new Set((characterCatalog||[]).map(item=>normalizeRosterName(item.name)));
+ const options=roster.units.map(unit=>unit?.name||plannerUnitName(unit)).filter(name=>{
+  const key=normalizeRosterName(name),owned=roster.map.get(key);
+  return key&&!used.has(key)&&catalogNames.has(key)&&owned&&owned.relic>=plannerRelicRequirement(planet,mission)&&!platoonBlocked.has('char:'+key);
+ }).filter((name,index,list)=>list.findIndex(other=>normalizeRosterName(other)===normalizeRosterName(name))===index).sort((a,b)=>a.localeCompare(b));
+ if(options.length<anyCount)return [];
+ const results=[],chosen=[];
+ function build(start){
+  if(results.length>=80)return;
+  if(chosen.length===anyCount){const candidate=plannerCandidate(planet,mission,rec,index,roster,chosen);if(candidate)results.push(candidate);return}
+  for(let i=start;i<options.length;i++){chosen.push(options[i]);build(i+1);chosen.pop();if(results.length>=80)return}
+ }
+ build(0);return results;
 }
 function plannerOptimizeByPhase(groups){
  const selected=new Map();let eligible=0,nodes=0,limited=false;
@@ -552,7 +576,7 @@ async function generateMyTBPlan(){
     const recommendations=mission.recommendations||[];
     const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
     if(hasSavedTeam){
-     const allCandidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
+     const allCandidates=recommendations.flatMap((rec,index)=>plannerCandidateOptions(planet,mission,rec,index,roster,platoonBlocked));
      const platoonEligible=allCandidates.filter(candidate=>!candidate.units.some(unit=>platoonBlocked.has(unit)));
      const candidates=platoonEligible.filter(candidate=>plannerCandidateHasOmicrons(candidate,roster));
      const group={key:'P'+selectedPhase+'|'+planet+'|'+missionIndex,phase:selectedPhase,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates,platoonBlocked:allCandidates.length-platoonEligible.length,omicronBlocked:platoonEligible.length-candidates.length};
