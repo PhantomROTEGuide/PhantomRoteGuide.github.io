@@ -422,8 +422,8 @@ function plannerCandidate(planet,mission,rec,index,roster){
  const rawNames=Array.isArray(rec.names)?rec.names:[];
  const count=fleet?8:missionCharacterLimit(mission,planet);
  const slotNames=rawNames.slice(0,count);
- if(!fleet&&(slotNames.length<count||slotNames.some(name=>!name||name==='__ANY__')))return null;
- if(fleet&&slotNames.slice(0,4).some(name=>!name||name==='__ANY__'))return null;
+ if(!fleet&&(slotNames.length<count||slotNames.some(name=>!name)))return null;
+ if(fleet&&slotNames.slice(0,4).some(name=>!name))return null;
  const namedSlots=slotNames.map((name,index)=>({name,index})).filter(slot=>slot.name&&slot.name!=='__ANY__');
  const names=namedSlots.map(slot=>slot.name);
  const normalized=names.map(normalizeRosterName);
