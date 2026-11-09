@@ -14,5 +14,9 @@
   {
     "name": "GET 3",
     "image": "./get3.png"
+  },
+  {
+    "name": "GET 2",
+    "image": "./get2.png"
   }
 ]
