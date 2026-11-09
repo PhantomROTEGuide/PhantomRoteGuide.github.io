@@ -639,6 +639,19 @@ function editTeamOmicronSelections(i,j,event){
  if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
  positionOmicronPopups();
 }
+function updateOmicronSlotDisplay(i,j,k,rec){
+ const team=document.querySelector('.team[data-mission-index="'+i+'"][data-team-index="'+j+'"]');
+ const slot=team?.querySelectorAll('.portrait-slot')?.[k];
+ if(!slot)return;
+ const chosen=selectedTBOmicrons(rec,k,rec.names?.[k]);
+ const circle=slot.querySelector('.portrait-circle');
+ if(circle){
+  circle.querySelectorAll('.omicron-mark').forEach(el=>el.remove());
+  if(chosen.length){const mark=document.createElement('span');mark.className='omicron-mark';mark.title=chosen.join(', ');mark.setAttribute('aria-label','Selected Territory Battle Omicrons: '+chosen.join(', '));const img=document.createElement('img');img.src='https://game-assets.swgoh.gg/textures/tex.skill_hexagon_white.png';img.alt='';mark.appendChild(img);circle.appendChild(mark)}
+ }
+ slot.querySelectorAll(':scope > .omicron-selected-list').forEach(el=>el.remove());
+ if(chosen.length){const list=document.createElement('div');list.className='omicron-selected-list';chosen.forEach(x=>{const item=document.createElement('span');item.textContent=formatTBOmicronAbility(x);list.appendChild(item)});const name=slot.querySelector(':scope > .portrait-number');if(name)name.insertAdjacentElement('afterend',list)}
+}
 function toggleOmicronAbility(i,j,k,ability,checked){
   const mission=ensurePlanet(current)[i];if(missionType(mission)==='fleet')return;
   const rec=mission.recommendations[j],images=recommendationImages(rec,missionType(mission)),available=territoryBattleOmicronAbilities[rec.names?.[k]]||[];
@@ -649,10 +662,7 @@ function toggleOmicronAbility(i,j,k,ability,checked){
   rec.omicronAbilities=marks;
   if(!Array.isArray(rec.omicrons))rec.omicrons=Array(5).fill(false);
   rec.omicrons[k]=marks[k].length>0;
-  // Keep the picker DOM in place while changing checkboxes. Rebuilding the
-  // mission list here destroys the portaled picker before the user can finish.
-  // The checkbox already reflects the new state; render the recommendation
-  // once when Done selecting closes the picker.
+  updateOmicronSlotDisplay(i,j,k,rec);
   queueSave();
   setStatus((checked?'Omicron ability selected':'Omicron ability cleared')+' · saving shared guide…','');
 }
