@@ -670,7 +670,8 @@ function updateOmicronSlotDisplay(i,j,k,rec){
  // the open Omicron picker.
  const summary=team.querySelector('.team-unit-thumbs');
  if(summary){
-  const thumb=summary.querySelectorAll('.team-unit-thumb')[k];
+  const name=rec.names?.[k]||'';
+  const thumb=Array.from(summary.querySelectorAll('.team-unit-thumb')).find(el=>el.querySelector('img')?.alt===name);
   if(thumb){
    thumb.querySelectorAll('.team-omicron-mark').forEach(el=>el.remove());
    if(chosen.length){
