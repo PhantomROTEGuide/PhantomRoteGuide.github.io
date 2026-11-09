@@ -409,9 +409,12 @@ function plannerSpecialTeamValid(planet,mission,names){
 function plannerCandidate(planet,mission,rec,index,roster){
  const fleet=missionType(mission)==='fleet';
  const rawNames=Array.isArray(rec.names)?rec.names:[];
- const count=fleet?4:missionCharacterLimit(mission,planet);
- const names=rawNames.slice(0,count);
- if(names.length<count||names.some(name=>!name||name==='__ANY__'))return null;
+ const count=fleet?8:missionCharacterLimit(mission,planet);
+ const slotNames=rawNames.slice(0,count);
+ if(!fleet&&(slotNames.length<count||slotNames.some(name=>!name||name==='__ANY__')))return null;
+ if(fleet&&slotNames.slice(0,4).some(name=>!name||name==='__ANY__'))return null;
+ const namedSlots=slotNames.map((name,index)=>({name,index})).filter(slot=>slot.name&&slot.name!=='__ANY__');
+ const names=namedSlots.map(slot=>slot.name);
  const normalized=names.map(normalizeRosterName);
  if(new Set(normalized).size!==normalized.length)return null;
  const owned=names.map(name=>roster.map.get(normalizeRosterName(name)));
@@ -421,7 +424,8 @@ function plannerCandidate(planet,mission,rec,index,roster){
  if(!fleet&&owned.some(unit=>unit.relic<relic))return null;
  if(!fleet&&!plannerSpecialTeamValid(planet,mission,names))return null;
  const units=names.map((name,i)=>(fleet?'ship:':'char:')+normalized[i]);
- const images=recommendationImages(rec,fleet?'fleet':'character').slice(0,count);
+ const allImages=recommendationImages(rec,fleet?'fleet':'character').slice(0,count);
+ const images=namedSlots.map(slot=>allImages[slot.index]||'');
  const rating={high:4,medium:3,low:2,hailmary:1};
  return {planet,missionTitle:mission.title||'Mission',missionIndex:-1,teamTitle:rec.title||rec.team||('Recommendation '+(index+1)),teamIndex:index,names,images,units,relic,fleet,fullAuto:rec.fullAuto||'',successRate:rec.successRate||'',score:(rating[rec.successRate]||0)+(rec.fullAuto==='yes'?0.5:0)};
 }
