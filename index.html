@@ -34,11 +34,22 @@ main{max-width:1240px;margin:auto;padding:28px 22px 65px}.hero{margin:10px 0 26p
 /* Keep one TB Omicron editor button after the final character portrait. */
 .omicron-picker:empty{display:none!important}
 .team-omicron-edit{align-self:center;flex:0 0 auto;margin:0 0 0 4px;padding:7px 10px!important;white-space:nowrap;font-size:11px!important;line-height:1.2}
+
+/* Personal Territory Battle planner */
+.planner{display:none}.planner.active{display:block}.planner-hero{margin:12px 0 22px}.planner-hero h2{font-size:clamp(26px,3.5vw,38px);margin:6px 0}.planner-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:18px 0;padding:14px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,#142840,#0b192a)}.planner-controls input{flex:1 1 230px;min-width:180px;background:#071321;border:1px solid #405a74;border-radius:8px;padding:10px 12px}.planner-status{margin:12px 0;color:var(--muted);font-size:12px}.planner-status.bad{color:#ff9aa6}.planner-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:16px 0}.planner-stat{padding:12px;border:1px solid var(--line);border-radius:9px;background:#102139}.planner-stat strong{display:block;color:var(--gold);font-size:22px;line-height:1.2}.planner-stat span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.planner-planet{margin:22px 0}.planner-planet h3{font-size:16px;margin:0 0 9px;color:var(--gold)}.planner-mission{display:grid;grid-template-columns:minmax(155px,1fr) minmax(0,2fr);gap:12px;align-items:center;padding:11px 12px;margin:7px 0;border:1px solid var(--line);border-radius:9px;background:#0d1c2e}.planner-mission.assigned{border-color:#367c59;background:linear-gradient(100deg,#102b25,#0d1c2e)}.planner-mission-title{font-weight:750;font-size:12px}.planner-mission-meta{font-size:10px;color:var(--muted)}.planner-team{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.planner-unit{width:39px;height:39px;position:relative;border:1px solid #526b84;border-radius:6px;overflow:hidden;background:#071321}.planner-unit img{width:100%;height:100%;object-fit:cover;display:block}.planner-unit-label{font-size:9px;color:var(--muted);max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.planner-team-name{font-size:11px;font-weight:750;color:var(--ink);margin-right:5px}.planner-ready{font-size:10px;font-weight:800;color:#9bd2b1}.planner-unready{font-size:10px;color:var(--muted)}.planner-foot{font-size:10px;color:var(--muted);margin:8px 0}.planner-back{margin-bottom:14px}@media(max-width:760px){.planner-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.planner-mission{grid-template-columns:1fr;gap:7px}.planner-unit{width:35px;height:35px}}
 </style></head>
 <body>
-<header><div class="bar"><div class="brand"><div class="crest">P</div><div><h1>PHANTOM RoTE GUIDE</h1><p>Rise of the Empire · Territory Battles</p></div></div><div class="actions"><span id="authLabel" class="btn">View only</span><button class="btn" id="loginBtn" onclick="showLogin()">Officer login</button><button class="btn" id="logoutBtn" style="display:none" onclick="logout()">Sign out</button></div></div></header>
+<header><div class="bar"><div class="brand"><div class="crest">P</div><div><h1>PHANTOM RoTE GUIDE</h1><p>Rise of the Empire · Territory Battles</p></div></div><div class="actions"><span id="authLabel" class="btn">View only</span><button class="btn primary" id="myTBPlanBtn" onclick="showMyTBPlan()">My TB Plan</button><button class="btn" id="loginBtn" onclick="showLogin()">Officer login</button><button class="btn" id="logoutBtn" style="display:none" onclick="logout()">Sign out</button></div></div></header>
 <main>
 <section id="home" class="home"><div class="hero"><div class="eyebrow">Guild field manual</div><h2>Choose your battlefield</h2><p>Select a planet to view its missions and the team's recommendations. Open a mission, then expand an individual team to see its squad and strategy.</p></div><div id="phases"></div><section class="bonus"><div class="eyebrow">Bonus operations</div><h3>Special Zones</h3><div class="grid" id="bonusZones"></div></section></section>
+
+<section id="myTBPlanner" class="planner">
+<button class="btn planner-back" onclick="closeMyTBPlan()">← Back to guide</button>
+<div class="planner-hero"><div class="eyebrow">Personal deployment assistant</div><h2>My TB Plan</h2><p class="muted">Enter your nine-digit Ally Code to compare your roster against every team recommendation in the Phantom guide. The planner checks planet- and mission-specific relic requirements and prevents duplicate character or ship assignments.</p></div>
+<div class="planner-controls"><input id="plannerAllyCode" inputmode="numeric" autocomplete="off" maxlength="11" placeholder="Enter 9-digit Ally Code" aria-label="SWGOH Ally Code"><button class="btn primary" id="plannerGenerateBtn" onclick="generateMyTBPlan()">Generate my plan</button></div>
+<div id="plannerStatus" class="planner-status">Your Ally Code is only used to retrieve your public roster. No roster data is saved to the guide.</div>
+<div id="plannerResults"></div>
+</section>
 <section id="detail" class="detail"><button class="btn back" onclick="goHome()">← All phases and planets</button><div class="detail-top"><span class="orb" id="detailOrb"></span><div><div class="eyebrow" id="detailPhase"></div><h2 id="detailName"></h2><p id="detailSub"></p></div></div><p class="muted">Expand a mission to see its team recommendations. Expand any team for its squad details and strategy notes.</p><div id="editNotice" class="locked">Anyone can add and edit team recommendations. Officers manage mission settings and restrictions.</div><div class="toolbar"><p>MISSIONS &amp; TEAM RECOMMENDATIONS</p><div id="addMissionBtn" style="display:none;gap:7px;flex-wrap:wrap"><button class="btn primary" onclick="addMission('character')">＋ Character mission</button><button class="btn primary" onclick="addMission('fleet')">＋ Fleet mission 🚀</button><select class="btn" id="specialMissionToAdd" aria-label="Choose special mission" style="max-width:230px"><option value="">Choose special mission…</option></select><button class="btn primary" onclick="addSpecialMissionFromPicker()">＋ Add special mission ★</button></div></div><div class="mission-list" id="missions"></div><div id="saveStatus" class="status"></div></section>
 </main><footer>Unofficial Star Wars: Galaxy of Heroes community guide</footer>
 <div class="login-panel" id="loginPanel"><div class="login-box"><h3>Officer sign in</h3><p class="muted" style="font-size:12px">Use the email and password created for you by the guide administrator.</p><form onsubmit="login(event)"><label>Email</label><input id="email" type="email" required autocomplete="username"><label>Password</label><input id="password" type="password" required autocomplete="current-password"><div class="actions"><button class="btn primary" type="submit">Sign in</button><button class="btn" type="button" onclick="hideLogin()">Cancel</button></div></form><div id="loginError" class="status bad"></div></div></div>
@@ -295,6 +306,207 @@ window.addEventListener('beforeunload',savePagePosition);
 window.addEventListener('blur',savePagePosition);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')savePagePosition();});
 window.addEventListener('pageshow',()=>{if(readPageState())restorePagePosition(false);});
+
+const tbPlanetRelicRequirements={
+ 'Mustafar':5,'Corellia':5,'Coruscant':5,
+ 'Geonosis':6,'Felucia':6,'Bracca':6,
+ 'Dathomir':7,'Tatooine':7,'Kashyyyk':7,
+ 'Haven Medical Station':8,'Kessel':8,'Lothal':8,
+ 'Malachor':9,'Vandor':9,'Ring of Kafrene':9,
+ 'Death Star':9,'Hoth':9,'Scarif':9,
+ 'Zeffo':7,'Mandalore':8
+};
+let myTBLastPlan=null,myTBRoster=null;
+function showMyTBPlan(){
+ savePagePosition();
+ document.getElementById('home').classList.add('hidden');
+ document.getElementById('detail').classList.remove('active');
+ document.getElementById('myTBPlanner').classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function closeMyTBPlan(){
+ document.getElementById('myTBPlanner').classList.remove('active');
+ if(current)document.getElementById('detail').classList.add('active');
+ else document.getElementById('home').classList.remove('hidden');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function plannerStatus(message,bad=false){
+ const el=document.getElementById('plannerStatus');el.textContent=message;el.className='planner-status'+(bad?' bad':'');
+}
+function normalizeRosterName(value){
+ return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+}
+function plannerRosterArray(payload){
+ if(Array.isArray(payload))return payload;
+ return payload?.roster||payload?.units||payload?.result?.roster||payload?.result?.[0]?.roster||payload?.data?.roster||payload?.data?.units||[];
+}
+function plannerRelicLevel(unit){
+ const direct=unit?.relic_tier??unit?.relicTier??unit?.relicLevel??unit?.relic_level;
+ if(direct!==undefined&&direct!==null&&Number.isFinite(Number(direct)))return Math.max(0,Number(direct));
+ const currentTier=unit?.relic?.currentTier??unit?.relic?.current_tier;
+ if(currentTier!==undefined&&currentTier!==null&&Number.isFinite(Number(currentTier)))return Math.max(0,Number(currentTier)-1);
+ return 0;
+}
+function plannerUnitName(unit){
+ return unit?.name||unit?.displayName||unit?.unitName||unit?.characterName||unit?.shipName||unit?.base_id||unit?.baseId||unit?.defId||'';
+}
+function plannerBuildRoster(payload){
+ const units=plannerRosterArray(payload);
+ if(!Array.isArray(units)||!units.length)throw new Error('The roster service returned no units. Check the Ally Code and try again.');
+ const map=new Map();
+ units.forEach(unit=>{
+  let name=plannerUnitName(unit);
+  if(!name)return;
+  const relic=plannerRelicLevel(unit);
+  const key=normalizeRosterName(name);
+  if(key)map.set(key,{name,relic,raw:unit});
+  const base=unit?.base_id||unit?.baseId||unit?.defId;
+  if(base){const baseKey=normalizeRosterName(base);if(baseKey&&!map.has(baseKey))map.set(baseKey,{name,relic,raw:unit});}
+ });
+ return {map,units};
+}
+async function fetchPlannerRoster(allyCode){
+ let lastError=null;
+ try{
+  const response=await fetch('https://swgoh.gg/api/player/'+encodeURIComponent(allyCode)+'/',{headers:{'Accept':'application/json'}});
+  if(!response.ok)throw new Error('SWGOH.GG roster request returned HTTP '+response.status);
+  const payload=await response.json();
+  return {profile:payload.data||payload.profile||payload,roster:plannerBuildRoster(payload)};
+ }catch(error){lastError=error;}
+ try{
+  const response=await fetch('https://api.mods-optimizer.swgoh.grandivory.com/playerprofile/',{
+   method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+   body:JSON.stringify({'ally-code':allyCode})
+  });
+  if(!response.ok)throw new Error('Roster service returned HTTP '+response.status);
+  const payload=await response.json();
+  return {profile:payload.player||payload.profile||payload,roster:plannerBuildRoster(payload)};
+ }catch(error){
+  throw new Error('Could not retrieve the roster. SWGOH.GG may block direct browser requests, or the roster service may be unavailable. '+(error?.message||lastError?.message||'Please try again later.'));
+ }
+}
+function plannerRelicRequirement(planet,mission){
+ const title=String(mission?.title||'');
+ const specialId=String(mission?.specialRuleId||'');
+ if((planet==='Bracca'||planet==='Felucia')&&(/cere\s*junda/i.test(title)||/zeffo-unlock/i.test(specialId)))return 7;
+ if(planet==='Mandalore'&&(/bo[\s-]*katan/i.test(title)||/bo[\s-]*katan/i.test(specialId)))return 9;
+ return tbPlanetRelicRequirements[planet]||0;
+}
+function plannerSpecialTeamValid(planet,mission,names){
+ const rule=missionType(mission)==='special'?specialRuleForMission(mission,planet):null;
+ if(rule){
+  if((rule.requiredAll||[]).some(name=>!names.includes(name)))return false;
+  if((rule.requiredAny||[]).some(group=>!group.some(name=>names.includes(name))))return false;
+  if(rule.faction&&(names.filter(name=>specialFactionMembers[rule.faction]?.has(name)).length<(rule.requiredCount||0)))return false;
+  if(rule.teamSize&&names.length<rule.teamSize)return false;
+  if(rule.maxUnits&&names.length>rule.maxUnits)return false;
+ }
+ const forced=requiredMissionCharacters(mission,planet);
+ if(forced.some(name=>!names.includes(name)))return false;
+ const choice=requiredAnyChoice(mission,planet);
+ if(choice&&!choice.options.some(name=>names.includes(name)))return false;
+ return true;
+}
+function plannerCandidate(planet,mission,rec,index,roster){
+ const fleet=missionType(mission)==='fleet';
+ const rawNames=Array.isArray(rec.names)?rec.names:[];
+ const count=fleet?4:missionCharacterLimit(mission,planet);
+ const names=rawNames.slice(0,count);
+ if(names.length<count||names.some(name=>!name||name==='__ANY__'))return null;
+ const normalized=names.map(normalizeRosterName);
+ if(new Set(normalized).size!==normalized.length)return null;
+ const owned=names.map(name=>roster.map.get(normalizeRosterName(name)));
+ if(owned.some(unit=>!unit))return null;
+ const relic=plannerRelicRequirement(planet,mission);
+ if(!fleet&&owned.some(unit=>unit.relic<relic))return null;
+ if(!fleet&&!plannerSpecialTeamValid(planet,mission,names))return null;
+ const units=names.map((name,i)=>(fleet?'ship:':'char:')+normalized[i]);
+ const images=recommendationImages(rec,fleet?'fleet':'character').slice(0,count);
+ const rating={high:4,medium:3,low:2,hailmary:1};
+ return {planet,missionTitle:mission.title||'Mission',missionIndex:-1,teamTitle:rec.title||rec.team||('Recommendation '+(index+1)),teamIndex:index,names,images,units,relic,fleet,fullAuto:rec.fullAuto||'',successRate:rec.successRate||'',score:(rating[rec.successRate]||0)+(rec.fullAuto==='yes'?0.5:0)};
+}
+function plannerOptimize(groups){
+ const work=groups.filter(group=>group.candidates.length).slice().sort((a,b)=>a.candidates.length-b.candidates.length);
+ work.forEach(group=>group.candidates.sort((a,b)=>b.score-a.score));
+ let best=[],nodes=0;const nodeLimit=60000,chosen=[];
+ function search(index,used){
+  if(++nodes>nodeLimit)return;
+  if(chosen.length>best.length)best=chosen.slice();
+  if(best.length===work.length||index>=work.length||chosen.length+(work.length-index)<=best.length)return;
+  const group=work[index];
+  for(const candidate of group.candidates){
+   if(candidate.units.some(unit=>used.has(unit)))continue;
+   const next=new Set(used);candidate.units.forEach(unit=>next.add(unit));
+   chosen.push({group,candidate});search(index+1,next);chosen.pop();
+   if(nodes>nodeLimit||best.length===work.length)return;
+  }
+  search(index+1,used);
+ }
+ search(0,new Set());
+ const selected=new Map(best.map(item=>[item.group.key,item.candidate]));
+ return {selected,eligible:work.length,nodes,limited:nodes>nodeLimit};
+}
+function plannerImageFor(name,image){
+ if(image)return image;
+ const all=[...(characterCatalog||[]),...(shipCatalog||[])];
+ return all.find(item=>normalizeRosterName(item.name)===normalizeRosterName(name))?.image||'';
+}
+function plannerRenderTeam(candidate){
+ const portraits=candidate.names.map((name,index)=>{
+  const image=plannerImageFor(name,candidate.images[index]);
+  return '<span class="planner-unit" title="'+esc(name)+'">'+(image?'<img src="'+esc(image)+'" alt="'+esc(name)+'">':'')+'</span>';
+ }).join('');
+ return '<div class="planner-team"><span class="planner-team-name">'+esc(candidate.teamTitle)+'</span>'+portraits+'<span class="planner-ready">'+(candidate.fleet?'Fleet ready':'R'+candidate.relic+'+ eligible')+'</span></div>';
+}
+function plannerRenderResults(groups,optimized,profile,roster){
+ const selected=optimized.selected;
+ const usedCount=new Set([...selected.values()].flatMap(candidate=>candidate.units)).size;
+ const charCount=roster.units.filter(unit=>Number(unit.combat_type??unit.combatType)===1).length;
+ const shipCount=roster.units.filter(unit=>Number(unit.combat_type??unit.combatType)===2).length;
+ const playerName=profile?.name||profile?.data?.name||profile?.playerName||'Player roster';
+ let html='<div class="planner-summary"><div class="planner-stat"><strong>'+selected.size+'</strong><span>Missions in plan</span></div><div class="planner-stat"><strong>'+optimized.eligible+'</strong><span>Missions with eligible teams</span></div><div class="planner-stat"><strong>'+charCount+'</strong><span>Characters scanned</span></div><div class="planner-stat"><strong>'+shipCount+'</strong><span>Ships scanned</span></div></div><p class="muted" style="font-size:12px"><b>'+esc(playerName)+'</b> · '+esc(document.getElementById('plannerAllyCode').value)+' · '+usedCount+' unique units assigned. Teams are selected to maximize the number of non-overlapping eligible missions.</p>';
+ const byPlanet=new Map();
+ groups.forEach(group=>{if(!byPlanet.has(group.planet))byPlanet.set(group.planet,[]);byPlanet.get(group.planet).push(group)});
+ for(const [planet,planetGroups] of byPlanet){
+  html+='<section class="planner-planet"><h3>'+esc(planet)+' · R'+plannerRelicRequirement(planet,{})+' baseline</h3>';
+  planetGroups.forEach(group=>{
+   const candidate=selected.get(group.key);
+   html+='<div class="planner-mission '+(candidate?'assigned':'')+'"><div><div class="planner-mission-title">'+esc(group.title)+'</div><div class="planner-mission-meta">'+(candidate?(candidate.fleet?'Capital ship + 3 starting ships':'Minimum R'+candidate.relic+' characters'):'No eligible non-overlapping recommendation')+'</div></div><div>'+(candidate?plannerRenderTeam(candidate):'<span class="planner-unready">'+(group.candidates.length?'Another mission uses the required units':'No recommendation meets your roster and relic requirements')+'</span>')+'</div></div>';
+  });
+  html+='</section>';
+ }
+ html+='<p class="planner-foot">Relic eligibility is checked against each planet and mission. The Felucia/Bracca Cere Junda special mission exception is R7; the Mandalore Bo-Katan mission exception is R9. No missing-unit list is displayed.'+(optimized.limited?' The optimizer reached its search limit, so this is the best plan found within that limit.':'')+'</p>';
+ document.getElementById('plannerResults').innerHTML=html;
+}
+async function generateMyTBPlan(){
+ const input=document.getElementById('plannerAllyCode'),allyCode=String(input.value||'').replace(/\D/g,'');
+ if(allyCode.length!==9){plannerStatus('Enter a valid nine-digit Ally Code.',true);input.focus();return}
+ const button=document.getElementById('plannerGenerateBtn');button.disabled=true;button.textContent='Scanning roster…';document.getElementById('plannerResults').innerHTML='';
+ try{
+  plannerStatus('Retrieving your public roster…');
+  const fetched=await fetchPlannerRoster(allyCode),roster=fetched.roster;myTBRoster=roster;
+  const groups=[];
+  for(const planet of planetList()){
+   const missions=data[slug(planet)]||[];
+   missions.forEach((mission,missionIndex)=>{
+    const candidates=(mission.recommendations||[]).map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
+    if(candidates.length){
+     const group={key:planet+'|'+missionIndex,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates};
+     candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
+    }
+   });
+  }
+  if(!groups.length)throw new Error('No saved team recommendations currently match the roster and mission relic requirements.');
+  plannerStatus('Checking relic levels and optimizing non-overlapping teams…');
+  const optimized=plannerOptimize(groups);
+  myTBLastPlan={groups,optimized,profile:fetched.profile,roster};
+  plannerRenderResults(groups,optimized,fetched.profile,roster);
+  plannerStatus('Plan generated. Review the selected teams and their mission readiness.');
+ }catch(error){
+  plannerStatus(error?.message||'Unable to generate the plan.',true);
+ }finally{button.disabled=false;button.textContent='Generate my plan'}
+}
+
 function openPlanet(name,phase,req,skipScroll){current=name;document.getElementById('home').classList.add('hidden');document.getElementById('detail').classList.add('active');document.getElementById('detailName').textContent=name;document.getElementById('detailOrb').style.backgroundImage=planetImage(name)?'url('+planetImage(name)+')':'';document.getElementById('detailPhase').textContent=phase;document.getElementById('detailSub').textContent=req;renderMissions();if(!skipScroll)window.scrollTo({top:0,behavior:'smooth'});savePagePosition()}
 function goHome(){document.getElementById('detail').classList.remove('active');document.getElementById('home').classList.remove('hidden');current='';window.scrollTo({top:0,behavior:'smooth'});savePagePosition()}
 function renderMissions(){const list=ensurePlanet(current),root=document.getElementById('missions');document.getElementById('addMissionBtn').style.display=isEditor?'flex':'none';document.getElementById('editNotice').style.display=isEditor?'none':'block';const specialSelect=document.getElementById('specialMissionToAdd');if(specialSelect){const existing=new Set(list.filter(m=>missionType(m)==='special').map(m=>m.specialRuleId));const options=specialRuleOptions(current).filter(r=>!existing.has(r.id));specialSelect.innerHTML='<option value="">'+(options.length?'Choose special mission…':'All listed special missions added')+'</option>'+options.map(r=>'<option value="'+esc(r.id)+'">'+esc(r.name)+'</option>').join('')+(specialRuleOptions(current).length?'':'<option value="custom">Custom special mission</option>');specialSelect.disabled=!isEditor||(!options.length&&specialRuleOptions(current).length>0)}if(!list.length){root.innerHTML='<div class="empty">No missions have been added.</div>';return}let forcedLeaderChanged=false;list.forEach(m=>{if(syncForcedCharacters(m,current))forcedLeaderChanged=true});list.forEach(m=>{if(missionType(m)==='fleet'&&shipCatalog.length)syncForcedFleetRestrictions(m)});if(forcedLeaderChanged&&isEditor)queueSave();root.innerHTML=list.map((m,i)=>'<details class="mission"><summary><span class="chev">›</span>'+(m.missionImage?'<span class="mission-unit-image '+(m.isEnemy?'enemy':'')+'">'+(m.missionImageCrop?'<span class="mission-token-image" style="background-image:url('+esc(m.missionImage)+');background-position:'+esc(m.missionImageCrop)+'"></span>':'<img src="'+esc(m.missionImage)+'" alt="">')+(m.isEnemy?'<span class="mission-enemy-skull" aria-label="Enemy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c-5 0-8.3 3.7-8.3 8.2 0 2.6 1.1 4.5 2.8 5.9v2.1c0 .9.7 1.6 1.6 1.6h7.8c.9 0 1.6-.7 1.6-1.6v-2.1c1.7-1.4 2.8-3.3 2.8-5.9 0-4.5-3.3-8.2-8.3-8.2Z" fill="#ff334f" stroke="#650d20" stroke-width="1.3" stroke-linejoin="round"/><ellipse cx="8.5" cy="10.5" rx="2.1" ry="2.6" fill="#260710"/><ellipse cx="15.5" cy="10.5" rx="2.1" ry="2.6" fill="#260710"/><path d="m12 13.2-1.3 2h2.6L12 13.2Z" fill="#260710"/><path d="M8.1 17.1h7.8M9.5 17.1v2.6m3.1-2.6v2.6m3.1-2.6v2.6" fill="none" stroke="#650d20" stroke-width="1" stroke-linecap="round"/></svg></span>':'')+'</span>':'<span class="mission-type-icon">'+(missionType(m)==='fleet'?'🚀 ':missionType(m)==='special'?'★ ':'👤 ')+'</span>')+'<span class="mission-name">'+esc(m.title||'Untitled mission')+'</span><span class="count">'+(m.recommendations||[]).length+' teams</span></summary><div class="mission-body">'+(isEditor?'<label class="field">Mission title</label><input class="edit-title" value="'+esc(m.title)+'" onchange="changeMissionTitle('+i+',this.value)"><label class="field">Mission character picture</label><div class="mission-image-controls">'+(m.missionImage?'<span class="mission-unit-image editor-preview '+(m.isEnemy?'enemy':'')+'"><img src="'+esc(m.missionImage)+'" alt="">'+(m.isEnemy?'<span class="mission-enemy-skull" aria-label="Enemy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c-5 0-8.3 3.7-8.3 8.2 0 2.6 1.1 4.5 2.8 5.9v2.1c0 .9.7 1.6 1.6 1.6h7.8c.9 0 1.6-.7 1.6-1.6v-2.1c1.7-1.4 2.8-3.3 2.8-5.9 0-4.5-3.3-8.2-8.3-8.2Z" fill="#ff334f" stroke="#650d20" stroke-width="1.3" stroke-linejoin="round"/><ellipse cx="8.5" cy="10.5" rx="2.1" ry="2.6" fill="#260710"/><ellipse cx="15.5" cy="10.5" rx="2.1" ry="2.6" fill="#260710"/><path d="m12 13.2-1.3 2h2.6L12 13.2Z" fill="#260710"/><path d="M8.1 17.1h7.8M9.5 17.1v2.6m3.1-2.6v2.6m3.1-2.6v2.6" fill="none" stroke="#650d20" stroke-width="1" stroke-linecap="round"/></svg></span>':'')+'</span><span class="picker-status">'+esc(m.missionImageName||'Selected character')+'</span>':'<span class="picker-status">Choose a character from the roster.</span>')+'<button type="button" class="btn primary" onclick="openMissionCharacterPicker('+i+')">Choose character</button>'+(m.missionImage?'<button type="button" class="btn danger" onclick="removeMissionImage('+i+')">Remove</button>':'')+'</div><label class="mission-enemy-toggle"><input type="checkbox" '+(m.isEnemy?'checked':'')+' onchange="setMissionEnemy('+i+',this.checked)"> Enemy unit</label><label class="field">Mission type</label><select class="edit-title" onchange="changeMissionType('+i+',this.value)"><option value="character" '+(missionType(m)==='character'?'selected':'')+'>👤 Character mission</option><option value="fleet" '+(missionType(m)==='fleet'?'selected':'')+'>🚀 Fleet mission</option><option value="special" '+(missionType(m)==='special'?'selected':'')+'>★ Special mission</option></select>'+(missionType(m)==='special'?'<label class="field">Special mission restriction</label><select class="edit-title" onchange="changeSpecialRule('+i+',this.value)"><option value="custom" '+(!specialRuleForMission(m)?'selected':'')+'>Custom / unrestricted</option>'+specialRuleOptions(current).map(r=>'<option value="'+esc(r.id)+'" '+(m.specialRuleId===r.id?'selected':'')+'>'+esc(r.name)+'</option>').join('')+'</select>':'')+(missionType(m)==='fleet'?'<label class="field">Forced leader / capital ship</label><select class="edit-title" data-fleet-capital="'+i+'" onchange="changeForcedFleetCapital('+i+',this.value)"><option value="">No forced capital ship</option></select><details class="forced-ship-dropdown" data-forced-ship-dropdown="'+i+'"><summary><span>Forced regular ships</span><span class="forced-ship-count" data-forced-ship-count="'+i+'">0 of 7 selected</span><span class="chev">›</span></summary><div class="forced-ship-dropdown-body"><input class="edit-title forced-ship-search" type="search" data-fleet-search="'+i+'" placeholder="Search ships by name…" oninput="filterForcedShips('+i+',this.value)"><div class="forced-ship-list" data-fleet-ships="'+i+'"></div><button class="btn danger" style="margin-top:7px" onclick="clearForcedFleetShips('+i+')">Remove all forced ships</button><div class="picker-status" data-fleet-ship-status="'+i+'">Select up to 7 regular ships. Only ships matching this planet’s Light Side / Dark Side alignment are available. Required ships are placed into the fleet and locked.</div></div></details>':'<label class="field">Required leader</label><select class="edit-title" onchange="changeForcedLeader('+i+',this.value)"><option value="" '+(!m.forcedLeaderName?'selected':'')+'>Auto-detect from mission title</option><option value="none" '+(m.forcedLeaderName==='none'?'selected':'')+'>No forced leader</option>'+forcedLeaderChoices.map(name=>'<option value="'+esc(name)+'" '+(m.forcedLeaderName===name?'selected':'')+'>'+esc(name)+'</option>').join('')+'</select>'+(missionType(m)==='character'?'<label class="field">Force faction</label><select class="edit-title" data-force-faction="'+i+'" onchange="changeForcedFaction('+i+',this.value)"><option value="">No forced faction</option></select><label class="field">Force characters</label><details class="forced-ship-dropdown" data-forced-characters-dropdown="'+i+'"><summary><span>Required characters</span><span class="forced-ship-count" data-forced-character-count="'+i+'">'+(m.forcedCharacters||[]).length+' selected</span><span class="chev">›</span></summary><div class="forced-ship-dropdown-body"><input class="edit-title forced-ship-search" type="search" placeholder="Search characters by name…" oninput="filterForcedCharacters('+i+',this.value)"><div class="forced-ship-list" data-force-characters="'+i+'"></div><div class="picker-status">Selected characters are automatically added to every team and locked in place.</div></div></details>':'')):'')+renderMissionTeams(m,i)+( '<button class="add-team" onclick="addTeam('+i+')">＋ Add team recommendation</button>'+(isEditor?'<div class="team-controls"><button class="btn danger" onclick="removeMission('+i+')">'+(missionType(m)==='special'?'Remove special mission':'Delete mission')+'</button></div>':'') )+'</div></details>').join('');if(isEditor)populateMissionRestrictionOptions();if(!window.teamUploadHandlerInstalled){window.teamUploadHandlerInstalled=true;document.addEventListener('change',function(event){const input=event.target;if(!input||!input.matches||!input.matches('input[data-team-upload]'))return;const file=input.files&&input.files[0];if(!file){setStatus('No file was selected.','bad');return;}const parts=input.getAttribute('data-team-upload').split(',').map(Number);setStatus('File selected: '+file.name,'');uploadTeamImage(parts[0],parts[1],parts[2],input)},true)}}
