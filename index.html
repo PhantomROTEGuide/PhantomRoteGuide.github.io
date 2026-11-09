@@ -419,17 +419,26 @@ MINI machine66|Commander Ahsoka Tano;Jedi Master Kenobi\nCaptainWhytie|Dark Troo
 function plannerProfileName(profile){return profile?.name||profile?.playerName||profile?.player_name||profile?.data?.name||profile?.data?.playerName||profile?.profile?.name||"";}
 function plannerRosterOmicronAbilities(unit){
  const raw=unit?.raw||{},data=raw?.data||raw,found=[];
- const lists=[data?.omicron_abilities,data?.omicronAbilities,raw?.omicron_abilities,raw?.omicronAbilities];
- lists.forEach(list=>{if(Array.isArray(list))list.forEach(value=>{const name=typeof value==="string"?value:(value?.name||value?.abilityName||value?.id||"");if(name)found.push(name)})});
- const skillLists=[data?.ability_data,data?.abilityData,data?.skills,raw?.ability_data,raw?.abilityData,raw?.skills];
- skillLists.forEach(list=>{if(Array.isArray(list))list.forEach(skill=>{
-  const learned=skill?.has_omicron_learned??skill?.hasOmicronLearned??skill?.hasOmicron??skill?.omicronLearned??false;
-  if(learned){const name=skill?.name||skill?.abilityName||skill?.ability_name||skill?.id||skill?.skillId||"";if(name)found.push(name)}
- })});
+ // Only count an Omicron when SWGOH.GG explicitly reports that it is learned.
+ // omicron_abilities can describe available Omicron abilities and is not proof
+ // by itself that the player has applied the upgrade.
+ const skillLists=[data?.ability_data,data?.abilityData,raw?.ability_data,raw?.abilityData];
+ skillLists.forEach(list=>{
+  if(!Array.isArray(list))return;
+  list.forEach(skill=>{
+   const learned=skill?.has_omicron_learned===true||skill?.hasOmicronLearned===true;
+   if(!learned)return;
+   const name=skill?.name||skill?.abilityName||skill?.ability_name||"";
+   const id=skill?.id||skill?.skillId||skill?.skill_id||"";
+   if(name)found.push(name);
+   if(id)found.push(id);
+  });
+ });
  return new Set(found.map(normalizeRosterName));
 }
 function plannerHasRequiredOmicrons(unit,abilities){
  if(!abilities?.length)return true;
+ if(!unit)return false;
  const owned=plannerRosterOmicronAbilities(unit);
  return abilities.every(ability=>owned.has(normalizeRosterName(ability)));
 }
