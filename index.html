@@ -490,7 +490,9 @@ function plannerRenderResults(groups,optimized,profile,roster,platoonBlocked){
  const charCount=roster.units.filter(unit=>Number((unit.data||unit).combat_type??(unit.data||unit).combatType)===1).length;
  const shipCount=roster.units.filter(unit=>Number((unit.data||unit).combat_type??(unit.data||unit).combatType)===2).length;
  const playerName=plannerProfileName(profile)||'Player roster';
+ const reservedNames=[...(platoonBlocked||[])].map(unit=>unit.slice(5)).map(key=>(characterCatalog||[]).find(item=>normalizeRosterName(item.name)===key)?.name||key).sort();
  let html='<div class="planner-summary"><div class="planner-stat"><strong>'+selected.size+'</strong><span>Missions in plan</span></div><div class="planner-stat"><strong>'+optimized.eligible+'</strong><span>Missions with eligible teams</span></div><div class="planner-stat"><strong>'+charCount+'</strong><span>Characters scanned</span></div><div class="planner-stat"><strong>'+shipCount+'</strong><span>Ships scanned</span></div></div><p class="muted" style="font-size:12px"><b>'+esc(playerName)+'</b> · '+esc(document.getElementById('plannerAllyCode').value)+' · '+usedCount+' unit assignments. Units can be reused in later phases, but only once per phase.</p>';
+ if(reservedNames.length)html+='<p class="planner-foot"><b>Reserved by your Phase '+esc(String(groups[0]?.phase||''))+' platoon assignments:</b> '+reservedNames.map(esc).join(', ')+'</p>';
  for(const phase of phases){
   const phaseGroups=groups.filter(group=>group.phase===phase[0]);
   if(!phaseGroups.length)continue;
@@ -529,8 +531,9 @@ async function generateMyTBPlan(){
     const recommendations=mission.recommendations||[];
     const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
     if(hasSavedTeam){
-     const candidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
-     const group={key:'P'+selectedPhase+'|'+planet+'|'+missionIndex,phase:selectedPhase,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates};
+     const allCandidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
+     const candidates=allCandidates.filter(candidate=>!candidate.units.some(unit=>platoonBlocked.has(unit)));
+     const group={key:'P'+selectedPhase+'|'+planet+'|'+missionIndex,phase:selectedPhase,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates,platoonBlocked:allCandidates.length-candidates.length};
      candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
     }
    });
