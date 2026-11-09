@@ -640,33 +640,25 @@ function editTeamOmicronSelections(i,j,event){
  positionOmicronPopups();
 }
 function updateOmicronSlotDisplay(i,j,k,rec){
- const team=document.querySelector('.team[data-mission-index="'+i+'"][data-team-index="'+j+'"]');
- if(!team)return;
- const slot=team.querySelector('.portrait-slot[data-portrait-slot="'+k+'"]');
- if(!slot)return;
- const chosen=selectedTBOmicrons(rec,k,rec.names?.[k]);
- const circle=slot.querySelector('.portrait-circle');
- if(circle){
-  circle.querySelectorAll('.omicron-mark').forEach(el=>el.remove());
-  if(chosen.length){
-   const mark=document.createElement('span');
-   mark.className='omicron-mark';
-   mark.title=chosen.join(', ');
-   mark.setAttribute('aria-label','Selected Territory Battle Omicrons: '+chosen.join(', '));
-   mark.textContent='Ω';
-   circle.appendChild(mark);
-  }
+ // Rebuild the recommendation from its updated data, as the original
+ // working Omicron flow did before dropdown thumbnails were introduced.
+ // Preserve every open mission and team panel while refreshing the UI.
+ const missionCards=Array.from(document.querySelectorAll('.mission')).map(el=>el.open);
+ const teamCards=Array.from(document.querySelectorAll('.mission')).map(el=>Array.from(el.querySelectorAll('.team')).map(team=>team.open));
+ renderMissions();
+ const cards=document.querySelectorAll('.mission');
+ cards.forEach((card,index)=>{
+  if(missionCards[index])card.open=true;
+  const teams=card.querySelectorAll('.team');
+  (teamCards[index]||[]).forEach((wasOpen,teamIndex)=>{if(wasOpen&&teams[teamIndex])teams[teamIndex].open=true});
+ });
+ const missionCard=cards[i];
+ if(missionCard){
+  missionCard.open=true;
+  const teams=missionCard.querySelectorAll('.team');
+  if(teams[j])teams[j].open=true;
  }
- const oldList=slot.querySelector('.omicron-selected-list');
- if(oldList)oldList.remove();
- if(chosen.length){
-  const list=document.createElement('div');
-  list.className='omicron-selected-list';
-  chosen.forEach(x=>{const item=document.createElement('span');item.textContent=formatTBOmicronAbility(x);list.appendChild(item)});
-  const name=slot.querySelector('.portrait-number');
-  if(name)name.insertAdjacentElement('afterend',list);
- }
-
+ positionOmicronPopups();
 }
 if(!window._tbOmicronChangeListener){window._tbOmicronChangeListener=true;document.addEventListener('change',event=>{const input=event.target.closest('input[data-omicron-ability]');if(!input)return;let ability;try{ability=decodeURIComponent(input.dataset.omicronAbility||'')}catch(error){setStatus('Could not read that Omicron ability.','bad');return}toggleOmicronAbility(Number(input.dataset.omicronMission),Number(input.dataset.omicronTeam),Number(input.dataset.omicronSlot),ability,input.checked)})}
 function toggleOmicronAbility(i,j,k,ability,checked){
