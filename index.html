@@ -449,8 +449,8 @@ function plannerRenderTeam(candidate){
 function plannerRenderResults(groups,optimized,profile,roster){
  const selected=optimized.selected;
  const usedCount=new Set([...selected.values()].flatMap(candidate=>candidate.units)).size;
- const charCount=roster.units.filter(unit=>Number(unit.combat_type??unit.combatType)===1).length;
- const shipCount=roster.units.filter(unit=>Number(unit.combat_type??unit.combatType)===2).length;
+ const charCount=roster.units.filter(unit=>Number((unit.data||unit).combat_type??(unit.data||unit).combatType)===1).length;
+ const shipCount=roster.units.filter(unit=>Number((unit.data||unit).combat_type??(unit.data||unit).combatType)===2).length;
  const playerName=profile?.name||profile?.data?.name||profile?.playerName||'Player roster';
  let html='<div class="planner-summary"><div class="planner-stat"><strong>'+selected.size+'</strong><span>Missions in plan</span></div><div class="planner-stat"><strong>'+optimized.eligible+'</strong><span>Missions with eligible teams</span></div><div class="planner-stat"><strong>'+charCount+'</strong><span>Characters scanned</span></div><div class="planner-stat"><strong>'+shipCount+'</strong><span>Ships scanned</span></div></div><p class="muted" style="font-size:12px"><b>'+esc(playerName)+'</b> · '+esc(document.getElementById('plannerAllyCode').value)+' · '+usedCount+' unique units assigned. Teams are selected to maximize the number of non-overlapping eligible missions.</p>';
  const byPlanet=new Map();
@@ -477,8 +477,10 @@ async function generateMyTBPlan(){
   for(const planet of planetList()){
    const missions=data[slug(planet)]||[];
    missions.forEach((mission,missionIndex)=>{
-    const candidates=(mission.recommendations||[]).map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
-    if(candidates.length){
+    const recommendations=mission.recommendations||[];
+    const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
+    if(hasSavedTeam){
+     const candidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
      const group={key:planet+'|'+missionIndex,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates};
      candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
     }
