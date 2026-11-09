@@ -752,7 +752,7 @@ function renderCharacterPicker(){
  const isNpcMissionTab=pickerTarget?.mode==='mission'&&pickerTarget?.type!=='fleet'&&missionPortraitTab==='npcs';
  const isSpecialMissionTab=pickerTarget?.mode==='mission'&&pickerTarget?.type!=='fleet'&&missionPortraitTab==='special';
  const forcedFaction=(!isNpcMissionTab&&!isSpecialMissionTab)&&(pickerTarget?.type==='character'||(pickerTarget?.mode==='mission'&&pickerTarget?.type!=='fleet'))?activeMission?.forcedFaction||'':'';
- const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>isSpecialMissionTab||((!forcedFaction||(x.c.factions||[]).some(f=>String(f).toLowerCase()===forcedFaction.toLowerCase()))&&(pickerTarget?.type!=='fleet'||pickerTarget?.mode==='mission'||(isCapitalSlot?capitalShipNames.has(x.c.name):!capitalShipNames.has(x.c.name)))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(requiredCharacterSide==='Bonus'||requiredCharacterSide==='Mixed'||characterAlignmentMap[x.c.name]===requiredCharacterSide.toLowerCase().replace(' ','') )&&(pickerTarget?.type!=='special'||specialCharacterAllowed(x.c.name,specialRule))&&(!requiredChoice||requiredChoice.options.includes(x.c.name))&&(isNpcMissionTab||isSpecialMissionTab||!selectedFaction||(x.c.factions||[]).some(faction=>String(faction).toLowerCase()===selectedFaction))&&(x.c.name.toLowerCase().includes(query)||(x.c.factions||[]).some(faction=>String(faction).toLowerCase().includes(query)))&&!usedImages.has(x.c.image)));
+ const matches=characterCatalog.map((c,index)=>({c,index})).filter(x=>isSpecialMissionTab||((!forcedFaction||(x.c.factions||[]).some(f=>String(f).toLowerCase()===forcedFaction.toLowerCase()))&&(pickerTarget?.type!=='fleet'||pickerTarget?.mode==='mission'||(isCapitalSlot?capitalShipNames.has(x.c.name):!capitalShipNames.has(x.c.name)))&&(requiredShipSide==='Bonus'||requiredShipSide==='Mixed'||shipAlignment(x.c.name)===requiredShipSide)&&(requiredCharacterSide==='Bonus'||requiredCharacterSide==='Mixed'||(characterAlignmentMap[x.c.name]==='neutral'||characterAlignmentMap[x.c.name]===requiredCharacterSide.toLowerCase().replace(' ','') ) )&&(pickerTarget?.type!=='special'||specialCharacterAllowed(x.c.name,specialRule))&&(!requiredChoice||requiredChoice.options.includes(x.c.name))&&(isNpcMissionTab||isSpecialMissionTab||!selectedFaction||(x.c.factions||[]).some(faction=>String(faction).toLowerCase()===selectedFaction))&&(x.c.name.toLowerCase().includes(query)||(x.c.factions||[]).some(faction=>String(faction).toLowerCase().includes(query)))&&!usedImages.has(x.c.image)));
  document.getElementById('characterPickerStatus').textContent=matches.length
   ?'Showing '+matches.length+' available '+itemLabel+((requiredShipSide==='Dark Side'||requiredCharacterSide==='Dark Side')?' · Dark Side only':(requiredShipSide==='Light Side'||requiredCharacterSide==='Light Side')?' · Light Side only':'')+(forcedFaction?' · '+forcedFaction+' only':'')+(pickerTarget?.type==='special'&&specialRule?.faction?' · '+specialRule.faction+' only':'')+(usedImages.size?' · '+usedImages.size+' already used in this team':'')+(query?' matching your search':' · search to narrow the list')
   :'No available '+itemLabel+' match the planet alignment or search. Items already used in this team are hidden.';
@@ -783,7 +783,7 @@ function applyCharacterSelections(){
    if(choice&&!choice.options.includes(character.name))continue;
    if(type==='special'&&!specialCharacterAllowed(character.name,specialRuleForMission(mission,target.planet)))continue;
    if(type==='character'&&mission.forcedFaction&&!(character.factions||[]).some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase()))continue;
-   if(type==='character'&&(side==='Dark Side'||side==='Light Side')&&actual!==side.toLowerCase().replace(' ',''))continue;
+   if(type==='character'&&(side==='Dark Side'||side==='Light Side')&&actual!=='neutral'&&actual!==side.toLowerCase().replace(' ',''))continue;
    if(images.some((url,k)=>k!==slot&&url===character.image))continue;
    images[slot]=character.image;names[slot]=character.name;
    if(Array.isArray(rec.omicrons))rec.omicrons[slot]=false;if(Array.isArray(rec.omicronAbilities))rec.omicronAbilities[slot]=[];
@@ -818,7 +818,7 @@ function selectAnyoneSlot(){
     if(choice&&!choice.options.includes(character.name))continue;
     if(target.type==='special'&&!specialCharacterAllowed(character.name,specialRuleForMission(mission,target.planet)))continue;
     if(target.type==='character'&&mission.forcedFaction&&!(character.factions||[]).some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase()))continue;
-    if(target.type==='character'&&(side==='Dark Side'||side==='Light Side')&&actual!==side.toLowerCase().replace(' ',''))continue;
+    if(target.type==='character'&&(side==='Dark Side'||side==='Light Side')&&actual!=='neutral'&&actual!==side.toLowerCase().replace(' ',''))continue;
     if(images.some((url,k)=>k!==slot&&url===character.image))continue;
     images[slot]=character.image;names[slot]=character.name;lastPlaced=slot;
     if(Array.isArray(rec.omicrons))rec.omicrons[slot]=false;if(Array.isArray(rec.omicronAbilities))rec.omicronAbilities[slot]=[];
