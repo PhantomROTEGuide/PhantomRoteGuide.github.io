@@ -482,23 +482,34 @@ function plannerOptimizeByPhase(groups){
  return {selected,eligible,nodes,limited};
 }
 function plannerOptimize(groups){
- const work=groups.filter(group=>group.candidates.length).slice().sort((a,b)=>a.candidates.length-b.candidates.length);
+ // Special missions take precedence over every other mission when teams
+ // compete for the same units. After maximizing assigned special missions,
+ // maximize the total number of assigned missions.
+ const work=groups.filter(group=>group.candidates.length).slice().sort((a,b)=>{
+  const priority=group=>group.type==='special'?0:1;
+  return priority(a)-priority(b)||a.candidates.length-b.candidates.length;
+ });
  work.forEach(group=>group.candidates.sort((a,b)=>b.score-a.score));
- let best=[],nodes=0;const nodeLimit=60000,chosen=[];
- function search(index,used){
+ let best=[],bestSpecial=-1,nodes=0;const nodeLimit=60000,chosen=[];
+ function search(index,used,chosenSpecial){
   if(++nodes>nodeLimit)return;
-  if(chosen.length>best.length)best=chosen.slice();
-  if(best.length===work.length||index>=work.length||chosen.length+(work.length-index)<=best.length)return;
-  const group=work[index];
+  if(chosenSpecial>bestSpecial||(chosenSpecial===bestSpecial&&chosen.length>best.length)){
+   best=chosen.slice();bestSpecial=chosenSpecial;
+  }
+  if(index>=work.length)return;
+  const remainingSpecial=work.slice(index).filter(group=>group.type==='special').length;
+  if(chosenSpecial+remainingSpecial<bestSpecial)return;
+  if(chosenSpecial+remainingSpecial===bestSpecial&&chosen.length+(work.length-index)<=best.length)return;
+  const group=work[index],isSpecial=group.type==='special';
   for(const candidate of group.candidates){
    if(candidate.units.some(unit=>used.has(unit)))continue;
    const next=new Set(used);candidate.units.forEach(unit=>next.add(unit));
-   chosen.push({group,candidate});search(index+1,next);chosen.pop();
-   if(nodes>nodeLimit||best.length===work.length)return;
+   chosen.push({group,candidate});search(index+1,next,chosenSpecial+(isSpecial?1:0));chosen.pop();
+   if(nodes>nodeLimit)return;
   }
-  search(index+1,used);
+  search(index+1,used,chosenSpecial);
  }
- search(0,new Set());
+ search(0,new Set(),0);
  const selected=new Map(best.map(item=>[item.group.key,item.candidate]));
  return {selected,eligible:work.length,nodes,limited:nodes>nodeLimit};
 }
