@@ -45,6 +45,96 @@ grant select on public.editors to authenticated;
 -- insert into public.editors (user_id) values ('PASTE-AUTH-USER-UUID-HERE');
 
 
+-- Allow community contributors to update team recommendations (including TB Omicron selections)
+-- while keeping officer-managed mission settings protected.
+create or replace function public.save_public_recommendations(
+  p_data jsonb,
+  p_expected_updated_at timestamptz
+)
+returns timestamptz
+language plpgsql
+security definer
+set search_path = public
+as $
+declare
+  v_existing jsonb;
+  v_merged jsonb;
+  v_updated_at timestamptz;
+  v_planet_key text;
+  v_old_missions jsonb;
+  v_new_missions jsonb;
+  v_missions jsonb;
+  v_i integer;
+  v_old_mission jsonb;
+  v_new_mission jsonb;
+begin
+  select data, updated_at
+    into v_existing, v_updated_at
+    from public.guide_data
+    where id = 1
+    for update;
+
+  if not found then
+    raise exception 'Shared guide row is missing.';
+  end if;
+
+  if p_expected_updated_at is distinct from v_updated_at then
+    raise exception 'stale guide data; refresh and try again.';
+  end if;
+
+  v_merged := coalesce(v_existing, '{}'::jsonb);
+
+  for v_planet_key in
+    select key from jsonb_each(coalesce(p_data, '{}'::jsonb))
+  loop
+    v_old_missions := v_existing -> v_planet_key;
+    v_new_missions := p_data -> v_planet_key;
+
+    if jsonb_typeof(v_old_missions) = 'array'
+       and jsonb_typeof(v_new_missions) = 'array' then
+      v_missions := v_old_missions;
+
+      for v_i in 0 .. jsonb_array_length(v_old_missions) - 1 loop
+        if v_i < jsonb_array_length(v_new_missions) then
+          v_old_mission := v_old_missions -> v_i;
+          v_new_mission := v_new_missions -> v_i;
+
+          if jsonb_typeof(v_old_mission) = 'object'
+             and jsonb_typeof(v_new_mission) = 'object'
+             and jsonb_typeof(v_new_mission -> 'recommendations') = 'array' then
+            v_old_mission := jsonb_set(
+              v_old_mission,
+              '{recommendations}',
+              v_new_mission -> 'recommendations',
+              true
+            );
+            v_missions := jsonb_set(
+              v_missions,
+              array[v_i::text],
+              v_old_mission,
+              false
+            );
+          end if;
+        end if;
+      end loop;
+
+      v_merged := jsonb_set(v_merged, array[v_planet_key], v_missions, true);
+    end if;
+  end loop;
+
+  update public.guide_data
+     set data = v_merged,
+         updated_at = clock_timestamp()
+   where id = 1
+   returning updated_at into v_updated_at;
+
+  return v_updated_at;
+end;
+$;
+
+revoke all on function public.save_public_recommendations(jsonb, timestamptz) from public;
+grant execute on function public.save_public_recommendations(jsonb, timestamptz) to anon, authenticated;
+
 -- Shared squad image storage
 -- Public read access lets every guild member see recommendation images.
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
