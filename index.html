@@ -348,6 +348,11 @@ function plannerRelicLevel(unit){
  if(currentTier!==undefined&&currentTier!==null&&Number.isFinite(Number(currentTier)))return Math.max(0,Number(currentTier)-1);
  return 0;
 }
+function plannerStarLevel(unit){
+ const data=unit?.data||unit;
+ const value=data?.rarity??data?.stars??data?.starLevel??data?.star_level??data?.rarityLevel??data?.rarity_level;
+ return value===undefined||value===null||value===''?null:Number.isFinite(Number(value))?Number(value):null;
+}
 function plannerUnitName(unit){
  const data=unit?.data||unit;
  return data?.name||data?.displayName||data?.unitName||data?.characterName||data?.shipName||data?.base_id||data?.baseId||data?.defId||data?.definitionId||'';
@@ -359,11 +364,12 @@ function plannerBuildRoster(payload){
  units.forEach(unit=>{
   let name=plannerUnitName(unit);
   if(!name)return;
-  const relic=plannerRelicLevel(unit);
+  const relic=plannerRelicLevel(unit),stars=plannerStarLevel(unit);
   const key=normalizeRosterName(name);
-  if(key)map.set(key,{name,relic,raw:unit});
-  const base=unit?.base_id||unit?.baseId||unit?.defId;
-  if(base){const baseKey=normalizeRosterName(base);if(baseKey&&!map.has(baseKey))map.set(baseKey,{name,relic,raw:unit});}
+  if(key)map.set(key,{name,relic,stars,raw:unit});
+  const data=unit?.data||unit;
+  const base=data?.base_id||data?.baseId||data?.defId||data?.definitionId;
+  if(base){const baseKey=normalizeRosterName(base);if(baseKey&&!map.has(baseKey))map.set(baseKey,{name,relic,stars,raw:unit});}
  });
  return {map,units};
 }
@@ -411,6 +417,7 @@ function plannerCandidate(planet,mission,rec,index,roster){
  const owned=names.map(name=>roster.map.get(normalizeRosterName(name)));
  if(owned.some(unit=>!unit))return null;
  const relic=plannerRelicRequirement(planet,mission);
+ if(fleet&&owned.some(unit=>unit.stars===null||unit.stars<7))return null;
  if(!fleet&&owned.some(unit=>unit.relic<relic))return null;
  if(!fleet&&!plannerSpecialTeamValid(planet,mission,names))return null;
  const units=names.map((name,i)=>(fleet?'ship:':'char:')+normalized[i]);
@@ -449,7 +456,7 @@ function plannerRenderTeam(candidate){
   const image=plannerImageFor(name,candidate.images[index]);
   return '<span class="planner-unit" title="'+esc(name)+'">'+(image?'<img src="'+esc(image)+'" alt="'+esc(name)+'">':'')+'</span>';
  }).join('');
- return '<div class="planner-team"><span class="planner-team-name">'+esc(candidate.teamTitle)+'</span>'+portraits+'<span class="planner-ready">'+(candidate.fleet?'Fleet ready':'R'+candidate.relic+'+ eligible')+'</span></div>';
+ return '<div class="planner-team"><span class="planner-team-name">'+esc(candidate.teamTitle)+'</span>'+portraits+'<span class="planner-ready">'+(candidate.fleet?'7★ fleet ready':'R'+candidate.relic+'+ eligible')+'</span></div>';
 }
 function plannerRenderResults(groups,optimized,profile,roster){
  const selected=optimized.selected;
@@ -464,7 +471,7 @@ function plannerRenderResults(groups,optimized,profile,roster){
   html+='<section class="planner-planet"><h3>'+esc(planet)+' · R'+plannerRelicRequirement(planet,{})+' baseline</h3>';
   planetGroups.forEach(group=>{
    const candidate=selected.get(group.key);
-   html+='<div class="planner-mission '+(candidate?'assigned':'')+'"><div><div class="planner-mission-title">'+esc(group.title)+'</div><div class="planner-mission-meta">'+(candidate?(candidate.fleet?'Capital ship + 3 starting ships':'Minimum R'+candidate.relic+' characters'):'No eligible non-overlapping recommendation')+'</div></div><div>'+(candidate?plannerRenderTeam(candidate):'<span class="planner-unready">'+(group.candidates.length?'Another mission uses the required units':'No recommendation meets your roster and relic requirements')+'</span>')+'</div></div>';
+   html+='<div class="planner-mission '+(candidate?'assigned':'')+'"><div><div class="planner-mission-title">'+esc(group.title)+'</div><div class="planner-mission-meta">'+(candidate?(candidate.fleet?'Capital ship + 3 starting ships · all 7★':'Minimum R'+candidate.relic+' characters'):'No eligible non-overlapping recommendation')+'</div></div><div>'+(candidate?plannerRenderTeam(candidate):'<span class="planner-unready">'+(group.candidates.length?'Another mission uses the required units':'No recommendation meets your roster and relic requirements')+'</span>')+'</div></div>';
   });
   html+='</section>';
  }
