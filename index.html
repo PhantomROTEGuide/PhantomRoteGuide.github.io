@@ -83,11 +83,11 @@ function selectedTBOmicrons(rec,slot,name){
 const phases=[
 [1,'Territory Zones',[['Mustafar','Dark Side'],['Corellia','Mixed'],['Coruscant','Light Side']]],
 [2,'Territory Zones',[['Geonosis','Dark Side'],['Felucia','Mixed'],['Bracca','Light Side']]],
-[3,'Territory Zones',[['Dathomir','Dark Side'],['Tatooine','Mixed'],['Kashyyyk','Light Side']]],
-[4,'Territory Zones',[['Haven Medical Station','Dark Side'],['Kessel','Mixed'],['Lothal','Light Side']]],
-[5,'Territory Zones',[['Malachor','Dark Side'],['Vandor','Mixed'],['Ring of Kafrene','Light Side']]],
-[6,'Territory Zones',[['Death Star','Dark Side'],['Hoth','Mixed'],['Scarif','Light Side']]]];
-const bonus=[['Zeffo','Phase 3 Bonus Zone'],['Mandalore','Phase 4 Bonus Zone']];
+[3,'Territory Zones',[['Dathomir','Dark Side'],['Tatooine','Mixed'],['Kashyyyk','Light Side'],['Zeffo','Bonus Zone']]],
+[4,'Territory Zones',[['Haven Medical Station','Dark Side'],['Kessel','Mixed'],['Lothal','Light Side'],['Mandalore','Bonus Zone'],['Zeffo','Bonus Zone']]],
+[5,'Territory Zones',[['Haven Medical Station','Dark Side'],['Mandalore','Mixed'],['Vandor','Light Side'],['Lothal','Mixed']]],
+[6,'Territory Zones',[['Malachor','Dark Side'],['Mandalore','Mixed'],['Vandor','Mixed'],['Ring of Kafrene','Light Side']]]];
+const bonus=[];
 const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Combat Mission 4','Fleet Mission'];
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false,sharedUpdatedAt=null,saveRevision=0,saveInProgress=false,saveAgain=false;
 let characterCatalog=[],characterCatalogPromise=null,missionNpcCatalog=null,missionNpcCatalogPromise=null,missionSpecialTokenPromise=null,missionPortraitTab="playable",characterAlignmentMap={},characterAlignmentPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null,pickerSelections=[];
@@ -272,12 +272,12 @@ function planetAlignment(name){if(name==='Zeffo')return 'Light Side';for(const p
 function shipAlignment(name){return darkSideShipNames.has(name)?'Dark Side':lightSideShipNames.has(name)?'Light Side':'Unknown'}
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function planetList(){return [...phases.flatMap(p=>p[2].map(x=>x[0])),...bonus.map(x=>x[0])]}
+function planetList(){return [...new Set([...phases.flatMap(p=>p[2].map(x=>x[0])),...bonus.map(x=>x[0])])]}
 function blankRec(n){return {title:'Team Recommendation '+n,team:'',submittedBy:'',images:['','','','',''],notes:''}}
 function blankMission(title,type){return {title,type:type||(String(title).toLowerCase().includes("fleet")?"fleet":"character"),recommendations:[1,2,3,4].map(blankRec)}}
 function ensurePlanet(name){const k=slug(name);if(!Array.isArray(data[k]))data[k]=missionNames.map(t=>blankMission(t));data[k].forEach(m=>{if(!m.type)m.type=String(m.title||"").toLowerCase().includes("fleet")?"fleet":"character"});return data[k]}
 function missionType(m){return m.type==="fleet"?"fleet":m.type==="special"?"special":"character"}
-function renderHome(){document.getElementById('phases').innerHTML=phases.map(p=>'<section class="phase"><div class="phase-head"><b>Phase '+p[0]+'</b><strong>'+p[1]+' · Territory Zones</strong></div><div class="grid">'+p[2].map(x=>planetCard(x[0],'Phase '+p[0]+' · '+x[1],p[1])).join('')+'</div></section>').join('');document.getElementById('bonusZones').innerHTML=bonus.map(x=>planetCard(x[0],x[1],'Bonus zone')).join('')}
+function renderHome(){document.getElementById('phases').innerHTML=phases.map(p=>'<section class="phase"><div class="phase-head"><b>Phase '+p[0]+'</b><strong>'+p[1]+' · Territory Zones</strong></div><div class="grid">'+p[2].map(x=>planetCard(x[0],'Phase '+p[0]+' · '+x[1],p[1])).join('')+'</div></section>').join('');document.getElementById('bonusZones').innerHTML=bonus.map(x=>planetCard(x[0],x[1],'Bonus zone')).join('');const bonusSection=document.querySelector('.bonus');if(bonusSection)bonusSection.style.display=bonus.length?'':'none'}
 const planetArtwork={
 'Mustafar':'planet_mustafar.png','Corellia':'planet_corellia.png','Coruscant':'planet_coruscant.png',
 'Geonosis':'planet_geonosis.png','Felucia':'planet_felucia.png','Bracca':'planet_bracca.png',
@@ -429,6 +429,17 @@ function plannerCandidate(planet,mission,rec,index,roster){
  const rating={high:4,medium:3,low:2,hailmary:1};
  return {planet,missionTitle:mission.title||'Mission',missionIndex:-1,teamTitle:rec.title||rec.team||('Recommendation '+(index+1)),teamIndex:index,names,images,units,relic,fleet,fullAuto:rec.fullAuto||'',successRate:rec.successRate||'',score:(rating[rec.successRate]||0)+(rec.fullAuto==='yes'?0.5:0)};
 }
+function plannerOptimizeByPhase(groups){
+ const selected=new Map();let eligible=0,nodes=0,limited=false;
+ phases.forEach(phase=>{
+  const phaseGroups=groups.filter(group=>group.phase===phase[0]);
+  if(!phaseGroups.length)return;
+  const result=plannerOptimize(phaseGroups);
+  result.selected.forEach((candidate,key)=>selected.set(key,candidate));
+  eligible+=result.eligible;nodes+=result.nodes;limited=limited||result.limited;
+ });
+ return {selected,eligible,nodes,limited};
+}
 function plannerOptimize(groups){
  const work=groups.filter(group=>group.candidates.length).slice().sort((a,b)=>a.candidates.length-b.candidates.length);
  work.forEach(group=>group.candidates.sort((a,b)=>b.score-a.score));
@@ -464,22 +475,27 @@ function plannerRenderTeam(candidate){
 }
 function plannerRenderResults(groups,optimized,profile,roster){
  const selected=optimized.selected;
- const usedCount=new Set([...selected.values()].flatMap(candidate=>candidate.units)).size;
+ const usedCount=[...selected.values()].reduce((sum,candidate)=>sum+candidate.units.length,0);
  const charCount=roster.units.filter(unit=>Number((unit.data||unit).combat_type??(unit.data||unit).combatType)===1).length;
  const shipCount=roster.units.filter(unit=>Number((unit.data||unit).combat_type??(unit.data||unit).combatType)===2).length;
  const playerName=profile?.name||profile?.data?.name||profile?.playerName||'Player roster';
- let html='<div class="planner-summary"><div class="planner-stat"><strong>'+selected.size+'</strong><span>Missions in plan</span></div><div class="planner-stat"><strong>'+optimized.eligible+'</strong><span>Missions with eligible teams</span></div><div class="planner-stat"><strong>'+charCount+'</strong><span>Characters scanned</span></div><div class="planner-stat"><strong>'+shipCount+'</strong><span>Ships scanned</span></div></div><p class="muted" style="font-size:12px"><b>'+esc(playerName)+'</b> · '+esc(document.getElementById('plannerAllyCode').value)+' · '+usedCount+' unique units assigned. Teams are selected to maximize the number of non-overlapping eligible missions.</p>';
- const byPlanet=new Map();
- groups.forEach(group=>{if(!byPlanet.has(group.planet))byPlanet.set(group.planet,[]);byPlanet.get(group.planet).push(group)});
- for(const [planet,planetGroups] of byPlanet){
-  html+='<section class="planner-planet"><h3>'+esc(planet)+' · R'+plannerRelicRequirement(planet,{})+' baseline</h3>';
-  planetGroups.forEach(group=>{
-   const candidate=selected.get(group.key);
-   html+='<div class="planner-mission '+(candidate?'assigned':'')+'"><div><div class="planner-mission-title">'+esc(group.title)+'</div><div class="planner-mission-meta">'+(candidate?(candidate.fleet?'Capital ship + 3 starting ships · all 7★':'Minimum R'+candidate.relic+' characters'):'No eligible non-overlapping recommendation')+'</div></div><div>'+(candidate?plannerRenderTeam(candidate):'<span class="planner-unready">'+(group.candidates.length?'Another mission uses the required units':'No recommendation meets your roster and relic requirements')+'</span>')+'</div></div>';
-  });
+ let html='<div class="planner-summary"><div class="planner-stat"><strong>'+selected.size+'</strong><span>Missions in plan</span></div><div class="planner-stat"><strong>'+optimized.eligible+'</strong><span>Missions with eligible teams</span></div><div class="planner-stat"><strong>'+charCount+'</strong><span>Characters scanned</span></div><div class="planner-stat"><strong>'+shipCount+'</strong><span>Ships scanned</span></div></div><p class="muted" style="font-size:12px"><b>'+esc(playerName)+'</b> · '+esc(document.getElementById('plannerAllyCode').value)+' · '+usedCount+' unit assignments. Units can be reused in later phases, but only once per phase.</p>';
+ for(const phase of phases){
+  const phaseGroups=groups.filter(group=>group.phase===phase[0]);
+  if(!phaseGroups.length)continue;
+  html+='<section class="planner-planet"><h3>Phase '+phase[0]+'</h3>';
+  const byPlanet=new Map();
+  phaseGroups.forEach(group=>{if(!byPlanet.has(group.planet))byPlanet.set(group.planet,[]);byPlanet.get(group.planet).push(group)});
+  for(const [planet,planetGroups] of byPlanet){
+   html+='<h4 style="margin:14px 0 8px;color:var(--text)">'+esc(planet)+' · R'+plannerRelicRequirement(planet,{})+' baseline</h4>';
+   planetGroups.forEach(group=>{
+    const candidate=selected.get(group.key);
+    html+='<div class="planner-mission '+(candidate?'assigned':'')+'"><div><div class="planner-mission-title">'+esc(group.title)+'</div><div class="planner-mission-meta">'+(candidate?(candidate.fleet?'Capital ship + starting ships + reinforcements · all 7★':'Minimum R'+candidate.relic+' characters'):'No eligible non-overlapping recommendation')+'</div></div><div>'+(candidate?plannerRenderTeam(candidate):'<span class="planner-unready">'+(group.candidates.length?'Another mission in this phase uses the required units':'No recommendation meets your roster and relic requirements')+'</span>')+'</div></div>';
+   });
+  }
   html+='</section>';
  }
- html+='<p class="planner-foot">Relic eligibility is checked against each planet and mission. The Felucia/Bracca Cere Junda special mission exception is R7; the Mandalore Bo-Katan mission exception is R9. No missing-unit list is displayed.'+(optimized.limited?' The optimizer reached its search limit, so this is the best plan found within that limit.':'')+'</p>';
+ html+='<p class="planner-foot">Relic eligibility is checked against each planet and mission. The Felucia/Bracca Cere Junda special mission exception is R7; the Mandalore Bo-Katan mission exception is R9. Fleet capital ships, starting ships, and reinforcements must all be 7★. Units are only reserved within their own phase.'+(optimized.limited?' The optimizer reached its search limit, so this is the best plan found within that limit.':'')+'</p>';
  document.getElementById('plannerResults').innerHTML=html;
 }
 async function generateMyTBPlan(){
@@ -490,21 +506,23 @@ async function generateMyTBPlan(){
   plannerStatus('Retrieving your public roster…');
   const fetched=await fetchPlannerRoster(allyCode),roster=fetched.roster;myTBRoster=roster;
   const groups=[];
-  for(const planet of planetList()){
-   const missions=data[slug(planet)]||[];
-   missions.forEach((mission,missionIndex)=>{
-    const recommendations=mission.recommendations||[];
-    const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
-    if(hasSavedTeam){
-     const candidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
-     const group={key:planet+'|'+missionIndex,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates};
-     candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
-    }
-   });
+  for(const phase of phases){
+   for(const [planet] of phase[2]){
+    const missions=data[slug(planet)]||[];
+    missions.forEach((mission,missionIndex)=>{
+     const recommendations=mission.recommendations||[];
+     const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
+     if(hasSavedTeam){
+      const candidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
+      const group={key:'P'+phase[0]+'|'+planet+'|'+missionIndex,phase:phase[0],planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates};
+      candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
+     }
+    });
+   }
   }
   if(!groups.length)throw new Error('No saved team recommendations currently match the roster and mission relic requirements.');
-  plannerStatus('Checking relic levels and optimizing non-overlapping teams…');
-  const optimized=plannerOptimize(groups);
+  plannerStatus('Checking relic levels and optimizing teams separately for each phase…');
+  const optimized=plannerOptimizeByPhase(groups);
   myTBLastPlan={groups,optimized,profile:fetched.profile,roster};
   plannerRenderResults(groups,optimized,fetched.profile,roster);
   plannerStatus('Plan generated. Review the selected teams and their mission readiness.');
