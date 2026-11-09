@@ -46,7 +46,7 @@ main{max-width:1240px;margin:auto;padding:28px 22px 65px}.hero{margin:10px 0 26p
 <section id="myTBPlanner" class="planner">
 <button class="btn planner-back" onclick="closeMyTBPlan()">← Back to guide</button>
 <div class="planner-hero"><div class="eyebrow">Personal deployment assistant</div><h2>My TB Plan</h2><p class="muted">Enter your nine-digit Ally Code to compare your roster against every team recommendation in the Phantom guide. The planner checks planet- and mission-specific relic requirements and prevents duplicate character or ship assignments.</p></div>
-<div class="planner-controls"><input id="plannerAllyCode" inputmode="numeric" autocomplete="off" maxlength="11" placeholder="Enter 9-digit Ally Code" aria-label="SWGOH Ally Code"><button class="btn primary" id="plannerGenerateBtn" onclick="generateMyTBPlan()">Generate my plan</button></div>
+<div class="planner-controls"><input id="plannerAllyCode" inputmode="numeric" autocomplete="off" maxlength="11" placeholder="Enter 9-digit Ally Code" aria-label="SWGOH Ally Code"><select id="plannerPhaseSelect" class="btn" aria-label="Select Territory Battle phase"><option value="1">Phase 1</option><option value="2">Phase 2</option><option value="3">Phase 3</option><option value="4">Phase 4</option><option value="5">Phase 5</option><option value="6">Phase 6</option></select><button class="btn primary" id="plannerGenerateBtn" onclick="generateMyTBPlan()">Generate my plan</button></div>
 <div id="plannerStatus" class="planner-status">Your Ally Code is only used to retrieve your public roster. No roster data is saved to the guide.</div>
 <div id="plannerResults"></div>
 </section>
@@ -501,31 +501,32 @@ function plannerRenderResults(groups,optimized,profile,roster){
 async function generateMyTBPlan(){
  const input=document.getElementById('plannerAllyCode'),allyCode=String(input.value||'').replace(/\D/g,'');
  if(allyCode.length!==9){plannerStatus('Enter a valid nine-digit Ally Code.',true);input.focus();return}
+ const selectedPhase=Number(document.getElementById('plannerPhaseSelect')?.value||1);
+ const phaseConfig=phases.find(phase=>phase[0]===selectedPhase);
+ if(!phaseConfig){plannerStatus('Choose a valid Territory Battle phase.',true);return}
  const button=document.getElementById('plannerGenerateBtn');button.disabled=true;button.textContent='Scanning roster…';document.getElementById('plannerResults').innerHTML='';
  try{
   plannerStatus('Retrieving your public roster…');
   const fetched=await fetchPlannerRoster(allyCode),roster=fetched.roster;myTBRoster=roster;
   const groups=[];
-  for(const phase of phases){
-   for(const [planet] of phase[2]){
-    const missions=data[slug(planet)]||[];
-    missions.forEach((mission,missionIndex)=>{
-     const recommendations=mission.recommendations||[];
-     const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
-     if(hasSavedTeam){
-      const candidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
-      const group={key:'P'+phase[0]+'|'+planet+'|'+missionIndex,phase:phase[0],planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates};
-      candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
-     }
-    });
-   }
+  for(const [planet] of phaseConfig[2]){
+   const missions=data[slug(planet)]||[];
+   missions.forEach((mission,missionIndex)=>{
+    const recommendations=mission.recommendations||[];
+    const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
+    if(hasSavedTeam){
+     const candidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
+     const group={key:'P'+selectedPhase+'|'+planet+'|'+missionIndex,phase:selectedPhase,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,candidates};
+     candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
+    }
+   });
   }
-  if(!groups.length)throw new Error('No saved team recommendations currently match the roster and mission relic requirements.');
-  plannerStatus('Checking relic levels and optimizing teams separately for each phase…');
+  if(!groups.length)throw new Error('No saved team recommendations are available for Phase '+selectedPhase+'.');
+  plannerStatus('Checking relic levels and optimizing teams for Phase '+selectedPhase+'…');
   const optimized=plannerOptimizeByPhase(groups);
-  myTBLastPlan={groups,optimized,profile:fetched.profile,roster};
+  myTBLastPlan={groups,optimized,profile:fetched.profile,roster,phase:selectedPhase};
   plannerRenderResults(groups,optimized,fetched.profile,roster);
-  plannerStatus('Plan generated. Review the selected teams and their mission readiness.');
+  plannerStatus('Phase '+selectedPhase+' plan generated. Review the selected teams and their mission readiness.');
  }catch(error){
   plannerStatus(error?.message||'Unable to generate the plan.',true);
  }finally{button.disabled=false;button.textContent='Generate my plan'}
