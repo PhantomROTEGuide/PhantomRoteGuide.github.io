@@ -92,7 +92,8 @@ const missionNames=['Combat Mission 1','Combat Mission 2','Combat Mission 3','Co
 let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false,sharedUpdatedAt=null,saveRevision=0,saveInProgress=false,saveAgain=false;
 let homeScrollPosition=0;
 let characterCatalog=[],characterCatalogPromise=null,missionNpcCatalog=null,missionNpcCatalogPromise=null,missionSpecialTokenPromise=null,missionPortraitTab="playable",characterAlignmentMap={},characterAlignmentPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null,pickerSelections=[];
-let fullAutoEditing=new Set(),successRateEditing=new Set(),omicronEditing=new Set(),teamSortMode='default';
+let fullAutoEditing=new Set(),successRateEditing=new Set(),omicronEditing=new Set(),teamSortMode='success';
+try{const savedTeamSort=localStorage.getItem('phantomGuideTeamSort');if(['default','success','az','full'].includes(savedTeamSort))teamSortMode=savedTeamSort}catch(e){}
 
 // Verified Rise of the Empire special-mission restrictions. Faction members are
 // matched against the character roster by exact in-game unit name.
@@ -617,7 +618,7 @@ function renderMissionTeams(m,i){
 function setTeamSort(value){
  if(!isEditor||!['default','success','az','full'].includes(value))return;
  const missionStates=[...document.querySelectorAll('.mission')].map(el=>({open:el.open,teams:[...el.querySelectorAll('.team')].map(team=>team.open)}));
- teamSortMode=value;renderMissions();
+ teamSortMode=value;try{localStorage.setItem('phantomGuideTeamSort',value)}catch(e){}renderMissions();
  document.querySelectorAll('.mission').forEach((el,i)=>{const state=missionStates[i];if(!state)return;el.open=state.open;el.querySelectorAll('.team').forEach((team,j)=>{if(state.teams[j]!==undefined)team.open=state.teams[j]})});
 }
 function renderTeamRatings(i,j,r,editable){
