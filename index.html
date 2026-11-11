@@ -699,11 +699,10 @@ async function pasteTeamRecommendation(i,j){
     if(invalid.length)throw new Error('This is a '+side+' fleet mission. These ships are not allowed: '+invalid.join(', ')+'.');
    }
    if(used.length>8)throw new Error('The copied fleet exceeds the 8 ship slots.');
+   const forcedShips=[target.forcedCapitalShip||'',...(Array.isArray(target.forcedShipNames)?target.forcedShipNames:[])];
+   forcedShips.forEach((required,slot)=>{if(!required)return;const ship=shipCatalog.find(x=>x.name===required);if(!ship)throw new Error('The required destination ship '+required+' is not available in the ship catalog.');names.forEach((name,k)=>{if(k!==slot&&name===required){names[k]='';images[k]=''}});names[slot]=required;images[slot]=ship.image});
+   const finalFleet=names.filter(Boolean);if(new Set(finalFleet).size!==finalFleet.length)throw new Error('The destination fleet would contain a duplicate ship.');
    next.images=images;next.names=names;delete next.image;
-   syncForcedFleetRestrictions(target);
-   const forced=target.forcedCapitalShip;
-   if(forced&&next.names[0]!==forced)throw new Error('The destination requires '+forced+' as its capital ship.');
-   for(let k=0;k<(target.forcedShipNames||[]).length;k++){const required=target.forcedShipNames[k];if(required&&next.names[k+1]!==required)throw new Error('The destination requires '+required+' in fleet slot '+(k+2)+'.');}
   }else{
    const invalid=used.filter(name=>!characterAllowedOnPlanet(name,current));
    if(invalid.length)throw new Error('These characters do not meet the '+planetAlignment(current)+' planet alignment: '+invalid.join(', ')+'.');
@@ -726,12 +725,13 @@ async function pasteTeamRecommendation(i,j){
    if(choice&&!choice.options.some(name=>names.includes(name)))throw new Error('This mission requires one of: '+choice.options.join(' or ')+'. The copied team does not include either option.');
    if(rule?.requiredCount){const factionCount=names.filter(name=>specialFactionMembers[rule.faction]?.has(name)).length;if(factionCount<rule.requiredCount)throw new Error('This special mission requires '+rule.requiredCount+' '+rule.faction+' characters. The copied team has '+factionCount+'.');}
    if(rule?.teamSize&&names.filter(Boolean).length<rule.teamSize)throw new Error('This special mission requires a full team of '+rule.teamSize+' characters.');
+   const finalCharacters=names.filter(name=>name&&name!=='__ANY__');if(new Set(finalCharacters).size!==finalCharacters.length)throw new Error('The destination squad would contain a duplicate character.');
    if(names.filter(Boolean).length>limit)throw new Error('The required destination characters would exceed this mission’s '+limit+' character limit.');
    next.names=names;next.images=images;
   }
   ensurePlanet(current)[i].recommendations[j]=next;
   queueSave();renderMissions();
-  const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
+  const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const team=cards[i].querySelector('.team[data-team-index="'+j+'"]');if(team)team.open=true}
   setStatus('Team pasted and saved locally. Shared save is pending.','good');
  }catch(error){setStatus('Paste blocked: '+(error?.message||String(error)),'bad')}
 }
