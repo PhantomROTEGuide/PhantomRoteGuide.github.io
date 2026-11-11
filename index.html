@@ -699,9 +699,10 @@ async function pasteTeamRecommendation(i,j){
     if(invalid.length)throw new Error('This is a '+side+' fleet mission. These ships are not allowed: '+invalid.join(', ')+'.');
    }
    if(used.length>8)throw new Error('The copied fleet exceeds the 8 ship slots.');
-   const forcedShips=[target.forcedCapitalShip||'',...(Array.isArray(target.forcedShipNames)?target.forcedShipNames:[])];
+   const forcedShips=[target.forcedCapitalShip||'',...(Array.isArray(target.forcedShipNames)?target.forcedShipNames.slice(0,7):[])];
    forcedShips.forEach((required,slot)=>{if(!required)return;const ship=shipCatalog.find(x=>x.name===required);if(!ship)throw new Error('The required destination ship '+required+' is not available in the ship catalog.');names.forEach((name,k)=>{if(k!==slot&&name===required){names[k]='';images[k]=''}});names[slot]=required;images[slot]=ship.image});
    const finalFleet=names.filter(Boolean);if(new Set(finalFleet).size!==finalFleet.length)throw new Error('The destination fleet would contain a duplicate ship.');
+   if(side==='Light Side'||side==='Dark Side'){const invalidFinal=finalFleet.filter(name=>shipAlignment(name)!==side);if(invalidFinal.length)throw new Error('The destination’s forced ships conflict with its '+side+' alignment: '+invalidFinal.join(', ')+'.');}
    next.images=images;next.names=names;delete next.image;
   }else{
    const invalid=used.filter(name=>!characterAllowedOnPlanet(name,current));
