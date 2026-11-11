@@ -726,6 +726,9 @@ async function pasteTeamRecommendation(i,j){
    if(rule?.requiredCount){const factionCount=names.filter(name=>specialFactionMembers[rule.faction]?.has(name)).length;if(factionCount<rule.requiredCount)throw new Error('This special mission requires '+rule.requiredCount+' '+rule.faction+' characters. The copied team has '+factionCount+'.');}
    if(rule?.teamSize&&names.filter(Boolean).length<rule.teamSize)throw new Error('This special mission requires a full team of '+rule.teamSize+' characters.');
    const finalCharacters=names.filter(name=>name&&name!=='__ANY__');if(new Set(finalCharacters).size!==finalCharacters.length)throw new Error('The destination squad would contain a duplicate character.');
+   const finalAlignmentErrors=finalCharacters.filter(name=>!characterAllowedOnPlanet(name,current));if(finalAlignmentErrors.length)throw new Error('Required destination characters conflict with the planet alignment: '+finalAlignmentErrors.join(', ')+'.');
+   if(faction){const finalFactionErrors=finalCharacters.filter(name=>!characterCatalog.find(c=>c.name===name)?.factions?.some(f=>String(f).toLowerCase()===String(faction).toLowerCase()));if(finalFactionErrors.length)throw new Error('The destination forced faction does not allow: '+finalFactionErrors.join(', ')+'.');}
+   if(rule){const finalRuleErrors=finalCharacters.filter(name=>!specialCharacterAllowed(name,rule));if(finalRuleErrors.length)throw new Error('The special mission faction does not allow: '+finalRuleErrors.join(', ')+'.');}
    if(names.filter(Boolean).length>limit)throw new Error('The required destination characters would exceed this mission’s '+limit+' character limit.');
    next.names=names;next.images=images;
   }
