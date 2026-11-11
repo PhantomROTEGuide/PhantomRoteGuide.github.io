@@ -93,6 +93,8 @@ let data={},current='',isEditor=false,user=null,saveTimer=null,dirty=false,share
 let homeScrollPosition=0;
 let characterCatalog=[],characterCatalogPromise=null,missionNpcCatalog=null,missionNpcCatalogPromise=null,missionSpecialTokenPromise=null,missionPortraitTab="playable",characterAlignmentMap={},characterAlignmentPromise=null,shipCatalog=[],shipCatalogPromise=null,pickerTarget=null,pickerSelections=[];
 let fullAutoEditing=new Set(),successRateEditing=new Set(),omicronEditing=new Set(),teamSortMode='success';
+let copiedTeamRecommendation=null;
+try{copiedTeamRecommendation=JSON.parse(localStorage.getItem('phantomGuideCopiedTeam')||'null')}catch(e){}
 try{const savedTeamSort=localStorage.getItem('phantomGuideTeamSort');if(['default','success','az','full'].includes(savedTeamSort))teamSortMode=savedTeamSort}catch(e){}
 
 // Verified Rise of the Empire special-mission restrictions. Faction members are
@@ -661,6 +663,78 @@ function setTeamRating(i,j,key,value){
  const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
 }
 function recommendationImages(r,type='character'){const count=type==='fleet'?8:5;const images=Array.isArray(r.images)?r.images.slice(0,count):[r.image||''];while(images.length<count)images.push('');return images}
+function copyTeamRecommendation(i,j){
+ if(!isEditor)return;
+ const mission=ensurePlanet(current)[i],rec=mission?.recommendations?.[j];if(!rec)return;
+ copiedTeamRecommendation={sourcePlanet:current,sourceMission:mission.title||'',sourceType:missionType(mission),recommendation:JSON.parse(JSON.stringify(rec)),copiedAt:Date.now()};
+ try{localStorage.setItem('phantomGuideCopiedTeam',JSON.stringify(copiedTeamRecommendation))}catch(e){}
+ setStatus('Copied “'+(rec.title||'Untitled team')+'”. Open another mission and choose Paste team.','good');
+}
+async function pasteTeamRecommendation(i,j){
+ if(!isEditor)return;
+ if(!copiedTeamRecommendation?.recommendation){setStatus('Copy a team recommendation first.','bad');return}
+ const target=ensurePlanet(current)[i],rec=target?.recommendations?.[j];if(!rec)return;
+ const targetType=missionType(target),source=copiedTeamRecommendation;
+ if((source.sourceType==='fleet')!==(targetType==='fleet')){setStatus('Paste blocked: character squads and fleets cannot be pasted into each other.','bad');return}
+ try{
+  const isFleet=targetType==='fleet';
+  if(isFleet){
+   if(!shipCatalogPromise)shipCatalogPromise=fetch('./ships.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load ship list.');return r.json()});
+   shipCatalog=await shipCatalogPromise;
+  }else{
+   if(!characterCatalogPromise)characterCatalogPromise=fetch('./characters.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character list.');return r.json()});
+   if(!characterAlignmentPromise)characterAlignmentPromise=fetch('./character-alignments.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character alignment list.');return r.json()});
+   [characterCatalog,characterAlignmentMap]=await Promise.all([characterCatalogPromise,characterAlignmentPromise]);
+  }
+  const next=JSON.parse(JSON.stringify(source.recommendation));
+  const count=isFleet?8:5,images=recommendationImages(next,targetType),names=Array.isArray(next.names)?next.names.slice(0,count):Array(count).fill('');
+  while(names.length<count)names.push('');
+  while(images.length<count)images.push('');
+  const used=names.filter(n=>n&&n!=='__ANY__');
+  if(new Set(used).size!==used.length)throw new Error('The copied team contains the same unit more than once.');
+  if(isFleet){
+   const side=planetAlignment(current);
+   if(side==='Light Side'||side==='Dark Side'){
+    const invalid=used.filter(name=>shipAlignment(name)!==side);
+    if(invalid.length)throw new Error('This is a '+side+' fleet mission. These ships are not allowed: '+invalid.join(', ')+'.');
+   }
+   if(used.length>8)throw new Error('The copied fleet exceeds the 8 ship slots.');
+   next.images=images;next.names=names;delete next.image;
+   syncForcedFleetRestrictions(target);
+   const forced=target.forcedCapitalShip;
+   if(forced&&next.names[0]!==forced)throw new Error('The destination requires '+forced+' as its capital ship.');
+   for(let k=0;k<(target.forcedShipNames||[]).length;k++){const required=target.forcedShipNames[k];if(required&&next.names[k+1]!==required)throw new Error('The destination requires '+required+' in fleet slot '+(k+2)+'.');}
+  }else{
+   const invalid=used.filter(name=>!characterAllowedOnPlanet(name,current));
+   if(invalid.length)throw new Error('These characters do not meet the '+planetAlignment(current)+' planet alignment: '+invalid.join(', ')+'.');
+   const faction=target.forcedFaction;
+   if(faction){
+    const outside=used.filter(name=>!characterCatalog.find(c=>c.name===name)?.factions?.some(f=>String(f).toLowerCase()===String(faction).toLowerCase()));
+    if(outside.length)throw new Error('This mission requires '+faction+'. These characters do not qualify: '+outside.join(', ')+'.');
+   }
+   const rule=targetType==='special'?specialRuleForMission(target):null;
+   if(rule){
+    const outside=used.filter(name=>!specialCharacterAllowed(name,rule));
+    if(outside.length)throw new Error('This special mission requires '+rule.faction+'. These characters do not qualify: '+outside.join(', ')+'.');
+   }
+   const limit=missionCharacterLimit(target,current);
+   if(used.length>limit)throw new Error('This mission allows no more than '+limit+' characters.');
+   next.images=images;next.names=names;delete next.image;
+   const required=requiredMissionCharacters(target,current);
+   required.forEach((name,index)=>{const slot=index+requiredSlotOffset(target,current),portrait=forcedLeaderPortraits[name]||characterCatalog.find(c=>c.name===name)?.image;if(names[slot]&&names[slot]!==name){const oldSlot=names.findIndex((n,k)=>k!==slot&&n===name);if(oldSlot>=0){names[oldSlot]='';images[oldSlot]=''}}names[slot]=name;if(portrait)images[slot]=portrait});
+   const choice=requiredAnyChoice(target,current);
+   if(choice&&!choice.options.some(name=>names.includes(name)))throw new Error('This mission requires one of: '+choice.options.join(' or ')+'. The copied team does not include either option.');
+   if(rule?.requiredCount){const factionCount=names.filter(name=>specialFactionMembers[rule.faction]?.has(name)).length;if(factionCount<rule.requiredCount)throw new Error('This special mission requires '+rule.requiredCount+' '+rule.faction+' characters. The copied team has '+factionCount+'.');}
+   if(rule?.teamSize&&names.filter(Boolean).length<rule.teamSize)throw new Error('This special mission requires a full team of '+rule.teamSize+' characters.');
+   if(names.filter(Boolean).length>limit)throw new Error('The required destination characters would exceed this mission’s '+limit+' character limit.');
+   next.names=names;next.images=images;
+  }
+  ensurePlanet(current)[i].recommendations[j]=next;
+  queueSave();renderMissions();
+  const cards=document.querySelectorAll('.mission');if(cards[i]){cards[i].open=true;const teams=cards[i].querySelectorAll('.team');if(teams[j])teams[j].open=true}
+  setStatus('Team pasted and saved locally. Shared save is pending.','good');
+ }catch(error){setStatus('Paste blocked: '+(error?.message||String(error)),'bad')}
+}
 function renderTeam(i,j,r){
  const mission=ensurePlanet(current)[i],type=missionType(mission),isFleet=type==='fleet',canContribute=true,images=recommendationImages(r,type),forcedLeader=forcedLeaderForMission(mission,current),requiredChoice=requiredAnyChoice(mission,current);
  const slotNames=isFleet?images.map((_,k)=>r.names?.[k]&&r.names[k]!=='__ANY__'?r.names[k]:['Capital Ship','Starting Ship','Starting Ship','Starting Ship','Reinforcement','Reinforcement','Reinforcement','Reinforcement'][k]):images.map((_,k)=>r.names?.[k]&&r.names[k]!=='__ANY__'?(k===0?'Leader · ':'')+r.names[k]:r.names?.[k]==='__ANY__'?'Any':requiredCharacterAt(mission,k,current)?'Required · '+requiredCharacterAt(mission,k,current):requiredChoiceAt(mission,k,current)?'Required choice':'Slot '+(k+1));
@@ -678,7 +752,7 @@ function renderTeam(i,j,r){
  const summaryPortraits=images.slice(0,isFleet?4:5).map((url,k)=>{const name=r.names?.[k]||'',isAny=name==='__ANY__';if(!url&&!isAny)return '';const abilities=!isFleet?selectedTBOmicrons(r,k,name):[];const omicron=abilities.length?'<span class="team-summary-omicron" title="'+esc(abilities.join(', '))+'"><img src="https://game-assets.swgoh.gg/textures/tex.skill_hexagon_white.png" alt="Omicron"></span>':'';const label=isAny?'Any':(isFleet?(name||['Capital Ship','Starting Ship 1','Starting Ship 2','Starting Ship 3'][k]):(name||('Character '+(k+1))));const portraitClass=isFleet?'team-summary-portrait fleet-summary-portrait'+(k===0?' fleet-capital-summary-portrait':''):'team-summary-portrait';return '<span class="'+portraitClass+(isAny?' team-summary-any':'')+'" title="'+esc(label)+'" aria-label="'+esc(label)+'">'+(isAny?'<span>ANY</span>':'<img src="'+esc(url)+'" alt="'+esc(label)+'">')+omicron+'</span>'}).join('');
  const summaryPortraitGroup=summaryPortraits?'<span class="team-summary-portraits" aria-label="Team character portraits">'+summaryPortraits+'</span>':'';
  const rateIcons={high:['✓','High success rate'],medium:['~','Medium success rate'],low:['↓','Low success rate'],hailmary:['✕','Hail Mary success rate']},rateIcon=rateIcons[r.successRate];
- return '<details class="team" data-mission-index="'+i+'" data-team-index="'+j+'"><summary><span class="chev">›</span><span class="team-title">'+esc(r.title||'Untitled team')+'</span>'+summaryPortraitGroup+(rateIcon?'<span class="team-success-icon team-success-'+r.successRate+'" title="'+rateIcon[1]+'" aria-label="'+rateIcon[1]+'">'+rateIcon[0]+'</span>':'')+'<span class="team-submitter">Submitted by: '+esc((r.submittedBy||'').trim()||'—')+'</span></summary><div class="team-body">'+(canContribute?'<label class="field">Recommendation title</label><input value="'+esc(r.title)+'" onchange="changeRec('+i+','+j+',\'title\',this.value)"><label class="field">Submitted by:</label><input value="'+esc(r.submittedBy||'')+'" placeholder="Enter your name" onchange="changeRec('+i+','+j+',\'submittedBy\',this.value)">':'')+(type==='special'?'<div class="locked">'+esc(specialRuleText(specialRule))+' · '+esc(specialTeamStatus(r,specialRule))+'</div>':'')+portraits+(canContribute?'<div class="team-controls picker-team-control"><button class="btn primary team-picker-button" onclick="openTeamCharacterPicker('+i+','+j+')">'+(isFleet?'Choose ships':'Choose characters')+'</button></div>':'')+'<div class="team-info-layout"><div class="team-rating-panel">'+renderTeamRatings(i,j,r,canContribute)+'</div><div class="team-notes-panel"><label class="field">Notes / strategy</label><textarea onchange="changeRec('+i+','+j+',\'notes\',this.value)" placeholder="Strategy, turn order, ability use, battle tips">'+esc(r.notes)+'</textarea></div></div>'+(isEditor?'<div class="team-controls"><button class="btn danger" onclick="removeTeam('+i+','+j+')">Delete recommendation</button></div>':'')+'</div></details>';
+ return '<details class="team" data-mission-index="'+i+'" data-team-index="'+j+'"><summary><span class="chev">›</span><span class="team-title">'+esc(r.title||'Untitled team')+'</span>'+summaryPortraitGroup+(rateIcon?'<span class="team-success-icon team-success-'+r.successRate+'" title="'+rateIcon[1]+'" aria-label="'+rateIcon[1]+'">'+rateIcon[0]+'</span>':'')+'<span class="team-submitter">Submitted by: '+esc((r.submittedBy||'').trim()||'—')+'</span></summary><div class="team-body">'+(canContribute?'<label class="field">Recommendation title</label><input value="'+esc(r.title)+'" onchange="changeRec('+i+','+j+',\'title\',this.value)"><label class="field">Submitted by:</label><input value="'+esc(r.submittedBy||'')+'" placeholder="Enter your name" onchange="changeRec('+i+','+j+',\'submittedBy\',this.value)">':'')+(type==='special'?'<div class="locked">'+esc(specialRuleText(specialRule))+' · '+esc(specialTeamStatus(r,specialRule))+'</div>':'')+portraits+(canContribute?'<div class="team-controls picker-team-control"><button class="btn primary team-picker-button" onclick="openTeamCharacterPicker('+i+','+j+')">'+(isFleet?'Choose ships':'Choose characters')+'</button></div>':'')+'<div class="team-info-layout"><div class="team-rating-panel">'+renderTeamRatings(i,j,r,canContribute)+'</div><div class="team-notes-panel"><label class="field">Notes / strategy</label><textarea onchange="changeRec('+i+','+j+',\'notes\',this.value)" placeholder="Strategy, turn order, ability use, battle tips">'+esc(r.notes)+'</textarea></div></div>'+(isEditor?'<div class="team-controls"><button class="btn" onclick="copyTeamRecommendation('+i+','+j+')">Copy team</button><button class="btn" onclick="pasteTeamRecommendation('+i+','+j+')">Paste team</button><button class="btn danger" onclick="removeTeam('+i+','+j+')">Delete recommendation</button></div>':'')+'</div></details>';
 }
 async function uploadTeamImage(i,j,k,input){
  const mission=ensurePlanet(current)[i];if(missionType(mission)!=='fleet'&&k>=missionCharacterLimit(mission,current)||lockedRequiredSlot(mission,mission.recommendations[j],k,current)||requiredChoiceAt(mission,k,current)){setStatus('This required character slot must be filled using the character picker.','bad');input.value='';return}
