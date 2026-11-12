@@ -615,11 +615,12 @@ function renderMissionTeams(m,i){
  else if(teamSortMode==='az')recommendations.sort((a,b)=>(a.r.title||'').localeCompare(b.r.title||''));
  else if(teamSortMode==='full')recommendations.sort((a,b)=>(autoOrder[a.r.fullAuto]??99)-(autoOrder[b.r.fullAuto]??99)||(a.r.title||'').localeCompare(b.r.title||''));
  const leaderGroups=[],groupsByLeader=new Map();
+ const hasLockedLeader=missionType(m)!=='fleet'&&!!(forcedLeaderForMission(m,current)||requiredCharacterAt(m,0,current));
  recommendations.forEach(item=>{
   const names=Array.isArray(item.r.names)?item.r.names:[];
   const assigned=names[0]&&names[0]!=='__ANY__'?String(names[0]).trim():'';
   const leader=assigned||(missionType(m)==='fleet'?(m.forcedCapitalShip||''):(forcedLeaderForMission(m,current)||requiredCharacterAt(m,0,current)||''));
-  const key=leader?'leader:'+leader.toLocaleLowerCase():'team:'+item.j;
+  const key=leader&&!hasLockedLeader?'leader:'+leader.toLocaleLowerCase():'team:'+item.j;
   let group=groupsByLeader.get(key);
   if(!group){group={leader,items:[]};groupsByLeader.set(key,group);leaderGroups.push(group)}
   group.items.push(item);
