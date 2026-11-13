@@ -22,7 +22,11 @@ The site is a static GitHub Pages app. Team recommendations are stored in Supaba
 
 Do not enable public sign-ups unless you intentionally want anyone to create an account. Being signed in alone does not grant editing permission; the UUID must be in `public.editors`.
 
-## 3. Publish
+## 3. Enable live syncing
+
+To let visitors see shared guide changes automatically without refreshing, open **Supabase Dashboard → SQL Editor**, paste the contents of `supabase-realtime.sql` from this repository, and run it once. This adds `public.guide_data` to the `supabase_realtime` publication. The website subscribes to changes and refreshes the open planet when another user saves. If someone has unsaved local edits, incoming changes are held back and the save is blocked rather than silently overwriting either person's work.
+
+## 4. Publish
 
 GitHub Pages should publish from `main` and the repository root. After the Supabase values are committed, wait for the Pages deployment and open:
 
