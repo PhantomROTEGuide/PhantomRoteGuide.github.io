@@ -421,22 +421,32 @@ function plannerRelicRequirement(planet,mission){
  if(planet==='Mandalore'&&(/bo[\s-]*katan/i.test(title)||/bo[\s-]*katan/i.test(specialId)))return 9;
  return tbPlanetRelicRequirements[planet]||0;
 }
-function plannerSpecialTeamValid(planet,mission,names){
- const rule=missionType(mission)==='special'?specialRuleForMission(mission,planet):null;
- if(rule){
-  if((rule.requiredAll||[]).some(name=>!names.includes(name)))return false;
-  if((rule.requiredAny||[]).some(group=>!group.some(name=>names.includes(name))))return false;
-  if(rule.faction&&(names.filter(name=>specialFactionMembers[rule.faction]?.has(name)).length<(rule.requiredCount||0)))return false;
-  if(rule.teamSize&&names.length<rule.teamSize)return false;
-  if(rule.maxUnits&&names.length>rule.maxUnits)return false;
+function plannerSpecialTeamValid(planet,mission,names,anyCount=0,roster=null,relic=0){
+  const rule=missionType(mission)==='special'?specialRuleForMission(mission,planet):null;
+  if(rule){
+   if((rule.requiredAll||[]).some(name=>!names.includes(name)))return false;
+   if((rule.requiredAny||[]).some(group=>!group.some(name=>names.includes(name))))return false;
+   if(rule.faction){
+    const factionNames=new Set([...(specialFactionMembers[rule.faction]||[])].map(normalizeRosterName));
+    const namedFaction=names.filter(name=>factionNames.has(normalizeRosterName(name))).length;
+    const usedNames=new Set(names.map(normalizeRosterName));
+    const availableFaction=new Set();
+    (roster?.units||[]).forEach(unit=>{
+     const name=plannerUnitName(unit),key=normalizeRosterName(name);
+     if(key&&factionNames.has(key)&&!usedNames.has(key)&&plannerRelicLevel(unit)>=relic)availableFaction.add(key);
+    });
+    if(namedFaction+Math.min(anyCount,availableFaction.size)<(rule.requiredCount||0))return false;
+   }
+   if(rule.teamSize&&names.length+anyCount<rule.teamSize)return false;
+   if(rule.maxUnits&&names.length+anyCount>rule.maxUnits)return false;
+  }
+  const forced=requiredMissionCharacters(mission,planet);
+  if(forced.some(name=>!names.includes(name)))return false;
+  const choice=requiredAnyChoice(mission,planet);
+  if(choice&&!choice.options.some(name=>names.includes(name)))return false;
+  return true;
  }
- const forced=requiredMissionCharacters(mission,planet);
- if(forced.some(name=>!names.includes(name)))return false;
- const choice=requiredAnyChoice(mission,planet);
- if(choice&&!choice.options.some(name=>names.includes(name)))return false;
- return true;
-}
-const plannerPlatoonReservations = Object.fromEntries(Object.entries({"3":`Alx|Darth Malgus;General Grievous;Tusken Raider;Maul;Bastila Shan (Fallen);Ewok Elder;Starkiller;Han Solo;Ki-Adi-Mundi;Jedi Knight Guardian
+ const plannerPlatoonReservations = Object.fromEntries(Object.entries({"3":`Alx|Darth Malgus;General Grievous;Tusken Raider;Maul;Bastila Shan (Fallen);Ewok Elder;Starkiller;Han Solo;Ki-Adi-Mundi;Jedi Knight Guardian
 Beebee ate|Ben Solo;Padmé Amidala;Rey
 Dark One|B1 Battle Droid;Darth Malak;Darth Malgus;Luminara Unduli;Maul;Hermit Yoda;Hoth Rebel Soldier;Rebel Officer Leia Organa;Resistance Trooper;Ki-Adi-Mundi;Jedi Master Luke Skywalker;Clone Sergeant - Phase I;General Kenobi;Jedi Consular;Kit Fisto;Jedi Knight Luke Skywalker
 Delmon Ciiid'r|Jedi Master Luke Skywalker;Chirrut Îmwe;Jedi Knight Luke Skywalker
@@ -467,7 +477,7 @@ function plannerCandidate(planet,mission,rec,index,roster){
  const relic=plannerRelicRequirement(planet,mission);
  if(fleet&&owned.some(unit=>unit.stars===null||unit.stars<7))return null;
  if(!fleet&&owned.some(unit=>unit.relic<relic))return null;
- if(!fleet&&!plannerSpecialTeamValid(planet,mission,names))return null;
+ if(!fleet&&!plannerSpecialTeamValid(planet,mission,names,slotNames.filter(name=>name==='__ANY__').length,roster,relic))return null;
  const units=names.map((name,i)=>(fleet?'ship:':'char:')+normalized[i]);
  const allImages=recommendationImages(rec,fleet?'fleet':'character').slice(0,count);
  const images=namedSlots.map(slot=>allImages[slot.index]||'');
