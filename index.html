@@ -261,16 +261,17 @@ function specialRuleText(rule){return rule?rule.description:'Custom special miss
 function specialTeamStatus(rec,rule){
  if(!rule)return 'No preset restrictions selected.';
  const names=Array.isArray(rec.names)?rec.names:[];
+ const anyCount=names.filter(n=>n==='__ANY__').length;
  const missing=(rule.requiredAll||[]).filter(n=>!names.includes(n));
- const anyMissing=(rule.requiredAny||[]).filter(group=>!group.some(n=>names.includes(n)));
- const factionCount=rule.faction?names.filter(n=>specialFactionMembers[rule.faction]?.has(n)).length:0;
+ const anyMissing=anyCount?(rule.requiredAny||[]).filter(group=>!group.some(n=>names.includes(n))&&anyCount===0):(rule.requiredAny||[]).filter(group=>!group.some(n=>names.includes(n)));
+ const factionCount=rule.faction?names.filter(n=>n!=='__ANY__'&&specialFactionMembers[rule.faction]?.has(n)).length+anyCount:0;
  const notes=[];
  if(missing.length)notes.push('Required: '+missing.join(', '));
- anyMissing.forEach(group=>notes.push('Also required: one of '+group.join(' or ')));
+ anyMissing.forEach(group=>notes.push('Also required: one of '+group.join(' or ')+' (or an eligible Any slot)'));
  if(rule.requiredCount&&factionCount<rule.requiredCount)notes.push('Add '+(rule.requiredCount-factionCount)+' more '+rule.faction+' character(s)');
  if(rule.teamSize&&names.filter(Boolean).length<rule.teamSize)notes.push('Fill all '+rule.teamSize+' character slots');
  if(rule.maxUnits&&names.filter(Boolean).length>rule.maxUnits)notes.push('This mission allows no more than '+rule.maxUnits+' characters');
- return notes.length?'Still needed: '+notes.join(' · '):'Required characters included.';
+ return notes.length?'Still needed: '+notes.join(' · '):'Required characters included (Any slots are provisional).';
 }
 
 const capitalShipNames=new Set(['Finalizer','Home One','Raddus','Chimaera','Executrix','Negotiator','Executor','Profundity','Leviathan','Endurance','Malevolence']);
