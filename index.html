@@ -425,16 +425,25 @@ function plannerSpecialTeamValid(planet,mission,names,anyCount=0,roster=null,rel
   const rule=missionType(mission)==='special'?specialRuleForMission(mission,planet):null;
   if(rule){
    if((rule.requiredAll||[]).some(name=>!names.includes(name)))return false;
-   if((rule.requiredAny||[]).some(group=>!group.some(name=>names.includes(name))))return false;
+   const usedNames=new Set(names.map(normalizeRosterName));
+   const availableRoster=(roster?.units||[]).map(unit=>({
+    name:plannerUnitName(unit),
+    key:normalizeRosterName(plannerUnitName(unit)),
+    relic:plannerRelicLevel(unit)
+   })).filter(unit=>unit.key&&!usedNames.has(unit.key)&&unit.relic>=relic);
+   const availableKeys=new Set(availableRoster.map(unit=>unit.key));
+   let anySlotsUsed=0;
+   for(const group of (rule.requiredAny||[])){
+    if(group.some(name=>names.includes(name)))continue;
+    const option=group.map(normalizeRosterName).find(key=>availableKeys.has(key));
+    if(!option||anySlotsUsed>=anyCount)return false;
+    availableKeys.delete(option);
+    anySlotsUsed++;
+   }
    if(rule.faction){
     const factionNames=new Set([...(specialFactionMembers[rule.faction]||[])].map(normalizeRosterName));
     const namedFaction=names.filter(name=>factionNames.has(normalizeRosterName(name))).length;
-    const usedNames=new Set(names.map(normalizeRosterName));
-    const availableFaction=new Set();
-    (roster?.units||[]).forEach(unit=>{
-     const name=plannerUnitName(unit),key=normalizeRosterName(name);
-     if(key&&factionNames.has(key)&&!usedNames.has(key)&&plannerRelicLevel(unit)>=relic)availableFaction.add(key);
-    });
+    const availableFaction=new Set(availableRoster.filter(unit=>factionNames.has(unit.key)).map(unit=>unit.key));
     if(namedFaction+Math.min(anyCount,availableFaction.size)<(rule.requiredCount||0))return false;
    }
    if(rule.teamSize&&names.length+anyCount<rule.teamSize)return false;
@@ -443,7 +452,7 @@ function plannerSpecialTeamValid(planet,mission,names,anyCount=0,roster=null,rel
   const forced=requiredMissionCharacters(mission,planet);
   if(forced.some(name=>!names.includes(name)))return false;
   const choice=requiredAnyChoice(mission,planet);
-  if(choice&&!choice.options.some(name=>names.includes(name)))return false;
+  if(choice&&!choice.options.some(name=>names.includes(name))&&anyCount===0)return false;
   return true;
  }
  const plannerPlatoonReservations = Object.fromEntries(Object.entries({"3":`Alx|Darth Malgus;General Grievous;Tusken Raider;Maul;Bastila Shan (Fallen);Ewok Elder;Starkiller;Han Solo;Ki-Adi-Mundi;Jedi Knight Guardian
