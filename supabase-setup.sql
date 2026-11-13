@@ -135,6 +135,21 @@ $$;
 revoke all on function public.save_public_recommendations(jsonb, timestamptz) from public;
 grant execute on function public.save_public_recommendations(jsonb, timestamptz) to anon, authenticated;
 
+-- Enable live shared-guide updates for connected browsers.
+do $
+begin
+  if not exists (
+    select 1
+      from pg_publication_tables
+     where pubname = 'supabase_realtime'
+       and schemaname = 'public'
+       and tablename = 'guide_data'
+  ) then
+    alter publication supabase_realtime add table public.guide_data;
+  end if;
+end
+$;
+
 -- Shared squad image storage
 -- Public read access lets every guild member see recommendation images.
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
