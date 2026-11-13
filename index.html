@@ -542,7 +542,7 @@ function plannerRenderTeam(candidate){
 function plannerRenderResults(groups,optimized,profile,roster,platoonBlocked){
  const selected=optimized.selected;
  const usedCount=[...selected.values()].reduce((sum,candidate)=>sum+candidate.units.length,0);
- const expectedPoints=groups.reduce((sum,group)=>{const candidate=selected.get(group.key);if(!candidate)return sum;const factor={high:0.8,medium:0.5,low:0.33,hailmary:0.33}[candidate.successRate]??0.33;return sum+group.points*factor},0);
+ const expectedPoints=groups.reduce((sum,group)=>{const candidate=selected.get(group.key);if(!candidate)return sum;const factor={high:0.85,medium:0.5,low:0.33,hailmary:0.33}[candidate.successRate]??0.33;return sum+group.points*factor},0);
  const charCount=roster.units.filter(unit=>Number((unit.data||unit).combat_type??(unit.data||unit).combatType)===1).length;
  const shipCount=roster.units.filter(unit=>Number((unit.data||unit).combat_type??(unit.data||unit).combatType)===2).length;
  const playerName=plannerProfileName(profile)||'Player roster';
