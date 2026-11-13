@@ -433,18 +433,20 @@ function plannerSpecialTeamValid(planet,mission,names,anyCount=0,roster=null,rel
    })).filter(unit=>unit.key&&!usedNames.has(unit.key)&&unit.relic>=relic);
    const availableKeys=new Set(availableRoster.map(unit=>unit.key));
    let anySlotsUsed=0;
+   const reservedAnyKeys=new Set();
    for(const group of (rule.requiredAny||[])){
     if(group.some(name=>names.includes(name)))continue;
     const option=group.map(normalizeRosterName).find(key=>availableKeys.has(key));
     if(!option||anySlotsUsed>=anyCount)return false;
     availableKeys.delete(option);
+    reservedAnyKeys.add(option);
     anySlotsUsed++;
    }
    if(rule.faction){
     const factionNames=new Set([...(specialFactionMembers[rule.faction]||[])].map(normalizeRosterName));
     const namedFaction=names.filter(name=>factionNames.has(normalizeRosterName(name))).length;
-    const availableFaction=new Set(availableRoster.filter(unit=>factionNames.has(unit.key)).map(unit=>unit.key));
-    if(namedFaction+Math.min(anyCount,availableFaction.size)<(rule.requiredCount||0))return false;
+    const availableFaction=new Set(availableRoster.filter(unit=>factionNames.has(unit.key)&&!reservedAnyKeys.has(unit.key)).map(unit=>unit.key));
+    if(namedFaction+Math.min(Math.max(0,anyCount-anySlotsUsed),availableFaction.size)<(rule.requiredCount||0))return false;
    }
    if(rule.teamSize&&names.length+anyCount<rule.teamSize)return false;
    if(rule.maxUnits&&names.length+anyCount>rule.maxUnits)return false;
