@@ -487,22 +487,23 @@ function plannerOptimizeByPhase(groups){
  return {selected,eligible,nodes,limited};
 }
 function plannerOptimize(groups){
- // Optimize lexicographically: special missions first, total missions second,
- // then the combined squad success score.
+ // Optimize lexicographically: special missions, total mission points,
+ // total missions, then the combined squad success score.
  const work=groups.filter(group=>group.candidates.length).slice().sort((a,b)=>{
   const priority=group=>group.type==='special'?0:1;
-  return priority(a)-priority(b)||a.candidates.length-b.candidates.length;
+  return priority(a)-priority(b)||b.points-a.points||a.candidates.length-b.candidates.length;
  });
  work.forEach(group=>group.candidates.sort((a,b)=>b.score-a.score));
- let best=[],bestSpecial=-1,bestTotal=-1,bestScore=-Infinity,nodes=0;
+ let best=[],bestSpecial=-1,bestPoints=-1,bestTotal=-1,bestScore=-Infinity,nodes=0;
  const nodeLimit=60000,chosen=[];
- function search(index,used,chosenSpecial,chosenScore){
+ function search(index,used,chosenSpecial,chosenPoints,chosenScore){
   if(++nodes>nodeLimit)return;
   const chosenTotal=chosen.length;
   if(chosenSpecial>bestSpecial||
-     (chosenSpecial===bestSpecial&&(chosenTotal>bestTotal||
-      (chosenTotal===bestTotal&&chosenScore>bestScore)))){
-   best=chosen.slice();bestSpecial=chosenSpecial;bestTotal=chosenTotal;bestScore=chosenScore;
+     (chosenSpecial===bestSpecial&&(chosenPoints>bestPoints||
+      (chosenPoints===bestPoints&&(chosenTotal>bestTotal||
+       (chosenTotal===bestTotal&&chosenScore>bestScore)))))){
+   best=chosen.slice();bestSpecial=chosenSpecial;bestPoints=chosenPoints;bestTotal=chosenTotal;bestScore=chosenScore;
   }
   if(index>=work.length)return;
   const remaining=work.slice(index);
@@ -514,13 +515,13 @@ function plannerOptimize(groups){
    if(candidate.units.some(unit=>used.has(unit)))continue;
    const next=new Set(used);candidate.units.forEach(unit=>next.add(unit));
    chosen.push({group,candidate});
-   search(index+1,next,chosenSpecial+(isSpecial?1:0),chosenScore+(candidate.score||0));
+   search(index+1,next,chosenSpecial+(isSpecial?1:0),chosenPoints+group.points,chosenScore+(candidate.score||0));
    chosen.pop();
    if(nodes>nodeLimit)return;
   }
-  search(index+1,used,chosenSpecial,chosenScore);
+  search(index+1,used,chosenSpecial,chosenPoints,chosenScore);
  }
- search(0,new Set(),0,0);
+ search(0,new Set(),0,0,0);
  const selected=new Map(best.map(item=>[item.group.key,item.candidate]));
  return {selected,eligible:work.length,nodes,limited:nodes>nodeLimit};
 }
@@ -588,7 +589,7 @@ async function generateMyTBPlan(){
     if(hasSavedTeam){
      const allCandidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
      const candidates=allCandidates.filter(candidate=>!candidate.units.some(unit=>platoonBlocked.has(unit)));
-     const group={key:'P'+selectedPhase+'|'+planet+'|'+missionIndex,phase:selectedPhase,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,type:missionType(mission),candidates,platoonBlocked:allCandidates.length-candidates.length};
+     const missionPoints=Number(mission.points);const group={key:'P'+selectedPhase+'|'+planet+'|'+missionIndex,phase:selectedPhase,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,type:missionType(mission),points:Number.isFinite(missionPoints)&&missionPoints>0?missionPoints:0,candidates,platoonBlocked:allCandidates.length-candidates.length};
      candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
     }
    });
