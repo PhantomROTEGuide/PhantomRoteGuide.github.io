@@ -29,7 +29,7 @@ declare
   v_j integer;
   v_old_count integer;
   v_new_count integer;
-  v_allowed text[] := array['title','team','images','names','notes','omicrons','omicronAbilities','fullAuto','successRate'];
+  v_allowed text[] := array['title','team','submittedBy','images','names','notes','omicrons','omicronAbilities','fullAuto','successRate'];
 begin
   if jsonb_typeof(p_data) <> 'object' then
     raise exception 'Invalid guide data.';
@@ -113,6 +113,9 @@ begin
         end if;
         if v_new_rec ? 'notes' and (jsonb_typeof(v_new_rec -> 'notes') <> 'string' or length(v_new_rec ->> 'notes') > 12000) then
           raise exception 'Strategy notes must be text up to 12,000 characters.';
+        end if;
+        if v_new_rec ? 'submittedBy' and (jsonb_typeof(v_new_rec -> 'submittedBy') <> 'string' or length(v_new_rec ->> 'submittedBy') > 80) then
+          raise exception 'Submitted-by names must be text up to 80 characters.';
         end if;
 
         if v_new_rec ? 'images' then
