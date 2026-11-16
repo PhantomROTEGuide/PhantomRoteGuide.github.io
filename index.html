@@ -487,9 +487,19 @@ function plannerCandidate(planet,mission,rec,index,roster){
   return required.length&&!plannerUnitMeetsTBOmicrons(unit?.raw,required);
  }))return null;
  const relic=plannerRelicRequirement(planet,mission);
- if(fleet&&owned.some(unit=>unit.stars===null||unit.stars<7))return null;
- if(!fleet&&owned.some(unit=>unit.relic<relic))return null;
- if(!fleet&&!plannerSpecialTeamValid(planet,mission,names,slotNames.filter(name=>name==='__ANY__').length,roster,relic))return null;
+ if(fleet){
+  if(owned.some(unit=>unit.stars===null||unit.stars<7))return null;
+  const side=planetAlignment(planet);
+  if((side==='Light Side'||side==='Dark Side')&&names.some(name=>shipAlignment(name)!==side))return null;
+ }else{
+  if(owned.some(unit=>unit.relic<relic))return null;
+  // Reapply the same destination restrictions used by the recommendation editor.
+  if(names.some(name=>!characterAllowedOnPlanet(name,planet)))return null;
+  if(mission.forcedFaction&&names.some(name=>!characterCatalog.find(c=>c.name===name)?.factions?.some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase())))return null;
+  const specialRule=missionType(mission)==='special'?specialRuleForMission(mission,planet):null;
+  if(specialRule&&names.some(name=>!specialCharacterAllowed(name,specialRule)))return null;
+  if(!plannerSpecialTeamValid(planet,mission,names,slotNames.filter(name=>name==='__ANY__').length,roster,relic))return null;
+ }
  const units=names.map((name,i)=>(fleet?'ship:':'char:')+normalized[i]);
  const allImages=recommendationImages(rec,fleet?'fleet':'character').slice(0,count);
  const images=namedSlots.map(slot=>allImages[slot.index]||'');
@@ -599,6 +609,10 @@ async function generateMyTBPlan(){
  const button=document.getElementById('plannerGenerateBtn');button.disabled=true;button.textContent='Scanning roster…';document.getElementById('plannerResults').innerHTML='';
  try{
   plannerStatus('Retrieving your public roster…');
+  // Load authoritative character alignments and faction tags before validating saved recommendations.
+  if(!characterCatalogPromise)characterCatalogPromise=fetch('./characters.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character list ('+r.status+').');return r.json()});
+  if(!characterAlignmentPromise)characterAlignmentPromise=fetch('./character-alignments.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Could not load character alignment list ('+r.status+').');return r.json()});
+  [characterCatalog,characterAlignmentMap]=await Promise.all([characterCatalogPromise,characterAlignmentPromise]);
   const fetched=await fetchPlannerRoster(allyCode),roster=fetched.roster;myTBRoster=roster;
   const playerName=plannerProfileName(fetched.profile),memberKey=normalizeRosterName(playerName),reservations=plannerPlatoonReservations[selectedPhase];
   const knownGuildMember=plannerPlatoonReservations[3].has(memberKey)||plannerPlatoonReservations[4].has(memberKey);
