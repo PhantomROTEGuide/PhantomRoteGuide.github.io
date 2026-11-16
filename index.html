@@ -352,8 +352,10 @@ function plannerRosterArray(payload){
 }
 function plannerRelicLevel(unit){
  const data=unit?.data||unit;
+ // SWGOH.GG's relic_tier is the raw Comlink relic.currentTier enum,
+ // not the displayed relic level. Both representations require -2.
  const direct=data?.relic_tier??data?.relicTier??data?.relicLevel??data?.relic_level;
- if(direct!==undefined&&direct!==null&&Number.isFinite(Number(direct)))return Math.max(0,Number(direct));
+ if(direct!==undefined&&direct!==null&&Number.isFinite(Number(direct)))return Math.max(0,Number(direct)-2);
  const currentTier=data?.relic?.currentTier??data?.relic?.current_tier;
  if(currentTier!==undefined&&currentTier!==null&&Number.isFinite(Number(currentTier)))return Math.max(0,Number(currentTier)-2);
  return 0;
