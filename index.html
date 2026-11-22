@@ -460,7 +460,96 @@ function plannerSpecialTeamValid(planet,mission,names,anyCount=0,roster=null,rel
   if(choice&&!choice.options.some(name=>names.includes(name))&&anyCount===0)return false;
   return true;
  }
- const plannerPlatoonReservations = Object.fromEntries(Object.entries({"3":`Alx|Darth Malgus;General Grievous;Tusken Raider;Maul;Bastila Shan (Fallen);Ewok Elder;Starkiller;Han Solo;Ki-Adi-Mundi;Jedi Knight Guardian
+ const plannerPlatoonReservations = Object.fromEntries(Object.entries({"1":`Momaasky|ship:Chimaera
+Tibeerius|ship:Gauntlet Starfighter
+MINI machine66|Imperial Probe Droid
+Carl|Imperial Super Commando
+Kyle|Ugnaught
+Super Daddy|Emperor Palpatine
+Rokoge Starslayer|ship:Geonosian Spy's Starfighter
+RoTsKe|General Grievous
+My Name is Mud|Gamorrean Guard
+Stammina0721|Darth Maul
+Kootgreen|Emperor Palpatine
+MINI Jfromthebay|BT-1
+UP2U|General Grievous
+LarpingJunkie|Darth Maul
+Les S hassle|Darth Sion
+Tadd|Emperor Palpatine
+Nosk|Nute Gunray
+XWM J|Darth Traya
+Tibeerius|ship:Hyena Bomber
+Equester|Droideka
+Delmon Ciiid'r|Grand Admiral Thrawn
+Mouma|Dengar
+Zen Qualto|Wat Tambor
+OhMyApollo|Asajj Ventress
+Daner Howlen|Ugnaught
+pwsjd|Grand Admiral Thrawn
+Sail Valley|Jango Fett
+DrCal|Wat Tambor
+Beebee ate|Darth Sidious
+HRB|IG-88
+UP2U|Darth Revan
+MINI Eobard Cadaver|ship:Hound's Tooth
+Alx|Darth Traya
+Waidak|0-0-0
+Stripe|BT-1
+Noskolo|ship:Chimaera
+Dirty Randy|Ninth Sister
+The Force|Wat Tambor
+DarthKenobi|Sith Assassin
+pvrtal|TIE Fighter Pilot
+Tana Lorr|ship:Chimaera
+F U Emma|Darth Vader
+Medic|Darth Traya
+epicbeast123|0-0-0
+Gen akbar|ship:Imperial TIE Bomber
+XWM J|Darth Revan
+Stammina0721|Ugnaught
+Gen akbar|Darth Traya
+Super Daddy|0-0-0
+Mouma|B1 Battle Droid
+Momaasky|Grand Admiral Thrawn
+X'lor Bintaghr|IG-86 Sentinel Droid
+CaptainWhytie|General Grievous
+RoTsKe|Embo
+Cigarwok|Sith Trooper
+Kootgreen|Darth Revan
+Rokoge Starslayer|Darth Sion
+MINI machine66|General Grievous
+Djadki|ship:Hound's Tooth
+Rock4Love|Dark Trooper
+F U Emma|ship:Chimaera
+Beebee ate|IG-88
+Zen Qualto|Darth Traya
+Equester|Boba Fett
+Carl|Droideka
+DarthKenobi|Emperor Palpatine
+Sail Valley|Tusken Shaman
+Dark One|Darth Traya
+DrCal|Mara Jade, The Emperor's Hand
+Daner Howlen|0-0-0
+Dirty Randy|ship:Chimaera
+Medic|Canderous Ordo
+pwsjd|Darth Traya
+LarpingJunkie|First Order SF TIE Pilot
+MINI Jfromthebay|Nightsister Initiate
+My Name is Mud|Darth Revan
+pvrtal|First Order SF TIE Pilot
+Delmon Ciiid'r|General Grievous
+Tana Lorr|First Order Officer
+pvrtal|Count Dooku
+Delmon Ciiid'r|ship:Chimaera
+Nosk|Darth Sidious
+HRB|Imperial Probe Droid
+Tibeerius|Fifth Brother
+epicbeast123|First Order Officer
+Les S hassle|Darth Revan
+The Force|Canderous Ordo
+OhMyApollo|Wat Tambor
+Kyle|ship:Imperial TIE Fighter
+Tadd|Darth Vader`,"3":`Alx|Darth Malgus;General Grievous;Tusken Raider;Maul;Bastila Shan (Fallen);Ewok Elder;Starkiller;Han Solo;Ki-Adi-Mundi;Jedi Knight Guardian
 Beebee ate|Ben Solo;Padmé Amidala;Rey
 Dark One|B1 Battle Droid;Darth Malak;Darth Malgus;Luminara Unduli;Maul;Hermit Yoda;Hoth Rebel Soldier;Rebel Officer Leia Organa;Resistance Trooper;Ki-Adi-Mundi;Jedi Master Luke Skywalker;Clone Sergeant - Phase I;General Kenobi;Jedi Consular;Kit Fisto;Jedi Knight Luke Skywalker
 Delmon Ciiid'r|Jedi Master Luke Skywalker;Chirrut Îmwe;Jedi Knight Luke Skywalker
@@ -512,7 +601,7 @@ MINI machine66|Captain Rex;ship:Executor
 Kyle|ship:Scythe;Starkiller
 Stripe|Leia Organa;Captain Rex
 F U Emma|ship:Leviathan;ship:TIE Dagger
-HRB|ship:Executor`}).map(([phase,raw])=>[Number(phase),new Map(raw.trim().split("\n").map(line=>{const p=line.indexOf("|");return [normalizeRosterName(line.slice(0,p)),new Set(line.slice(p+1).split(";").map(n=>{n=n.trim();const type=n.startsWith("ship:")?"ship:":"char:";return type+normalizeRosterName(type==="ship:"?n.slice(5):n)}).filter(Boolean))]}))]));
+HRB|ship:Executor`}).map(([phase,raw])=>[Number(phase),(()=>{const map=new Map();raw.trim().split("\n").forEach(line=>{const p=line.indexOf("|");if(p<1)return;const key=normalizeRosterName(line.slice(0,p));if(!map.has(key))map.set(key,new Set());line.slice(p+1).split(";").forEach(n=>{n=n.trim();const type=n.startsWith("ship:")?"ship:":"char:";const id=type+normalizeRosterName(type==="ship:"?n.slice(5):n);if(id.length>type.length)map.get(key).add(id)})});return map})()]));
 function plannerProfileName(profile){return profile?.name||profile?.playerName||profile?.player_name||profile?.data?.name||profile?.data?.playerName||profile?.profile?.name||"";}
 function plannerCandidate(planet,mission,rec,index,roster){
  const fleet=missionType(mission)==='fleet';
