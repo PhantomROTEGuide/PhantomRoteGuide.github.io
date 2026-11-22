@@ -664,7 +664,7 @@ async function generateMyTBPlan(){
   [characterCatalog,characterAlignmentMap]=await Promise.all([characterCatalogPromise,characterAlignmentPromise]);
   const fetched=await fetchPlannerRoster(allyCode),roster=fetched.roster;myTBRoster=roster;
   const playerName=plannerProfileName(fetched.profile),memberKey=normalizeRosterName(playerName),reservations=plannerPlatoonReservations[selectedPhase];
-  const knownGuildMember=plannerPlatoonReservations[3].has(memberKey)||plannerPlatoonReservations[4].has(memberKey);
+  const knownGuildMember=Object.values(plannerPlatoonReservations).some(phaseMap=>phaseMap.has(memberKey));
   if(!knownGuildMember)throw new Error('Your SWGOH.GG profile name ('+(playerName||'not available')+') could not be matched to the collected guild platoon assignments. Check the Ally Code and in-game name before generating a restricted plan.');
   const platoonBlocked=reservations?.get(memberKey)||new Set();
   const groups=[];
