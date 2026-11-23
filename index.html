@@ -1484,6 +1484,10 @@ function plannerOptimize(groups){
   if(specialChosen.length>bestSpecialCount||(specialChosen.length===bestSpecialCount&&score>bestSpecialScore)){
    bestSpecial=specialChosen.slice();bestSpecialCount=specialChosen.length;bestSpecialScore=score;
   }
+  // A complete non-overlapping special-mission set is the primary objective.
+  // Stop immediately when one is found; don't waste the search budget scoring
+  // alternate combinations and accidentally leave a valid special mission out.
+  if(specialChosen.length===special.length)return;
   if(index>=special.length)return;
   if(specialChosen.length+special.length-index<bestSpecialCount)return;
   const group=special[index];
