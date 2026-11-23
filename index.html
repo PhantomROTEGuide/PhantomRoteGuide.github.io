@@ -108,7 +108,7 @@ const specialFactionMembers={
 };
 const specialMissionRules={
  'Corellia':[{id:'qira-younghan',name:"Qi'ra + Young Han Solo",description:"5 characters · Qi'ra and Young Han Solo required",requiredAll:["Qi'ra",'Young Han Solo'],teamSize:5,forcedLeader:"Qi'ra"}],
- 'Bracca':[{id:'zeffo-unlock',name:'Zeffo Unlock',description:'Cere Junda and either Cal Kestis or Jedi Knight Cal Kestis required',requiredAll:['Cere Junda'],requiredAny:[['Cal Kestis','Jedi Knight Cal Kestis']],forcedLeader:'Cere Junda'}],
+ 'Bracca':[{id:'zeffo-unlock',name:'Zeffo Unlock',description:'2 characters · Cere Junda and either Cal Kestis or Jedi Knight Cal Kestis required',requiredAll:['Cere Junda'],requiredAny:[['Cal Kestis','Jedi Knight Cal Kestis']],maxUnits:2,forcedLeader:'Cere Junda'}],
  'Zeffo':[{id:'clone-trooper',name:'Clone Trooper Special Mission',description:'5 Clone Troopers required',faction:'Clone Trooper',requiredCount:5}],
  'Kashyyyk':[{id:'saw-gerrera',name:'Saw Gerrera Special Mission',description:'Rebel Fighters · Saw Gerrera required',faction:'Rebel Fighter',requiredAll:['Saw Gerrera'],requiredCount:5,forcedLeader:'Saw Gerrera'}],
  'Dathomir':[{id:'merrin',name:'Merrin Nightsister Special Mission',description:'Nightsisters · Merrin required',faction:'Nightsister',requiredAll:['Merrin'],requiredCount:5}],
@@ -1444,7 +1444,7 @@ function plannerCandidate(planet,mission,rec,index,roster,diagnostics=null){
   const side=planetAlignment(planet);
   if((side==='Light Side'||side==='Dark Side')&&names.some(name=>shipAlignment(name)!==side))return fail('A ship does not match the planet alignment.');
  }else{
-  if(owned.some(unit=>unit.relic<relic))return fail('At least one of the five characters is below R'+relic+'.');
+  if(owned.some(unit=>unit.relic<relic))return fail('At least one of the '+count+' required character'+(count===1?' is':'s are')+' below R'+relic+'.');
   // Reapply the same destination restrictions used by the recommendation editor.
   if(names.some(name=>!characterAllowedOnPlanet(name,planet)))return fail('A character is restricted by the planet alignment.');
   if(mission.forcedFaction&&names.some(name=>!characterCatalog.find(c=>c.name===name)?.factions?.some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase())))return fail('A character does not meet the mission faction restriction.');
