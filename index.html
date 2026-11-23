@@ -1416,19 +1416,20 @@ Stripe|Leia Organa;Captain Rex
 F U Emma|ship:Leviathan;ship:TIE Dagger
 HRB|ship:Executor`}).map(([phase,raw])=>[Number(phase),(()=>{const map=new Map();raw.trim().split("\n").forEach(line=>{const p=line.indexOf("|");if(p<1)return;const key=normalizeRosterName(line.slice(0,p));if(!map.has(key))map.set(key,new Set());line.slice(p+1).split(";").forEach(n=>{n=n.trim();const type=n.startsWith("ship:")?"ship:":"char:";const id=type+normalizeRosterName(type==="ship:"?n.slice(5):n);if(id.length>type.length)map.get(key).add(id)})});return map})()]));
 function plannerProfileName(profile){return profile?.name||profile?.playerName||profile?.player_name||profile?.data?.name||profile?.data?.playerName||profile?.profile?.name||"";}
-function plannerCandidate(planet,mission,rec,index,roster){
+function plannerCandidate(planet,mission,rec,index,roster,diagnostics=null){
+ const fail=reason=>{if(diagnostics)diagnostics.push(reason);return null};
  const fleet=missionType(mission)==='fleet';
  const rawNames=Array.isArray(rec.names)?rec.names:[];
  const count=fleet?8:missionCharacterLimit(mission,planet);
  const slotNames=rawNames.slice(0,count);
- if(!fleet&&(slotNames.length<count||slotNames.some(name=>!name)))return null;
- if(fleet&&slotNames.slice(0,4).some(name=>!name))return null;
+ if(!fleet&&(slotNames.length<count||slotNames.some(name=>!name)))return fail('Recommendation does not have all 5 character slots filled.');
+ if(fleet&&slotNames.slice(0,4).some(name=>!name))return fail('Fleet recommendation is missing a required starting ship.');
  const namedSlots=slotNames.map((name,index)=>({name,index})).filter(slot=>slot.name&&slot.name!=='__ANY__');
  const names=namedSlots.map(slot=>slot.name);
  const normalized=names.map(normalizeRosterName);
- if(new Set(normalized).size!==normalized.length)return null;
+ if(new Set(normalized).size!==normalized.length)return fail('Recommendation repeats a character.');
  const owned=names.map(name=>roster.map.get(normalizeRosterName(name)));
- if(owned.some(unit=>!unit))return null;
+ if(owned.some(unit=>!unit))return fail('One or more recommended characters are not found in the SWGOH.GG roster.');
  // A recommendation's selected TB Omicron abilities are hard requirements.
  // Use the exact learned ability reported by SWGOH.GG; missing or unverified
  // Omicron data must never make an Omicron-required team appear eligible.
@@ -1436,20 +1437,20 @@ function plannerCandidate(planet,mission,rec,index,roster){
  if(omicronSlots.some(({slot,unit})=>{
   const required=selectedTBOmicrons(rec,slot.index,slot.name);
   return required.length&&!plannerUnitMeetsTBOmicrons(unit?.raw,required);
- }))return null;
+ }))return fail('A required Territory Battle Omicron is not applied on the recommended character.');
  const relic=plannerRelicRequirement(planet,mission);
  if(fleet){
-  if(owned.some(unit=>unit.stars===null||unit.stars<7))return null;
+  if(owned.some(unit=>unit.stars===null||unit.stars<7))return fail('A required ship is below 7 stars.');
   const side=planetAlignment(planet);
-  if((side==='Light Side'||side==='Dark Side')&&names.some(name=>shipAlignment(name)!==side))return null;
+  if((side==='Light Side'||side==='Dark Side')&&names.some(name=>shipAlignment(name)!==side))return fail('A ship does not match the planet alignment.');
  }else{
-  if(owned.some(unit=>unit.relic<relic))return null;
+  if(owned.some(unit=>unit.relic<relic))return fail('At least one of the five characters is below R'+relic+'.');
   // Reapply the same destination restrictions used by the recommendation editor.
-  if(names.some(name=>!characterAllowedOnPlanet(name,planet)))return null;
-  if(mission.forcedFaction&&names.some(name=>!characterCatalog.find(c=>c.name===name)?.factions?.some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase())))return null;
+  if(names.some(name=>!characterAllowedOnPlanet(name,planet)))return fail('A character is restricted by the planet alignment.');
+  if(mission.forcedFaction&&names.some(name=>!characterCatalog.find(c=>c.name===name)?.factions?.some(f=>String(f).toLowerCase()===String(mission.forcedFaction).toLowerCase())))return fail('A character does not meet the mission faction restriction.');
   const specialRule=missionType(mission)==='special'?specialRuleForMission(mission,planet):null;
-  if(specialRule&&names.some(name=>!specialCharacterAllowed(name,specialRule)))return null;
-  if(!plannerSpecialTeamValid(planet,mission,names,slotNames.filter(name=>name==='__ANY__').length,roster,relic))return null;
+  if(specialRule&&names.some(name=>!specialCharacterAllowed(name,specialRule)))return fail('A character does not meet the special-mission faction restriction.');
+  if(!plannerSpecialTeamValid(planet,mission,names,slotNames.filter(name=>name==='__ANY__').length,roster,relic))return fail('The special-mission requirements are not satisfied (Cere Junda plus Cal Kestis or Jedi Knight Cal Kestis, with R7 eligibility).');
  }
  const units=names.map((name,i)=>(fleet?'ship:':'char:')+normalized[i]);
  const allImages=recommendationImages(rec,fleet?'fleet':'character').slice(0,count);
@@ -1543,7 +1544,7 @@ function plannerRenderResults(groups,optimized,profile,roster,platoonBlocked){
    html+='<h4 style="margin:14px 0 8px;color:var(--text)">'+esc(planet)+' · R'+plannerRelicRequirement(planet,{})+' baseline</h4>';
    planetGroups.slice().sort((a,b)=>{const priority=group=>group.type==='special'?0:group.type==='fleet'?2:1;return priority(a)-priority(b)}).forEach(group=>{
     const candidate=selected.get(group.key);
-    const rateIcons={high:['✓','High success rate'],medium:['~','Medium success rate'],low:['↓','Low success rate'],hailmary:['✕','Hail Mary success rate']};const rate=candidate?rateIcons[candidate.successRate]:null;const rateClass=rate?' success-'+candidate.successRate:'';html+='<div class="planner-mission '+(candidate?'assigned':'')+rateClass+'"><div><div class="planner-mission-heading">'+(rate?'<span class="planner-mission-rate success-'+candidate.successRate+'" title="'+rate[1]+'" aria-label="'+rate[1]+'">'+rate[0]+'</span>':'')+'<div class="planner-mission-title">'+esc(group.title)+(group.type==='special'?'<span class="planner-special-tag">★ Special Mission</span>':'')+'</div></div><div class="planner-mission-meta">'+(candidate?(candidate.fleet?'Capital ship + starting ships + reinforcements · all 7★':'Minimum R'+candidate.relic+' characters'):'No eligible non-overlapping recommendation')+'</div></div><div>'+(candidate?plannerRenderTeam(candidate):'<span class="planner-unready">'+(group.candidates.length?'Another mission in this phase uses the required units':(group.platoonBlocked?'A saved team uses a unit reserved for your platoon assignment':'No recommendation meets your roster and relic requirements'))+'</span>')+'</div></div>';
+    const rateIcons={high:['✓','High success rate'],medium:['~','Medium success rate'],low:['↓','Low success rate'],hailmary:['✕','Hail Mary success rate']};const rate=candidate?rateIcons[candidate.successRate]:null;const rateClass=rate?' success-'+candidate.successRate:'';html+='<div class="planner-mission '+(candidate?'assigned':'')+rateClass+'"><div><div class="planner-mission-heading">'+(rate?'<span class="planner-mission-rate success-'+candidate.successRate+'" title="'+rate[1]+'" aria-label="'+rate[1]+'">'+rate[0]+'</span>':'')+'<div class="planner-mission-title">'+esc(group.title)+(group.type==='special'?'<span class="planner-special-tag">★ Special Mission</span>':'')+'</div></div><div class="planner-mission-meta">'+(candidate?(candidate.fleet?'Capital ship + starting ships + reinforcements · all 7★':'Minimum R'+candidate.relic+' characters'):'No eligible non-overlapping recommendation')+'</div></div><div>'+(candidate?plannerRenderTeam(candidate):'<span class="planner-unready">'+(group.candidates.length?'Another mission in this phase uses the required units':(group.platoonBlocked?'A saved team uses a unit reserved for your platoon assignment':(group.rejectionReasons?.length?'Rejected recommendations: '+group.rejectionReasons.join(' · '):'No recommendation meets your roster and relic requirements')))+'</span>')+'</div></div>';
    });
   }
   html+='</section>';
@@ -1576,9 +1577,10 @@ async function generateMyTBPlan(){
     const recommendations=mission.recommendations||[];
     const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
     if(hasSavedTeam){
-     const allCandidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster)).filter(Boolean);
+     const rejected=[];
+     const allCandidates=recommendations.map((rec,index)=>plannerCandidate(planet,mission,rec,index,roster,rejected)).filter(Boolean);
      const candidates=allCandidates.filter(candidate=>!candidate.units.some(unit=>platoonBlocked.has(unit)));
-     const missionPoints=Number(mission.points);const group={key:'P'+selectedPhase+'|'+planet+'|'+missionIndex,phase:selectedPhase,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,type:missionType(mission),points:missionType(mission)==='special'?0:(Number.isFinite(missionPoints)&&missionPoints>0?missionPoints:0),candidates,platoonBlocked:allCandidates.length-candidates.length};
+     const missionPoints=Number(mission.points);const group={key:'P'+selectedPhase+'|'+planet+'|'+missionIndex,phase:selectedPhase,planet,title:mission.title||('Mission '+(missionIndex+1)),missionIndex,type:missionType(mission),points:missionType(mission)==='special'?0:(Number.isFinite(missionPoints)&&missionPoints>0?missionPoints:0),candidates,platoonBlocked:allCandidates.length-candidates.length,rejectionReasons:[...new Set(rejected)]};
      candidates.forEach(candidate=>candidate.missionIndex=missionIndex);groups.push(group);
     }
    });
