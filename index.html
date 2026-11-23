@@ -1649,6 +1649,9 @@ async function generateMyTBPlan(){
     // The Zeffo Clone Trooper Special Mission is completed in Phase 4 only.
     // Do not reserve or generate a duplicate recommendation for it in Phase 3.
     if(selectedPhase===3&&planet==='Zeffo'&&missionType(mission)==='special'&&mission.specialRuleId==='clone-trooper')return;
+    // The Dathomir Merrin Special Mission is completed in Phase 3 only.
+    // Do not generate a duplicate recommendation for it in Phase 4.
+    if(selectedPhase===4&&planet==='Dathomir'&&missionType(mission)==='special'&&mission.specialRuleId==='merrin')return;
     const recommendations=mission.recommendations||[];
     const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
     if(hasSavedTeam){
