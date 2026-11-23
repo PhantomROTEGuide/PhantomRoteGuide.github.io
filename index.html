@@ -1479,7 +1479,9 @@ function plannerOptimize(groups){
  work.forEach(group=>group.candidates.sort((a,b)=>(b.score||0)-(a.score||0)));
  let nodes=0,limited=false,bestSpecial=[],bestSpecialCount=-1,bestSpecialScore=-Infinity;
  const specialLimit=250000,specialChosen=[];
+ let foundCompleteSpecialSet=false;
  function reserveSpecial(index,used,score){
+  if(foundCompleteSpecialSet)return;
   if(++nodes>specialLimit){limited=true;return;}
   if(specialChosen.length>bestSpecialCount||(specialChosen.length===bestSpecialCount&&score>bestSpecialScore)){
    bestSpecial=specialChosen.slice();bestSpecialCount=specialChosen.length;bestSpecialScore=score;
@@ -1487,7 +1489,10 @@ function plannerOptimize(groups){
   // A complete non-overlapping special-mission set is the primary objective.
   // Stop immediately when one is found; don't waste the search budget scoring
   // alternate combinations and accidentally leave a valid special mission out.
-  if(specialChosen.length===special.length)return;
+  if(specialChosen.length===special.length){
+   foundCompleteSpecialSet=true;
+   return;
+  }
   if(index>=special.length)return;
   if(specialChosen.length+special.length-index<bestSpecialCount)return;
   const group=special[index];
@@ -1497,7 +1502,7 @@ function plannerOptimize(groups){
    specialChosen.push({group,candidate});
    reserveSpecial(index+1,next,score+(candidate.score||0));
    specialChosen.pop();
-   if(limited)return;
+   if(foundCompleteSpecialSet||limited)return;
   }
   reserveSpecial(index+1,used,score);
  }
