@@ -1471,42 +1471,86 @@ function plannerOptimizeByPhase(groups){
  return {selected,eligible,nodes,limited};
 }
 function plannerOptimize(groups){
- // Lock in the best non-overlapping special-mission set before considering
- // normal missions. Normal missions can never displace a special-mission team.
+ // Special missions are the primary constraint. Use a dynamic
+ // most-constrained-first search so the hardest remaining mission is assigned
+ // before flexible missions consume its units.
  const work=groups.filter(group=>group.candidates.length).slice();
- const special=work.filter(group=>group.type==='special').sort((a,b)=>a.candidates.length-b.candidates.length);
+ const special=work.filter(group=>group.type==='special');
  const normal=work.filter(group=>group.type!=='special').sort((a,b)=>b.points-a.points||a.candidates.length-b.candidates.length);
  work.forEach(group=>group.candidates.sort((a,b)=>(b.score||0)-(a.score||0)));
- let nodes=0,limited=false,bestSpecial=[],bestSpecialCount=-1,bestSpecialScore=-Infinity;
- const specialLimit=250000,specialChosen=[];
- let foundCompleteSpecialSet=false;
- function reserveSpecial(index,used,score){
-  if(foundCompleteSpecialSet)return;
+ let nodes=0,limited=false;
+ const specialLimit=1000000;
+ let bestSpecial=[],bestSpecialCount=-1,bestSpecialScore=-Infinity;
+ let completeSpecialSet=null;
+ function compatibleCandidates(group,used){
+  return group.candidates.filter(candidate=>!candidate.units.some(unit=>used.has(unit)));
+ }
+ function searchCompleteSpecial(remaining,used,chosen,score){
+  if(completeSpecialSet||limited)return;
   if(++nodes>specialLimit){limited=true;return;}
-  if(specialChosen.length>bestSpecialCount||(specialChosen.length===bestSpecialCount&&score>bestSpecialScore)){
-   bestSpecial=specialChosen.slice();bestSpecialCount=specialChosen.length;bestSpecialScore=score;
-  }
-  // A complete non-overlapping special-mission set is the primary objective.
-  // Stop immediately when one is found; don't waste the search budget scoring
-  // alternate combinations and accidentally leave a valid special mission out.
-  if(specialChosen.length===special.length){
-   foundCompleteSpecialSet=true;
+  if(!remaining.length){
+   completeSpecialSet={chosen:chosen.slice(),score};
    return;
   }
-  if(index>=special.length)return;
-  if(specialChosen.length+special.length-index<bestSpecialCount)return;
-  const group=special[index];
-  for(const candidate of group.candidates){
-   if(candidate.units.some(unit=>used.has(unit)))continue;
-   const next=new Set(used);candidate.units.forEach(unit=>next.add(unit));
-   specialChosen.push({group,candidate});
-   reserveSpecial(index+1,next,score+(candidate.score||0));
-   specialChosen.pop();
-   if(foundCompleteSpecialSet||limited)return;
+  // Dynamic MRV: choose the remaining mission with the fewest currently
+  // compatible teams, recalculated after every assignment.
+  let nextIndex=-1,nextOptions=null;
+  for(let i=0;i<remaining.length;i++){
+   const options=compatibleCandidates(remaining[i],used);
+   if(nextOptions===null||options.length<nextOptions.length){
+    nextIndex=i;nextOptions=options;
+    if(options.length===0)break;
+   }
   }
-  reserveSpecial(index+1,used,score);
+  if(!nextOptions?.length)return;
+  const nextGroup=remaining[nextIndex];
+  const nextRemaining=remaining.filter((_,i)=>i!==nextIndex);
+  for(const candidate of nextOptions){
+   const nextUsed=new Set(used);candidate.units.forEach(unit=>nextUsed.add(unit));
+   chosen.push({group:nextGroup,candidate});
+   searchCompleteSpecial(nextRemaining,nextUsed,chosen,score+(candidate.score||0));
+   chosen.pop();
+   if(completeSpecialSet||limited)return;
+  }
  }
- reserveSpecial(0,new Set(),0);
+ searchCompleteSpecial(special,new Set(),[],0);
+ if(completeSpecialSet){
+  bestSpecial=completeSpecialSet.chosen;
+  bestSpecialCount=bestSpecial.length;
+  bestSpecialScore=completeSpecialSet.score;
+ }else{
+  // If a complete set is impossible (or the search limit is reached), retain
+  // the largest compatible subset rather than dropping every special mission.
+  const fallbackLimit=1000000;
+  const fallbackStart=nodes;
+  function searchBestSubset(remaining,used,chosen,score){
+   if(++nodes-fallbackStart>fallbackLimit){limited=true;return;}
+   if(chosen.length>bestSpecialCount||(chosen.length===bestSpecialCount&&score>bestSpecialScore)){
+    bestSpecial=chosen.slice();bestSpecialCount=chosen.length;bestSpecialScore=score;
+   }
+   if(!remaining.length)return;
+   if(chosen.length+remaining.length<bestSpecialCount)return;
+   let nextIndex=-1,nextOptions=null;
+   for(let i=0;i<remaining.length;i++){
+    const options=compatibleCandidates(remaining[i],used);
+    if(nextOptions===null||options.length<nextOptions.length){
+     nextIndex=i;nextOptions=options;
+     if(options.length===0)break;
+    }
+   }
+   const nextGroup=remaining[nextIndex];
+   const nextRemaining=remaining.filter((_,i)=>i!==nextIndex);
+   for(const candidate of nextOptions||[]){
+    const nextUsed=new Set(used);candidate.units.forEach(unit=>nextUsed.add(unit));
+    chosen.push({group:nextGroup,candidate});
+    searchBestSubset(nextRemaining,nextUsed,chosen,score+(candidate.score||0));
+    chosen.pop();
+    if(nodes-fallbackStart>fallbackLimit)return;
+   }
+   searchBestSubset(nextRemaining,used,chosen,score);
+  }
+  searchBestSubset(special,new Set(),[],0);
+ }
  const selected=new Map(bestSpecial.map(item=>[item.group.key,item.candidate]));
  const reserved=new Set(bestSpecial.flatMap(item=>item.candidate.units));
  let bestNormal=[],bestPoints=-1,bestTotal=-1,bestScore=-Infinity;
