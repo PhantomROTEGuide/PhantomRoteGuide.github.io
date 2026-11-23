@@ -1480,7 +1480,7 @@ function plannerOptimize(groups){
  work.forEach(group=>group.candidates.sort((a,b)=>(b.score||0)-(a.score||0)));
  let nodes=0,limited=false;
  const specialLimit=1000000;
- let bestSpecial=[],bestSpecialCount=-1,bestSpecialScore=-Infinity;
+ let bestSpecial=[],bestSpecialCount=-1,bestSpecialScore=-Infinity,bestSawAssigned=false;
  let completeSpecialSet=null;
  function compatibleCandidates(group,used){
   return group.candidates.filter(candidate=>!candidate.units.some(unit=>used.has(unit)));
@@ -1525,8 +1525,9 @@ function plannerOptimize(groups){
   const fallbackStart=nodes;
   function searchBestSubset(remaining,used,chosen,score){
    if(++nodes-fallbackStart>fallbackLimit){limited=true;return;}
-   if(chosen.length>bestSpecialCount||(chosen.length===bestSpecialCount&&score>bestSpecialScore)){
-    bestSpecial=chosen.slice();bestSpecialCount=chosen.length;bestSpecialScore=score;
+   const sawAssigned=chosen.some(item=>item.group.planet==='Kashyyyk'&&/saw gerrera/i.test(item.group.title||''));
+   if(chosen.length>bestSpecialCount||(chosen.length===bestSpecialCount&&sawAssigned&&!bestSawAssigned)||(chosen.length===bestSpecialCount&&sawAssigned===bestSawAssigned&&score>bestSpecialScore)){
+    bestSpecial=chosen.slice();bestSpecialCount=chosen.length;bestSpecialScore=score;bestSawAssigned=sawAssigned;
    }
    if(!remaining.length)return;
    if(chosen.length+remaining.length<bestSpecialCount)return;
