@@ -1646,6 +1646,9 @@ async function generateMyTBPlan(){
   for(const [planet] of phaseConfig[2]){
    const missions=data[slug(planet)]||[];
    missions.forEach((mission,missionIndex)=>{
+    // The Zeffo Clone Trooper Special Mission is completed in Phase 4 only.
+    // Do not reserve or generate a duplicate recommendation for it in Phase 3.
+    if(selectedPhase===3&&planet==='Zeffo'&&missionType(mission)==='special'&&mission.specialRuleId==='clone-trooper')return;
     const recommendations=mission.recommendations||[];
     const hasSavedTeam=recommendations.some(rec=>(Array.isArray(rec.names)&&rec.names.some(name=>name&&name!=='__ANY__'))||(Array.isArray(rec.images)&&rec.images.some(Boolean)));
     if(hasSavedTeam){
